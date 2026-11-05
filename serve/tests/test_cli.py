@@ -10,9 +10,7 @@ runner = CliRunner()
 
 
 def test_estimate_json(models_dir: Path) -> None:
-    result = runner.invoke(
-        app, ["estimate", "-m", str(models_dir / "Qwen__Qwen3-4B-Instruct-2507"), "--json"]
-    )
+    result = runner.invoke(app, ["estimate", "-m", str(models_dir / "Qwen__Qwen3-4B-Instruct-2507"), "--json"])
     assert result.exit_code == 0, result.output
     data = json.loads(result.output)
     assert data["max_concurrent_seqs"] == 9

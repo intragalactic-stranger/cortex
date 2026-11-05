@@ -14,6 +14,7 @@ from pydantic import BaseModel
 from cortex_serve.memcalc.devices import Device
 from cortex_serve.memcalc.dtypes import APPROXIMATE_WEIGHT_FORMATS, kv_bytes, weight_bytes
 from cortex_serve.memcalc.families import producer_of
+from cortex_serve.memcalc.gguf import GGUFHeader
 from cortex_serve.memcalc.model import LayerKind, LayerSpec, ModelSpec
 
 Components = Literal["text", "all"]
@@ -62,6 +63,28 @@ def active_weight_bytes(spec: ModelSpec, fmt: str) -> int:
     b = weight_bytes(fmt)
     lm_b = 2.0 if fmt.lower() in _LINEAR_ONLY_FORMATS else b
     return math.ceil((spec.active_params - spec.lm_head_params) * b + spec.lm_head_params * lm_b)
+
+
+def gguf_weight_bytes(gguf: GGUFHeader, ple_offload: bool = False) -> int:
+    """Exact weight bytes of a GGUF (as llama.cpp loads it), optionally without the PLE lookup table."""
+    return gguf.weight_bytes - (gguf.bytes_matching("per_layer_token_embd") if ple_offload else 0)
+
+
+def gguf_active_bytes(gguf: GGUFHeader, spec: ModelSpec) -> int:
+    """Bytes read per decoded token: everything except lookup-only tables (PLE; token_embd when a separate
+    output.weight exists) and, for MoE, the non-routed share of the expert tensors."""
+    names = {t.name for t in gguf.tensors}
+    total = 0.0
+    for t in gguf.tensors:
+        if "per_layer_token_embd" in t.name:
+            continue
+        if t.name == "token_embd.weight" and "output.weight" in names:
+            continue
+        if "_exps" in t.name and spec.moe:
+            total += t.nbytes * spec.moe.active_fraction
+            continue
+        total += t.nbytes
+    return math.ceil(total)
 
 
 # ---------------------------------------------------------------- KV cache and state
@@ -153,14 +176,21 @@ def estimate(
     components: Components = "text",
     ple_offload: bool = False,
     with_mtp: bool = False,
+    gguf: GGUFHeader | None = None,
 ) -> Estimate:
+    """``gguf``: when given, weight bytes and bytes-read-per-token come from the GGUF header (exact),
+    and ``weight_fmt`` is only a label."""
     if ctx <= 0:
         raise ValueError("ctx must be positive")
     if not 0 < util <= 1:
         raise ValueError("util must be in (0, 1]")
     notes: list[str] = []
     reserve = DEFAULT_RESERVE_GIB[device.kind] if reserve_gib is None else reserve_gib
-    w_bytes = weights_bytes(spec, weight_fmt, components, ple_offload, with_mtp)
+    if gguf is not None:
+        w_bytes = gguf_weight_bytes(gguf, ple_offload)
+        notes.append(f"weights from GGUF header: exact ({gguf.bits_per_weight:.2f} bits/weight average)")
+    else:
+        w_bytes = weights_bytes(spec, weight_fmt, components, ple_offload, with_mtp)
     decoder, kept = loaded_param_groups(spec, components, ple_offload, with_mtp)
     per_seq = seq_bytes(spec, ctx, kv_fmt)
     budget = device.memory_bytes * util
@@ -171,7 +201,7 @@ def estimate(
     elif max_seqs == 0:
         notes.append("weights fit, but not even one sequence of this context fits in the KV budget")
 
-    active = active_weight_bytes(spec, weight_fmt)
+    active = gguf_active_bytes(gguf, spec) if gguf is not None else active_weight_bytes(spec, weight_fmt)
     ceiling = ceiling_ctx = crossover = None
     if device.bandwidth_gbs:
         bw = device.bandwidth_gbs * 1e9
@@ -194,12 +224,10 @@ def estimate(
     else:
         notes.append(f"no bandwidth figure for {device.name}: decode ceilings omitted")
 
-    if weight_fmt.lower() in APPROXIMATE_WEIGHT_FORMATS:
+    if gguf is None and weight_fmt.lower() in APPROXIMATE_WEIGHT_FORMATS:
         notes.append(f"{weight_fmt} is a mixed-precision GGUF format; bytes/param is an average")
     if spec.params.per_layer_embeddings and not ple_offload:
-        notes.append(
-            "per-layer embedding tables counted as device memory (use --ple-offload if the engine maps them)"
-        )
+        notes.append("per-layer embedding tables counted as device memory (use --ple-offload if the engine maps them)")
     if spec.count(LayerKind.SHARED):
         notes.append(f"{spec.count(LayerKind.SHARED)} layers reuse another layer's KV and own none")
     if spec.count(LayerKind.LINEAR):

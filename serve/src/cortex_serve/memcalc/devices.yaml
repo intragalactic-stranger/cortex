@@ -71,7 +71,7 @@ Apple-M4-Max-128GB:
 local-epyc-7571:
   kind: cpu
   memory_gib: 15.0 # system RAM; the OS and other processes use part of it
-  bandwidth_gbs: null # to be measured in M1
+  bandwidth_gbs: 20.3 # MEASURED 2026-11-05: read kernel, 4 threads (serve/scripts/membw.c; evidence/M1/02_membw.txt)
   bf16_tflops: null
   fp8_tflops: null
   source_url: evidence/M0/01_machine-probe.txt

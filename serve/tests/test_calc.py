@@ -66,9 +66,10 @@ def test_lower_bit_weights_turn_compute_bound_sooner() -> None:
     assert int4 < bf16 / 3
 
 
-def test_cpu_device_has_no_ceiling() -> None:
+def test_cpu_device_uses_measured_bandwidth() -> None:
     est = estimate(spec("Qwen__Qwen3-0.6B"), get_device("local-epyc-7571"), "q4_k_m")
-    assert est.decode_ceiling_tok_s is None
+    assert est.decode_ceiling_tok_s is not None and 40 < est.decode_ceiling_tok_s < 80  # 20.3 GB/s / ~0.36 GB
+    assert est.roofline_crossover_batch is None  # no FLOPS figure for this CPU
     assert est.max_concurrent_seqs > 0
 
 

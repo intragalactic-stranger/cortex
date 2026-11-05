@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Annotated
 
 import typer
@@ -11,6 +12,7 @@ from rich.table import Table
 
 from cortex_serve.memcalc.calc import Components, Estimate, estimate
 from cortex_serve.memcalc.devices import get_device, load_devices
+from cortex_serve.memcalc.gguf import read_header
 from cortex_serve.memcalc.loader import load_model
 
 app = typer.Typer(
@@ -20,9 +22,7 @@ app = typer.Typer(
 )
 console = Console()
 
-ModelOpt = Annotated[
-    str, typer.Option("--model", "-m", help="HF repo id (org/name) or a local model dir/config")
-]
+ModelOpt = Annotated[str, typer.Option("--model", "-m", help="HF repo id (org/name) or a local model dir/config")]
 DeviceOpt = Annotated[str, typer.Option("--device", "-d", help="Device name; see `memcalc devices`")]
 DtypeOpt = Annotated[str, typer.Option("--dtype", help="Weight format: bf16, fp8, w4a16-g128, q4_k_m, ...")]
 KvOpt = Annotated[str, typer.Option("--kv-dtype", help="KV cache format: auto, bf16, fp8, q8_0, ...")]
@@ -30,9 +30,7 @@ UtilOpt = Annotated[float, typer.Option("--util", help="Fraction of device memor
 ReserveOpt = Annotated[
     float | None, typer.Option("--reserve-gib", help="Runtime reserve (CUDA ctx, graphs, activations)")
 ]
-ComponentsOpt = Annotated[
-    str, typer.Option("--components", help="'text' (language model) or 'all' (+vision/audio)")
-]
+ComponentsOpt = Annotated[str, typer.Option("--components", help="'text' (language model) or 'all' (+vision/audio)")]
 JsonOpt = Annotated[bool, typer.Option("--json", help="Emit JSON instead of a table")]
 
 
@@ -90,10 +88,11 @@ def estimate_cmd(
     util: UtilOpt = 0.9,
     reserve_gib: ReserveOpt = None,
     components: ComponentsOpt = "text",
-    ple_offload: Annotated[
-        bool, typer.Option("--ple-offload", help="Gemma PLE tables kept off-device")
-    ] = False,
+    ple_offload: Annotated[bool, typer.Option("--ple-offload", help="Gemma PLE tables kept off-device")] = False,
     with_mtp: Annotated[bool, typer.Option("--with-mtp", help="Load multi-token-prediction heads")] = False,
+    gguf: Annotated[
+        Path | None, typer.Option("--gguf", help="GGUF file: exact weight bytes from its header (llama.cpp tier)")
+    ] = None,
     revision: Annotated[str | None, typer.Option("--revision", help="HF branch, tag or commit")] = None,
     as_json: JsonOpt = False,
 ) -> None:
@@ -110,6 +109,7 @@ def estimate_cmd(
         _components(components),
         ple_offload,
         with_mtp,
+        read_header(gguf) if gguf else None,
     )
     if as_json:
         typer.echo(est.model_dump_json(indent=2))

@@ -9,6 +9,11 @@ build/
 *.egg-info/
 .env
 .env.*
-# raw benchmark outputs (summaries are committed)
-serve/results/raw/
+# benchmark outputs: commit manifests, points, quality and reports; keep bulky raw files local
+serve/results/**/requests.parquet
+serve/results/**/engine-*.log
+serve/results/**/arc-*.json
+serve/results/.data/
+*.sha256.json
 .DS_Store
+serve/results/*.log

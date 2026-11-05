@@ -11,10 +11,19 @@ dependencies = [
     "rich>=13",
     "pyyaml>=6",
     "httpx>=0.28",
+    "tokenizers>=0.21",
+    "polars>=1.20",
+    "matplotlib>=3.9",
 ]
 
 [project.scripts]
 memcalc = "cortex_serve.memcalc.cli:app"
+servebench = "cortex_serve.servebench.cli:app"
+
+[project.optional-dependencies]
+modal = [
+    "modal>=1.6",
+]
 
 [build-system]
 requires = ["hatchling>=1.25"]
