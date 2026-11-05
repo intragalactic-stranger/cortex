@@ -1,0 +1,34 @@
+{
+  "description": "Hand-calculated expectations for memcalc. Shared with the TypeScript port (M6): both implementations must reproduce these exactly. Byte values are integers; tolerances only where stated.",
+  "derivations": "See evidence/M0/04_kv-cache-corrected.txt and serve/docs/learn/02_memory_math.md",
+  "cases": [
+    {"id": "llama31-8b-kv-8k", "model": "synthetic__llama-3.1-8b", "kv_dtype": "bf16", "ctx": 8192,
+     "expect": {"kv_bytes_per_token": 131072, "seq_bytes": 1073741824, "params_stored": 8030261248}},
+    {"id": "qwen3-4b-8k", "model": "Qwen__Qwen3-4B-Instruct-2507", "kv_dtype": "bf16", "ctx": 8192,
+     "expect": {"kv_bytes_per_token": 147456, "seq_bytes": 1207959552, "fixed_state_bytes": 0, "params_stored": 4022468096}},
+    {"id": "qwen3-4b-8k-fp8kv", "model": "Qwen__Qwen3-4B-Instruct-2507", "kv_dtype": "fp8", "ctx": 8192,
+     "expect": {"kv_bytes_per_token": 73728, "seq_bytes": 603979776}},
+    {"id": "qwen35-4b-8k", "model": "Qwen__Qwen3.5-4B", "kv_dtype": "bf16", "ctx": 8192,
+     "expect": {"kv_bytes_per_token": 32768, "seq_bytes": 319946752, "fixed_state_bytes": 51511296, "params_stored": 4659865088}},
+    {"id": "gemma4-e4b-8k", "model": "google__gemma-4-E4B-it", "kv_dtype": "bf16", "ctx": 8192,
+     "expect": {"kv_bytes_per_token": 16384, "seq_bytes": 155189248, "fixed_state_bytes": 0, "params_stored": 7996157418}},
+    {"id": "gemma4-e4b-32k", "model": "google__gemma-4-E4B-it", "kv_dtype": "bf16", "ctx": 32768,
+     "expect": {"seq_bytes": 557842432}},
+    {"id": "gemma4-e2b-8k", "model": "google__gemma-4-E2B-it", "kv_dtype": "bf16", "ctx": 8192,
+     "expect": {"kv_bytes_per_token": 6144, "seq_bytes": 56623104, "params_stored": 5123178979}},
+    {"id": "qwen3-30b-a3b-8k", "model": "Qwen__Qwen3-30B-A3B", "kv_dtype": "bf16", "ctx": 8192,
+     "expect": {"kv_bytes_per_token": 98304, "seq_bytes": 805306368, "params_stored": 30532122624}}
+  ],
+  "estimates": [
+    {"id": "qwen3-4b-l4-8k", "model": "Qwen__Qwen3-4B-Instruct-2507", "device": "L4", "dtype": "bf16", "kv_dtype": "auto",
+     "ctx": 8192, "util": 0.9,
+     "expect": {"weights_bytes": 8044936192, "max_concurrent_seqs": 9}},
+    {"id": "llama31-8b-h100-ceiling", "model": "synthetic__llama-3.1-8b", "device": "H100-80GB", "dtype": "bf16",
+     "kv_dtype": "auto", "ctx": 8192, "util": 0.9,
+     "expect": {"decode_ceiling_tok_s": 223.18, "tolerance": 0.01,
+                "note": "Spec §3.3 says ~200 using all 16.06 GB of weights; memcalc excludes the input-embedding table (a row lookup, not a full read) -> 15.01 GB -> 223 tok/s. Counting all weights gives 208.6, within 5% of the spec."}},
+    {"id": "llama31-8b-l4-ceiling", "model": "synthetic__llama-3.1-8b", "device": "L4", "dtype": "bf16",
+     "kv_dtype": "auto", "ctx": 8192, "util": 0.9,
+     "expect": {"decode_ceiling_tok_s": 19.99, "tolerance": 0.01}}
+  ]
+}
