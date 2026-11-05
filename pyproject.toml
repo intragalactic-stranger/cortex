@@ -1,0 +1,30 @@
+# Virtual workspace root for the Cortex monorepo (no installable package here).
+[tool.uv.workspace]
+members = ["serve"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "mypy>=1.15",
+    "ruff>=0.12",
+    "pre-commit>=4",
+    "types-PyYAML",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "N", "PTH", "TID"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["serve/src", "serve/tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["serve/tests"]
+markers = ["network: needs internet access (skipped in CI)"]
+addopts = "-m 'not network' -q"

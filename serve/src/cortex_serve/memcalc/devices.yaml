@@ -1,0 +1,77 @@
+# Device table for memcalc. All values are APPROXIMATE and must be re-checked against vendor pages.
+#   memory_gib    : memory usable by the process. For GPUs this is the total that nvidia-smi typically
+#                   reports (slightly below the marketing number); confirmed per GPU in M2.
+#   bandwidth_gbs : peak memory bandwidth, GB/s (1e9 bytes).
+#   bf16_tflops / fp8_tflops : dense tensor-core peak (no sparsity); null = not supported / unknown.
+# Sources: NVIDIA product pages / datasheets (URLs below), Apple tech specs. Checked 2026-11-05.
+
+T4:
+  kind: gpu
+  memory_gib: 15.0
+  bandwidth_gbs: 320
+  bf16_tflops: null # Turing has no bf16; fp16 tensor ~65 TFLOPS
+  fp8_tflops: null
+  source_url: https://www.nvidia.com/en-us/data-center/tesla-t4/
+L4:
+  kind: gpu
+  memory_gib: 22.49
+  bandwidth_gbs: 300
+  bf16_tflops: 121
+  fp8_tflops: 242
+  source_url: https://www.nvidia.com/en-us/data-center/l4/
+A10G:
+  kind: gpu
+  memory_gib: 22.49
+  bandwidth_gbs: 600
+  bf16_tflops: 70 # AWS does not publish A10G tensor peaks; community estimate
+  fp8_tflops: null
+  source_url: https://aws.amazon.com/ec2/instance-types/g5/
+A100-40GB:
+  kind: gpu
+  memory_gib: 40.0
+  bandwidth_gbs: 1555
+  bf16_tflops: 312
+  fp8_tflops: null
+  source_url: https://www.nvidia.com/en-us/data-center/a100/
+A100-80GB:
+  kind: gpu
+  memory_gib: 80.0
+  bandwidth_gbs: 2039
+  bf16_tflops: 312
+  fp8_tflops: null
+  source_url: https://www.nvidia.com/en-us/data-center/a100/
+H100-80GB:
+  kind: gpu
+  memory_gib: 79.65
+  bandwidth_gbs: 3350 # SXM; the PCIe variant is ~2000 GB/s
+  bf16_tflops: 989
+  fp8_tflops: 1979
+  source_url: https://www.nvidia.com/en-us/data-center/h100/
+H200:
+  kind: gpu
+  memory_gib: 140.0
+  bandwidth_gbs: 4800
+  bf16_tflops: 989
+  fp8_tflops: 1979
+  source_url: https://www.nvidia.com/en-us/data-center/h200/
+RTX-4090:
+  kind: gpu
+  memory_gib: 23.99
+  bandwidth_gbs: 1008
+  bf16_tflops: 165
+  fp8_tflops: 330
+  source_url: https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/
+Apple-M4-Max-128GB:
+  kind: unified
+  memory_gib: 128.0
+  bandwidth_gbs: 546
+  bf16_tflops: null
+  fp8_tflops: null
+  source_url: https://www.apple.com/macbook-pro/specs/
+local-epyc-7571:
+  kind: cpu
+  memory_gib: 15.0 # system RAM; the OS and other processes use part of it
+  bandwidth_gbs: null # to be measured in M1
+  bf16_tflops: null
+  fp8_tflops: null
+  source_url: evidence/M0/01_machine-probe.txt
