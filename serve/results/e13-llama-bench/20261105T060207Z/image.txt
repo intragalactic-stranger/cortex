@@ -1,0 +1,1 @@
+ghcr.io/ggml-org/llama.cpp@sha256:93573d882ea21d1b77712a33162934daaabcdf3a076dfff91a9ed3c2aed8cd41
