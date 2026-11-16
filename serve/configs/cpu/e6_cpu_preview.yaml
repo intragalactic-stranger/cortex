@@ -1,0 +1,17 @@
+name: e6-cpu-spec-decoding
+experiment: E6-cpu-preview
+description: Speculative decoding preview on CPU. Qwen3-1.7B Q4_K_M target with a Qwen3-0.6B Q4_K_M draft (same tokenizer).
+engine:
+  kind: llamacpp
+  image: ghcr.io/ggml-org/llama.cpp:server@sha256:1145e8de3111dc9358c6d8daffb755c4cf8a862d93391c26ba521b9a810bbe3e
+  args: {threads: 4, parallel: 1, ctx_per_slot: 2048, ignore_eos: true, draft_model: unsloth_Qwen3-0.6B-GGUF/Qwen3-0.6B-Q4_K_M.gguf, spec_type: draft-simple}
+artifacts:
+  - {name: qwen3-1.7b-q4_k_m, repo: unsloth/Qwen3-1.7B-GGUF, revision: d7f544eead698dbd1f15126ef60b45a1e1933222, file: Qwen3-1.7B-Q4_K_M.gguf, family: Qwen/Qwen3-1.7B, quant: q4_k_m}
+tokenizers:
+  Qwen/Qwen3-1.7B: {repo: Qwen/Qwen3-1.7B, revision: 70d244cc86ccca08cf5af4e1e306ecf908b1ad5e}
+workloads:
+  - {name: chat-short, input_tokens: 128, output_tokens: 64}
+load: {mode: concurrency, levels: [1], requests_per_level: 8, warmup_requests: 1}
+slo: {ttft_s: 3.0, tpot_s: 0.125}
+repeats: 3
+seed: 1234

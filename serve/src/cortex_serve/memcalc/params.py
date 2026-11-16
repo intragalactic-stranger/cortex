@@ -45,9 +45,7 @@ def classify_tensor(name: str, layers: Sequence[LayerSpec], tied: bool = False) 
     for pattern, bucket in _SIMPLE_RULES:
         if pattern.search(name):
             if bucket == "lm_head" and tied:
-                return (
-                    "tied_duplicate"  # e.g. Qwen3-0.6B/1.7B store lm_head although tie_word_embeddings=true
-                )
+                return "tied_duplicate"  # e.g. Qwen3-0.6B/1.7B store lm_head although tie_word_embeddings=true
             return bucket
     m = _LAYER.search(name)
     if m:
@@ -65,9 +63,7 @@ def classify_tensors(tensors: TensorTable, layers: Sequence[LayerSpec], tied: bo
     for name, (_dtype, shape) in tensors.items():
         bucket = classify_tensor(name, layers, tied)
         buckets[bucket] = buckets.get(bucket, 0) + math.prod(shape)
-    return ParamBreakdown(
-        source="safetensors-header", decoder_layers=buckets.pop("decoder_layers", 0), **buckets
-    )
+    return ParamBreakdown(source="safetensors-header", decoder_layers=buckets.pop("decoder_layers", 0), **buckets)
 
 
 _LLAMA_STYLE = {"llama", "mistral", "qwen2", "qwen3", "qwen3_moe", "smollm3"}

@@ -1,0 +1,1 @@
+load_backend: loaded CPU backend from /app/libggml-cpu-haswell.so

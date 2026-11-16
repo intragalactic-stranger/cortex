@@ -1,0 +1,21 @@
+name: e13-cpu-ollama
+experiment: E13
+description: Same GGUF files served by Ollama (llama.cpp-based) to measure the cost of its convenience layer.
+engine:
+  kind: ollama
+  image: ollama/ollama:0.40.14@sha256:ebaef4f4c5d93660e1f25f8ad085a112f51ccfb0e8458073e71793959dba91c9
+  args: {threads: 4, parallel: 4, ctx_per_slot: 2048}
+artifacts:
+  - {name: qwen3-0.6b-q4_k_m, repo: unsloth/Qwen3-0.6B-GGUF, revision: 50968a4468ef4233ed78cd7c3de230dd1d61a56b, file: Qwen3-0.6B-Q4_K_M.gguf, family: Qwen/Qwen3-0.6B, quant: q4_k_m}
+  - {name: qwen3-1.7b-q4_k_m, repo: unsloth/Qwen3-1.7B-GGUF, revision: d7f544eead698dbd1f15126ef60b45a1e1933222, file: Qwen3-1.7B-Q4_K_M.gguf, family: Qwen/Qwen3-1.7B, quant: q4_k_m}
+tokenizers:
+  Qwen/Qwen3-0.6B: {repo: Qwen/Qwen3-0.6B, revision: c1899de289a04d12100db370d81485cdf75e47ca}
+  Qwen/Qwen3-1.7B: {repo: Qwen/Qwen3-1.7B, revision: 70d244cc86ccca08cf5af4e1e306ecf908b1ad5e}
+workloads:
+  - {name: chat-short, input_tokens: 128, output_tokens: 64}
+load: {mode: concurrency, levels: [1, 4], requests_per_level: 8, warmup_requests: 1}
+# G-04 (decided 2026-11-05): CPU interactive SLO. TTFT <= 3 s, TPOT <= 125 ms (>= 8 tok/s, faster than reading speed).
+slo: {ttft_s: 3.0, tpot_s: 0.125}
+repeats: 3
+seed: 1234
+hardware: {device: local-epyc-7571, threads: 4, memory_gib: 15}

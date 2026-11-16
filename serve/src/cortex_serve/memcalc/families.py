@@ -46,9 +46,7 @@ def tied_embeddings(cfg: Config) -> bool:
 
 def model_dtype_bytes(cfg: Config) -> float:
     tc = text_config(cfg)
-    name = (
-        tc.get("dtype") or tc.get("torch_dtype") or cfg.get("dtype") or cfg.get("torch_dtype") or "bfloat16"
-    )
+    name = tc.get("dtype") or tc.get("torch_dtype") or cfg.get("dtype") or cfg.get("torch_dtype") or "bfloat16"
     return STATE_DTYPE_BYTES.get(str(name), 2.0)
 
 
@@ -84,9 +82,7 @@ def build_layers(cfg: Config) -> tuple[LayerSpec, ...]:
     for i, kind in enumerate(kinds):
         if kind == LayerKind.FULL:
             layers.append(
-                LayerSpec(
-                    index=i, kind=kind, q_heads=q_heads, kv_heads=global_kv_heads, head_dim=global_head_dim
-                )
+                LayerSpec(index=i, kind=kind, q_heads=q_heads, kv_heads=global_kv_heads, head_dim=global_head_dim)
             )
         elif kind == LayerKind.SLIDING:
             layers.append(
