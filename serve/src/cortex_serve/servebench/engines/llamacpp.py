@@ -22,6 +22,7 @@ _FLAG_MAP = {
     "cache_type_v": "-ctv",
     "flash_attn": "-fa",
     "draft_model": "-md",
+    "spec_type": "--spec-type",
     "spec_draft_n_max": "--spec-draft-n-max",
     "cache_reuse": "--cache-reuse",
 }
@@ -34,6 +35,9 @@ _BOOL_FLAGS = {
 
 
 def server_args(args: dict[str, Any], model_path: str) -> list[str]:
+    if "draft_model" in args and "spec_type" not in args:
+        # Current llama-server defaults --spec-type to "none": -md alone loads the draft but never drafts.
+        raise ValueError("draft_model requires spec_type (e.g. 'draft-simple'); llama.cpp's default is 'none'")
     out = ["-m", f"/models/{model_path}", "--host", "0.0.0.0", "--port", "8080", "--metrics"]
     for key, value in args.items():
         if key in _FLAG_MAP:
