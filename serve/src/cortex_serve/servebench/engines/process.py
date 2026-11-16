@@ -6,6 +6,7 @@ Flags must be re-verified against each pinned image's ``--help`` (docs/research/
 
 from __future__ import annotations
 
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -115,3 +116,38 @@ class ProcessEngine(Engine):
             except subprocess.TimeoutExpired:
                 self.proc.kill()
         self.proc = None
+
+
+def parse_vllm_memory(log: str) -> dict[str, float]:
+    """KV capacity vLLM reports at startup (format verified per pinned version in docs/research/M2_*)."""
+    out: dict[str, float] = {}
+    if m := re.search(r"Available KV cache memory:\s*([\d.]+)\s*GiB", log):
+        out["kv_available_gib"] = float(m.group(1))
+    if m := re.search(r"GPU KV cache size:\s*([\d,]+)\s*tokens", log):
+        out["kv_capacity_tokens"] = float(m.group(1).replace(",", ""))
+    if m := re.search(r"Maximum concurrency for ([\d,]+) tokens per request:\s*([\d.]+)x", log):
+        out["max_concurrency_ctx"] = float(m.group(1).replace(",", ""))
+        out["max_concurrency"] = float(m.group(2))
+    if m := re.search(r"Model loading took\s*([\d.]+)\s*GiB", log):
+        out["model_load_gib"] = float(m.group(1))
+    return out
+
+
+def parse_sglang_memory(log: str) -> dict[str, float]:
+    out: dict[str, float] = {}
+    if m := re.search(r"max_total_num_tokens=(\d+)", log):
+        out["kv_capacity_tokens"] = float(m.group(1))
+    if m := re.search(r"KV Cache is allocated\. #tokens: (\d+), K size: ([\d.]+) GB, V size: ([\d.]+) GB", log):
+        out["kv_capacity_tokens"] = float(m.group(1))
+        out["kv_gb"] = float(m.group(2)) + float(m.group(3))
+    return out
+
+
+def parse_memory(kind: str, log: str) -> dict[str, float]:
+    if kind == "vllm":
+        return parse_vllm_memory(log)
+    if kind == "sglang":
+        return parse_sglang_memory(log)
+    from cortex_serve.servebench.engines.llamacpp import parse_memory as llamacpp_memory
+
+    return llamacpp_memory(log)

@@ -25,6 +25,8 @@ def _cmd(args: list[str], cwd: Path | None = None) -> str | None:
 
 
 def git_state(repo_dir: Path) -> dict[str, Any]:
+    if os.environ.get("SERVEBENCH_GIT_SHA"):  # remote containers have no checkout; the launcher passes it in
+        return {"sha": os.environ["SERVEBENCH_GIT_SHA"], "dirty": os.environ.get("SERVEBENCH_GIT_DIRTY") == "1"}
     sha = _cmd(["git", "rev-parse", "HEAD"], repo_dir)
     dirty = bool(_cmd(["git", "status", "--porcelain", "--untracked-files=no"], repo_dir))
     return {"sha": sha, "dirty": dirty}
