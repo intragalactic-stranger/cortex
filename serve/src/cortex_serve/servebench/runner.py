@@ -79,6 +79,17 @@ def _artifact_record(a: ArtifactSpec, models_dir: Path) -> dict[str, Any]:
     return rec  # HF-repo artifacts (vLLM/SGLang) are identified by repo + pinned revision
 
 
+def draft_stats(results: list[RequestResult]) -> dict[str, float | None]:
+    """Speculative-decoding totals for one load point from llama-server's per-request ``timings``."""
+    drafted = sum(r.server_timings.get("draft_n", 0.0) for r in results)
+    accepted = sum(r.server_timings.get("draft_n_accepted", 0.0) for r in results)
+    return {
+        "draft_tokens": drafted,
+        "draft_accepted": accepted,
+        "draft_acceptance": accepted / drafted if drafted else None,
+    }
+
+
 def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: list[str] | None = None) -> Path:
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     run_dir = out_root / cfg.name / stamp
@@ -140,6 +151,10 @@ def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: 
                         after = scrape_prometheus(engine.base_url)
                         for r in lr.results:
                             r.output_tokens = len(tok.encode(r.text)) if r.text else 0
+                        drafts = draft_stats(lr.results)
+                        if "draft_model" in cfg.engine.args and not drafts["draft_tokens"]:
+                            # Guard against a silent no-op: a loaded draft model that never drafted (E6, 2026-11-16).
+                            raise RuntimeError(f"{artifact.name}: draft model configured but 0 tokens drafted")
                         row = {
                             "run": cfg.name,
                             "stamp": stamp,
@@ -161,6 +176,7 @@ def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: 
                             **{f"res_{k}": v for k, v in resources.items()},
                             **{f"mem_{k}": v for k, v in memory.items()},
                             **_server_medians(lr.results),
+                            **drafts,
                             "metrics_scraped": bool(before and after),
                         }
                         point_rows.append(row)

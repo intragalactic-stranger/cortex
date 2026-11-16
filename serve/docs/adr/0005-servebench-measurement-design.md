@@ -21,3 +21,7 @@ Engine comparisons are easy to get wrong: engine-reported timings differ in defi
 + Numbers are comparable across engines and reproducible from configs. + Timing logic is tested without servers.
 − Client-side TTFT includes HTTP and loopback overhead (sub-millisecond locally; on Modal the client is co-located, G-05).
 − Synthetic prose is not a real conversation distribution; ShareGPT-style traces are added on GPU (M2).
+
+## Amendment (2026-11-16, M1 results)
+- **Point 9 is limited for memory.** llama.cpp `mmap`s weights, and cgroup v2 charges a file page only to the cgroup that first faults it in. Weights already in the host page cache from an earlier container are not counted, so cgroup *peak memory* under-reports (Gemma 4 E2B Q8_0: 657 MiB peak vs 1,847 MiB for the smaller Q4_0). Memory claims use the engine-reported model/KV/compute-buffer sizes (`mem_*` columns) and memcalc; cgroup memory is kept only as a diagnostic. CPU time from cgroup is unaffected.
+- **Engine features must be verified as active, not just configured.** The first E6 run loaded a draft model that never drafted (`--spec-type` defaults to `none`). servebench now records per-point draft counts from server `timings` and fails a run whose configured feature shows no effect (commit `75d6f73`).

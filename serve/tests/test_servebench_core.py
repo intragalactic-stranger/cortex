@@ -129,3 +129,23 @@ def test_parse_ppl_and_prometheus_and_samples() -> None:
         ]
     )
     assert s["peak_memory_mib"] == 3.0 and s["avg_cpu_cores"] == 2.0
+
+
+def test_draft_model_requires_spec_type() -> None:
+    # llama-server's --spec-type defaults to "none": -md alone loads the draft and never drafts (E6, 2026-11-16).
+    with pytest.raises(ValueError, match="spec_type"):
+        server_args({"draft_model": "d.gguf"}, "x.gguf")
+    args = server_args({"draft_model": "d.gguf", "spec_type": "draft-simple"}, "x.gguf")
+    assert args[args.index("-md") + 1] == "/models/d.gguf"
+    assert args[args.index("--spec-type") + 1] == "draft-simple"
+
+
+def test_draft_stats_sums_server_timings() -> None:
+    from cortex_serve.servebench.runner import draft_stats
+
+    rs = [RequestResult(request_id=i, workload="w", input_tokens=10, max_tokens=4) for i in range(3)]
+    rs[0].server_timings = {"draft_n": 49.0, "draft_n_accepted": 46.0}
+    rs[1].server_timings = {"draft_n": 51.0, "draft_n_accepted": 34.0}
+    stats = draft_stats(rs)  # rs[2] has no timings (e.g. errored request)
+    assert stats == {"draft_tokens": 100.0, "draft_accepted": 80.0, "draft_acceptance": 0.8}
+    assert draft_stats(rs[2:])["draft_acceptance"] is None

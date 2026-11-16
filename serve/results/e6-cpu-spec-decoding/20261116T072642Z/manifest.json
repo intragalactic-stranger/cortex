@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "created_utc": "2026-11-16T07:26:42+00:00",
+  "servebench_version": "0.1.0",
+  "host": {
+    "hostname_hash": "d3093eab5bc8",
+    "cpu": "AMD EPYC 7571",
+    "logical_cpus": 4,
+    "memory_gib": 15.46,
+    "kernel": "7.0.0-1014-aws",
+    "python": "3.12.8",
+    "docker": "29.1.3",
+    "gpu": null
+  },
+  "run": {
+    "name": "e6-cpu-spec-decoding",
+    "experiment": "E6-cpu-preview",
+    "stamp": "20261116T072642Z"
+  },
+  "config": {
+    "name": "e6-cpu-spec-decoding",
+    "description": "Speculative decoding preview on CPU. Qwen3-1.7B Q4_K_M target with a Qwen3-0.6B Q4_K_M draft (same tokenizer).",
+    "experiment": "E6-cpu-preview",
+    "engine": {
+      "kind": "llamacpp",
+      "image": "ghcr.io/ggml-org/llama.cpp:server@sha256:1145e8de3111dc9358c6d8daffb755c4cf8a862d93391c26ba521b9a810bbe3e",
+      "launch": "docker",
+      "args": {
+        "threads": 4,
+        "parallel": 1,
+        "ctx_per_slot": 2048,
+        "ignore_eos": true,
+        "draft_model": "unsloth_Qwen3-0.6B-GGUF/Qwen3-0.6B-Q4_K_M.gguf",
+        "spec_type": "draft-simple"
+      }
+    },
+    "artifacts": [
+      {
+        "name": "qwen3-1.7b-q4_k_m",
+        "repo": "unsloth/Qwen3-1.7B-GGUF",
+        "revision": "d7f544eead698dbd1f15126ef60b45a1e1933222",
+        "file": "Qwen3-1.7B-Q4_K_M.gguf",
+        "family": "Qwen/Qwen3-1.7B",
+        "quant": "q4_k_m"
+      }
+    ],
+    "tokenizers": {
+      "Qwen/Qwen3-1.7B": {
+        "repo": "Qwen/Qwen3-1.7B",
+        "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+      }
+    },
+    "workloads": [
+      {
+        "name": "chat-short",
+        "input_tokens": 128,
+        "output_tokens": 64,
+        "input_jitter": 0.0,
+        "shared_prefix_tokens": 0,
+        "instruction": "Continue the notes above in the same style. Keep writing without stopping."
+      }
+    ],
+    "load": {
+      "mode": "concurrency",
+      "levels": [
+        1.0
+      ],
+      "requests_per_level": 8,
+      "warmup_requests": 1,
+      "timeout_s": 600.0
+    },
+    "slo": {
+      "ttft_s": 3.0,
+      "tpot_s": 0.125
+    },
+    "repeats": 3,
+    "seed": 1234,
+    "disable_thinking": true,
+    "hardware": {},
+    "budget": null
+  },
+  "engine": {
+    "kind": "llamacpp",
+    "image": "ghcr.io/ggml-org/llama.cpp:server@sha256:1145e8de3111dc9358c6d8daffb755c4cf8a862d93391c26ba521b9a810bbe3e",
+    "digest": "ghcr.io/ggml-org/llama.cpp@sha256:1145e8de3111dc9358c6d8daffb755c4cf8a862d93391c26ba521b9a810bbe3e",
+    "version": null
+  },
+  "git": {
+    "sha": "75d6f736fa3592f00d8551d18187f765547786ec",
+    "dirty": false
+  },
+  "artifacts": [
+    {
+      "name": "qwen3-1.7b-q4_k_m",
+      "repo": "unsloth/Qwen3-1.7B-GGUF",
+      "revision": "d7f544eead698dbd1f15126ef60b45a1e1933222",
+      "file": "Qwen3-1.7B-Q4_K_M.gguf",
+      "family": "Qwen/Qwen3-1.7B",
+      "quant": "q4_k_m",
+      "sha256": "b139949c5bd74937ad8ed8c8cf3d9ffb1e99c866c823204dc42c0d91fa181897",
+      "bytes": 1107409472
+    }
+  ]
+}

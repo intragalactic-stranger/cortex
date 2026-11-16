@@ -1,0 +1,2 @@
+artifact,workload,level,engine,quant,family,output_throughput_tok_s,thr_min,thr_max,ttft_p50_s,ttft_p95_s,tpot_p50_s,tpot_p95_s,itl_p95_s,e2e_p50_s,slo_attainment,goodput_tok_s,output_tokens_mean,input_tokens_mean,peak_mem_mib,errors,repeats
+qwen3-1.7b-q4_k_m,chat-short,1.0,llamacpp,q4_k_m,Qwen/Qwen3-1.7B,4.215747015779742,3.4278552275344696,5.006772173535569,8.022704330564011,8.203031640674453,0.11986542541149353,0.1267678777544966,0.35171998796868137,15.595332735218108,0.0,0.0,64.0,129.0,2600.48046875,0,6
