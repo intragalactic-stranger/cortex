@@ -30,7 +30,7 @@ MODELS = {
     "qwen3-4b": ("Qwen/Qwen3-4B-Instruct-2507", "cdbee75f17c01a7cc42f958dc650907174af0554", "causal"),
     "gemma4-e4b": ("google/gemma-4-E4B-it", "4ecc2ba63bcac23ba4a767fc87025b1450f84c9c", "gemma4"),
 }
-L4_USD_PER_HOUR = 0.80  # `modal billing rates`, 2026-11-24
+RATES = {"L4": 0.80, "L40S": 1.95, "A100-80GB": 2.50}  # `modal billing rates`, 2026-11-24
 MAX_MINUTES = 60
 
 app = modal.App("cortex-quantize")
@@ -73,7 +73,9 @@ def _calibration(kind: str, tok: object, n: int, max_len: int) -> tuple[object, 
 
 
 @app.function(image=image, gpu="L4", memory=32768, volumes={"/hf": hf_cache}, timeout=MAX_MINUTES * 60)
-def quantize(model_key: str, recipe: str, calib_kind: str, n: int, max_len: int, git_sha: str, git_dirty: bool) -> dict:
+def quantize(
+    model_key: str, recipe: str, calib_kind: str, n: int, max_len: int, git_sha: str, git_dirty: bool, gpu: str = "L4"
+) -> dict:
     import importlib.metadata as md
 
     from cortex_serve.quantize.recipes import RECIPES, build
@@ -115,7 +117,7 @@ def quantize(model_key: str, recipe: str, calib_kind: str, n: int, max_len: int,
         "versions": {p: md.version(p) for p in ("llmcompressor", "compressed-tensors", "torch", "transformers")},
         "git_sha": git_sha,
         "git_dirty": git_dirty,
-        "gpu": "L4",
+        "gpu": gpu,
         "wall_s": round(time.time() - t0, 1),
         "size_bytes": sum(f.stat().st_size for f in out.rglob("*") if f.is_file()),
     }
@@ -133,22 +135,23 @@ def main(
     max_len: int = 2048,
     yes: bool = False,
     approved_gate: float = 60.0,
+    gpu: str = "L4",
 ) -> None:
     from cortex_serve.quantize.recipes import RECIPES
     from cortex_serve.spend import guarded
 
     if recipe not in RECIPES or model not in MODELS:
         raise SystemExit(f"recipe must be one of {sorted(RECIPES)}, model one of {sorted(MODELS)}")
-    worst = L4_USD_PER_HOUR * MAX_MINUTES / 60
+    worst = RATES[gpu] * MAX_MINUTES / 60
     print(
-        f"[cost] quantize {model} {recipe} ({calib}): L4, hard cap {MAX_MINUTES} min -> worst case ${worst:.2f}",
+        f"[cost] quantize {model} {recipe} ({calib}): {gpu}, hard cap {MAX_MINUTES} min -> worst case ${worst:.2f}",
         flush=True,
     )
     sha = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=False).stdout.strip()
     dirty = bool(subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"], capture_output=True,
                                 text=True, check=False).stdout.strip())  # fmt: skip
     with guarded(f"quantize {model} {recipe}", worst, approved_gate, yes):
-        manifest = quantize.remote(model, recipe, calib, n, max_len, sha, dirty)
+        manifest = quantize.with_options(gpu=gpu).remote(model, recipe, calib, n, max_len, sha, dirty, gpu)
     dest = Path("serve/results/quantize") / manifest["artifact"]
     dest.mkdir(parents=True, exist_ok=True)
     (dest / "cortex_manifest.json").write_text(json.dumps(manifest, indent=2))
