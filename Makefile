@@ -1,4 +1,4 @@
-.PHONY: setup lint fmt typecheck test test-network check demo
+.PHONY: setup lint fmt typecheck test test-network check demo k3d-up k3d-down k3d-status helm-check up down
 
 setup:            ## install all workspace packages + dev tools, enable git hooks
 	uv sync --all-packages --locked
@@ -26,3 +26,23 @@ demo:             ## E15 architecture comparison from vendored fixtures
 		-m serve/tests/fixtures/models/Qwen__Qwen3-4B-Instruct-2507 \
 		-m serve/tests/fixtures/models/Qwen__Qwen3.5-4B \
 		-m serve/tests/fixtures/models/google__gemma-4-E4B-it
+
+# --- M5: local Kubernetes (k3d) and compose stacks -------------------------------------------------
+k3d-up:           ## create the k3d cluster + KEDA + Prometheus/Grafana + cortex-serve chart
+	serve/deploy/k3d/up.sh all
+
+k3d-down:         ## delete the k3d cluster (frees its images and volumes)
+	serve/deploy/k3d/down.sh
+
+k3d-status:       ## pods, autoscaler and endpoints
+	. serve/deploy/k3d/env.sh && kubectl -n cortex get pods,hpa,scaledobject,pdb,networkpolicy
+
+helm-check:       ## lint + render the chart (no cluster needed)
+	helm lint serve/deploy/helm/cortex-serve
+	helm template cortex serve/deploy/helm/cortex-serve -n cortex > /dev/null
+
+up:               ## single-command local stack without Kubernetes (docker compose)
+	serve/deploy/compose/up.sh
+
+down:             ## stop the compose stack
+	docker compose -f serve/deploy/compose/compose.yaml down

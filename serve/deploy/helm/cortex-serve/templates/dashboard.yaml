@@ -1,0 +1,12 @@
+{{- if .Values.monitoring.dashboards }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cortex-serve-dashboard
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+    grafana_dashboard: "1"   # picked up by the Grafana sidecar (kube-prometheus-stack values)
+data:
+  cortex-serve.json: |-
+{{ .Files.Get "dashboards/cortex-serve.json" | indent 4 }}
+{{- end }}

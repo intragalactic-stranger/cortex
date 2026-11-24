@@ -39,8 +39,11 @@ data:
     {{- if hasKey $models $dep }}
     {{- $m := index $models $dep }}
     {{- $weight := 0 }}
-    {{- if gt $n 1 }}{{- $weight = ternary $g.canary.weight (sub 100 $g.canary.weight) (eq $dep "canary") }}{{- end }}
+    {{- if gt $n 1 }}{{- $weight = ternary (int $g.canary.weight) (sub 100 (int $g.canary.weight)) (eq $dep "canary") }}{{- end }}
+    {{- /* canary.weight 0 = rolled back (stable only), 100 = promoted (candidate only) */}}
+    {{- if or (eq $n 1) (gt $weight 0) }}
     {{- include "cortex.litellmDeployment" (list $root $alias $m $weight) | nindent 4 }}
+    {{- end }}
     {{- end }}
     {{- end }}
     {{- end }}
@@ -93,6 +96,10 @@ data:
       request_timeout: {{ $g.timeoutSeconds }}
       drop_params: true
       callbacks: ["prometheus"]
+      # /metrics needs a proxy-admin key when auth is on; Prometheus must not hold one. It is scraped
+      # unauthenticated instead (counts, latencies, hashed key ids only). The NodePort is loopback-only
+      # on k3d; in a shared cluster expose metrics on an internal-only port (threat model T6).
+      require_auth_for_metrics_endpoint: false
       json_logs: true
       telemetry: false
 
