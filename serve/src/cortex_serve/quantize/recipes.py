@@ -24,6 +24,7 @@ RECIPES = {
         Recipe("w4a16-gptq-g128", "GPTQ int4 weights, group 128, symmetric, static actorder", True),
         Recipe("w4a16-awq-asym", "AWQ scales + RTN int4 weights, group 128, asymmetric", True),
         Recipe("w4a16-gptq-g32-sym", "GPTQ int4 group 32 symmetric (matches Google's Gemma 4 QAT scheme)", True),
+        Recipe("w4a16-rtn-g32-sym", "Round-to-nearest int4 group 32 symmetric (data-free PTQ baseline)", False),
     )
 }
 
@@ -58,4 +59,11 @@ def build(name: str, ignore: list[str] | None = None) -> list[Any]:
         assert scheme.weights is not None
         scheme.weights.group_size = 32
         return [GPTQModifier(config_groups={"group_0": scheme}, ignore=ign)]
+    if name == "w4a16-rtn-g32-sym":
+        from compressed_tensors.quantization import preset_name_to_scheme
+
+        scheme = preset_name_to_scheme("W4A16", ["Linear"])
+        assert scheme.weights is not None
+        scheme.weights.group_size = 32
+        return [QuantizationModifier(config_groups={"group_0": scheme}, ignore=ign)]
     raise KeyError(f"unknown recipe {name!r}; known: {sorted(RECIPES)}")

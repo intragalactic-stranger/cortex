@@ -74,7 +74,15 @@ def _calibration(kind: str, tok: object, n: int, max_len: int) -> tuple[object, 
 
 @app.function(image=image, gpu="L4", memory=32768, volumes={"/hf": hf_cache}, timeout=MAX_MINUTES * 60)
 def quantize(
-    model_key: str, recipe: str, calib_kind: str, n: int, max_len: int, git_sha: str, git_dirty: bool, gpu: str = "L4"
+    model_key: str,
+    recipe: str,
+    calib_kind: str,
+    n: int,
+    max_len: int,
+    git_sha: str,
+    git_dirty: bool,
+    gpu: str = "L4",
+    pipeline: str = "",
 ) -> dict:
     import importlib.metadata as md
 
@@ -103,6 +111,8 @@ def quantize(
     if spec.needs_calibration:
         ds, meta = _calibration(calib_kind, tok, n, max_len)
         kwargs = {"dataset": ds, "max_seq_length": max_len, "num_calibration_samples": n}
+        if pipeline:  # "basic" = one full forward per sample (the default sequential tracer fails on Gemma 4)
+            kwargs["pipeline"] = pipeline
     # pass the tokenizer as processor: multimodal Gemma 4 has no auto-detectable text-only processor
     oneshot(model=model, processor=tok, recipe=build(recipe, ignore), **kwargs)
     model.save_pretrained(out, save_compressed=True)
@@ -119,6 +129,7 @@ def quantize(
         "git_sha": git_sha,
         "git_dirty": git_dirty,
         "gpu": gpu,
+        "pipeline": pipeline or "default",
         "wall_s": round(time.time() - t0, 1),
         "size_bytes": sum(f.stat().st_size for f in out.rglob("*") if f.is_file()),
     }
@@ -137,6 +148,7 @@ def main(
     yes: bool = False,
     approved_gate: float = 60.0,
     gpu: str = "L4",
+    pipeline: str = "",
 ) -> None:
     from cortex_serve.quantize.recipes import RECIPES
     from cortex_serve.spend import guarded
@@ -152,7 +164,7 @@ def main(
     dirty = bool(subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"], capture_output=True,
                                 text=True, check=False).stdout.strip())  # fmt: skip
     with guarded(f"quantize {model} {recipe}", worst, approved_gate, yes):
-        manifest = quantize.with_options(gpu=gpu).remote(model, recipe, calib, n, max_len, sha, dirty, gpu)
+        manifest = quantize.with_options(gpu=gpu).remote(model, recipe, calib, n, max_len, sha, dirty, gpu, pipeline)
     dest = Path("serve/results/quantize") / manifest["artifact"]
     dest.mkdir(parents=True, exist_ok=True)
     (dest / "cortex_manifest.json").write_text(json.dumps(manifest, indent=2))
