@@ -82,6 +82,15 @@ class WorkloadSpec(Strict):
     input_jitter: float = 0.0  # +/- fraction of input length, uniform
     shared_prefix_tokens: int = 0
     instruction: str = "Continue the notes above in the same style. Keep writing without stopping."
+    source: Literal["synthetic", "ultrachat"] = Field(
+        default="synthetic",
+        description="synthetic: exact-length word-list prompts; ultrachat: real first-turn user prompts "
+        "(HuggingFaceH4/ultrachat_200k test_sft, pinned), natural length",
+    )
+    ignore_eos: bool = Field(default=True, description="False lets the model stop naturally (real prompts)")
+    json_schema: dict[str, Any] | None = Field(
+        default=None, description="Constrain output with response_format json_schema; validity is recorded"
+    )
 
 
 class LoadSpec(Strict):

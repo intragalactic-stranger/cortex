@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import random
+from typing import Any
 
 import pytest
 from cortex_serve.servebench.client import RequestResult
@@ -157,3 +158,41 @@ def test_requests_scale_with_concurrency() -> None:
     load = LoadSpec(levels=[1, 4, 64], requests_per_level=16, requests_per_slot=4)
     assert [load.requests_for(lv) for lv in load.levels] == [16, 16, 256]
     assert LoadSpec(levels=[1, 64], requests_per_level=16).requests_for(64) == 16
+
+
+def test_request_extra_and_json_validity() -> None:
+    from cortex_serve.servebench.collect import json_valid, prom_delta
+    from cortex_serve.servebench.config import WorkloadSpec
+    from cortex_serve.servebench.runner import request_extra
+
+    schema: dict[str, Any] = {"type": "object", "properties": {"name": {"type": "string"}, "n": {"type": "integer"}},
+              "required": ["name", "n"]}  # fmt: skip
+    wl = WorkloadSpec(name="j", input_tokens=10, output_tokens=5, ignore_eos=False, json_schema=schema)
+    extra = request_extra("vllm", wl)
+    assert extra is not None and "ignore_eos" not in extra and extra["response_format"]["type"] == "json_schema"
+    assert request_extra("llamacpp", WorkloadSpec(name="c", input_tokens=1, output_tokens=1)) is None
+    assert request_extra("vllm", WorkloadSpec(name="c", input_tokens=1, output_tokens=1)) == {"ignore_eos": True}
+    assert json_valid('{"name": "a", "n": 3}', schema)
+    assert not json_valid('{"name": "a"}', schema) and not json_valid("not json", schema)
+    assert not json_valid('{"name": "a", "n": "3"}', schema)
+    before = {'vllm:x_total{a="1"}': 2.0}
+    after = {'vllm:x_total{a="1"}': 5.0, 'vllm:x_total{a="2"}': 1.0}
+    assert prom_delta(before, after, "vllm:x_total") == 4.0 and prom_delta({}, {}, "vllm:x_total") is None
+
+
+def test_real_prompts_respect_length_and_seed() -> None:
+    from cortex_serve.servebench.config import WorkloadSpec
+    from cortex_serve.servebench.workloads import real_prompts
+
+    class Tok:
+        def encode(self, text: str) -> list[int]:
+            return list(range(len(text.split())))
+
+        def decode(self, ids: list[int]) -> str:
+            return ""
+
+    rows = ["a b c", "a " * 50, "x y", "one two three four", "z"]
+    wl = WorkloadSpec(name="u", input_tokens=4, output_tokens=8, source="ultrachat", ignore_eos=False)
+    a = real_prompts(rows, wl, Tok(), 3, seed=1)
+    assert len(a) == 3 and all(r.input_tokens <= 4 for r in a)
+    assert [r.prompt for r in a] == [r.prompt for r in real_prompts(rows, wl, Tok(), 3, seed=1)]
