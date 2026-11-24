@@ -8,7 +8,8 @@ Cost safety:
   nothing runs without ``--yes``;
 * the Modal function timeout is ``max_minutes``, so spend is hard-capped even if something hangs;
 * before launching, the metered spend (``modal billing summary``) + this run's worst case must stay under the
-  approved stage gate and the $245 credit ceiling (D-030); runs are launched one at a time so that holds;
+  approved stage gate and the $245 credit ceiling (D-030), and nothing may be billed to the card
+  (``billed_cost`` must be $0); runs are launched one at a time so that holds;
 * model weights are cached in the ``cortex-hf-cache`` volume (downloaded once).
 """
 
@@ -51,6 +52,8 @@ def _image(kind: str) -> modal.Image:
     image = modal.Image.from_registry(ref, add_python="3.12") if kind == "llamacpp" else modal.Image.from_registry(ref)
     return (
         image.entrypoint([])
+        # the SGLang image ships only `python3`; Modal's uv_pip_install resolves `python`
+        .run_commands("command -v python || ln -s \"$(command -v python3)\" /usr/local/bin/python")
         .uv_pip_install(*PY_DEPS)
         .env({"HF_HOME": "/hf", "HF_HUB_ENABLE_HF_TRANSFER": "0"})
         .add_local_python_source("cortex_serve")
@@ -111,8 +114,11 @@ def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 
         f"-> worst case ${b.max_usd:.2f}"
     )
     summary = subprocess.run(["modal", "billing", "summary", "--json"], capture_output=True, text=True, check=True)
-    spent = float(json.loads(summary.stdout)["metered_cost"])
-    print(f"[cost] metered spend this month so far: ${spent:.2f} (approved gate ${approved_gate:.0f})")
+    billing = json.loads(summary.stdout)
+    spent, billed = float(billing["metered_cost"]), float(billing["billed_cost"])
+    print(f"[cost] metered this month ${spent:.2f}, billed to card ${billed:.2f} (approved gate ${approved_gate:.0f})")
+    if billed > 0.005:
+        raise SystemExit(f"[cost] refusing: ${billed:.2f} is already billed to the card; credits must cover everything")
     if reason := budget_check(spent, b.max_usd, approved_gate):
         raise SystemExit(f"[cost] refusing: {reason}")
     if not yes:
