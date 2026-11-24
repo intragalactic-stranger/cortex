@@ -28,7 +28,10 @@ def test_bfsi_split_is_part_disjoint_and_deterministic() -> None:
     a = split_bfsi(rows, n_calib=100, n_heldout=30)
     b = split_bfsi(list(reversed(rows)), n_calib=100, n_heldout=30)
     assert a == b and len(a.calib) == 100 and len(a.heldout) == 30
-    parts = lambda ids: {":".join(i.split(":")[1:3]) for i in ids}  # noqa: E731
+
+    def parts(ids: list[str]) -> set[str]:
+        return {":".join(i.split(":")[1:3]) for i in ids}
+
     assert not parts(a.calib_ids) & parts(a.heldout_ids)
     assert all(not i.startswith("ecfr:26") for i in a.calib_ids + a.heldout_ids)
     assert ids_digest(a.calib_ids) == ids_digest(b.calib_ids)
