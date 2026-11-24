@@ -8,6 +8,8 @@
 
 from __future__ import annotations
 
+import shutil
+import subprocess
 import threading
 import time
 from pathlib import Path
@@ -56,6 +58,55 @@ class CgroupSampler:
         if self._thread.is_alive():
             self._thread.join(timeout=5)
         return summarize_samples(self.samples)
+
+
+class NvidiaSmiSampler:
+    """GPU telemetry at 1 Hz via ``nvidia-smi -lms`` (utilisation %, memory used MiB, power W)."""
+
+    QUERY = "utilization.gpu,memory.used,power.draw"
+
+    def __init__(self, interval_ms: int = 1000) -> None:
+        self.interval_ms = interval_ms
+        self.proc: subprocess.Popen[str] | None = None
+
+    def start(self) -> NvidiaSmiSampler:
+        if shutil.which("nvidia-smi"):
+            self.proc = subprocess.Popen(
+                [
+                    "nvidia-smi",
+                    f"--query-gpu={self.QUERY}",
+                    "--format=csv,noheader,nounits",
+                    f"-lms={self.interval_ms}",
+                ],
+                stdout=subprocess.PIPE,
+                text=True,
+            )
+        return self
+
+    def stop(self) -> dict[str, Any]:
+        if not self.proc:
+            return {"samples": 0}
+        self.proc.terminate()
+        out, _ = self.proc.communicate(timeout=10)
+        return summarize_gpu(out)
+
+
+def summarize_gpu(text: str) -> dict[str, Any]:
+    rows = []
+    for line in text.strip().splitlines():
+        parts = [p.strip() for p in line.split(",")]
+        try:
+            rows.append(tuple(float(p) for p in parts[:3]))
+        except ValueError:
+            continue
+    if not rows:
+        return {"samples": 0}
+    return {
+        "samples": len(rows),
+        "gpu_util_mean_pct": sum(r[0] for r in rows) / len(rows),
+        "gpu_mem_peak_mib": max(r[1] for r in rows),
+        "gpu_power_mean_w": sum(r[2] for r in rows) / len(rows),
+    }
 
 
 def summarize_samples(samples: list[dict[str, float]]) -> dict[str, Any]:

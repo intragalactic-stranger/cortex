@@ -12,11 +12,14 @@ import httpx
 import polars as pl
 
 from cortex_serve.servebench.client import RequestResult, send
-from cortex_serve.servebench.collect import CgroupSampler, scrape_prometheus
+from cortex_serve.servebench.collect import CgroupSampler, NvidiaSmiSampler, scrape_prometheus
 from cortex_serve.servebench.config import ArtifactSpec, RunConfig
 from cortex_serve.servebench.engines import Engine, make_engine
 from cortex_serve.servebench.engines.base import artifact_path
-from cortex_serve.servebench.engines.llamacpp import LlamaCppEngine, parse_memory
+from cortex_serve.servebench.engines.llamacpp import LlamaCppEngine
+from cortex_serve.servebench.engines.llamacpp import parse_memory as parse_llamacpp_memory
+from cortex_serve.servebench.engines.process import ProcessEngine
+from cortex_serve.servebench.engines.process import parse_memory as parse_process_memory
 from cortex_serve.servebench.load import LevelRun, run_concurrency, run_poisson
 from cortex_serve.servebench.manifest import build_manifest, file_sha256, git_state, image_digest
 from cortex_serve.servebench.metrics import percentile, summarize
@@ -35,7 +38,7 @@ def probe_llamacpp_memory(engine: LlamaCppEngine, artifact: ArtifactSpec) -> dic
     )
     try:
         probe.start(artifact)
-        return parse_memory(probe.logs())
+        return parse_llamacpp_memory(probe.logs())
     finally:
         probe.stop()
 
@@ -44,10 +47,14 @@ async def _run_level(
     engine: Engine, cfg: RunConfig, warmup: list[Request], measured: list[Request], level: float
 ) -> LevelRun:
     limits = httpx.Limits(max_connections=int(max(level, 1)) + 8)
+    # vLLM and SGLang take ignore_eos per request (llama.cpp uses the server flag --ignore-eos)
+    extra = {"ignore_eos": True} if cfg.engine.kind in ("vllm", "sglang") else None
     async with httpx.AsyncClient(timeout=cfg.load.timeout_s, limits=limits) as client:
 
         async def do(req: Request) -> RequestResult:
-            return await send(client, engine.base_url, engine.protocol, engine.model_name, req, cfg.disable_thinking)
+            return await send(
+                client, engine.base_url, engine.protocol, engine.model_name, req, cfg.disable_thinking, extra=extra
+            )
 
         if cfg.load.mode == "concurrency":
             return await run_concurrency(do, warmup, measured, int(level))
@@ -62,6 +69,17 @@ def _server_medians(results: list[RequestResult]) -> dict[str, float | None]:
         if vals:
             out[f"server_{key}_p50"] = percentile(vals, 50)
     return out
+
+
+def _artifact_record(a: ArtifactSpec, models_dir: Path) -> dict[str, Any]:
+    rec: dict[str, Any] = a.model_dump()
+    if a.file is not None and (models_dir / artifact_path(a)).exists():
+        path = models_dir / artifact_path(a)
+        rec.update(sha256=file_sha256(path), bytes=path.stat().st_size)
+    qm = Path(a.repo) / "cortex_manifest.json"
+    if a.repo.startswith("/") and qm.exists():  # M3 local checkpoint: carry its quantization manifest
+        rec["quantize_manifest"] = json.loads(qm.read_text())
+    return rec  # HF-repo artifacts (vLLM/SGLang) are identified by repo + pinned revision
 
 
 def draft_stats(results: list[RequestResult]) -> dict[str, float | None]:
@@ -79,7 +97,7 @@ def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: 
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     run_dir = out_root / cfg.name / stamp
     run_dir.mkdir(parents=True, exist_ok=True)
-    engine = make_engine(cfg.engine.kind, cfg.engine.image, cfg.engine.args, str(models_dir))
+    engine = make_engine(cfg.engine.kind, cfg.engine.image, cfg.engine.args, str(models_dir), cfg.engine.launch)
     artifacts = [a for a in cfg.artifacts if not only or a.name in only]
 
     manifest = build_manifest(
@@ -92,14 +110,8 @@ def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: 
             "version": engine.version(),
         },
         git=git_state(repo_dir),
-        artifacts=[
-            {
-                **a.model_dump(),
-                "sha256": file_sha256(models_dir / artifact_path(a)),
-                "bytes": (models_dir / artifact_path(a)).stat().st_size,
-            }
-            for a in artifacts
-        ],
+        artifacts=[_artifact_record(a, models_dir) for a in artifacts],
+        budget=cfg.budget.model_dump() if cfg.budget else None,
     )
     (run_dir / "manifest.json").write_text(json.dumps(manifest, indent=2))
     _log(f"run dir {run_dir}")
@@ -116,20 +128,27 @@ def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: 
             memory = probe_llamacpp_memory(engine, artifact)
         _log(f"{artifact.name}: starting {cfg.engine.kind}")
         engine.start(artifact)
+        if isinstance(engine, ProcessEngine):
+            memory = parse_process_memory(engine.kind, engine.logs())
         try:
             for wl in cfg.workloads:
-                per_point = cfg.load.requests_per_level
                 n_points = cfg.repeats * len(cfg.load.levels)
                 warm_n = cfg.load.warmup_requests
-                pool = generate(wl, tok, warm_n * n_points + per_point * n_points, cfg.seed)
+                measured_total = cfg.repeats * sum(cfg.load.requests_for(lv) for lv in cfg.load.levels)
+                pool = generate(wl, tok, warm_n * n_points + measured_total, cfg.seed)
                 cursor = 0
                 for rep in range(cfg.repeats):
                     for level in cfg.load.levels:
+                        per_point = cfg.load.requests_for(level)
                         warmup = pool[cursor : cursor + warm_n]
                         cursor += warm_n
                         measured = pool[cursor : cursor + per_point]
                         cursor += per_point
-                        sampler = CgroupSampler(engine.container or "").start()
+                        sampler: CgroupSampler | NvidiaSmiSampler = (
+                            NvidiaSmiSampler().start()
+                            if isinstance(engine, ProcessEngine)
+                            else CgroupSampler(engine.container or "").start()
+                        )
                         before = scrape_prometheus(engine.base_url)
                         lr = asyncio.run(_run_level(engine, cfg, warmup, measured, level))
                         resources = sampler.stop()

@@ -27,6 +27,10 @@ def aggregate(points: pl.DataFrame) -> pl.DataFrame:
     def med(col: str) -> pl.Expr:
         return pl.col(col).median().alias(col)
 
+    # CPU runs sample cgroup RAM, GPU runs sample nvidia-smi memory; report whichever the runs have
+    mem_cols = [c for c in ("res_peak_memory_mib", "res_gpu_mem_peak_mib") if c in points.columns]
+    peak = pl.max_horizontal([pl.col(c) for c in mem_cols]).max() if mem_cols else pl.lit(None, dtype=pl.Float64)
+
     return (
         points.group_by([*KEYS, "engine", "quant", "family"])
         .agg(
@@ -43,7 +47,7 @@ def aggregate(points: pl.DataFrame) -> pl.DataFrame:
             med("goodput_tok_s"),
             med("output_tokens_mean"),
             med("input_tokens_mean"),
-            pl.col("res_peak_memory_mib").max().alias("peak_mem_mib"),
+            peak.alias("peak_mem_mib"),
             pl.col("errors").sum().alias("errors"),
             pl.len().alias("repeats"),
         )
@@ -58,7 +62,7 @@ def _fmt(v: float | None, scale: float = 1.0, digits: int = 2) -> str:
 def markdown(agg: pl.DataFrame) -> str:
     lines = [
         "| Workload | Artifact | Engine | Conc. | Out tok/s (median [min-max]) | TTFT p50 / p95 (s) | "
-        "TPOT p50 / p95 (ms) | SLO met | Goodput tok/s | Out tok/req | Peak RAM MiB | Reps | Err |",
+        "TPOT p50 / p95 (ms) | SLO met | Goodput tok/s | Out tok/req | Peak mem MiB | Reps | Err |",
         "|---|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for r in agg.iter_rows(named=True):
@@ -80,10 +84,11 @@ def plot(agg: pl.DataFrame, out_dir: Path) -> list[Path]:
     for wl in agg["workload"].unique().sort().to_list():
         sub = agg.filter(pl.col("workload") == wl)
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
-        for art in sub["artifact"].unique().sort().to_list():
-            s = sub.filter(pl.col("artifact") == art).sort("level")
-            ax1.plot(s["level"], s["output_throughput_tok_s"], marker="o", label=art)
-            ax2.plot(s["output_throughput_tok_s"], s["tpot_p50_s"] * 1000, marker="o", label=art)
+        for eng, art in sub.select("engine", "artifact").unique().sort(["engine", "artifact"]).iter_rows():
+            s = sub.filter((pl.col("artifact") == art) & (pl.col("engine") == eng)).sort("level")
+            label = f"{eng} / {art}"
+            ax1.plot(s["level"], s["output_throughput_tok_s"], marker="o", label=label)
+            ax2.plot(s["output_throughput_tok_s"], s["tpot_p50_s"] * 1000, marker="o", label=label)
         ax1.set_xlabel("concurrent requests")
         ax1.set_ylabel("output tokens/s (all requests)")
         ax1.set_title(f"{wl}: throughput vs concurrency")

@@ -1,0 +1,22 @@
+{
+  "name": "qwen3-4b-fp8-official",
+  "model": "Qwen/Qwen3-4B-Instruct-2507-FP8",
+  "revision": "8591804019c8b22094c3b5b4454e0edc05dffc98",
+  "max_model_len": 4096,
+  "extra": [],
+  "engine_image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+  "lm_eval": "lm_eval[api,ifeval]==0.4.13",
+  "gpu": "L4",
+  "wall_s": 3176,
+  "git": {
+    "sha": "63f936cc7c64da30cb8bbbe5b9d4bf2320040fcd",
+    "dirty": false
+  },
+  "domain": {
+    "bfsi_heldout_ppl": 5.977559130167431,
+    "bfsi_heldout_tokens": 81532.0,
+    "bfsi_heldout_sections": 200.0
+  },
+  "quick_limit": 0,
+  "quantize_manifest": null
+}

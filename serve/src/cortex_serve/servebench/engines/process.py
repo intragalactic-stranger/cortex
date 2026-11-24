@@ -6,6 +6,7 @@ Flags must be re-verified against each pinned image's ``--help`` (docs/research/
 
 from __future__ import annotations
 
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -38,13 +39,17 @@ SGLANG_BOOL = {"disable_radix_cache", "enable_mixed_chunk", "disable_cuda_graph"
 
 def vllm_cmd(artifact: ArtifactSpec, args: dict[str, Any], port: int) -> list[str]:
     model = artifact.repo if artifact.file is None else f"/models/{artifact.file}"
-    cmd = ["vllm", "serve", model, "--revision", artifact.revision, "--port", str(port), "--host", "127.0.0.1"]
-    cmd += ["--served-model-name", "model", "--disable-log-requests"]
+    cmd = ["vllm", "serve", model, "--port", str(port), "--host", "127.0.0.1"]
+    if not model.startswith("/"):  # local checkpoint dirs (M3 artifacts) have no hub revision
+        cmd[3:3] = ["--revision", artifact.revision]
+    cmd += ["--served-model-name", "model"]  # request logging is off by default since vLLM 0.1x
     return cmd + _flags(args, VLLM_BOOL)
 
 
 def sglang_cmd(artifact: ArtifactSpec, args: dict[str, Any], port: int) -> list[str]:
-    cmd = ["python3", "-m", "sglang.launch_server", "--model-path", artifact.repo, "--revision", artifact.revision]
+    cmd = ["python3", "-m", "sglang.launch_server", "--model-path", artifact.repo]
+    if not artifact.repo.startswith("/"):
+        cmd += ["--revision", artifact.revision]
     cmd += ["--port", str(port), "--host", "127.0.0.1", "--served-model-name", "model", "--enable-metrics"]
     return cmd + _flags(args, SGLANG_BOOL)
 
@@ -72,6 +77,9 @@ class ProcessEngine(Engine):
             argv = server_args(self.args, artifact_path(artifact))
             argv[argv.index("--port") + 1] = str(self.host_port)
             argv[argv.index("--host") + 1] = "127.0.0.1"
+            # server_args uses the Docker mount point /models; in process mode the files live under models_dir
+            argv = [a.replace("/models/", f"{self.models_dir.rstrip('/')}/", 1) if a.startswith("/models/") else a
+                    for a in argv]  # fmt: skip
             return ["/app/llama-server", *argv]
         raise ValueError(f"unsupported process engine {self.kind!r}")
 
@@ -115,3 +123,38 @@ class ProcessEngine(Engine):
             except subprocess.TimeoutExpired:
                 self.proc.kill()
         self.proc = None
+
+
+def parse_vllm_memory(log: str) -> dict[str, float]:
+    """KV capacity vLLM reports at startup (format verified per pinned version in docs/research/M2_*)."""
+    out: dict[str, float] = {}
+    if m := re.search(r"Available KV cache memory:\s*([\d.]+)\s*GiB", log):
+        out["kv_available_gib"] = float(m.group(1))
+    if m := re.search(r"GPU KV cache size:\s*([\d,]+)\s*tokens", log):
+        out["kv_capacity_tokens"] = float(m.group(1).replace(",", ""))
+    if m := re.search(r"Maximum concurrency for ([\d,]+) tokens per request:\s*([\d.]+)x", log):
+        out["max_concurrency_ctx"] = float(m.group(1).replace(",", ""))
+        out["max_concurrency"] = float(m.group(2))
+    if m := re.search(r"Model loading took\s*([\d.]+)\s*GiB", log):
+        out["model_load_gib"] = float(m.group(1))
+    return out
+
+
+def parse_sglang_memory(log: str) -> dict[str, float]:
+    out: dict[str, float] = {}
+    if m := re.search(r"max_total_num_tokens=(\d+)", log):
+        out["kv_capacity_tokens"] = float(m.group(1))
+    if m := re.search(r"KV Cache is allocated\. #tokens: (\d+), K size: ([\d.]+) GB, V size: ([\d.]+) GB", log):
+        out["kv_capacity_tokens"] = float(m.group(1))
+        out["kv_gb"] = float(m.group(2)) + float(m.group(3))
+    return out
+
+
+def parse_memory(kind: str, log: str) -> dict[str, float]:
+    if kind == "vllm":
+        return parse_vllm_memory(log)
+    if kind == "sglang":
+        return parse_sglang_memory(log)
+    from cortex_serve.servebench.engines.llamacpp import parse_memory as llamacpp_memory
+
+    return llamacpp_memory(log)

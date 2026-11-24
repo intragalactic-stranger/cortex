@@ -50,6 +50,31 @@ class BudgetSpec(Strict):
         return self.usd_per_hour * self.max_minutes / 60
 
 
+# Modal credits: $250, expire 2026-11-30 (D-030). Spend is gated in stages so a bad run can't strand the plan.
+CREDIT_CEILING_USD = 245.0  # hard stop: never let worst case cross this ($5 margin before the card is charged)
+STAGE_GATES_USD = (60.0, 120.0, 180.0)  # pause for a review with the owner before crossing each gate
+
+
+def budget_check(spent_usd: float, worst_case_usd: float, approved_gate_usd: float) -> str | None:
+    """Return a refusal reason, or None if the run may start.
+
+    ``spent_usd`` is the provider-metered spend so far, ``worst_case_usd`` the run's hard-capped cost, and
+    ``approved_gate_usd`` the highest stage gate the owner has approved (``STAGE_GATES_USD`` or the ceiling).
+    """
+    after = spent_usd + worst_case_usd
+    if after > CREDIT_CEILING_USD:
+        return (
+            f"spent ${spent_usd:.2f} + worst case ${worst_case_usd:.2f} "
+            f"would exceed the ${CREDIT_CEILING_USD:.0f} ceiling"
+        )
+    if after > approved_gate_usd:
+        return (
+            f"spent ${spent_usd:.2f} + worst case ${worst_case_usd:.2f} crosses the approved stage gate "
+            f"${approved_gate_usd:.0f}: review spend with the owner, then pass --approved-gate"
+        )
+    return None
+
+
 class WorkloadSpec(Strict):
     name: str
     input_tokens: int
@@ -63,8 +88,18 @@ class LoadSpec(Strict):
     mode: Literal["concurrency", "poisson"] = "concurrency"
     levels: list[float] = Field(description="Concurrency levels, or request rates (req/s) for poisson")
     requests_per_level: int = Field(description="Measured requests per level (per repeat)")
+    requests_per_slot: int | None = Field(
+        default=None,
+        description="Concurrency mode: measure at least this many requests per concurrent slot, so high levels "
+        "stay saturated (n = max(requests_per_level, requests_per_slot * level))",
+    )
     warmup_requests: int = 2
     timeout_s: float = 600.0
+
+    def requests_for(self, level: float) -> int:
+        if self.requests_per_slot is None or self.mode != "concurrency":
+            return self.requests_per_level
+        return max(self.requests_per_level, self.requests_per_slot * int(level))
 
 
 class SLO(Strict):

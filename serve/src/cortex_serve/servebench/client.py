@@ -58,7 +58,9 @@ class RequestResult:
         return (self.e2e_s - self.ttft_s) / (n - 1)
 
 
-def request_body(protocol: Protocol, model: str, req: Request, disable_thinking: bool) -> dict[str, Any]:
+def request_body(
+    protocol: Protocol, model: str, req: Request, disable_thinking: bool, extra: dict[str, Any] | None = None
+) -> dict[str, Any]:
     messages = [{"role": "user", "content": req.prompt}]
     if protocol == "openai":
         body: dict[str, Any] = {
@@ -71,7 +73,7 @@ def request_body(protocol: Protocol, model: str, req: Request, disable_thinking:
         }
         if disable_thinking:
             body["chat_template_kwargs"] = {"enable_thinking": False}
-        return body
+        return {**body, **(extra or {})}
     body = {
         "model": model,
         "messages": messages,
@@ -152,11 +154,12 @@ async def send(
     req: Request,
     disable_thinking: bool = True,
     clock: Clock = time.perf_counter,
+    extra: dict[str, Any] | None = None,
 ) -> RequestResult:
     res = RequestResult(
         request_id=req.id, workload=req.workload, input_tokens=req.input_tokens, max_tokens=req.max_tokens
     )
-    body = request_body(protocol, model, req, disable_thinking)
+    body = request_body(protocol, model, req, disable_thinking, extra)
     t0 = clock()
     res.start_s = t0
     try:

@@ -24,6 +24,11 @@ strict = true
 plugins = ["pydantic.mypy"]
 files = ["serve/src", "serve/tests"]
 
+[[tool.mypy.overrides]]
+# installed only in the M3 quantization image (pins conflict with vLLM's, docs/research M3 §1.4)
+module = ["llmcompressor.*", "compressed_tensors.*"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["serve/tests"]
 markers = ["network: needs internet access (skipped in CI)"]

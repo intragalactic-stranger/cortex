@@ -17,3 +17,4 @@ serve/results/.data/
 *.sha256.json
 .DS_Store
 serve/results/*.log
+serve/results/logs/

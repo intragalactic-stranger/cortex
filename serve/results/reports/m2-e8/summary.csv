@@ -1,0 +1,2 @@
+artifact,workload,level,engine,quant,family,output_throughput_tok_s,thr_min,thr_max,ttft_p50_s,ttft_p95_s,tpot_p50_s,tpot_p95_s,itl_p95_s,e2e_p50_s,slo_attainment,goodput_tok_s,output_tokens_mean,input_tokens_mean,peak_mem_mib,errors,repeats
+qwen3-4b-bf16,chat-balanced,64.0,vllm,bf16,Qwen/Qwen3-4B-Instruct-2507,793.9071792963854,203.88058682352587,795.7366207696176,1.3336269079999994,4.838952479,0.0751654429362745,0.07715350849147054,0.06744794282498959,20.3069704305,0.0,0.0,256.0,513.0,20731.0,0,8
