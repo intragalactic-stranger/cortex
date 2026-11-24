@@ -103,7 +103,8 @@ def quantize(
     if spec.needs_calibration:
         ds, meta = _calibration(calib_kind, tok, n, max_len)
         kwargs = {"dataset": ds, "max_seq_length": max_len, "num_calibration_samples": n}
-    oneshot(model=model, recipe=build(recipe, ignore), **kwargs)
+    # pass the tokenizer as processor: multimodal Gemma 4 has no auto-detectable text-only processor
+    oneshot(model=model, processor=tok, recipe=build(recipe, ignore), **kwargs)
     model.save_pretrained(out, save_compressed=True)
     tok.save_pretrained(out)
     manifest = {
