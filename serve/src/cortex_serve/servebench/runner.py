@@ -129,13 +129,14 @@ def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: 
             memory = parse_process_memory(engine.kind, engine.logs())
         try:
             for wl in cfg.workloads:
-                per_point = cfg.load.requests_per_level
                 n_points = cfg.repeats * len(cfg.load.levels)
                 warm_n = cfg.load.warmup_requests
-                pool = generate(wl, tok, warm_n * n_points + per_point * n_points, cfg.seed)
+                measured_total = cfg.repeats * sum(cfg.load.requests_for(lv) for lv in cfg.load.levels)
+                pool = generate(wl, tok, warm_n * n_points + measured_total, cfg.seed)
                 cursor = 0
                 for rep in range(cfg.repeats):
                     for level in cfg.load.levels:
+                        per_point = cfg.load.requests_for(level)
                         warmup = pool[cursor : cursor + warm_n]
                         cursor += warm_n
                         measured = pool[cursor : cursor + per_point]

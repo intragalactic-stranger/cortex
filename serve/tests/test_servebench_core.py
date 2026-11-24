@@ -149,3 +149,11 @@ def test_draft_stats_sums_server_timings() -> None:
     stats = draft_stats(rs)  # rs[2] has no timings (e.g. errored request)
     assert stats == {"draft_tokens": 100.0, "draft_accepted": 80.0, "draft_acceptance": 0.8}
     assert draft_stats(rs[2:])["draft_acceptance"] is None
+
+
+def test_requests_scale_with_concurrency() -> None:
+    from cortex_serve.servebench.config import LoadSpec
+
+    load = LoadSpec(levels=[1, 4, 64], requests_per_level=16, requests_per_slot=4)
+    assert [load.requests_for(lv) for lv in load.levels] == [16, 16, 256]
+    assert LoadSpec(levels=[1, 64], requests_per_level=16).requests_for(64) == 16

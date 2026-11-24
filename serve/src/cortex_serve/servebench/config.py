@@ -88,8 +88,18 @@ class LoadSpec(Strict):
     mode: Literal["concurrency", "poisson"] = "concurrency"
     levels: list[float] = Field(description="Concurrency levels, or request rates (req/s) for poisson")
     requests_per_level: int = Field(description="Measured requests per level (per repeat)")
+    requests_per_slot: int | None = Field(
+        default=None,
+        description="Concurrency mode: measure at least this many requests per concurrent slot, so high levels "
+        "stay saturated (n = max(requests_per_level, requests_per_slot * level))",
+    )
     warmup_requests: int = 2
     timeout_s: float = 600.0
+
+    def requests_for(self, level: float) -> int:
+        if self.requests_per_slot is None or self.mode != "concurrency":
+            return self.requests_per_level
+        return max(self.requests_per_level, self.requests_per_slot * int(level))
 
 
 class SLO(Strict):

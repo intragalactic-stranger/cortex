@@ -40,6 +40,7 @@ PY_DEPS = [
     "tokenizers>=0.21",
     "polars>=1.20",
     "matplotlib>=3.9",
+    "huggingface_hub>=0.26",
 ]
 
 app = modal.App("cortex-servebench")
@@ -60,6 +61,23 @@ def _image(kind: str) -> modal.Image:
     )
 
 
+def _fetch_gguf(cfg: object) -> None:
+    """GGUF engines read ``/hf/gguf/<org>_<repo>/<file>``: download missing files once into the volume."""
+    from cortex_serve.servebench.config import RunConfig
+    from cortex_serve.servebench.engines.base import artifact_path
+    from huggingface_hub import hf_hub_download
+
+    assert isinstance(cfg, RunConfig)
+    for art in cfg.artifacts:
+        if art.file is None:
+            continue
+        dest = Path("/hf/gguf") / artifact_path(art)
+        if not dest.exists():
+            print(f"[fetch] {art.repo}@{art.revision[:8]}/{art.file}")
+            hf_hub_download(art.repo, art.file, revision=art.revision, local_dir=dest.parent)
+            hf_cache.commit()
+
+
 def _bench(config_yaml: str, only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
     """Runs inside the GPU container: start engine, run the config, return the run dir as tar.gz."""
     os.environ["SERVEBENCH_GIT_SHA"] = git_sha
@@ -68,6 +86,7 @@ def _bench(config_yaml: str, only: list[str] | None, git_sha: str, git_dirty: bo
     from cortex_serve.servebench.runner import run
 
     cfg = RunConfig.model_validate(yaml.safe_load(config_yaml))
+    _fetch_gguf(cfg)
     out = Path("/tmp/results")
     try:
         run_dir = run(cfg, out, models_dir=Path("/hf/gguf"), repo_dir=Path("/"), only=only)
