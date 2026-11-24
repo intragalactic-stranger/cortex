@@ -72,6 +72,21 @@ def _calibration(kind: str, tok: object, n: int, max_len: int) -> tuple[object, 
     }
 
 
+def _copy_aux_files(repo: str, rev: str, out: Path) -> None:
+    """vLLM needs the base repo's processor/chat-template files (Gemma 4 is served as multimodal)."""
+    import shutil
+
+    from huggingface_hub import hf_hub_download, list_repo_files
+
+    for f in list_repo_files(repo, revision=rev):
+        if (
+            f.endswith((".json", ".jinja"))
+            and "/" not in f
+            and f not in ("config.json", "model.safetensors.index.json")
+        ) and not (out / f).exists():
+            shutil.copy(hf_hub_download(repo, f, revision=rev), out / f)
+
+
 @app.function(image=image, gpu="L4", memory=32768, volumes={"/hf": hf_cache}, timeout=MAX_MINUTES * 60)
 def quantize(
     model_key: str,
@@ -117,6 +132,7 @@ def quantize(
     oneshot(model=model, processor=tok, recipe=build(recipe, ignore), **kwargs)
     model.save_pretrained(out, save_compressed=True)
     tok.save_pretrained(out)
+    _copy_aux_files(repo, rev, out)
     manifest = {
         "artifact": name,
         "base_model": repo,
