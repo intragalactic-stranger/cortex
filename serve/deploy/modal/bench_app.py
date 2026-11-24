@@ -106,7 +106,7 @@ def _bench(
         cfg = RunConfig.model_validate(yaml.safe_load(text))
         # Modal kills the whole call at its timeout and nothing is returned: skip a config that may not finish
         need = (cfg.budget.max_minutes * 60) if cfg.budget else 0.0
-        if deadline_s and time.monotonic() - t0 + need > deadline_s - 120:
+        if deadline_s and time.monotonic() - t0 + need > deadline_s:  # deadline = sum of all caps
             print(f"[fail] {cfg.name}: skipped, would not finish before the container timeout")
             continue
         try:
