@@ -1,0 +1,48 @@
+name: e4-l4-vllm-apc-on
+experiment: E4
+description: 'Prefix caching ON (vLLM APC): 1,536 of 2,048 prompt tokens shared.'
+engine:
+  kind: vllm
+  launch: process
+  image: vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34
+  args:
+    max_model_len: 4096
+    gpu_memory_utilization: 0.9
+    enable_prefix_caching: true
+artifacts:
+- name: qwen3-4b-bf16
+  repo: Qwen/Qwen3-4B-Instruct-2507
+  revision: cdbee75f17c01a7cc42f958dc650907174af0554
+  family: Qwen/Qwen3-4B-Instruct-2507
+  quant: bf16
+tokenizers:
+  Qwen/Qwen3-4B-Instruct-2507:
+    repo: Qwen/Qwen3-4B-Instruct-2507
+    revision: cdbee75f17c01a7cc42f958dc650907174af0554
+workloads:
+- name: shared-prefix
+  input_tokens: 2048
+  output_tokens: 128
+  shared_prefix_tokens: 1536
+- name: rag-long-prefill
+  input_tokens: 2048
+  output_tokens: 128
+load:
+  mode: concurrency
+  levels:
+  - 1
+  - 16
+  requests_per_level: 8
+  requests_per_slot: 2
+  warmup_requests: 4
+slo:
+  ttft_s: 0.5
+  tpot_s: 0.05
+repeats: 2
+hardware:
+  device: modal-l4
+  gpu: L4
+budget:
+  gpu: L4
+  usd_per_hour: 0.8
+  max_minutes: 25

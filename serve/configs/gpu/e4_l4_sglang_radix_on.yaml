@@ -1,0 +1,47 @@
+name: e4-l4-sglang-radix-on
+experiment: E4
+description: Prefix caching ON (SGLang RadixAttention).
+engine:
+  kind: sglang
+  launch: process
+  image: lmsysorg/sglang:v0.5.22@sha256:e3a4f06001a29542fc4a8638536d9ffc5eb9c9942b08603c09b19a56eae4a1ae
+  args:
+    context_length: 4096
+    mem_fraction_static: 0.85
+artifacts:
+- name: qwen3-4b-bf16
+  repo: Qwen/Qwen3-4B-Instruct-2507
+  revision: cdbee75f17c01a7cc42f958dc650907174af0554
+  family: Qwen/Qwen3-4B-Instruct-2507
+  quant: bf16
+tokenizers:
+  Qwen/Qwen3-4B-Instruct-2507:
+    repo: Qwen/Qwen3-4B-Instruct-2507
+    revision: cdbee75f17c01a7cc42f958dc650907174af0554
+workloads:
+- name: shared-prefix
+  input_tokens: 2048
+  output_tokens: 128
+  shared_prefix_tokens: 1536
+- name: rag-long-prefill
+  input_tokens: 2048
+  output_tokens: 128
+load:
+  mode: concurrency
+  levels:
+  - 1
+  - 16
+  requests_per_level: 8
+  requests_per_slot: 2
+  warmup_requests: 4
+slo:
+  ttft_s: 0.5
+  tpot_s: 0.05
+repeats: 2
+hardware:
+  device: modal-l4
+  gpu: L4
+budget:
+  gpu: L4
+  usd_per_hour: 0.8
+  max_minutes: 25
