@@ -73,6 +73,9 @@ class ProcessEngine(Engine):
             argv = server_args(self.args, artifact_path(artifact))
             argv[argv.index("--port") + 1] = str(self.host_port)
             argv[argv.index("--host") + 1] = "127.0.0.1"
+            # server_args uses the Docker mount point /models; in process mode the files live under models_dir
+            argv = [a.replace("/models/", f"{self.models_dir.rstrip('/')}/", 1) if a.startswith("/models/") else a
+                    for a in argv]  # fmt: skip
             return ["/app/llama-server", *argv]
         raise ValueError(f"unsupported process engine {self.kind!r}")
 

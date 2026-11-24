@@ -35,6 +35,7 @@ def test_process_llamacpp_command_uses_local_port() -> None:
     cmd = eng.run_args(gguf)
     assert cmd[0] == "/app/llama-server" and cmd[cmd.index("--port") + 1] == "8000"
     assert cmd[cmd.index("--host") + 1] == "127.0.0.1"
+    assert cmd[cmd.index("-m") + 1] == "/hf/gguf/org_r/x.gguf"
 
 
 def test_parse_vllm_log() -> None:
