@@ -145,16 +145,17 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
 @app.local_entrypoint()
 def main(name: str, model: str, revision: str = "local", tokenizer: str = "Qwen/Qwen3-4B-Instruct-2507",
          max_len: int = 4096, extra: str = "",
-         gpu: str = "L4", quick: int = 0, add_bos: bool = False, parts: str = "all", yes: bool = False,
+         gpu: str = "L4", quick: int = 0, add_bos: bool = False, parts: str = "all", max_minutes: int = MAX_MINUTES,
+         yes: bool = False,
          approved_gate: float = 60.0) -> None:  # fmt: skip
     from cortex_serve.spend import guarded
 
-    worst = RATES[gpu] * MAX_MINUTES / 60
-    print(f"[cost] eval {name}: {gpu}, hard cap {MAX_MINUTES} min -> worst case ${worst:.2f}", flush=True)
+    worst = RATES[gpu.rstrip("!")] * max_minutes / 60
+    print(f"[cost] eval {name}: {gpu}, hard cap {max_minutes} min -> worst case ${worst:.2f}", flush=True)
     sha = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=False).stdout.strip()
     dirty = bool(subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"], capture_output=True,
                                 text=True, check=False).stdout.strip())  # fmt: skip
-    fn = evaluate.with_options(gpu=gpu)
+    fn = evaluate.with_options(gpu=gpu, timeout=max_minutes * 60)
     with guarded(f"eval {name}", worst, approved_gate, yes):
         data = fn.remote(name, model, revision, tokenizer, max_len, extra.split() if extra else [],
                          {"sha": sha, "dirty": dirty}, quick, add_bos, parts)  # fmt: skip
