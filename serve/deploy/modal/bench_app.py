@@ -72,6 +72,14 @@ def _fetch_gguf(cfg: object) -> None:
         if art.file is None:
             continue
         dest = Path("/hf/gguf") / artifact_path(art)
+        if art.repo == "local/gguf-m3":  # our own M3 GGUFs (gguf_app.py writes them to /hf/gguf-m3)
+            src = Path("/hf/gguf-m3") / art.file
+            if not src.exists():
+                raise FileNotFoundError(f"{src} missing: run gguf_app.py --job qwen first")
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            if not dest.exists():
+                dest.symlink_to(src)
+            continue
         if not dest.exists():
             print(f"[fetch] {art.repo}@{art.revision[:8]}/{art.file}")
             hf_hub_download(art.repo, art.file, revision=art.revision, local_dir=dest.parent)
