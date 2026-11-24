@@ -16,7 +16,6 @@ Cost safety:
 from __future__ import annotations
 
 import io
-import json
 import os
 import subprocess
 import tarfile
@@ -129,7 +128,8 @@ FUNCTIONS = {"vllm": bench_vllm, "sglang": bench_sglang, "llamacpp": bench_llama
 def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 60.0) -> None:
     """``--config`` takes one path or several comma-separated paths for the same engine image and GPU; they run
     back to back in one container. The worst case is the sum of their budgets."""
-    from cortex_serve.servebench.config import RunConfig, budget_check
+    from cortex_serve.servebench.config import RunConfig
+    from cortex_serve.spend import guarded
 
     paths = [Path(c) for c in config.split(",")]
     texts = [p.read_text() for p in paths]
@@ -146,17 +146,7 @@ def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 
     minutes = sum(b.max_minutes for b in budgets)
     worst = rate * minutes / 60
     names = ", ".join(c.name for c in cfgs)
-    print(f"[cost] {names}: {gpu} at ${rate:.2f}/h, hard cap {minutes:.0f} min -> worst case ${worst:.2f}")
-    summary = subprocess.run(["modal", "billing", "summary", "--json"], capture_output=True, text=True, check=True)
-    billing = json.loads(summary.stdout)
-    spent, billed = float(billing["metered_cost"]), float(billing["billed_cost"])
-    print(f"[cost] metered this month ${spent:.2f}, billed to card ${billed:.2f} (approved gate ${approved_gate:.0f})")
-    if billed > 0.005:
-        raise SystemExit(f"[cost] refusing: ${billed:.2f} is already billed to the card; credits must cover everything")
-    if reason := budget_check(spent, worst, approved_gate):
-        raise SystemExit(f"[cost] refusing: {reason}")
-    if not yes:
-        raise SystemExit("[cost] dry run only. Re-run with --yes to start the GPU job.")
+    print(f"[cost] {names}: {gpu} at ${rate:.2f}/h, hard cap {minutes:.0f} min -> worst case ${worst:.2f}", flush=True)
     sha = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=False).stdout.strip()
     dirty = bool(
         subprocess.run(
@@ -164,7 +154,8 @@ def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 
         ).stdout.strip()
     )
     fn = FUNCTIONS[cfgs[0].engine.kind].with_options(gpu=gpu, timeout=int(minutes * 60))
-    data = fn.remote(texts, only.split(",") if only else None, sha, dirty)
+    with guarded(names, worst, approved_gate, yes):
+        data = fn.remote(texts, only.split(",") if only else None, sha, dirty)
     dest = Path("serve/results")
     with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
         tar.extractall(dest, filter="data")
