@@ -1,0 +1,9 @@
+apiVersion: v2
+name: cortex-serve
+description: >-
+  Cortex Serve on Kubernetes (M5): per-model llama.cpp CPU deployments behind a LiteLLM gateway,
+  queue-depth autoscaling with KEDA, NetworkPolicies, alerts and a Grafana dashboard.
+type: application
+version: 0.1.0
+appVersion: "m5"
+kubeVersion: ">=1.30.0-0"

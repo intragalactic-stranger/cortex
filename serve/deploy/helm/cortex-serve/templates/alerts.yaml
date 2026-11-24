@@ -1,0 +1,69 @@
+{{- $a := .Values.monitoring.alerts -}}
+{{- $slo := .Values.monitoring.slo -}}
+{{- $ns := .Release.Namespace -}}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cortex-serve
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: cortex-serve.recording
+      interval: 15s
+      rules:
+        # Slot usage per model pool: running requests / total slots (llamacpp:n_slots is not exported,
+        # so slots per replica come from the chart values).
+        {{- range .Values.models }}
+        {{- if include "cortex.modelEnabled" . }}
+        - record: cortex:slot_usage:ratio
+          labels: {cortex_model: {{ .name }}}
+          expr: >-
+            sum(llamacpp:requests_processing{namespace="{{ $ns }}",cortex_model="{{ .name }}"})
+            / (count(llamacpp:requests_processing{namespace="{{ $ns }}",cortex_model="{{ .name }}"})
+               * {{ include "cortex.modelArg" (list . $.Values.llamacpp.defaults "parallel") }})
+        {{- end }}
+        {{- end }}
+        - record: cortex:queue_depth:sum
+          expr: sum by (cortex_model) (llamacpp:requests_deferred{namespace="{{ $ns }}"})
+        - record: cortex:gateway_ttft_seconds:p95_5m
+          expr: >-
+            histogram_quantile(0.95, sum by (le, model_group) (
+              rate(litellm_llm_api_time_to_first_token_metric_bucket{namespace="{{ $ns }}"}[5m])))
+        - record: cortex:gateway_error_ratio:5m
+          expr: >-
+            sum(rate(litellm_proxy_failed_requests_metric_total{namespace="{{ $ns }}"}[5m]))
+            / sum(rate(litellm_proxy_total_requests_metric_total{namespace="{{ $ns }}"}[5m]))
+    - name: cortex-serve.alerts
+      rules:
+        - alert: CortexTTFTp95AboveSLO
+          expr: cortex:gateway_ttft_seconds:p95_5m > {{ $slo.ttftP95Seconds }}
+          for: {{ $a.forDuration }}
+          labels: {severity: warning}
+          annotations:
+            summary: "TTFT p95 for {{ "{{ $labels.model_group }}" }} is {{ "{{ $value | humanizeDuration }}" }} (SLO {{ $slo.ttftP95Seconds }} s)"
+            description: Gateway-measured time to first token has been above the G-04 CPU SLO for {{ $a.forDuration }}. Check queue depth and replica count.
+        - alert: CortexSlotUsageHigh
+          expr: cortex:slot_usage:ratio > {{ $a.slotUsage }}
+          for: {{ $a.forDuration }}
+          labels: {severity: warning}
+          annotations:
+            summary: "{{ "{{ $labels.cortex_model }}" }} slots {{ "{{ $value | humanizePercentage }}" }} busy"
+            description: All decode slots of the pool are occupied; new requests queue (requests_deferred). The pool is at max replicas or scaling lags.
+        - alert: CortexGatewayErrorRateHigh
+          expr: cortex:gateway_error_ratio:5m > {{ $a.errorRate }}
+          for: {{ $a.forDuration }}
+          labels: {severity: critical}
+          annotations:
+            summary: "Gateway error rate {{ "{{ $value | humanizePercentage }}" }}"
+            description: More than {{ mulf $a.errorRate 100 }}% of gateway requests failed (after retries and fallbacks) over 5 minutes.
+        - alert: CortexModelBackendDown
+          expr: |
+            kube_deployment_status_replicas_available{namespace="{{ $ns }}",deployment=~"cortex-model-.*"} == 0
+            or
+            sum by (cortex_model) (up{namespace="{{ $ns }}",job=~".*cortex-models"}) == 0
+          for: 1m
+          labels: {severity: critical}
+          annotations:
+            summary: "Model backend {{ "{{ $labels.deployment }}{{ $labels.cortex_model }}" }} has no serving replica"
+            description: No ready replica (or no scrapeable pod). The gateway is routing this alias to its fallback.

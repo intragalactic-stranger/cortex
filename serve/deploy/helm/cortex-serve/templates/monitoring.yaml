@@ -1,0 +1,40 @@
+{{- /* Scrape config for model pods and the gateway (Prometheus Operator CRDs). */}}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cortex-models
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: model
+  podMetricsEndpoints:
+    - port: http
+      path: /metrics
+      interval: {{ .Values.monitoring.scrapeInterval }}
+      # llama-server protects /metrics with the backend API key.
+      authorization:
+        type: Bearer
+        credentials:
+          name: {{ .Values.llamacpp.apiKeySecret.name }}
+          key: {{ .Values.llamacpp.apiKeySecret.key }}
+      relabelings:
+        - {sourceLabels: [__meta_kubernetes_pod_label_cortex_dev_model], targetLabel: cortex_model}
+        - {sourceLabels: [__meta_kubernetes_pod_label_cortex_dev_version], targetLabel: cortex_version}
+        - {sourceLabels: [__meta_kubernetes_pod_label_cortex_dev_alias], targetLabel: cortex_alias}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cortex-gateway
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: gateway
+  podMetricsEndpoints:
+    - port: http
+      path: /metrics/
+      interval: {{ .Values.monitoring.scrapeInterval }}

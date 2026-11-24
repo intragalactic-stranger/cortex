@@ -1,0 +1,40 @@
+# k3d cluster for M5 (single node: 4 vCPU / 15 GiB VM, one copy of each image).
+# ${CORTEX_MODELS_DIR} is expanded by k3d from the environment (set by up.sh).
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: cortex
+servers: 1
+agents: 0
+image: rancher/k3s:v1.35.10-k3s1@sha256:8262ca99a558dca0c0437443421986480b2359f9118f2371359f88a41514522f
+kubeAPI:
+  hostIP: "127.0.0.1"   # never listen on the VM's public interface
+  hostPort: "6550"
+volumes:
+  # GGUF cache from M1, read-only. Pods mount it through a hostPath PV + PVC (chart: weights.*).
+  - volume: ${CORTEX_MODELS_DIR}:/var/lib/cortex/models:ro
+    nodeFilters: [server:0]
+ports:
+  # NodePorts published on loopback only: gateway, Prometheus, Grafana.
+  - port: 127.0.0.1:4000:30400
+    nodeFilters: [server:0:direct]
+  - port: 127.0.0.1:9090:30090
+    nodeFilters: [server:0:direct]
+  - port: 127.0.0.1:3300:30300
+    nodeFilters: [server:0:direct]
+options:
+  k3d:
+    wait: true
+    timeout: "300s"
+    disableLoadbalancer: true
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters: [server:*]
+      - arg: --disable=servicelb
+        nodeFilters: [server:*]
+      - arg: --disable=metrics-server
+        nodeFilters: [server:*]
+  kubeconfig:
+    updateDefaultKubeconfig: false
+    switchCurrentContext: false
