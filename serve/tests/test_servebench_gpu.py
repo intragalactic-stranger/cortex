@@ -75,3 +75,10 @@ def test_budget_check_gates_and_ceiling() -> None:
     assert "stage gate" in (budget_check(58.0, 5.0, 60.0) or "")
     assert budget_check(58.0, 5.0, 120.0) is None
     assert "ceiling" in (budget_check(242.0, 5.0, CREDIT_CEILING_USD) or "")
+
+
+def test_local_checkpoint_has_no_revision_flag() -> None:
+    local = ART.model_copy(update={"repo": "/hf/artifacts/qwen3-4b-fp8-dynamic"})
+    cmd = vllm_cmd(local, {}, 8000)
+    assert cmd[2] == "/hf/artifacts/qwen3-4b-fp8-dynamic" and "--revision" not in cmd
+    assert "--revision" not in sglang_cmd(local, {}, 8000)

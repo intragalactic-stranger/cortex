@@ -76,6 +76,9 @@ def _artifact_record(a: ArtifactSpec, models_dir: Path) -> dict[str, Any]:
     if a.file is not None and (models_dir / artifact_path(a)).exists():
         path = models_dir / artifact_path(a)
         rec.update(sha256=file_sha256(path), bytes=path.stat().st_size)
+    qm = Path(a.repo) / "cortex_manifest.json"
+    if a.repo.startswith("/") and qm.exists():  # M3 local checkpoint: carry its quantization manifest
+        rec["quantize_manifest"] = json.loads(qm.read_text())
     return rec  # HF-repo artifacts (vLLM/SGLang) are identified by repo + pinned revision
 
 

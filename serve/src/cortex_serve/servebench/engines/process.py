@@ -39,13 +39,17 @@ SGLANG_BOOL = {"disable_radix_cache", "enable_mixed_chunk", "disable_cuda_graph"
 
 def vllm_cmd(artifact: ArtifactSpec, args: dict[str, Any], port: int) -> list[str]:
     model = artifact.repo if artifact.file is None else f"/models/{artifact.file}"
-    cmd = ["vllm", "serve", model, "--revision", artifact.revision, "--port", str(port), "--host", "127.0.0.1"]
+    cmd = ["vllm", "serve", model, "--port", str(port), "--host", "127.0.0.1"]
+    if not model.startswith("/"):  # local checkpoint dirs (M3 artifacts) have no hub revision
+        cmd[3:3] = ["--revision", artifact.revision]
     cmd += ["--served-model-name", "model"]  # request logging is off by default since vLLM 0.1x
     return cmd + _flags(args, VLLM_BOOL)
 
 
 def sglang_cmd(artifact: ArtifactSpec, args: dict[str, Any], port: int) -> list[str]:
-    cmd = ["python3", "-m", "sglang.launch_server", "--model-path", artifact.repo, "--revision", artifact.revision]
+    cmd = ["python3", "-m", "sglang.launch_server", "--model-path", artifact.repo]
+    if not artifact.repo.startswith("/"):
+        cmd += ["--revision", artifact.revision]
     cmd += ["--port", str(port), "--host", "127.0.0.1", "--served-model-name", "model", "--enable-metrics"]
     return cmd + _flags(args, SGLANG_BOOL)
 
