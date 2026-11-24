@@ -53,7 +53,7 @@ def _image(kind: str) -> modal.Image:
     return (
         image.entrypoint([])
         # the SGLang image ships only `python3`; Modal's uv_pip_install resolves `python`
-        .run_commands("command -v python || ln -s \"$(command -v python3)\" /usr/local/bin/python")
+        .run_commands('command -v python || ln -s "$(command -v python3)" /usr/local/bin/python')
         .uv_pip_install(*PY_DEPS)
         .env({"HF_HOME": "/hf", "HF_HUB_ENABLE_HF_TRANSFER": "0"})
         .add_local_python_source("cortex_serve")
