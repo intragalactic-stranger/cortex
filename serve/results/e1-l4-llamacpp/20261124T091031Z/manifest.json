@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "created_utc": "2026-11-24T09:10:32+00:00",
+  "servebench_version": "0.1.0",
+  "host": {
+    "hostname_hash": "c5803a6e4daa",
+    "cpu": "unknown",
+    "logical_cpus": 17,
+    "memory_gib": 654.89,
+    "kernel": "4.19.0-gvisor",
+    "python": "3.12.1",
+    "docker": null,
+    "gpu": "NVIDIA L4, 620.70.06, 23034 MiB"
+  },
+  "run": {
+    "name": "e1-l4-llamacpp",
+    "experiment": "E1",
+    "stamp": "20261124T091031Z"
+  },
+  "config": {
+    "name": "e1-l4-llamacpp",
+    "description": "Engine baseline on L4. Qwen3-4B-Instruct-2507 F16 GGUF (unsloth; same bytes as bf16), llama.cpp CUDA, 16 slots x 4096 ctx, concurrency 1-16 (smaller grid by design, owner-approved 2026-11-24).",
+    "experiment": "E1",
+    "engine": {
+      "kind": "llamacpp",
+      "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b12110@sha256:a2963b4817f03eea7e0d6065ea576252322792441ef97aaae178b924520547d6",
+      "launch": "process",
+      "args": {
+        "parallel": 16,
+        "ctx_size": 65536,
+        "flash_attn": "on",
+        "ignore_eos": true,
+        "extra": [
+          "-ngl",
+          "99"
+        ]
+      }
+    },
+    "artifacts": [
+      {
+        "name": "qwen3-4b-f16-gguf",
+        "repo": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+        "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+        "file": "Qwen3-4B-Instruct-2507-F16.gguf",
+        "family": "Qwen/Qwen3-4B-Instruct-2507",
+        "quant": "f16"
+      }
+    ],
+    "tokenizers": {
+      "Qwen/Qwen3-4B-Instruct-2507": {
+        "repo": "Qwen/Qwen3-4B-Instruct-2507",
+        "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+      }
+    },
+    "workloads": [
+      {
+        "name": "chat-balanced",
+        "input_tokens": 512,
+        "output_tokens": 256,
+        "input_jitter": 0.0,
+        "shared_prefix_tokens": 0,
+        "instruction": "Continue the notes above in the same style. Keep writing without stopping."
+      },
+      {
+        "name": "rag-long-prefill",
+        "input_tokens": 2048,
+        "output_tokens": 128,
+        "input_jitter": 0.0,
+        "shared_prefix_tokens": 0,
+        "instruction": "Continue the notes above in the same style. Keep writing without stopping."
+      }
+    ],
+    "load": {
+      "mode": "concurrency",
+      "levels": [
+        1.0,
+        4.0,
+        16.0
+      ],
+      "requests_per_level": 16,
+      "requests_per_slot": 3,
+      "warmup_requests": 4,
+      "timeout_s": 600.0
+    },
+    "slo": {
+      "ttft_s": 0.5,
+      "tpot_s": 0.05
+    },
+    "repeats": 3,
+    "seed": 1234,
+    "disable_thinking": true,
+    "hardware": {
+      "device": "modal-l4",
+      "gpu": "L4"
+    },
+    "budget": {
+      "gpu": "L4",
+      "usd_per_hour": 0.8,
+      "max_minutes": 60.0
+    }
+  },
+  "engine": {
+    "kind": "llamacpp",
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b12110@sha256:a2963b4817f03eea7e0d6065ea576252322792441ef97aaae178b924520547d6",
+    "digest": null,
+    "version": "built with GNU 14.2.0 for Linux x86_64"
+  },
+  "git": {
+    "sha": "f276e8afa7d25402333d997db7b7357ee4d00737",
+    "dirty": false
+  },
+  "artifacts": [
+    {
+      "name": "qwen3-4b-f16-gguf",
+      "repo": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+      "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+      "file": "Qwen3-4B-Instruct-2507-F16.gguf",
+      "family": "Qwen/Qwen3-4B-Instruct-2507",
+      "quant": "f16",
+      "sha256": "336228a2810f17724ecd6e9e2e40e8381eee81e886316fee311ade2899c31030",
+      "bytes": 8051285344
+    }
+  ],
+  "budget": {
+    "gpu": "L4",
+    "usd_per_hour": 0.8,
+    "max_minutes": 60.0
+  }
+}
