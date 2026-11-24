@@ -278,3 +278,18 @@ llama.cpp on L4 (1 user, TPOT ms): bf16 33.2 · Q8_0 19.8 · Q5_K_M 14.3 · Q4_K
 | unsloth IT Q8_0 | 213.4 | 185.4 | 0.0065 | 96.8% |
 
 **M1's "QAT 65 vs Q8_0 212" was never a quantization effect:** the QAT checkpoint is a different model whose raw-text perplexity is ~3.5× lower *before* quantization. Quantization damage measured against each model's own parent is normal (Q8_0 KLD 0.0065; QAT Q4_0 0.050). Lesson: compare quantization damage within one parent (KLD), never raw PPL across parents.
+
+### 6. QAT vs PTQ: Gemma 4 E4B at the same W4A16 g32 symmetric scheme (vLLM, L40S)
+
+| Variant | GSM8K strict / flex | IFEval | ARC, reasoning-first (n = 500, Wilson 95%) | Size |
+|---|---|---|---|---|
+| bf16 (original IT) | 71.4 / 76.5 | 85.2 ±3.0 | 93.6 (91.1–95.4) | — |
+| Google QAT (`…-qat-w4a16-ct`) | −1.7 / −1.2 | −3.0 | 93.2 (90.6–95.1) | 11.5 GB |
+| Our GPTQ PTQ (generic calib, basic pipeline) | +0.1 / −0.2 | −2.0 | 92.6 (90.0–94.6) | 10.75 GiB |
+| Our RTN (data-free) | **−40.4 / −13.6** | **−6.8** | 90.6 (87.7–92.9) | 9.50 GiB |
+
+**Findings**
+- **Careful PTQ (GPTQ) matched both the original and Google's QAT checkpoint on every generative task** (all within CI). **Naive RTN** at the same bit width lost 13.6 points of GSM8K (flexible) and 6.8 of IFEval: *how* you quantize matters more than whether the model was trained for it, at this size and on these tasks.
+- **QAT's large advantage shows up only in raw-text perplexity** (WikiText word PPL 86 vs 252 for the original; BFSI 52 vs 127), the same "different model" effect as in §5. It did not translate into better chat-task scores.
+- **Loglikelihood benchmarks are not meaningful for Gemma 4 IT:** ARC/HellaSwag/MMLU-Pro sit at chance even for bf16 (25.2 / 37.4 / 24.8), with or without `<bos>` (`results/quality-gpu-invalid/README.md`). Gemma is compared on generative tasks only. lm-eval's `arc_challenge_chat` scores 0 for every Gemma variant (it expects a bare letter; Gemma reasons first), so reasoning-first ARC uses our own scorer (`quality/arc.py`, `cot=True`).
+- Unexplained: our GPTQ and RTN artifacts differ by 1.25 GiB with identical ignore lists. Open question for the artifact audit before publishing.
