@@ -22,8 +22,8 @@ from cortex_serve.gatewaybench.load import (
 )
 from cortex_serve.gatewaybench.manifest import pods_summary
 from cortex_serve.gatewaybench.prom import parse_matrix
-from cortex_serve.gatewaybench.summary import summarize_outcomes
-from cortex_serve.gatewaybench.timeline import bin_outcomes
+from cortex_serve.gatewaybench.summary import stage_stats, summarize_outcomes
+from cortex_serve.gatewaybench.timeline import bin_outcomes, parse_events
 from cortex_serve.servebench.client import RequestResult
 from cortex_serve.servebench.workloads import Request
 
@@ -236,3 +236,19 @@ def test_pods_summary() -> None:
     [row] = pods_summary(pods)
     assert row["model"] == "primary" and row["image_id"] == "img@sha256:1" and row["weights"] == "f.gguf"
     assert json.dumps(row)
+
+
+def test_stage_stats() -> None:
+    t0 = 0.0
+    outs = [_o(0, 1.0, ttft=1.0, e2e=2.0), _o(1, 5.0, ttft=3.0, e2e=20.0), _o(2, 12.0, ttft=None, error="x")]
+    outs[0].output_tokens = 10
+    rows = stage_stats(outs, [Stage(10, 1), Stage(10, 2)], t0)
+    # stage 0: started ids 0,1; completed in-window only id 0 (done at 3); id 1 done at 25 (outside both)
+    assert (rows[0]["started"], rows[0]["failed"], rows[0]["ttft_p50_s"]) == (2, 0, 2.0)
+    assert rows[0]["completed_rps"] == pytest.approx(0.1) and rows[0]["output_tok_s"] == pytest.approx(1.0)
+    assert (rows[1]["started"], rows[1]["failed"], rows[1]["ttft_p50_s"]) == (1, 1, None)
+
+
+def test_parse_events() -> None:
+    text = "1700000000.5 ROLLOUT 1 START\nnot an event\n\n1700000010 primary ready\n"
+    assert parse_events(text) == [(1700000000.5, "ROLLOUT 1 START"), (1700000010.0, "primary ready")]

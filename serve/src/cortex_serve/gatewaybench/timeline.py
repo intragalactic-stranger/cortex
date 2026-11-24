@@ -48,6 +48,18 @@ def bin_outcomes(outcomes: Sequence[Outcome], t0: float, bin_s: float, end_s: fl
     ]
 
 
+def parse_events(text: str) -> list[tuple[float, str]]:
+    """``events.log`` lines: ``<unix seconds> <label...>``; other lines are ignored."""
+    out = []
+    for line in text.splitlines():
+        head, _, label = line.strip().partition(" ")
+        try:
+            out.append((float(head), label.strip()))
+        except ValueError:
+            continue
+    return out
+
+
 def relative(points: Sequence[tuple[float, float]], t0: float) -> tuple[list[float], list[float]]:
     return [t - t0 for t, _ in points], [v for _, v in points]
 
@@ -60,6 +72,7 @@ def plot_timeline(
     series: Mapping[str, Sequence[tuple[float, float]]],
     t0: float,
     slo_ttft_s: float,
+    events: Sequence[tuple[float, str]] = (),
 ) -> None:
     """Three aligned panels: load and queue, replicas, TTFT.
 
@@ -120,6 +133,22 @@ def plot_timeline(
     ax3.set_ylim(bottom=0)
     ax3.legend(loc="upper left", fontsize=8, frameon=False)
     ax3.grid(alpha=0.3)
+
+    for i, (t, label) in enumerate(events):
+        for ax in axes:
+            ax.axvline(t - t0, color="#7f7f7f", ls="--", lw=0.9)
+        ax1.annotate(
+            label,
+            (t - t0, 1.0),
+            xycoords=("data", "axes fraction"),
+            rotation=90,
+            fontsize=7,
+            va="top",
+            ha="right",
+            color="#555555",
+            xytext=(-2, -2 - 0 * i),
+            textcoords="offset points",
+        )
 
     fig.suptitle(title, fontsize=11)
     out_png.parent.mkdir(parents=True, exist_ok=True)

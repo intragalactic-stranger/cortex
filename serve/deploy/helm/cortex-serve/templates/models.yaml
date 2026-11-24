@@ -196,11 +196,12 @@ spec:
       metricType: AverageValue
       metadata:
         serverAddress: {{ $root.Values.monitoring.prometheusUrl }}
-        # Peak of the summed demand over 15 s (subquery). Summing two separate max_over_time terms
-        # double-counts a request that moves from deferred to processing inside the window (seen in
-        # the first M5 ramp: 4 users read as 5 and scaled to 3 replicas).
+        # Mean of the summed demand over 15 s (subquery). Two earlier forms over-read 4 users as 5 and
+        # held 3 replicas: (1) sum of two separate max_over_time terms double-counted a request moving
+        # from deferred to processing; (2) max_over_time of the sum still caught spikes caused by pods
+        # being scraped at slightly different instants. See ADR 0007 amendment.
         query: >-
-          max_over_time((
+          avg_over_time((
             sum(llamacpp:requests_processing{namespace="{{ $root.Release.Namespace }}",cortex_model="{{ $m.name }}"})
             + sum(llamacpp:requests_deferred{namespace="{{ $root.Release.Namespace }}",cortex_model="{{ $m.name }}"})
           )[15s:5s])

@@ -8,7 +8,7 @@ set -euo pipefail
 cd "$REPO_DIR"
 OUT="serve/results/m5-fallback/$(date -u +%Y%m%dT%H%M%SZ)"; mkdir -p "$OUT"
 CORTEX_API_KEY=$(serve/scripts/m5_key.sh m5-fallback); export CORTEX_API_KEY
-mark() { echo "$(date -u +%H:%M:%S.%3N) $(date +%s.%N) $*" | tee -a "$OUT/events.log"; }
+mark() { echo "$(date +%s.%N) $*" | tee -a "$OUT/events.log"; }
 log "load c=2 for 360 s -> $OUT"
 uv run gatewaybench load --out "$OUT" --profile "360:2" --alias cortex-router \
   --input-tokens 64 --output-tokens 32 --note "fallback demo: primary pool scaled to 0 mid-run" &

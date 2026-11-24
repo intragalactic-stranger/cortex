@@ -19,15 +19,15 @@ uv run gatewaybench load --out "$OUT" --profile "$SECS:$CONC" --alias cortex-rou
   --input-tokens 64 --output-tokens 32 --note "rolling update of primary pool under load" &
 LOAD=$!
 sleep 90
-log "rollout restart (1/2)"; echo "$(date -u +%H:%M:%S.%3N) ROLLOUT 1 START" >> "$OUT/pods_watch.log"
+log "rollout restart (1/2)"; echo "$(date +%s.%N) ROLLOUT 1 START" >> "$OUT/events.log"
 kubectl -n "$NS" rollout restart deployment/cortex-model-primary
 kubectl -n "$NS" rollout status deployment/cortex-model-primary --timeout=600s
-echo "$(date -u +%H:%M:%S.%3N) ROLLOUT 1 DONE" >> "$OUT/pods_watch.log"
+echo "$(date +%s.%N) ROLLOUT 1 DONE" >> "$OUT/events.log"
 sleep 60
-log "rollout restart (2/2)"; echo "$(date -u +%H:%M:%S.%3N) ROLLOUT 2 START" >> "$OUT/pods_watch.log"
+log "rollout restart (2/2)"; echo "$(date +%s.%N) ROLLOUT 2 START" >> "$OUT/events.log"
 kubectl -n "$NS" rollout restart deployment/cortex-model-primary
 kubectl -n "$NS" rollout status deployment/cortex-model-primary --timeout=600s
-echo "$(date -u +%H:%M:%S.%3N) ROLLOUT 2 DONE" >> "$OUT/pods_watch.log"
+echo "$(date +%s.%N) ROLLOUT 2 DONE" >> "$OUT/events.log"
 wait $LOAD
 kubectl -n "$NS" rollout history deployment/cortex-model-primary > "$OUT/rollout_history.txt"
 uv run gatewaybench timeline "$OUT" --model primary --bin 10 --title "Rolling update under load (2 rollouts), k3d CPU"

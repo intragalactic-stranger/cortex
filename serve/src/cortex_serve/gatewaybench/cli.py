@@ -26,8 +26,8 @@ from cortex_serve.gatewaybench.load import (
 )
 from cortex_serve.gatewaybench.manifest import cluster_manifest
 from cortex_serve.gatewaybench.prom import query_range
-from cortex_serve.gatewaybench.summary import summarize_outcomes
-from cortex_serve.gatewaybench.timeline import bin_outcomes, plot_timeline
+from cortex_serve.gatewaybench.summary import stage_stats, summarize_outcomes
+from cortex_serve.gatewaybench.timeline import bin_outcomes, parse_events, plot_timeline
 from cortex_serve.servebench.config import WorkloadSpec
 from cortex_serve.servebench.manifest import build_manifest, git_state
 from cortex_serve.servebench.tokenizer import HubTokenizer
@@ -170,6 +170,8 @@ def timeline_cmd(
     profile = [Stage(**s) for s in manifest["profile"]]
     bins = bin_outcomes(outcomes, t0, bin_s, (t1 - t0) + bin_s)
     (run_dir / "bins.json").write_text(json.dumps([asdict(b) for b in bins], indent=2))
+    events_path = run_dir / "events.log"
+    events = parse_events(events_path.read_text()) if events_path.exists() else []
     plot_timeline(
         run_dir / "timeline.png",
         title or f"Queue-depth autoscaling on k3d (CPU): {manifest['alias']}",
@@ -178,14 +180,21 @@ def timeline_cmd(
         series,
         t0,
         slo_ttft_s,
+        events,
     )
     typer.echo(str(run_dir / "timeline.png"))
 
 
 @app.command("summary")
 def summary_cmd(run_dir: Annotated[Path, typer.Argument()]) -> None:
-    """Recompute summary.json from outcomes.jsonl."""
-    summary = summarize_outcomes(read_outcomes(run_dir / "outcomes.jsonl"))
+    """Recompute summary.json from outcomes.jsonl (adds per-stage stats when the manifest has a profile)."""
+    outcomes = read_outcomes(run_dir / "outcomes.jsonl")
+    summary = summarize_outcomes(outcomes)
+    mpath = run_dir / "manifest.json"
+    if mpath.exists():
+        m = json.loads(mpath.read_text())
+        if "t_start_unix" in m:
+            summary["stages"] = stage_stats(outcomes, [Stage(**s) for s in m["profile"]], float(m["t_start_unix"]))
     (run_dir / "summary.json").write_text(json.dumps(summary, indent=2))
     typer.echo(json.dumps(summary, indent=2))
 
