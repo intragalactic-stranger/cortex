@@ -112,9 +112,11 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
         (out / "engine.log").write_text(eng.logs())
     finally:
         eng.stop()
+    gpu_name = subprocess.run(["nvidia-smi", "--query-gpu=name,memory.total", "--format=csv,noheader"],
+                              capture_output=True, text=True, check=False).stdout.strip()  # fmt: skip
     qm = Path(model) / "cortex_manifest.json"
     meta = {"name": name, "model": model, "revision": revision, "max_model_len": max_len, "extra": extra,
-            "engine_image": VLLM_IMAGE, "lm_eval": LM_EVAL, "gpu": "L4", "wall_s": round(time.time() - t0),
+            "engine_image": VLLM_IMAGE, "lm_eval": LM_EVAL, "gpu": gpu_name, "wall_s": round(time.time() - t0),
             "git": git, "domain": domain, "quick_limit": quick,
             "quantize_manifest": json.loads(qm.read_text()) if qm.exists() else None}  # fmt: skip
     (out / "eval_manifest.json").write_text(json.dumps(meta, indent=2))
