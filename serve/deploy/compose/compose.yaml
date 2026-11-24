@@ -24,12 +24,12 @@ services:
     <<: *llama
     command: ["-m", "/models/unsloth_Qwen3-0.6B-GGUF/Qwen3-0.6B-Q4_K_M.gguf", "--alias", "qwen3-0.6b-q4km",
               "--host", "0.0.0.0", "--port", "8080", "--metrics", "-t", "2", "-np", "2",
-              "--kv-unified-per-slot", "1024", "--reasoning", "off", "--no-ui"]
+              "--kv-unified-per-slot", "1024", "--cache-ram", "256", "--reasoning", "off", "--no-ui"]
   fallback:
     <<: *llama
     command: ["-m", "/models/unsloth_Qwen3-1.7B-GGUF/Qwen3-1.7B-Q4_K_M.gguf", "--alias", "qwen3-1.7b-q4km",
               "--host", "0.0.0.0", "--port", "8080", "--metrics", "-t", "2", "-np", "1",
-              "--kv-unified-per-slot", "1024", "--reasoning", "off", "--no-ui"]
+              "--kv-unified-per-slot", "1024", "--cache-ram", "256", "--reasoning", "off", "--no-ui"]
   gateway:
     image: ghcr.io/berriai/litellm-non_root:v1.108.16@sha256:9a81470454422473f10882f8de4c2c780bcd4a5719159c133110d437e1b8f7a7
     command: ["--config", "/etc/litellm/config.yaml", "--port", "4000", "--num_workers", "1"]

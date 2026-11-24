@@ -1,0 +1,81 @@
+{
+  "window_s": [
+    260.0,
+    415.0
+  ],
+  "queries": {
+    "demand": "llamacpp:requests_processing{namespace=\"cortex\",cortex_model=\"primary\"} + on(pod) llamacpp:requests_deferred{namespace=\"cortex\",cortex_model=\"primary\"}",
+    "deferred": "llamacpp:requests_deferred{namespace=\"cortex\",cortex_model=\"primary\"}",
+    "cpu_cores": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"cortex\",container=\"llama-server\",pod=~\"cortex-model-primary-.*\"}[30s]))",
+    "cpu_throttled_ratio": "sum by (pod) (rate(container_cpu_cfs_throttled_periods_total{namespace=\"cortex\",pod=~\"cortex-model-primary-.*\"}[30s])) / sum by (pod) (rate(container_cpu_cfs_periods_total{namespace=\"cortex\",pod=~\"cortex-model-primary-.*\"}[30s]))",
+    "decode_tok_s": "sum by (pod) (rate(llamacpp:tokens_predicted_total{namespace=\"cortex\",cortex_model=\"primary\"}[30s]))"
+  },
+  "per_pod": {
+    "cortex-model-primary-6bbc46d7fb-pkjlv": {
+      "demand": {
+        "mean": 2.84375,
+        "max": 5.0
+      },
+      "deferred": {
+        "mean": 0.875,
+        "max": 3.0
+      },
+      "cpu_cores": {
+        "mean": 0.9689408904264222,
+        "max": 0.998971815107103
+      },
+      "cpu_throttled_ratio": {
+        "mean": 0.19117686607551157,
+        "max": 0.2846153846153846
+      },
+      "decode_tok_s": {
+        "mean": 4.800000004608,
+        "max": 6.4
+      }
+    },
+    "cortex-model-primary-6bbc46d7fb-zrxc2": {
+      "demand": {
+        "mean": 1.5625,
+        "max": 3.0
+      },
+      "deferred": {
+        "mean": 0.09375,
+        "max": 1.0
+      },
+      "cpu_cores": {
+        "mean": 0.8538097563651305,
+        "max": 0.9977722190275413
+      },
+      "cpu_throttled_ratio": {
+        "mean": 0.19344730960293896,
+        "max": 0.39539637765908175
+      },
+      "decode_tok_s": {
+        "mean": 4.12,
+        "max": 6.4
+      }
+    },
+    "cortex-model-primary-6bbc46d7fb-zzmjs": {
+      "demand": {
+        "mean": 0.9375,
+        "max": 3.0
+      },
+      "deferred": {
+        "mean": 0.03125,
+        "max": 1.0
+      },
+      "cpu_cores": {
+        "mean": 0.4303144416723994,
+        "max": 0.9737132566334991
+      },
+      "cpu_throttled_ratio": {
+        "mean": 0.04454064507593385,
+        "max": 0.152
+      },
+      "decode_tok_s": {
+        "mean": 1.9599904031998618,
+        "max": 5.12
+      }
+    }
+  }
+}

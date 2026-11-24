@@ -24,7 +24,8 @@ reacts before the SLO is broken.
 
 ## Decision
 - KEDA `ScaledObject` (Prometheus scaler, `metricType: AverageValue`) on the primary pool with
-  **demand = Σ over pods of (requests_processing + requests_deferred)**, each term taken as `max_over_time(...[15s])`,
+  **demand = Σ over pods of (requests_processing + requests_deferred)**, smoothed as the peak of the
+  summed series over 15 s (`max_over_time((Σ processing + Σ deferred)[15s:5s])`), and
   **target = slots per replica** (`-np`). The HPA then computes `desired = ceil(demand / slots)`: enough
   replicas that no request has to queue.
 - Running requests are included, not only the queue: with only the deferred count, a fully used but
@@ -35,6 +36,11 @@ reacts before the SLO is broken.
   their in-flight requests.
 - KEDA `fallback` holds the current replica count if Prometheus is unreachable
   (`behavior: currentReplicasIfHigher`). It never scales on missing data.
+
+## Amendment (same day, after the first ramp)
+The first version summed two separate `max_over_time` terms. A request that moves from deferred to
+processing inside the 15 s window was counted twice: 4 users read as 5 and the pool went to 3 replicas
+instead of 2 (`results/m5-autoscale/20261124T131550Z`). The subquery form takes the peak of the sum instead.
 
 ## Consequences
 + The metric reflects what users feel. The timeline figure (`results/m5-autoscale/`) shows replicas following

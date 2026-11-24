@@ -245,3 +245,81 @@ def canary_cmd(
     typer.echo(
         json.dumps({"stable": result["stable"], "candidate": result["candidate"], "decision": asdict(d)}, indent=2)
     )
+
+
+POD_QUERIES = {
+    "demand": "llamacpp:requests_processing{{{sel}}} + on(pod) llamacpp:requests_deferred{{{sel}}}",
+    "deferred": "llamacpp:requests_deferred{{{sel}}}",
+    "cpu_cores": 'sum by (pod) (rate(container_cpu_usage_seconds_total{{namespace="{ns}",container="llama-server",'
+    'pod=~"cortex-model-{model}-.*"}}[30s]))',
+    "cpu_throttled_ratio": 'sum by (pod) (rate(container_cpu_cfs_throttled_periods_total{{namespace="{ns}",'
+    'pod=~"cortex-model-{model}-.*"}}[30s])) / sum by (pod) (rate(container_cpu_cfs_periods_total{{namespace="{ns}",'
+    'pod=~"cortex-model-{model}-.*"}}[30s]))',
+    "decode_tok_s": "sum by (pod) (rate(llamacpp:tokens_predicted_total{{{sel}}}[30s]))",
+}
+
+
+@app.command("balance")
+def balance_cmd(
+    run_dir: Annotated[Path, typer.Argument()],
+    start_s: Annotated[float, typer.Option("--from", help="Seconds after load start")],
+    end_s: Annotated[float, typer.Option("--to")],
+    prom: Annotated[str, typer.Option("--prom")] = PROM_URL,
+    model: Annotated[str, typer.Option("--model")] = "primary",
+    namespace: Annotated[str, typer.Option("--namespace")] = "cortex",
+) -> None:
+    """Per-pod mean/max of demand, queue, CPU, throttling and decode rate in a window (load balance check)."""
+    t0 = float(json.loads((run_dir / "manifest.json").read_text())["t_start_unix"])
+    sel = f'namespace="{namespace}",cortex_model="{model}"'
+    out: dict[str, Any] = {"window_s": [start_s, end_s], "queries": {}, "per_pod": {}}
+    for name, tmpl in POD_QUERIES.items():
+        q = tmpl.format(sel=sel, ns=namespace, model=model)
+        out["queries"][name] = q
+        for s in query_range(prom, q, t0 + start_s, t0 + end_s, 5.0):
+            vals = [v for _, v in s.points]
+            pod = s.labels.get("pod", "?")
+            out["per_pod"].setdefault(pod, {})[name] = {
+                "mean": sum(vals) / len(vals) if vals else None,
+                "max": max(vals) if vals else None,
+            }
+    path = run_dir / f"balance_{int(start_s)}-{int(end_s)}s.json"
+    path.write_text(json.dumps(out, indent=2))
+    for pod, m in sorted(out["per_pod"].items()):
+        typer.echo(
+            pod + "  " + "  ".join(f"{k}={v['mean']:.2f}/{v['max']:.2f}" for k, v in m.items() if v["mean"] is not None)
+        )
+
+
+@app.command("pods")
+def pods_cmd(
+    run_dir: Annotated[Path, typer.Argument()],
+    prom: Annotated[str, typer.Option("--prom")] = PROM_URL,
+    model: Annotated[str, typer.Option("--model")] = "primary",
+    namespace: Annotated[str, typer.Option("--namespace")] = "cortex",
+    grace_s: Annotated[float, typer.Option("--grace", help="terminationGracePeriodSeconds of the pods")] = 120.0,
+) -> None:
+    """Pod lifecycle during a run from kube-state-metrics: created, ready, delete requested (s after load start).
+
+    ``metadata.deletionTimestamp`` is the deletion *deadline* (request time + grace period), so the
+    request time is that minus ``--grace``.
+    """
+    m = json.loads((run_dir / "manifest.json").read_text())
+    t0, t1 = float(m["t_start_unix"]), float(m["t_end_unix"])
+    sel = f'namespace="{namespace}",pod=~"cortex-model-{model}-.*"'
+    rows: dict[str, dict[str, float | None]] = {}
+    for name, metric in (
+        ("created", "kube_pod_created"),
+        ("ready", "kube_pod_status_ready_time"),
+        ("deletion", "kube_pod_deletion_timestamp"),
+    ):
+        for s in query_range(prom, f"max by (pod) ({metric}{{{sel}}})", t0 - 600, t1 + 120, 5.0):
+            pod = s.labels.get("pod", "?")
+            rows.setdefault(pod, {"created": None, "ready": None, "deletion": None})
+            rows[pod][name] = round(s.points[-1][1] - t0, 1) if s.points else None
+    for r in rows.values():
+        c, rd, dl = r["created"], r["ready"], r.pop("deletion")
+        r["create_to_ready_s"] = round(rd - c, 1) if c is not None and rd is not None else None
+        r["delete_requested"] = round(dl - grace_s, 1) if dl is not None else None
+    (run_dir / "pods.json").write_text(json.dumps(rows, indent=2))
+    for pod, r in sorted(rows.items(), key=lambda kv: kv[1]["created"] or 0.0):
+        typer.echo(f"{pod}  {r}")

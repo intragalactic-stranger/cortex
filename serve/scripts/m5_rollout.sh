@@ -9,7 +9,7 @@ cd "$REPO_DIR"
 CONC="${1:-4}"; SECS="${2:-420}"
 OUT="serve/results/m5-rollout/$(date -u +%Y%m%dT%H%M%SZ)"; mkdir -p "$OUT"
 CORTEX_API_KEY=$(serve/scripts/m5_key.sh m5-rollout); export CORTEX_API_KEY
-kubectl -n "$NS" get pods -l cortex.dev/model=primary -w --output-watch-events \
+kubectl -n "$NS" get pods -l cortex.dev/model=primary -w \
   -o custom-columns=NAME:.metadata.name,READY:.status.containerStatuses[0].ready,PHASE:.status.phase,DEL:.metadata.deletionTimestamp \
   | while IFS= read -r l; do echo "$(date -u +%H:%M:%S.%3N) $l"; done > "$OUT/pods_watch.log" &
 WATCH=$!
@@ -31,4 +31,5 @@ echo "$(date -u +%H:%M:%S.%3N) ROLLOUT 2 DONE" >> "$OUT/pods_watch.log"
 wait $LOAD
 kubectl -n "$NS" rollout history deployment/cortex-model-primary > "$OUT/rollout_history.txt"
 uv run gatewaybench timeline "$OUT" --model primary --bin 10 --title "Rolling update under load (2 rollouts), k3d CPU"
+uv run gatewaybench pods "$OUT" --model primary
 log "done: $OUT"; python3 -c "import json;s=json.load(open('$OUT/summary.json'));print({k:s[k] for k in ('requests','ok','failed','with_retries','errors')})"

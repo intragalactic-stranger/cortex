@@ -1,0 +1,21 @@
+{
+  "requests": 155,
+  "ok": 155,
+  "failed": 0,
+  "error_rate": 0.0,
+  "errors": {},
+  "by_deployment": {
+    "cortex-router--primary-v1": 155
+  },
+  "ok_by_deployment": {
+    "cortex-router--primary-v1": 155
+  },
+  "with_retries": 0,
+  "with_fallbacks": 0,
+  "window_s": 568.3714678287506,
+  "ttft_p50_s": 4.782590372953564,
+  "ttft_p95_s": 15.926683503435926,
+  "e2e_p50_s": 12.322655896190554,
+  "e2e_p95_s": 25.287593468884015,
+  "output_tokens_total": 4949
+}

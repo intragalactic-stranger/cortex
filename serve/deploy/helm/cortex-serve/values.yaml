@@ -11,6 +11,9 @@ llamacpp:
     threads: 1
     parallel: 2           # slots per replica; also the autoscaling target per replica
     ctxPerSlot: 1024
+    # Host-RAM prompt cache. llama.cpp's default is 8192 MiB, far above the container limit: in M5 a
+    # primary pod grew 484 -> 1,507 MiB RSS under load and was OOM-killed at its 1.5 GiB limit.
+    cacheRamMiB: 256
     # Qwen3 thinking off (non-thinking chat); no bundled web UI on an inference backend.
     extraArgs: ["--reasoning", "off", "--no-ui"]
   probes:

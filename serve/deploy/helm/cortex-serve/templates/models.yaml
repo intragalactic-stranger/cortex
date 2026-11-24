@@ -73,6 +73,8 @@ spec:
             - {{ include "cortex.modelArg" (list $m $d "parallel") | quote }}
             - --kv-unified-per-slot
             - {{ include "cortex.modelArg" (list $m $d "ctxPerSlot") | quote }}
+            - --cache-ram
+            - {{ include "cortex.modelArg" (list $m $d "cacheRamMiB") | quote }}
             {{- range (default $d.extraArgs $m.extraArgs) }}
             - {{ . | quote }}
             {{- end }}
@@ -194,9 +196,14 @@ spec:
       metricType: AverageValue
       metadata:
         serverAddress: {{ $root.Values.monitoring.prometheusUrl }}
+        # Peak of the summed demand over 15 s (subquery). Summing two separate max_over_time terms
+        # double-counts a request that moves from deferred to processing inside the window (seen in
+        # the first M5 ramp: 4 users read as 5 and scaled to 3 replicas).
         query: >-
-          sum(max_over_time(llamacpp:requests_processing{namespace="{{ $root.Release.Namespace }}",cortex_model="{{ $m.name }}"}[15s]))
-          + sum(max_over_time(llamacpp:requests_deferred{namespace="{{ $root.Release.Namespace }}",cortex_model="{{ $m.name }}"}[15s]))
+          max_over_time((
+            sum(llamacpp:requests_processing{namespace="{{ $root.Release.Namespace }}",cortex_model="{{ $m.name }}"})
+            + sum(llamacpp:requests_deferred{namespace="{{ $root.Release.Namespace }}",cortex_model="{{ $m.name }}"})
+          )[15s:5s])
         threshold: {{ include "cortex.modelArg" (list $m $d "parallel") | quote }}
         ignoreNullValues: "false"
 {{- end }}

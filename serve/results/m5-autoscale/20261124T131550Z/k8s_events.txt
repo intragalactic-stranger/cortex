@@ -1,0 +1,24 @@
+<nil>                  cortex-model-primary-6bbc46d7fb-pkjlv   Scheduled           Successfully assigned cortex/cortex-model-primary-6bbc46d7fb-pkjlv to k3d-cortex-server-0
+<nil>                  cortex-model-primary                    KEDAScalerInfo      PollingInterval is configured but is not relevant for scaling. It only affects scaling when minReplicaCount = 0, idleReplicaCount is set, or useCachedMetrics is enabled, but it still controls how often KEDA refreshes the ScaledObject status conditions and events
+<nil>                  cortex-model-primary                    KEDAScalerInfo      PollingInterval is configured but is not relevant for scaling. It only affects scaling when minReplicaCount = 0, idleReplicaCount is set, or useCachedMetrics is enabled, but it still controls how often KEDA refreshes the ScaledObject status conditions and events
+<nil>                  cortex-model-primary-6bbc46d7fb-zzmjs   Scheduled           Successfully assigned cortex/cortex-model-primary-6bbc46d7fb-zzmjs to k3d-cortex-server-0
+2026-11-24T13:17:39Z   keda-hpa-cortex-model-primary           SuccessfulRescale   New size: 2; reason: external metric s0-prometheus(&LabelSelector{MatchLabels:map[string]string{scaledobject.keda.sh/name: cortex-model-primary,},MatchExpressions:[]LabelSelectorRequirement{},}) above target
+2026-11-24T13:17:39Z   cortex-model-primary                    ScalingReplicaSet   Scaled up replica set cortex-model-primary-6bbc46d7fb from 1 to 2
+2026-11-24T13:17:39Z   cortex-model-primary-6bbc46d7fb         SuccessfulCreate    Created pod: cortex-model-primary-6bbc46d7fb-zzmjs
+2026-11-24T13:17:40Z   cortex-model-primary-6bbc46d7fb-zzmjs   Pulled              Container image "ghcr.io/ggml-org/llama.cpp:server@sha256:1145e8de3111dc9358c6d8daffb755c4cf8a862d93391c26ba521b9a810bbe3e" already present on machine and can be accessed by the pod
+2026-11-24T13:17:40Z   cortex-model-primary-6bbc46d7fb-zzmjs   Created             Container created
+2026-11-24T13:17:40Z   cortex-model-primary-6bbc46d7fb-zzmjs   Started             Container started
+2026-11-24T13:18:24Z   cortex-model-primary                    ScalingReplicaSet   Scaled up replica set cortex-model-primary-6bbc46d7fb from 2 to 3
+2026-11-24T13:18:24Z   cortex-model-primary-6bbc46d7fb         SuccessfulCreate    Created pod: cortex-model-primary-6bbc46d7fb-pkjlv
+2026-11-24T13:18:24Z   keda-hpa-cortex-model-primary           SuccessfulRescale   New size: 3; reason: external metric s0-prometheus(&LabelSelector{MatchLabels:map[string]string{scaledobject.keda.sh/name: cortex-model-primary,},MatchExpressions:[]LabelSelectorRequirement{},}) above target
+2026-11-24T13:18:25Z   cortex-model-primary-6bbc46d7fb-pkjlv   Created             Container created
+2026-11-24T13:18:25Z   cortex-model-primary-6bbc46d7fb-pkjlv   Started             Container started
+2026-11-24T13:18:25Z   cortex-model-primary-6bbc46d7fb-pkjlv   Pulled              Container image "ghcr.io/ggml-org/llama.cpp:server@sha256:1145e8de3111dc9358c6d8daffb755c4cf8a862d93391c26ba521b9a810bbe3e" already present on machine and can be accessed by the pod
+2026-11-24T13:23:55Z   cortex-model-primary-6bbc46d7fb         SuccessfulDelete    Deleted pod: cortex-model-primary-6bbc46d7fb-zzmjs
+2026-11-24T13:23:55Z   cortex-model-primary-6bbc46d7fb-zzmjs   Killing             Stopping container llama-server
+2026-11-24T13:23:55Z   cortex-model-primary                    ScalingReplicaSet   Scaled down replica set cortex-model-primary-6bbc46d7fb from 3 to 2
+2026-11-24T13:23:55Z   keda-hpa-cortex-model-primary           SuccessfulRescale   New size: 2; reason: All metrics below target
+2026-11-24T13:26:10Z   cortex-model-primary-6bbc46d7fb         SuccessfulDelete    Deleted pod: cortex-model-primary-6bbc46d7fb-pkjlv
+2026-11-24T13:26:10Z   cortex-model-primary-6bbc46d7fb-pkjlv   Killing             Stopping container llama-server
+2026-11-24T13:26:10Z   cortex-model-primary                    ScalingReplicaSet   Scaled down replica set cortex-model-primary-6bbc46d7fb from 2 to 1
+2026-11-24T13:26:10Z   keda-hpa-cortex-model-primary           SuccessfulRescale   New size: 1; reason: All metrics below target
