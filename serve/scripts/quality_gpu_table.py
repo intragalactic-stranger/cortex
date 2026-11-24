@@ -15,6 +15,7 @@ METRICS = {  # task -> (metric key, higher is better)
     "hellaswag": ("acc_norm,none", True),
     "leaderboard_mmlu_pro": ("acc,none", True),
     "gsm8k": ("exact_match,strict-match", True),
+    "gsm8k_flex": ("exact_match,flexible-extract", True),
     "ifeval": ("prompt_level_strict_acc,none", True),
     "wikitext": ("word_perplexity,none", False),
 }
@@ -24,10 +25,11 @@ def load(name: str) -> dict[str, tuple[float, float | None]]:
     out: dict[str, tuple[float, float | None]] = {}
     for f in (ROOT / name).rglob("results_*.json"):
         for task, vals in json.loads(f.read_text())["results"].items():
-            if task in METRICS:
-                key, _ = METRICS[task]
+            for col, (key, _) in METRICS.items():
+                if col.split("_flex")[0] != task or key not in vals:
+                    continue
                 se = vals.get(key.replace(",", "_stderr,", 1))
-                out[task] = (vals[key], se if isinstance(se, float) else None)
+                out[col] = (vals[key], se if isinstance(se, float) else None)
     man = ROOT / name / "eval_manifest.json"
     if man.exists():
         out["bfsi_ppl"] = (json.loads(man.read_text())["domain"]["bfsi_heldout_ppl"], None)
