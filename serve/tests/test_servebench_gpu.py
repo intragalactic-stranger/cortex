@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 from cortex_serve.servebench.collect import summarize_gpu
-from cortex_serve.servebench.config import ArtifactSpec, BudgetSpec
+from cortex_serve.servebench.config import CREDIT_CEILING_USD, ArtifactSpec, BudgetSpec, budget_check
 from cortex_serve.servebench.engines import ProcessEngine, make_engine
 from cortex_serve.servebench.engines.process import parse_sglang_memory, parse_vllm_memory, sglang_cmd, vllm_cmd
 
@@ -67,3 +67,10 @@ def test_gpu_telemetry_summary() -> None:
 
 def test_budget_worst_case() -> None:
     assert BudgetSpec(gpu="L4", usd_per_hour=0.8, max_minutes=30).max_usd == pytest.approx(0.4)
+
+
+def test_budget_check_gates_and_ceiling() -> None:
+    assert budget_check(10.0, 5.0, 60.0) is None
+    assert "stage gate" in (budget_check(58.0, 5.0, 60.0) or "")
+    assert budget_check(58.0, 5.0, 120.0) is None
+    assert "ceiling" in (budget_check(242.0, 5.0, CREDIT_CEILING_USD) or "")

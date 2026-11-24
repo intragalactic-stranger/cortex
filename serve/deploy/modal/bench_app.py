@@ -7,12 +7,15 @@ Cost safety:
 * every config must declare ``budget: {gpu, usd_per_hour, max_minutes}``; the worst case is printed and
   nothing runs without ``--yes``;
 * the Modal function timeout is ``max_minutes``, so spend is hard-capped even if something hangs;
+* before launching, the metered spend (``modal billing summary``) + this run's worst case must stay under the
+  approved stage gate and the $245 credit ceiling (D-030); runs are launched one at a time so that holds;
 * model weights are cached in the ``cortex-hf-cache`` volume (downloaded once).
 """
 
 from __future__ import annotations
 
 import io
+import json
 import os
 import subprocess
 import tarfile
@@ -93,8 +96,8 @@ FUNCTIONS = {"vllm": bench_vllm, "sglang": bench_sglang, "llamacpp": bench_llama
 
 
 @app.local_entrypoint()
-def main(config: str, yes: bool = False, only: str = "") -> None:
-    from cortex_serve.servebench.config import RunConfig
+def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 60.0) -> None:
+    from cortex_serve.servebench.config import RunConfig, budget_check
 
     text = Path(config).read_text()
     cfg = RunConfig.model_validate(yaml.safe_load(text))
@@ -107,6 +110,11 @@ def main(config: str, yes: bool = False, only: str = "") -> None:
         f"[cost] {cfg.name}: {b.gpu} at ${b.usd_per_hour:.2f}/h, hard cap {b.max_minutes:.0f} min "
         f"-> worst case ${b.max_usd:.2f}"
     )
+    summary = subprocess.run(["modal", "billing", "summary", "--json"], capture_output=True, text=True, check=True)
+    spent = float(json.loads(summary.stdout)["metered_cost"])
+    print(f"[cost] metered spend this month so far: ${spent:.2f} (approved gate ${approved_gate:.0f})")
+    if reason := budget_check(spent, b.max_usd, approved_gate):
+        raise SystemExit(f"[cost] refusing: {reason}")
     if not yes:
         raise SystemExit("[cost] dry run only. Re-run with --yes to start the GPU job.")
     sha = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=False).stdout.strip()
