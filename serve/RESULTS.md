@@ -386,3 +386,16 @@ All on Modal with the pinned vLLM 0.32.0 / SGLang 0.5.22 images, Qwen3-4B-Instru
 - **How much of the theoretical saving vLLM realises:** Qwen3.5 84% at 8K (363 vs 305 MiB per sequence) and 94% at 32K; Gemma only ~48% at 8K and 77% at 32K. Gemma's sliding-window layers carry a fixed per-sequence overhead beyond the window (the same pattern llama.cpp showed in M1). memcalc is exact for the dense model.
 - **Gemma's per-sequence saving is partly eaten by its 14.5 GiB of weights on a 24 GB card:** its KV pool is only 4.2 GiB, so it fits fewer 8K sequences than Qwen3.5 despite smaller KV per token.
 - **Engine support differs for the new designs:** SGLang matches vLLM on Qwen3.5 long contexts but not on 32-user chat (313 vs 484 tok/s, TTFT p95 15 s), and on Gemma long contexts it reaches only half of vLLM's throughput. Not investigated further.
+
+### E12. Tensor parallel: TP=2 on 2 x H100 vs TP=1 on 1 x H100 (Qwen3-4B bf16, chat-balanced)
+
+| Users | TPOT p50 (ms) TP1 / TP2 | Out tok/s TP1 / TP2 | Goodput req/s TP1 / TP2 |
+|---|---|---|---|
+| 1 | 4.15 / **3.04** | 237 / 305 | 0.92 / 1.19 |
+| 16 | 4.77 / 3.69 | 3,034 / 3,883 | 11.9 / 15.2 |
+| 64 | 7.15 / 5.13 | 7,584 / 10,244 | 27.2 / 40.0 |
+| 128 | 10.67 / 7.05 | 10,079 / 14,433 | 20.5 / 31.4 |
+
+- **TP=2 cuts per-token latency 1.37× and adds 43–47% capacity, for 2× the price:** goodput per dollar at 64 users falls from 6.9 to 5.1 req/s per $/h (−27%). Each layer ends in an all-reduce across the two GPUs; for a 4B model that fits on one GPU, the communication is a large share of each step.
+- **For throughput, two independent replicas (data parallel) are the cheaper way to use a second GPU** for a model this size (not measured; follows from the TP=1 numbers). TP pays off when latency is the constraint or the model does not fit on one GPU (E9's 57 GiB MoE would need TP on an 80 GB card at long contexts).
+- 2 x L4 was requested first but Modal never scheduled it (1 h 45 min in queue, not billed), so the pair is H100s.
