@@ -37,11 +37,13 @@ def load(name: str) -> dict[str, tuple[float, float | None]]:
 def main() -> None:
     names = sorted(p.name for p in ROOT.iterdir() if p.is_dir())
     data = {n: load(n) for n in names}
-    base = data.get("qwen3-4b-bf16", {})
+    bases = {"qwen3-4b": "qwen3-4b-bf16", "gemma4-e4b": "gemma4-e4b-bf16"}  # compare within a model family only
     cols = [*METRICS, "bfsi_ppl"]
     sep = " | " if "--md" in sys.argv else "  "
     print(sep.join(["model", *cols]))
     for n in names:
+        fam_base = next((b for f, b in bases.items() if n.startswith(f)), "")
+        base = data.get(fam_base, {})
         cells = []
         for c in cols:
             if c not in data[n]:
@@ -52,7 +54,7 @@ def main() -> None:
             cell = f"{v * 100:.1f}" if pct else f"{v:.3f}"
             if se is not None and pct:
                 cell += f"±{1.96 * se * 100:.1f}"
-            if c in base and n != "qwen3-4b-bf16":
+            if c in base and n != fam_base:
                 d = (v - base[c][0]) * (100 if pct else 1)
                 cell += f" ({d:+.1f})" if pct else f" ({(v / base[c][0] - 1) * 100:+.1f}%)"
             cells.append(cell)

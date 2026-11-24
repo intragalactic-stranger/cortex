@@ -82,7 +82,7 @@ def _domain_ppl(base_url: str, n: int) -> dict[str, float]:
 
 @app.function(image=image, gpu="L4", volumes={"/hf": hf_cache}, timeout=MAX_MINUTES * 60)
 def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int, extra: list[str],
-             git: dict[str, object], quick: int = 0) -> bytes:  # fmt: skip
+             git: dict[str, object], quick: int = 0, add_bos: bool = False, parts: str = "all") -> bytes:  # fmt: skip
     from cortex_serve.servebench.config import ArtifactSpec
     from cortex_serve.servebench.engines.process import ProcessEngine
 
@@ -100,15 +100,17 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
         # local checkpoints carry their own tokenizer files; hub models use the base repo's tokenizer
         tok = f"tokenizer={model if model.startswith('/') else tokenizer}"
         common = f"model=model,{tok},num_concurrent=32,max_retries=3,timeout=600"
-        _lm_eval("local-completions", f"{common},base_url={base}/v1/completions",
-                 out / "loglik", "arc_challenge,wikitext", None, quick)  # fmt: skip
-        _lm_eval("local-completions", f"{common},base_url={base}/v1/completions",
-                 out / "hellaswag", "hellaswag", 2000, quick)  # fmt: skip
-        _lm_eval("local-completions", f"{common},base_url={base}/v1/completions",
-                 out / "mmlu_pro", "leaderboard_mmlu_pro", MMLU_PRO_LIMIT, quick)  # fmt: skip
-        _lm_eval("local-chat-completions", f"{common},base_url={base}/v1/chat/completions", out / "gen",
-                 "gsm8k,ifeval", None, quick)  # fmt: skip
-        domain = _domain_ppl(base, quick or BFSI_HELDOUT_N)
+        # Gemma needs <bos>; lm-eval's API models tokenize loglikelihood requests without special tokens by default
+        ll = f"{common},base_url={base}/v1/completions" + (",add_bos_token=True" if add_bos else "")
+        want = set(parts.split(",")) if parts != "all" else {"loglik", "gen", "domain"}
+        if "loglik" in want:
+            _lm_eval("local-completions", ll, out / "loglik", "arc_challenge,wikitext", None, quick)
+            _lm_eval("local-completions", ll, out / "hellaswag", "hellaswag", 2000, quick)
+            _lm_eval("local-completions", ll, out / "mmlu_pro", "leaderboard_mmlu_pro", MMLU_PRO_LIMIT, quick)
+        if "gen" in want:
+            _lm_eval("local-chat-completions", f"{common},base_url={base}/v1/chat/completions", out / "gen",
+                     "gsm8k,ifeval", None, quick)  # fmt: skip
+        domain = _domain_ppl(base, quick or BFSI_HELDOUT_N) if "domain" in want else None
         (out / "engine.log").write_text(eng.logs())
     finally:
         eng.stop()
@@ -117,9 +119,10 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
     qm = Path(model) / "cortex_manifest.json"
     meta = {"name": name, "model": model, "revision": revision, "max_model_len": max_len, "extra": extra,
             "engine_image": VLLM_IMAGE, "lm_eval": LM_EVAL, "gpu": gpu_name, "wall_s": round(time.time() - t0),
-            "git": git, "domain": domain, "quick_limit": quick,
+            "git": git, "domain": domain, "quick_limit": quick, "add_bos": add_bos, "parts": parts,
             "quantize_manifest": json.loads(qm.read_text()) if qm.exists() else None}  # fmt: skip
-    (out / "eval_manifest.json").write_text(json.dumps(meta, indent=2))
+    mname = "eval_manifest.json" if parts == "all" else f"eval_manifest_{parts.replace(',', '+')}.json"
+    (out / mname).write_text(json.dumps(meta, indent=2))
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w:gz") as tar:
         tar.add(out, arcname=name)
@@ -129,7 +132,8 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
 @app.local_entrypoint()
 def main(name: str, model: str, revision: str = "local", tokenizer: str = "Qwen/Qwen3-4B-Instruct-2507",
          max_len: int = 4096, extra: str = "",
-         gpu: str = "L4", quick: int = 0, yes: bool = False, approved_gate: float = 60.0) -> None:  # fmt: skip
+         gpu: str = "L4", quick: int = 0, add_bos: bool = False, parts: str = "all", yes: bool = False,
+         approved_gate: float = 60.0) -> None:  # fmt: skip
     from cortex_serve.spend import guarded
 
     worst = RATES[gpu] * MAX_MINUTES / 60
@@ -140,7 +144,7 @@ def main(name: str, model: str, revision: str = "local", tokenizer: str = "Qwen/
     fn = evaluate.with_options(gpu=gpu)
     with guarded(f"eval {name}", worst, approved_gate, yes):
         data = fn.remote(name, model, revision, tokenizer, max_len, extra.split() if extra else [],
-                         {"sha": sha, "dirty": dirty}, quick)  # fmt: skip
+                         {"sha": sha, "dirty": dirty}, quick, add_bos, parts)  # fmt: skip
     dest = Path("serve/results/quality-gpu" + ("-quick" if quick else ""))
     dest.mkdir(parents=True, exist_ok=True)
     with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
