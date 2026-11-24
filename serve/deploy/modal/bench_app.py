@@ -194,7 +194,7 @@ def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 
 
 def _check_gpu(dest: Path, run_names: list[str], requested: str) -> None:
     """Modal may serve a request on a different (upgraded) GPU; flag any run whose real device differs."""
-    want = requested.rstrip("!").replace("-", " ").split()[0].upper()  # "H100!" -> "H100", "A100-80GB" -> "A100"
+    want = requested.split(":")[0].rstrip("!").replace("-", " ").split()[0].upper()  # "H100!:2" -> "H100"
     for name in run_names:
         for man in (dest / name).glob("*/manifest.json"):
             real = str(json.loads(man.read_text()).get("host", {}).get("gpu", ""))
