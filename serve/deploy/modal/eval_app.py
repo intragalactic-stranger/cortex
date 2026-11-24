@@ -38,7 +38,7 @@ image = (
     modal.Image.from_registry(VLLM_IMAGE)
     .entrypoint([])
     .run_commands('command -v python || ln -s "$(command -v python3)" /usr/local/bin/python')
-    .uv_pip_install(LM_EVAL, "pydantic>=2.10", "pyyaml>=6", "httpx>=0.28", "pandas>=2.2", "datasets>=4")
+    .uv_pip_install(LM_EVAL, "pydantic>=2.10", "pyyaml>=6", "httpx>=0.28", "pandas>=2.2", "datasets>=4", "polars>=1.20")
     # lm-eval must not move vLLM's torch/transformers (research M3 risk 6): fail the build if it did
     .run_commands('python3 -c "import torch, transformers, vllm; print(torch.__version__, transformers.__version__)"')
     .env({"HF_HOME": "/hf", "HF_HUB_ENABLE_HF_TRANSFER": "0", "HF_ALLOW_CODE_EVAL": "1"})
