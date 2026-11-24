@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "created_utc": "2026-11-24T06:29:12+00:00",
+  "servebench_version": "0.1.0",
+  "host": {
+    "hostname_hash": "c5803a6e4daa",
+    "cpu": "unknown",
+    "logical_cpus": 17,
+    "memory_gib": 339.6,
+    "kernel": "4.19.0-gvisor",
+    "python": "3.12.3",
+    "docker": null,
+    "gpu": "NVIDIA L4, 610.57.04, 23034 MiB"
+  },
+  "run": {
+    "name": "gpu-smoke-vllm-l4",
+    "experiment": "smoke",
+    "stamp": "20261124T062902Z"
+  },
+  "config": {
+    "name": "gpu-smoke-vllm-l4",
+    "description": "First Modal run. Validates the image, engine startup, log parsing and GPU telemetry on the cheapest tier.",
+    "experiment": "smoke",
+    "engine": {
+      "kind": "vllm",
+      "image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+      "launch": "process",
+      "args": {
+        "max_model_len": 4096,
+        "gpu_memory_utilization": 0.9
+      }
+    },
+    "artifacts": [
+      {
+        "name": "qwen3-0.6b-bf16",
+        "repo": "Qwen/Qwen3-0.6B",
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "file": null,
+        "family": "Qwen/Qwen3-0.6B",
+        "quant": "bf16"
+      }
+    ],
+    "tokenizers": {
+      "Qwen/Qwen3-0.6B": {
+        "repo": "Qwen/Qwen3-0.6B",
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+      }
+    },
+    "workloads": [
+      {
+        "name": "chat-short",
+        "input_tokens": 128,
+        "output_tokens": 64,
+        "input_jitter": 0.0,
+        "shared_prefix_tokens": 0,
+        "instruction": "Continue the notes above in the same style. Keep writing without stopping."
+      }
+    ],
+    "load": {
+      "mode": "concurrency",
+      "levels": [
+        1.0,
+        8.0
+      ],
+      "requests_per_level": 16,
+      "warmup_requests": 2,
+      "timeout_s": 600.0
+    },
+    "slo": {
+      "ttft_s": 0.5,
+      "tpot_s": 0.05
+    },
+    "repeats": 1,
+    "seed": 1234,
+    "disable_thinking": true,
+    "hardware": {},
+    "budget": {
+      "gpu": "L4",
+      "usd_per_hour": 0.8,
+      "max_minutes": 20.0
+    }
+  },
+  "engine": {
+    "kind": "vllm",
+    "image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+    "digest": null,
+    "version": "0.32.0"
+  },
+  "git": {
+    "sha": "dc1fde5e9e97bf339f513596839cb9b4c9eca012",
+    "dirty": false
+  },
+  "artifacts": [
+    {
+      "name": "qwen3-0.6b-bf16",
+      "repo": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "file": null,
+      "family": "Qwen/Qwen3-0.6B",
+      "quant": "bf16"
+    }
+  ],
+  "budget": {
+    "gpu": "L4",
+    "usd_per_hour": 0.8,
+    "max_minutes": 20.0
+  }
+}
