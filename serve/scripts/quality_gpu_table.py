@@ -17,6 +17,7 @@ METRICS = {  # task -> (metric key, higher is better)
     "gsm8k": ("exact_match,strict-match", True),
     "gsm8k_flex": ("exact_match,flexible-extract", True),
     "ifeval": ("prompt_level_strict_acc,none", True),
+    "arc_challenge_chat": ("exact_match,remove_whitespace", True),
     "wikitext": ("word_perplexity,none", False),
 }
 

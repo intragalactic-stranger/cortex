@@ -110,6 +110,9 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
         if "gen" in want:
             _lm_eval("local-chat-completions", f"{common},base_url={base}/v1/chat/completions", out / "gen",
                      "gsm8k,ifeval", None, quick)  # fmt: skip
+        if "arcchat" in want:  # generative ARC (chat template): for models whose raw-text likelihoods are degenerate
+            _lm_eval("local-chat-completions", f"{common},base_url={base}/v1/chat/completions", out / "arcchat",
+                     "arc_challenge_chat", None, quick)  # fmt: skip
         domain = _domain_ppl(base, quick or BFSI_HELDOUT_N) if "domain" in want else None
         (out / "engine.log").write_text(eng.logs())
     finally:
