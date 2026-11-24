@@ -7,5 +7,5 @@ uv run --extra modal modal run serve/deploy/modal/quantize_app.py --recipe w4a16
 a=gemma4-e4b-w4a16-gptq-g32-sym-generic
 EXTRA='--limit-mm-per-prompt {"image":0,"audio":0} --default-chat-template-kwargs {"enable_thinking":false}'
 echo "=== $(date -u +%FT%TZ) eval gemma4-e4b-ptq-w4a16-g32"
-uv run --extra modal modal run serve/deploy/modal/eval_app.py --name gemma4-e4b-ptq-w4a16-g32 --model "/hf/artifacts/$a" --tokenizer google/gemma-4-E4B-it --gpu L40S --extra "$EXTRA" --yes || echo "!!! gemma ptq eval failed"
+uv run --extra modal modal run serve/deploy/modal/eval_app.py --name gemma4-e4b-ptq-w4a16-g32 --model "/hf/artifacts/$a" --tokenizer google/gemma-4-E4B-it --gpu L40S --extra "$EXTRA" --add-bos --yes || echo "!!! gemma ptq eval failed"
 echo "=== $(date -u +%FT%TZ) Gemma PTQ done"
