@@ -78,40 +78,48 @@ def _fetch_gguf(cfg: object) -> None:
             hf_cache.commit()
 
 
-def _bench(config_yaml: str, only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
-    """Runs inside the GPU container: start engine, run the config, return the run dir as tar.gz."""
+def _bench(config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
+    """Runs inside the GPU container: run each config in turn (one cold start), return all run dirs as tar.gz.
+
+    A failing config is logged and skipped so the others still return their data.
+    """
     os.environ["SERVEBENCH_GIT_SHA"] = git_sha
     os.environ["SERVEBENCH_GIT_DIRTY"] = "1" if git_dirty else "0"
     from cortex_serve.servebench.config import RunConfig
     from cortex_serve.servebench.runner import run
 
-    cfg = RunConfig.model_validate(yaml.safe_load(config_yaml))
-    _fetch_gguf(cfg)
     out = Path("/tmp/results")
-    try:
-        run_dir = run(cfg, out, models_dir=Path("/hf/gguf"), repo_dir=Path("/"), only=only)
-    finally:
-        hf_cache.commit()
+    run_dirs: list[Path] = []
+    for text in config_yamls:
+        cfg = RunConfig.model_validate(yaml.safe_load(text))
+        try:
+            _fetch_gguf(cfg)
+            run_dirs.append(run(cfg, out, models_dir=Path("/hf/gguf"), repo_dir=Path("/"), only=only))
+        except Exception as exc:
+            print(f"[fail] {cfg.name}: {exc!r}")
+        finally:
+            hf_cache.commit()
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w:gz") as tar:
-        tar.add(run_dir, arcname=str(run_dir.relative_to(out)))
+        for run_dir in run_dirs:
+            tar.add(run_dir, arcname=str(run_dir.relative_to(out)))
     return buf.getvalue()
 
 
 # One function per engine image; GPU type and timeout are set per call with .with_options().
 @app.function(image=_image("vllm"), gpu="L4", volumes=VOLUMES, timeout=600)
-def bench_vllm(config_yaml: str, only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
-    return _bench(config_yaml, only, git_sha, git_dirty)
+def bench_vllm(config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
+    return _bench(config_yamls, only, git_sha, git_dirty)
 
 
 @app.function(image=_image("sglang"), gpu="L4", volumes=VOLUMES, timeout=600)
-def bench_sglang(config_yaml: str, only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
-    return _bench(config_yaml, only, git_sha, git_dirty)
+def bench_sglang(config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
+    return _bench(config_yamls, only, git_sha, git_dirty)
 
 
 @app.function(image=_image("llamacpp"), gpu="L4", volumes=VOLUMES, timeout=600)
-def bench_llamacpp(config_yaml: str, only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
-    return _bench(config_yaml, only, git_sha, git_dirty)
+def bench_llamacpp(config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
+    return _bench(config_yamls, only, git_sha, git_dirty)
 
 
 FUNCTIONS = {"vllm": bench_vllm, "sglang": bench_sglang, "llamacpp": bench_llamacpp}
@@ -119,26 +127,33 @@ FUNCTIONS = {"vllm": bench_vllm, "sglang": bench_sglang, "llamacpp": bench_llama
 
 @app.local_entrypoint()
 def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 60.0) -> None:
+    """``--config`` takes one path or several comma-separated paths for the same engine image and GPU; they run
+    back to back in one container. The worst case is the sum of their budgets."""
     from cortex_serve.servebench.config import RunConfig, budget_check
 
-    text = Path(config).read_text()
-    cfg = RunConfig.model_validate(yaml.safe_load(text))
-    if cfg.budget is None:
-        raise SystemExit("config has no `budget` section: refusing to run on a paid GPU")
-    if cfg.engine.launch != "process" or cfg.engine.image != ENGINE_IMAGES[cfg.engine.kind]:
-        raise SystemExit(f"engine must be launch: process with image {ENGINE_IMAGES[cfg.engine.kind]}")
-    b = cfg.budget
-    print(
-        f"[cost] {cfg.name}: {b.gpu} at ${b.usd_per_hour:.2f}/h, hard cap {b.max_minutes:.0f} min "
-        f"-> worst case ${b.max_usd:.2f}"
-    )
+    paths = [Path(c) for c in config.split(",")]
+    texts = [p.read_text() for p in paths]
+    cfgs = [RunConfig.model_validate(yaml.safe_load(t)) for t in texts]
+    for cfg in cfgs:
+        if cfg.budget is None:
+            raise SystemExit(f"{cfg.name}: no `budget` section: refusing to run on a paid GPU")
+        if cfg.engine.launch != "process" or cfg.engine.image != ENGINE_IMAGES[cfg.engine.kind]:
+            raise SystemExit(f"{cfg.name}: engine must be launch: process with image {ENGINE_IMAGES[cfg.engine.kind]}")
+    budgets = [c.budget for c in cfgs if c.budget is not None]
+    if len({c.engine.kind for c in cfgs}) != 1 or len({(b.gpu, b.usd_per_hour) for b in budgets}) != 1:
+        raise SystemExit("all configs in one call must share the engine kind, GPU and rate")
+    gpu, rate = budgets[0].gpu, budgets[0].usd_per_hour
+    minutes = sum(b.max_minutes for b in budgets)
+    worst = rate * minutes / 60
+    names = ", ".join(c.name for c in cfgs)
+    print(f"[cost] {names}: {gpu} at ${rate:.2f}/h, hard cap {minutes:.0f} min -> worst case ${worst:.2f}")
     summary = subprocess.run(["modal", "billing", "summary", "--json"], capture_output=True, text=True, check=True)
     billing = json.loads(summary.stdout)
     spent, billed = float(billing["metered_cost"]), float(billing["billed_cost"])
     print(f"[cost] metered this month ${spent:.2f}, billed to card ${billed:.2f} (approved gate ${approved_gate:.0f})")
     if billed > 0.005:
         raise SystemExit(f"[cost] refusing: ${billed:.2f} is already billed to the card; credits must cover everything")
-    if reason := budget_check(spent, b.max_usd, approved_gate):
+    if reason := budget_check(spent, worst, approved_gate):
         raise SystemExit(f"[cost] refusing: {reason}")
     if not yes:
         raise SystemExit("[cost] dry run only. Re-run with --yes to start the GPU job.")
@@ -148,9 +163,12 @@ def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 
             ["git", "status", "--porcelain", "--untracked-files=no"], capture_output=True, text=True, check=False
         ).stdout.strip()
     )
-    fn = FUNCTIONS[cfg.engine.kind].with_options(gpu=b.gpu, timeout=int(b.max_minutes * 60))
-    data = fn.remote(text, only.split(",") if only else None, sha, dirty)
+    fn = FUNCTIONS[cfgs[0].engine.kind].with_options(gpu=gpu, timeout=int(minutes * 60))
+    data = fn.remote(texts, only.split(",") if only else None, sha, dirty)
     dest = Path("serve/results")
     with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
         tar.extractall(dest, filter="data")
-    print(f"[done] results extracted under {dest}/{cfg.name}/")
+        got = sorted({m.name.split("/")[0] for m in tar.getmembers()})
+    print(f"[done] results extracted under {dest}/: {', '.join(got) or 'NOTHING'}")
+    if missing := [c.name for c in cfgs if c.name not in got]:
+        print(f"[fail] no results for: {', '.join(missing)}")
