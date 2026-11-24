@@ -107,3 +107,94 @@ Model sizes from GGUF headers match llama.cpp's reported file size to the MiB. T
 - **Speculative decoding is 1.57× *slower* per token on this CPU, even at 99% acceptance.** It relies on verifying k drafted tokens for about the price of one decode step, which holds when decode is bandwidth-bound (GPU). Here a batched forward pass is only ~1.9× cheaper per token than single-token decode (prefill 18.6 vs decode 10.6 tok/s), so verifying 4 tokens costs ~2 decode steps, plus the draft model's own passes. TTFT also rises 2.3 s (the draft prefills the prompt too).
 - The 99.2% acceptance is likely inflated by the synthetic prompts (`ignore_eos` output becomes repetitive); a natural-language prompt gave 94% (46/49). High acceptance is the best case for speculative decoding, so the slowdown conclusion holds.
 - **A first E6 run (`20261116T065339Z`) is invalid:** current llama-server defaults `--spec-type` to `none`, so `-md` loaded the draft model and never used it. Fixed in `75d6f73`; servebench now rejects a draft model without `spec_type` and fails a run that drafts 0 tokens.
+
+---
+
+## M2: GPU engine baseline on Modal (E1, E8, memcalc validation), measured
+
+**Model:** Qwen3-4B-Instruct-2507 @ `cdbee75f`, bf16 (vLLM, SGLang) / F16 GGUF from unsloth @ `a06e946b` (llama.cpp; same bytes per weight).
+**Engines (pinned by digest, `deploy/modal/bench_app.py`):** vLLM 0.32.0, SGLang 0.5.22, llama.cpp `server-cuda-b12110`. Load client in the **same container** as the engine (G-05), so TTFT has no internet in it.
+**GPUs (from `nvidia-smi` in each manifest):** L4 24 GB ($0.80/h); H100 80GB HBM3 ($3.95/h); one H200 run (see the correction below).
+**Workloads:** `chat-balanced` 512 in / 256 out, `rag-long-prefill` 2,048 in / 128 out (exact lengths, `ignore_eos`). Closed-loop concurrency; requests per level = max(16, 3 × concurrency); 3 repeats; medians shown.
+**GPU SLO:** TTFT ≤ 500 ms and TPOT ≤ 50 ms per request; **goodput** = requests/s that met both (DistServe).
+**Runs:** `results/e1-l4-{vllm,sglang,llamacpp}/`, `results/e1-h100-{vllm,sglang}/`, `results/e8-l4-vllm-*/`, `results/m2-crosscheck/`. Full tables and plots: `results/reports/m2-e1-l4/`, `m2-e1-h100/`, `m2-e8/`.
+
+### 1. E1 on L4: three engines
+
+| Workload | Users | Out tok/s vLLM / SGLang / llama.cpp | TTFT p95 (ms) | TPOT p50 (ms) | Goodput req/s |
+|---|---|---|---|---|---|
+| chat | 1 | 30 / 30 / 30 | 106 / 115 / 187 | 33 / 33 / 33 | 0.12 / 0.12 / 0.12 |
+| chat | 4 | 110 / 109 / 97 | 366 / 394 / 700 | 35 / 35 / 39 | **0.43 / 0.43** / 0 |
+| chat | 16 | 353 / 348 / 268 | 1,301 / 1,441 / 2,325 | 42 / 42 / 55 | 0.34 / 0.09 / 0 |
+| chat | 64 | 792 / 749 / — | 4,614 / 5,535 / — | 76 / 73 / — | 0 / 0 / — |
+| rag | 1 | 27 / 27 / 26 | 370 / 399 / 600 | 34 / 34 / 34 | **0.21 / 0.21** / 0 |
+| rag | 16 | 171 / 162 / 115 | 4,801 / 5,699 / 8,517 | 83 / 71 / 123 | 0 / 0 / 0 |
+
+(llama.cpp ran 1–16 users by design: 16 slots × 4,096 context.) 0 errors in all points.
+
+**Findings**
+- **Single-user decode is the same on all three engines (33 ms/token)** and is **80% of the L4's bandwidth ceiling**: 300 GB/s ÷ 8.05 GB of weights read per token = 37 tok/s; measured 30.
+- **vLLM and SGLang are within ~5% on L4 at every load.** vLLM is slightly ahead on throughput at 64 users (792 vs 749 tok/s); SGLang keeps TPOT lower under long-prompt load (71 vs 83 ms at 16 users).
+- **llama.cpp falls 25–33% behind at 16 users** and its TTFT grows fastest: no continuous batching of prefill with decode on the same scale.
+- **An L4 serving this 4B model in bf16 meets the GPU SLO for only ~4 chat users (or 1 RAG user).** The SLO's 50 ms TPOT leaves little room above the 33 ms single-user floor, and TTFT p95 breaks 500 ms first.
+
+### 2. E1 on H100: vLLM vs SGLang
+
+| Workload | Users | Out tok/s vLLM / SGLang | TTFT p95 (ms) | TPOT p50 (ms) | Goodput req/s |
+|---|---|---|---|---|---|
+| chat | 1 | 232 / 244 | 48 / 21 | 4.2 / 4.0 | 0.90 / 0.95 |
+| chat | 16 | 2,947 / 2,994 | 171 / 147 | 4.8 / 4.8 | 11.5 / 11.7 |
+| chat | 64 | 7,271 / 7,345 | 582 / 514 | 7.2 / 7.4 | 24.0 / **27.1** |
+| chat | 128 | 9,508 / 9,614 | 1,066 / 926 | 10.7 / 11.1 | 10.6 / 14.6 |
+| rag | 16 | 1,643 / 1,630 | 510 / 489 | 7.0 / 7.4 | 11.8 / **12.7** |
+| rag | 128 | 2,698 / 2,656 | 3,619 / 3,614 | 38 / 33 | 1.4 / 2.0 |
+
+**Findings**
+- **On a real H100 the two engines tie on throughput (within ~2%).** SGLang has lower TTFT and so slightly higher goodput at 64–128 users.
+- **Single-user decode reaches only ~57% of the H100's bandwidth ceiling** (3,350 GB/s ÷ 8.05 GB = 416 tok/s; measured ~238). One sequence of a 4B model cannot keep a large GPU busy; batching is where the H100 pays off.
+- **Cost per useful answer (goodput per dollar, chat):** L4 0.43 req/s ÷ $0.80/h = **~1,900 SLO-meeting requests per $**; H100 SGLang 27.1 req/s ÷ $3.95/h = **~24,700 per $** (vLLM ~21,800). The H100 costs 4.9× more per hour and is **~11–13× cheaper per SLO-meeting request** for this model.
+
+**Correction (caught by the manifest):** the first vLLM "H100" run (`e1-h100-vllm/20261124T081904Z`) actually ran on an **H200** — Modal upgraded the request, billing the H100 rate. On that run vLLM looked 15–22% faster than SGLang. Re-run on an exact H100 (`gpu: "H100!"`), the gap disappears. The H200 run is kept as an H200 data point (`GPU_NOTE.md`): vLLM on H200 vs H100 is **+20–23% throughput** (memory bandwidth 4.8 vs 3.35 TB/s = 1.43×). `bench_app.py` now flags any run whose real GPU differs from the request.
+
+### 3. E8: vLLM memory knobs (L4, chat-balanced, 64 users, 1 repeat)
+
+| Knob (others default: util 0.9, max_len 4096) | KV cache (GiB) | KV tokens | Out tok/s | TTFT p95 (s) | TPOT p50 (ms) |
+|---|---|---|---|---|---|
+| `gpu_memory_utilization` 0.5 | 2.00 | 14,544 | 409 | 28.3 | 50 |
+| 0.7 | 6.99 | 50,864 | 794 | 4.8 | 75 |
+| 0.9 | 11.40 | 83,024 | 794 | 4.8 | 75 |
+| `max_model_len` 2,048 | 10.83 | 78,864 | 794 | 4.8 | 75 |
+| `max_model_len` 16,384 | 10.83 | 78,864 | 794 | 4.9 | 75 |
+| `max_num_seqs` 8 | 11.34 | 82,544 | 204 | 71.0 | 38 |
+| `max_num_seqs` 32 | 11.28 | 82,112 | 558 | 16.8 | 55 |
+| `max_num_seqs` 128 | 11.05 | 80,432 | 796 | 4.8 | 75 |
+
+**Findings**
+- **Too little KV cache halves throughput:** at util 0.5 only ~19 of 64 requests (768 tokens each) fit, the rest queue (TTFT p95 28 s).
+- **Past "enough", more KV buys nothing at a given load:** 0.7 and 0.9 are identical at 64 users (64 × 768 = 49K tokens fits in both).
+- **`max_model_len` does not change memory or speed** with paged attention; it only changes how many *maximum-length* requests could fit (vLLM's reported max concurrency: 38.5× at 2K vs 4.8× at 16K).
+- **`max_num_seqs` trades per-user speed for total throughput:** capping at 8 gives each user 38 ms/token but cuts throughput 4× and makes others wait 71 s.
+- **vLLM's KV size varies ~5% between identical configs** (10.83 GiB in E1 vs 11.40 GiB in E8 at util 0.9; smaller `max_num_seqs` also frees a little activation memory). Treat KV capacity as a ±5% quantity.
+
+### 4. memcalc vs engines (S5: weights ±10%, max concurrency ±20%)
+
+| Engine / GPU / util | memcalc KV (GiB) | Engine-reported KV (GiB) | Error | Max seqs @4,096: memcalc / engine |
+|---|---|---|---|---|
+| vLLM / L4 / 0.9 | 11.25 | 10.83 – 11.40 | −1% to +4% | 19 / 19.3 – 20.3 |
+| vLLM / L4 / 0.7 | 6.75 | 6.99 | −3% | 12 / 12.4 |
+| vLLM / L4 / 0.5 | 2.25 | 2.00 | +13% | 4 / 3.6 |
+| vLLM / H100 / 0.9 | 62.69 | 61.06 | +3% | — |
+| vLLM / H200 / 0.9 | 117.01 | 115.62 | +1% | — |
+| SGLang / L4 / 0.85 | 10.12 | 10.83 | −7% | — |
+| SGLang / H100 / 0.85 | 58.71 | 59.01 | −1% | — |
+
+Weights: memcalc 7.49 GiB vs vLLM "Model loading took 7.64 GiB" (−2%). KV bytes per token (147,456 = 36 layers × 8 KV heads × 128 × 2 × 2 B) reproduce every engine's token count exactly from its GiB. **Both S5 targets are met.** The largest error (+13% at util 0.5) comes from memcalc's fixed 1.5 GiB reserve: at low utilisation the real activation/CUDA-graph reserve is a larger share of a small budget.
+
+### 5. Cross-check against `vllm bench serve` (same server config, L4)
+
+| Users | TTFT p95 (ms) servebench / vllm bench | TPOT p50 (ms) | Out tok/s |
+|---|---|---|---|
+| 1 | 106 / 114 | 33.3 / 33.5 | 30.0 / 29.6 |
+| 16 | 1,301 / 1,323 | 41.9 / 42.0 | 353 / 359 |
+
+**The harness agrees with the vendor's benchmark within 1–7%** (`results/m2-crosscheck/20261124T091327Z`). Differences are within run-to-run noise (vllm bench uses random token IDs on `/v1/completions`; servebench uses tokenizer-verified text on chat completions).
