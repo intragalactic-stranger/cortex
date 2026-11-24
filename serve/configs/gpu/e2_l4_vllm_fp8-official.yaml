@@ -42,4 +42,4 @@ hardware:
 budget:
   gpu: L4
   usd_per_hour: 0.8
-  max_minutes: 15
+  max_minutes: 25
