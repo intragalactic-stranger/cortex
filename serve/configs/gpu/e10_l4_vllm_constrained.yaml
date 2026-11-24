@@ -21,7 +21,7 @@ tokenizers:
 workloads:
 - name: json-extract
   input_tokens: 512
-  output_tokens: 200
+  output_tokens: 400
   ignore_eos: false
   instruction: Return ONLY a JSON object with keys "title" (string), "year" (integer), "topics" (array of strings) and "summary" (string, one sentence) describing the notes above.
   json_schema:

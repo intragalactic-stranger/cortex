@@ -107,8 +107,11 @@ def _engine_counters(
         "spec_acceptance": acc / drafted if acc is not None and drafted else None,
         "prefix_cache_hit_rate": hits / queries if hits is not None and queries else None,
         "json_valid_rate": (
-            sum(json_valid(r.text, wl.json_schema) for r in ok) / len(ok) if wl.json_schema and ok else None
+            sum(json_valid(r.text, schema) for r in ok) / len(ok)
+            if (schema := wl.json_schema or wl.check_schema) and ok
+            else None
         ),
+        "truncated_rate": sum(r.finish_reason == "length" for r in ok) / len(ok) if ok else None,
     }
 
 

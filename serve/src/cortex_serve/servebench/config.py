@@ -91,6 +91,9 @@ class WorkloadSpec(Strict):
     json_schema: dict[str, Any] | None = Field(
         default=None, description="Constrain output with response_format json_schema; validity is recorded"
     )
+    check_schema: dict[str, Any] | None = Field(
+        default=None, description="Only *check* outputs against this schema (no constraint), e.g. prompted JSON"
+    )
 
 
 class LoadSpec(Strict):
