@@ -1,0 +1,4011 @@
+{
+ "n": 500,
+ "correct": 453,
+ "accuracy": 0.906,
+ "ci95_low": 0.8772348563464386,
+ "ci95_high": 0.928573953406468,
+ "unparsed": 29,
+ "errors": 0,
+ "rows": [
+  {
+   "id": "Mercury_7068513",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "TIMSS_2003_8_pg94",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_415081",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n**1."
+  },
+  {
+   "id": "LEAP_2007_8_10418",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7085225",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_183820",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the elemen"
+  },
+  {
+   "id": "Mercury_7213325",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_401666",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the goal. The objective "
+  },
+  {
+   "id": "Mercury_7042945",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_404894",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_SC_402103",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify an unsafe"
+  },
+  {
+   "id": "TIMSS_1995_8_L6",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MEA_2016_5_4",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the chara"
+  },
+  {
+   "id": "Mercury_417117",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to categorize the con"
+  },
+  {
+   "id": "Mercury_SC_415534",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the components of the se"
+  },
+  {
+   "id": "Mercury_SC_413549",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "**Step 1: Understand the relationship be"
+  },
+  {
+   "id": "Mercury_7034843",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7171570",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_401006",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_400500",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the set of"
+  },
+  {
+   "id": "Mercury_400880",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the change"
+  },
+  {
+   "id": "Mercury_7267715",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_LBS11003",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7264093",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the composition of coal."
+  },
+  {
+   "id": "Mercury_SC_406794",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_178325",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the best "
+  },
+  {
+   "id": "TAKS_2009_5_14",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_408324",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the initial state and pr"
+  },
+  {
+   "id": "ACTAAP_2010_7_14",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_402029",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "ACTAAP_2012_7_9",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "AIMS_2008_8_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7032498",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_412681",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "The gravitational force ($F_g$) between "
+  },
+  {
+   "id": "Mercury_7086660",
+   "pred": "A",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MCAS_1998_4_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7160563",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify an exampl"
+  },
+  {
+   "id": "Mercury_SC_405130",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "MCAS_2012_8_23640",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the source and destinati"
+  },
+  {
+   "id": "Mercury_SC_414274",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_SC_401792",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MDSA_2013_8_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the scenario. Two differ"
+  },
+  {
+   "id": "LEAP_2007_4_10280",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "LEAP_2002_4_10247",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7271670",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the role of oceans in cl"
+  },
+  {
+   "id": "MEA_2016_8_12",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the best e"
+  },
+  {
+   "id": "Mercury_401728",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify a correct "
+  },
+  {
+   "id": "Mercury_SC_410837",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the given information. T"
+  },
+  {
+   "id": "OHAT_2010_8_8",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the r"
+  },
+  {
+   "id": "Mercury_7024798",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7161315",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7082320",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "Mercury_7212328",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MEA_2016_8_15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the list w"
+  },
+  {
+   "id": "Mercury_7217298",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7111178",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "Mercury_401912",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step solution:\n\n1.  **"
+  },
+  {
+   "id": "Mercury_416380",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7175875",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_412374",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MCAS_2004_9_5",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_417460",
+   "pred": "B",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7142520",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_400063",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Analyze the process described. T"
+  },
+  {
+   "id": "Mercury_7114100",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_416683",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7228725",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the core concept. The qu"
+  },
+  {
+   "id": "Mercury_7271758",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7116183",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MEA_2013_8_15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "ACTAAP_2014_7_5",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7230090",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the most "
+  },
+  {
+   "id": "LEAP_2011_8_10434",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "TAKS_2009_8_32",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MCAS_2006_9_12",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "TIMSS_2007_8_pg60",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_409295",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7200340",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7270113",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MCAS_2005_8_7",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "MCAS_2006_9_4",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_8_35",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7172708",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MEA_2010_8_18",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400046",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7106593",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "ACTAAP_2007_7_36",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7084665",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_8_19",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the factor"
+  },
+  {
+   "id": "Mercury_SC_405296",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MCAS_2006_9_17-v1",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "OHAT_2009_8_36",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_405357",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_400084",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "The given unbalanced equation is:\n$$\\tex"
+  },
+  {
+   "id": "MCAS_2006_9_43",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n**1."
+  },
+  {
+   "id": "Mercury_7057680",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "MCAS_2014_5_7",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_413542",
+   "pred": "D",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "The user is asking for the best step to "
+  },
+  {
+   "id": "Mercury_409114",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n**1."
+  },
+  {
+   "id": "Mercury_402539",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7210473",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the description. The des"
+  },
+  {
+   "id": "Mercury_7013965",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the most "
+  },
+  {
+   "id": "Mercury_7081603",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7034808",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7263183",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the function of the cell"
+  },
+  {
+   "id": "Mercury_411071",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n1.  "
+  },
+  {
+   "id": "Mercury_7252245",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_402502",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the group"
+  },
+  {
+   "id": "Mercury_SC_407228",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_414156",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_413299",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7131845",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the subject and context."
+  },
+  {
+   "id": "Mercury_SC_LBS10902",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the characteristics of f"
+  },
+  {
+   "id": "Mercury_7133245",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7189000",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7250058",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7214008",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7216423",
+   "pred": "C",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7058415",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_11",
+   "pred": "4",
+   "answer": "4",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "NAEP_2000_8_S11+11",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_402120",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the goal. The objective "
+  },
+  {
+   "id": "Mercury_7042648",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MDSA_2008_8_27",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7106628",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks which factor is most l"
+  },
+  {
+   "id": "Mercury_7041650",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_410602",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The problem asks for the time it takes f"
+  },
+  {
+   "id": "MSA_2015_8_30",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_417593",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_402121",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7211033",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7221655",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7221078",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_416529",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_407400",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the very "
+  },
+  {
+   "id": "Mercury_7201740",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_406625",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7132405",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_414352",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7164623",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7123393",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the chara"
+  },
+  {
+   "id": "MEA_2013_5_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "Mercury_402547",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7016800",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Here's a step-by-step analysis to determ"
+  },
+  {
+   "id": "Mercury_7068635",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7245840",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_SC_401587",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_403907",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7234605",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the m"
+  },
+  {
+   "id": "Mercury_7206938",
+   "pred": "D",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_406855",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks for the best way to mo"
+  },
+  {
+   "id": "Mercury_SC_400162",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks for the reason why usi"
+  },
+  {
+   "id": "AKDE&ED_2008_8_48",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MCAS_2006_8_12",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the most "
+  },
+  {
+   "id": "ACTAAP_2014_7_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7132020",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the components of an ato"
+  },
+  {
+   "id": "MCAS_2001_5_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7143010",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "VASoL_2009_3_22",
+   "pred": "B",
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7206395",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7097493",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the initial state and th"
+  },
+  {
+   "id": "Mercury_7168823",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_LBS11009",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7138390",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_401783",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_414339",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the initial condition an"
+  },
+  {
+   "id": "Mercury_183033",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_404609",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7093048",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the source of the proble"
+  },
+  {
+   "id": "Mercury_7215828",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7005880",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7017045",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to answe"
+  },
+  {
+   "id": "Mercury_SC_405481",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MDSA_2009_5_39",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "NCEOGA_2013_8_57",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "The question asks what evidence would in"
+  },
+  {
+   "id": "Mercury_409645",
+   "pred": "B",
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_4_28",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "WASL_2004_8_17",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7111125",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_400440",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The reaction shown is between hydrochlor"
+  },
+  {
+   "id": "AKDE&ED_2008_4_19",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_42",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks about the factors that"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_1",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7102323",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7182210",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_400884",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step derivation:\n\n1."
+  },
+  {
+   "id": "NCEOGA_2013_8_15",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_LBS10302",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks for the time it takes "
+  },
+  {
+   "id": "Mercury_7128923",
+   "pred": "D",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7230073",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify an item w"
+  },
+  {
+   "id": "Mercury_411224",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n**1."
+  },
+  {
+   "id": "NCEOGA_2013_8_42",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "TIMSS_1995_8_J1",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks for the best descripti"
+  },
+  {
+   "id": "Mercury_7218015",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "MCAS_2001_5_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "VASoL_2009_3_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the materials and the ac"
+  },
+  {
+   "id": "Mercury_7239383",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_408748",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "ACTAAP_2010_5_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "Mercury_408922",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks how the scientific pro"
+  },
+  {
+   "id": "Mercury_7071523",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking about the necessary s"
+  },
+  {
+   "id": "Mercury_407019",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_184730",
+   "pred": "A",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "TAKS_2009_5_26",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_SC_402981",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the function of a labora"
+  },
+  {
+   "id": "Mercury_SC_407592",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks Roy to identify a sour"
+  },
+  {
+   "id": "Mercury_7033828",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The goal i"
+  },
+  {
+   "id": "Mercury_180005",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "VASoL_2007_5_21",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify which of t"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_8_42",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "**Step 1: Identify the relevant physical"
+  },
+  {
+   "id": "Mercury_SC_400012",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7029558",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7283430",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the correc"
+  },
+  {
+   "id": "MEA_2014_5_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MDSA_2008_8_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "MEA_2011_8_13",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_LBS10265",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n1.  "
+  },
+  {
+   "id": "Mercury_416638",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the organisms and the pr"
+  },
+  {
+   "id": "MDSA_2009_5_25",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7188195",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7064575",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "NYSEDREGENTS_2015_8_3",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7116323",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_406482",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_416633",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify which comp"
+  },
+  {
+   "id": "Mercury_7109463",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_402984",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7123358",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7032620",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The question describes a characteristic "
+  },
+  {
+   "id": "MCAS_2000_4_36",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_406136",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7159810",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_407382",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_415422",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400985",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_4",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to answe"
+  },
+  {
+   "id": "TIMSS_2003_8_pg47",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of each "
+  },
+  {
+   "id": "Mercury_403234",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "Mercury_7203473",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_401361",
+   "pred": "A",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_401426",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the observation. The stu"
+  },
+  {
+   "id": "Mercury_7223493",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_SC_406720",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking for the most likely f"
+  },
+  {
+   "id": "Mercury_7199028",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_402057",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "**Step 1: Analyze the scenario.**\nThe sc"
+  },
+  {
+   "id": "Mercury_402563",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step thought process"
+  },
+  {
+   "id": "MEA_2010_8_15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the proces"
+  },
+  {
+   "id": "Mercury_7212818",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MCAS_2000_4_26",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7252753",
+   "pred": "B",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "The user is asking about the stimulus th"
+  },
+  {
+   "id": "Mercury_LBS10610",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7180810",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7130778",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_400887",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n**1."
+  },
+  {
+   "id": "Mercury_175840",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_417150",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "OHAT_2010_5_18",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The goal of the experiment is to test th"
+  },
+  {
+   "id": "Mercury_7011323",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the materials and the pr"
+  },
+  {
+   "id": "MDSA_2009_8_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks for the period of rota"
+  },
+  {
+   "id": "Mercury_SC_400590",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_401357",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "The question asks to identify the proces"
+  },
+  {
+   "id": "Mercury_404435",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7141610",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_401926",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "LEAP__4_10225",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400059",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the initial condition. T"
+  },
+  {
+   "id": "Mercury_7032515",
+   "pred": "C",
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_405947",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here's a step-by-step analysis of the qu"
+  },
+  {
+   "id": "Mercury_7030555",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "Mercury_SC_400383",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_SC_LBS10597",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400142",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the situation. A liquid "
+  },
+  {
+   "id": "Mercury_SC_415406",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The question describes two processes rel"
+  },
+  {
+   "id": "MEA_2013_8_18",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "MCAS_2004_8_23",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n**1."
+  },
+  {
+   "id": "Mercury_LBS10151",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_416167",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_405726",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_402282",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7192798",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "LEAP__7_10348",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the stati"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_4_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_4_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the properties of each s"
+  },
+  {
+   "id": "Mercury_7082845",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_417138",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7123078",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7217368",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_410963",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify which stat"
+  },
+  {
+   "id": "Mercury_400877",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step derivation:\n\n1."
+  },
+  {
+   "id": "Mercury_SC_405640",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "VASoL_2009_3_8",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_407262",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_7082023",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_416181",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify a food gr"
+  },
+  {
+   "id": "Mercury_7027720",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "MCAS_2012_5_23625",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "TIMSS_1995_8_R2",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400578",
+   "pred": null,
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "LEAP_2000_8_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_402994",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "MCAS_1999_8_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7108990",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "ACTAAP_2013_7_16",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400853",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_406458",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "ACTAAP_2008_7_4",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step derivation:\n\n1."
+  },
+  {
+   "id": "MCAS_2013_8_29416",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7216965",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7187373",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks which adaptation, comm"
+  },
+  {
+   "id": "Mercury_7082758",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_412673",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7027405",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the best "
+  },
+  {
+   "id": "Mercury_7205800",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "VASoL_2008_5_10",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400401",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7150343",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7085278",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_400443",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step derivation:\n\n**"
+  },
+  {
+   "id": "Mercury_SC_401265",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "ACTAAP_2011_5_8",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "**Step 1: Analyze the question.**\nThe qu"
+  },
+  {
+   "id": "MDSA_2009_4_1",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7214778",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The student is designing an investigatio"
+  },
+  {
+   "id": "Mercury_SC_400062",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the term \"plateau.\"\nA pl"
+  },
+  {
+   "id": "Mercury_7030468",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7174213",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400402",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the f"
+  },
+  {
+   "id": "AKDE&ED_2008_4_35",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_400699",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_407613",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the f"
+  },
+  {
+   "id": "Mercury_SC_401585",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks during which season th"
+  },
+  {
+   "id": "Mercury_7236740",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n1.  "
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_34",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "**Step-by-step derivation:**\n\n1.  **Anal"
+  },
+  {
+   "id": "OHAT_2007_5_15",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step thought process t"
+  },
+  {
+   "id": "Mercury_416671",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_24",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "AIMS_2008_8_6",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7271513",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "ACTAAP_2015_7_9",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_406835",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking for the best practice"
+  },
+  {
+   "id": "Mercury_7084228",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the scenario. The questi"
+  },
+  {
+   "id": "MCAS_2006_9_30",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the most "
+  },
+  {
+   "id": "TIMSS_2003_8_pg87",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step derivation to sol"
+  },
+  {
+   "id": "Mercury_SC_406623",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_400233",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_401360",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7198468",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_416576",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7040985",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "ACTAAP_2007_7_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7216300",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify which meth"
+  },
+  {
+   "id": "OHAT_2007_8_24",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "VASoL_2010_3_22",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_402164",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking about the data collec"
+  },
+  {
+   "id": "MCAS_1998_4_13",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the process described. T"
+  },
+  {
+   "id": "Mercury_416230",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "The question asks to order different typ"
+  },
+  {
+   "id": "AKDE&ED_2008_8_3",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7099190",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "ACTAAP_2007_7_31",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "MDSA_2012_8_6",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the scenario. The scenar"
+  },
+  {
+   "id": "Mercury_7270393",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400697",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7182245",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "MCAS_2014_8_6",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7206553",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7212888",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_401147",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7040775",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Photosynthesis is the process used by pl"
+  },
+  {
+   "id": "VASoL_2007_5_22",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the **man"
+  },
+  {
+   "id": "MEAP_2005_8_45",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "MSA_2013_5_11",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7163818",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "AKDE&ED_2008_8_34",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_405931",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "**Step 1: Analyze the scenario.**\nThe sc"
+  },
+  {
+   "id": "Mercury_7282083",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "AKDE&ED_2012_8_20",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "NYSEDREGENTS_2013_8_10",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the function of the dial"
+  },
+  {
+   "id": "Mercury_7142415",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_189053",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7268328",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "MCAS_2003_5_33",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_407710",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the scenario. Brianna ha"
+  },
+  {
+   "id": "Mercury_7267523",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "NCEOGA_2013_8_5",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_408384",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_416593",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "MEA_2013_5_15",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step derivation:\n\n1.  "
+  },
+  {
+   "id": "Mercury_401763",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step derivation:\n\n**"
+  },
+  {
+   "id": "Mercury_175560",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "VASoL_2008_3_16",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_409030",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking which element of the "
+  },
+  {
+   "id": "Mercury_7235638",
+   "pred": "B",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7270165",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "MCAS_2013_5_29411",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_400091",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step solution:\n\n1.  **"
+  },
+  {
+   "id": "MSA_2012_5_23",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "TIMSS_2007_8_pg109",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The goal i"
+  },
+  {
+   "id": "Mercury_7206378",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking for the most accurate"
+  },
+  {
+   "id": "Mercury_7094290",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "The question describes the ancient belie"
+  },
+  {
+   "id": "Mercury_7218400",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The goal of the students is to reduce th"
+  },
+  {
+   "id": "Mercury_7215670",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question describes a scenario where "
+  },
+  {
+   "id": "Mercury_SC_416168",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MCAS_2000_8_29",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The process of solving technological pro"
+  },
+  {
+   "id": "Mercury_404132",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "The question asks to identify a correctl"
+  },
+  {
+   "id": "Mercury_SC_401185",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_415272",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7130655",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_188528",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_184975",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "The question asks which of the listed co"
+  },
+  {
+   "id": "Mercury_SC_402276",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_406710",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the prima"
+  },
+  {
+   "id": "Mercury_7159320",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MCAS_2004_9_21-v1",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_415719",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_401272",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks about the most likely "
+  },
+  {
+   "id": "MCAS_1999_4_26",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks for an example of a so"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_4_9",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_402341",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7131530",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the e"
+  },
+  {
+   "id": "Mercury_SC_408706",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_183890",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_407260",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "MCAS_2004_8_3",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "VASoL_2008_3_25",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the goal. The goal is to"
+  },
+  {
+   "id": "Mercury_411732",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MCAS_2009_5_6518",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to identify the phase "
+  },
+  {
+   "id": "Mercury_7263060",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_401168",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks what is used to stop t"
+  },
+  {
+   "id": "MCAS_2009_8_17",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Photosynthesis is the process used by pl"
+  },
+  {
+   "id": "TIMSS_1995_8_Q15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7159023",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_LBS10027",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7227710",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the observation. The res"
+  },
+  {
+   "id": "MCAS_2006_9_44",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "Mercury_7228358",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "VASoL_2007_3_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7072380",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400182",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MDSA_2010_4_20",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "MDSA_2013_8_40",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7247013",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7081743",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks what action would *bes"
+  },
+  {
+   "id": "Mercury_7234378",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7043820",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the type "
+  },
+  {
+   "id": "Mercury_7249708",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "VASoL_2009_3_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7210245",
+   "pred": "B",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_180828",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_7016258",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "MCAS_2006_8_24",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "Mercury_SC_402985",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Analyze the function of a rain g"
+  },
+  {
+   "id": "Mercury_415086",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is the step-by-step solution:\n\n1.  "
+  },
+  {
+   "id": "MCAS_2014_8_20",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the p"
+  },
+  {
+   "id": "Mercury_416646",
+   "pred": "D",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to answe"
+  },
+  {
+   "id": "Mercury_7009993",
+   "pred": null,
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_408631",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "ACTAAP_2010_7_3",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "LEAP_2009_8_10430",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the best "
+  },
+  {
+   "id": "Mercury_7214340",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_175385",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of what "
+  },
+  {
+   "id": "MCAS_2002_8_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the h"
+  },
+  {
+   "id": "Mercury_7082443",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the request. The goal is"
+  },
+  {
+   "id": "Mercury_7107328",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_SC_415006",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks to find an analogy for"
+  },
+  {
+   "id": "ACTAAP_2010_5_7",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "ACTAAP_2009_5_8",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the question. The questi"
+  },
+  {
+   "id": "Mercury_7138460",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_405778",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_408763",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify a plant a"
+  },
+  {
+   "id": "Mercury_7212993",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7004743",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_401295",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7093153",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_7017710",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7173583",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7222793",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking for a method to minim"
+  },
+  {
+   "id": "MDSA_2011_5_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks for the presentation t"
+  },
+  {
+   "id": "Mercury_7283833",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_SC_401788",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_405136",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_7005005",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "MCAS_2003_5_14",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7086608",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "MDSA_2009_4_34",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the s"
+  },
+  {
+   "id": "NAEP_2000_8_S11+10",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400404",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of each "
+  },
+  {
+   "id": "Mercury_7116235",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the q"
+  },
+  {
+   "id": "Mercury_7218365",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify the most "
+  },
+  {
+   "id": "Mercury_400407",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis of the o"
+  },
+  {
+   "id": "Mercury_7081480",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_402348",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_7106698",
+   "pred": "B",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "FCAT_2008_5_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking to identify an analog"
+  },
+  {
+   "id": "Mercury_SC_410971",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Analyze the premise. The premise"
+  },
+  {
+   "id": "Mercury_7136063",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The user is asking about the geological "
+  },
+  {
+   "id": "OHAT_2007_8_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_SC_400708",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks about the origin of pe"
+  },
+  {
+   "id": "Mercury_SC_413439",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks which investigation wi"
+  },
+  {
+   "id": "Mercury_402216",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  },
+  {
+   "id": "Mercury_406550",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "**Step 1: Analyze the relationship descr"
+  },
+  {
+   "id": "AKDE&ED_2008_8_7",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Here is a step-by-step analysis to deter"
+  }
+ ]
+}
