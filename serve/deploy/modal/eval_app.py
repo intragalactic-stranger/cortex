@@ -96,11 +96,8 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, tok_rev: str,
     eng.start(art)
     try:
         base = "http://127.0.0.1:8000"
-        tok = (
-            f"tokenizer={tokenizer},tokenizer_revision={tok_rev}"
-            if not tokenizer.startswith("/")
-            else f"tokenizer={tokenizer}"
-        )
+        # local checkpoints carry their own tokenizer files; hub models use the base repo's tokenizer
+        tok = f"tokenizer={model if model.startswith('/') else tokenizer}"
         common = f"model=model,{tok},num_concurrent=32,max_retries=3,timeout=600"
         _lm_eval("local-completions", f"{common},base_url={base}/v1/completions",
                  out / "loglik", "arc_challenge,wikitext", None)  # fmt: skip
