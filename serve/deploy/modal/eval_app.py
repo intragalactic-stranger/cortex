@@ -28,6 +28,7 @@ VLLM_IMAGE = "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d
 LM_EVAL = "lm_eval[api,ifeval]==0.4.13"
 MMLU_PRO_LIMIT = 1000  # leaderboard_mmlu_pro is one task of 12,032 items: first 1,000
 BFSI_HELDOUT_N = 200
+ARC_GEN_N = 500
 RATES = {"L4": 0.80, "L40S": 1.95, "H100": 3.95}  # `modal billing rates`, 2026-11-24
 MAX_MINUTES = 120
 
@@ -113,6 +114,15 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
         if "arcchat" in want:  # generative ARC (chat template): for models whose raw-text likelihoods are degenerate
             _lm_eval("local-chat-completions", f"{common},base_url={base}/v1/chat/completions", out / "arcchat",
                      "arc_challenge_chat", None, quick)  # fmt: skip
+        if "arcgen" in want:  # reasoning-first ARC with our own scorer (Wilson CI), same rules for every model
+            import asyncio
+
+            from cortex_serve.servebench.quality.arc import evaluate as arc_eval
+
+            res = asyncio.run(arc_eval(base, "openai", "model", quick or ARC_GEN_N, seed=1234, concurrency=32,
+                                       cot=True, max_tokens=768))  # fmt: skip
+            (out / "arcgen").mkdir(exist_ok=True)
+            (out / "arcgen" / "arcgen.json").write_text(json.dumps(res, indent=1))
         domain = _domain_ppl(base, quick or BFSI_HELDOUT_N) if "domain" in want else None
         (out / "engine.log").write_text(eng.logs())
     finally:

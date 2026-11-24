@@ -31,9 +31,14 @@ def load(name: str) -> dict[str, tuple[float, float | None]]:
                     continue
                 se = vals.get(key.replace(",", "_stderr,", 1))
                 out[col] = (vals[key], se if isinstance(se, float) else None)
-    man = ROOT / name / "eval_manifest.json"
-    if man.exists():
-        out["bfsi_ppl"] = (json.loads(man.read_text())["domain"]["bfsi_heldout_ppl"], None)
+    for man in sorted((ROOT / name).glob("eval_manifest*.json")):
+        dom = json.loads(man.read_text()).get("domain")
+        if dom:
+            out["bfsi_ppl"] = (dom["bfsi_heldout_ppl"], None)
+    arc = ROOT / name / "arcgen" / "arcgen.json"
+    if arc.exists():
+        a = json.loads(arc.read_text())
+        out["arc_cot"] = (a["accuracy"], (a["ci95_high"] - a["ci95_low"]) / 2 / 1.96)
     return out
 
 
@@ -41,7 +46,7 @@ def main() -> None:
     names = sorted(p.name for p in ROOT.iterdir() if p.is_dir())
     data = {n: load(n) for n in names}
     bases = {"qwen3-4b": "qwen3-4b-bf16", "gemma4-e4b": "gemma4-e4b-bf16"}  # compare within a model family only
-    cols = [*METRICS, "bfsi_ppl"]
+    cols = [c for c in METRICS if c != "arc_challenge_chat"] + ["arc_cot", "bfsi_ppl"]
     sep = " | " if "--md" in sys.argv else "  "
     print(sep.join(["model", *cols]))
     for n in names:

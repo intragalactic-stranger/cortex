@@ -196,3 +196,12 @@ def test_real_prompts_respect_length_and_seed() -> None:
     a = real_prompts(rows, wl, Tok(), 3, seed=1)
     assert len(a) == 3 and all(r.input_tokens <= 4 for r in a)
     assert [r.prompt for r in a] == [r.prompt for r in real_prompts(rows, wl, Tok(), 3, seed=1)]
+
+
+def test_parse_final_answer() -> None:
+    from cortex_serve.servebench.quality.arc import parse_final
+
+    assert parse_final("Reasoning... B looks wrong.\nAnswer: C", ["A", "B", "C", "D"]) == "C"
+    assert parse_final("**Answer: (D)**", ["A", "B", "C", "D"]) == "D"
+    assert parse_final("The answer is B. Wait, Answer: A", ["A", "B", "C", "D"]) == "A"
+    assert parse_final("no verdict here", ["A", "B"]) is None
