@@ -12,13 +12,13 @@
   "engine_image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
   "lm_eval": "lm_eval[api,ifeval]==0.4.13",
   "gpu": "NVIDIA L40S, 46068 MiB",
-  "wall_s": 590,
+  "wall_s": 580,
   "git": {
-    "sha": "b9b2e78f1a56cbb41935208b904197bc27fbd3de",
+    "sha": "6b19f6637807cc9cfc5977e8a8fae3e4663d528a",
     "dirty": false
   },
   "domain": {
-    "bfsi_heldout_ppl": 104.73588020672852,
+    "bfsi_heldout_ppl": 104.65114361081997,
     "bfsi_heldout_tokens": 83460.0,
     "bfsi_heldout_sections": 200.0
   },
