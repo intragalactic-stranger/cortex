@@ -41,8 +41,8 @@ slo:
 repeats: 3
 hardware:
   device: modal-h100
-  gpu: H100
+  gpu: 'H100 (exact: Modal ''H100!'' prevents an automatic H200 upgrade)'
 budget:
-  gpu: H100
+  gpu: H100!
   usd_per_hour: 3.95
   max_minutes: 30
