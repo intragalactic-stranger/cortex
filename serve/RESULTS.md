@@ -198,3 +198,83 @@ Weights: memcalc 7.49 GiB vs vLLM "Model loading took 7.64 GiB" (−2%). KV byte
 | 16 | 1,301 / 1,323 | 41.9 / 42.0 | 353 / 359 |
 
 **The harness agrees with the vendor's benchmark within 1–7%** (`results/m2-crosscheck/20261124T091327Z`). Differences are within run-to-run noise (vllm bench uses random token IDs on `/v1/completions`; servebench uses tokenizer-verified text on chat completions).
+
+---
+
+## M3: Quantization artifacts, quality (E3) and speed (E2), measured
+
+**Base model:** Qwen3-4B-Instruct-2507 @ `cdbee75f`. **Quantizer:** llm-compressor 0.15.0 / compressed-tensors 0.20.1 in its own Modal image (it pins compressed-tensors 0.20.1; vLLM 0.32.0 pins 0.17.0). **GGUF:** llama.cpp `full-cuda-b12110`. Calibration: 512 samples × 2,048 tokens, generic = UltraChat 200k (`8049631c`), BFSI = eCFR Titles 12 + 17 (`Azzindani/US_Regulation_ECFR_20260101` @ `04148fee`), split by CFR part so the BFSI held-out set never overlaps calibration (D-026).
+**Quality (vLLM 0.32.0 + lm-eval 0.4.13, same container):** ARC-Challenge (1,172, acc_norm), HellaSwag (first 2,000, acc_norm), MMLU-Pro leaderboard variant (first 1,000, logprob MC), GSM8K (1,319, 5-shot, strict + flexible extract), IFEval (541, prompt-level strict), WikiText word perplexity, BFSI held-out perplexity (200 sections). Every variant sees the same items; ± = 95% CI from lm-eval's standard error.
+**Runs:** `results/quantize/*/cortex_manifest.json`, `results/quality-gpu/<variant>/`, `results/quality-gguf-gpu/`, `results/e2-{l4,h100}-*`.
+
+### 1. Artifacts
+
+| Variant | Method | Size | Time (GPU) |
+|---|---|---|---|
+| bf16 | original | 7.49 GiB | — |
+| FP8-dynamic | FP8 E4M3 W per-channel, A per-token dynamic (data-free) | 4.12 GiB | 18 s (L4) |
+| W8A8-INT8 | SmoothQuant 0.8 + GPTQ int8 | 4.12 GiB | 22 min (L4) |
+| W4A16 GPTQ g128 | GPTQ int4, group 128, generic calib | 2.48 GiB | 16 min (L4) |
+| W4A16 GPTQ g128 BFSI | same, BFSI calibration | 2.48 GiB | 12 min (L4) |
+| W4A16 AWQ | AWQ scales + RTN int4 asym g128 | 2.49 GiB | 19 min (L40S; OOM on L4) |
+| Qwen official FP8 | block-128 FP8 (Qwen) | 5.19 GB | — |
+| GGUF Q8_0 / Q5_K_M / Q4_K_M (± imatrix generic / BFSI) | llama.cpp | 3.99 / 2.69 / 2.33 GiB | minutes (CPU) |
+
+### 2. Quality vs bf16 (vLLM formats)
+
+| Variant | ARC | HellaSwag | MMLU-Pro | GSM8K strict / flex | IFEval | WikiText PPL | BFSI PPL |
+|---|---|---|---|---|---|---|---|
+| bf16 | 58.3 ±2.8 | 58.5 ±2.2 | 34.5 ±2.9 | 72.8 / 78.8 | 83.4 ±3.1 | 14.27 | 5.97 |
+| FP8-dynamic (ours) | +0.4 | −0.3 | −0.4 | +1.3 / +0.8 | −2.0 | +1.3% | +0.2% |
+| FP8 official (Qwen) | +0.8 | −0.1 | −0.8 | −0.7 / +0.8 | +0.4 | +0.1% | +0.2% |
+| W8A8-INT8 | +0.7 | +0.2 | 0.0 | −1.7 / +0.5 | −0.9 | +0.5% | +0.2% |
+| W4A16 AWQ | −1.6 | −0.4 | −1.9 | +3.2 / +1.7 | −0.7 | +4.7% | +5.6% |
+| W4A16 GPTQ (generic) | +0.1 | −1.6 | −2.3 | +0.7 / +0.8 | −0.9 | +5.5% | +7.3% |
+| W4A16 GPTQ (BFSI calib) | +0.4 | −0.9 | −2.8 | **−38.4** / −3.2 | −3.9 | +8.3% | **+3.0%** |
+
+**Findings**
+- **8-bit (FP8 or INT8) is quality-neutral:** every task within its CI, perplexity +0.1–1.3%. Our 18-second data-free FP8 matches Qwen's official FP8.
+- **4-bit costs a measurable but small amount:** perplexity +4.7–5.5%, MMLU-Pro −1.9 to −2.3 (inside the CI), reasoning and instruction tasks unchanged within noise. AWQ ≥ GPTQ on most metrics, all inside the CIs.
+- **Domain-only calibration is a trade-off, not a free win.** BFSI calibration halves the in-domain perplexity damage (+3.0% vs +7.3%) but the model stops following the few-shot answer format: only 45% of GSM8K answers end in `#### N` (80% with generic calibration), so strict GSM8K drops 38 points while arithmetic itself (flexible extract) drops 3.2. IFEval −3.9 agrees. Recommendation: calibrate on a domain + general-chat mix.
+
+### 3. GGUF quality (llama.cpp; KL divergence vs the bf16 GGUF on 100 WikiText-2 chunks, PPL on all chunks)
+
+| Variant | Size | Mean KLD | Same top-1 | WikiText PPL | BFSI PPL |
+|---|---|---|---|---|---|
+| bf16 | 7.50 GiB | — | — | 10.338 | 5.444 |
+| Q8_0 | 3.99 GiB | 0.0012 | 98.2% | +0.1% | +0.2% |
+| Q5_K_M | 2.69 GiB | 0.0115 | 94.8% | +1.1% | +0.7% |
+| Q4_K_M | 2.33 GiB | 0.0366 | 91.7% | +2.0% | +2.9% |
+| Q4_K_M + imatrix (generic) | 2.33 GiB | 0.0250 | 92.4% | +2.9% | +2.4% |
+| Q4_K_M + imatrix (BFSI) | 2.33 GiB | 0.0255 | 92.5% | +1.8% | +2.0% |
+
+- **Each step down in bits roughly triples KL divergence** (8 → 5 → 4 bit); **an importance matrix cuts 4-bit KLD by ~31%** at the same size. Generic and BFSI imatrices are equivalent on KLD; BFSI is slightly better on BFSI text. PPL and KLD disagree on the generic imatrix (PPL slightly worse): KLD against the parent is the more reliable damage measure.
+
+### 4. E2 speed: what the bytes buy (vLLM, chat-balanced 512/256)
+
+| Format | L4 TPOT @1 (ms) | L4 goodput @4 (req/s) | L4 tok/s @64 | H100 TPOT @1 (ms) | H100 goodput @64 (req/s) | H100 tok/s @128 |
+|---|---|---|---|---|---|---|
+| bf16 | 33.3 | 0.43 | 792 | 4.15 | 27.2 | 10,079 |
+| FP8-dynamic | 21.1 | 0.67 | 996 | 3.12 | 35.3 | 11,710 |
+| FP8 official | 19.1 | 0.71 | 880 | 3.20 | 35.7 | 11,796 |
+| W8A8-INT8 | 20.8 | 0.68 | 994 | 3.30 | 35.1 | 11,673 |
+| W4A16 GPTQ | **12.2** | **1.07** | **1,045** | 3.66 | 25.1 | 9,619 |
+| W4A16 AWQ | 12.3 | 1.06 | 1,038 | — | — | — |
+
+llama.cpp on L4 (1 user, TPOT ms): bf16 33.2 · Q8_0 19.8 · Q5_K_M 14.3 · Q4_K_M 12.7 (imatrix: identical speed). At 16 users: 247 / 312 / 349 / 365 tok/s.
+
+**Findings**
+- **The best format depends on the GPU.** On the L4 (300 GB/s) decode stays memory-bound even at 64 users, so 4-bit wins everywhere: 2.7× faster per token at 1 user, 2.5× goodput at 4 users, +32% throughput at 64. On the H100 (3.35 TB/s) a busy server becomes compute-bound: **W4A16 is faster at 1 user but slower than bf16 at 64–128 users** (weight-only int4 must dequantize to bf16 before every matmul), while **FP8/INT8 (true 8-bit compute) give +30% goodput** at 64 users.
+- **Qwen's official block-FP8 has worse TTFT on the L4** (1.55 s vs 0.99 s p95 at 16 users): sm_89 has no CUTLASS block-FP8 path (research M3 §6). On the H100 it equals our FP8.
+- The engine-reported KV capacity grows as weights shrink (H100: 444K tokens bf16 → 469K FP8 → 481K W4A16).
+
+### 5. Gemma 4 E2B perplexity anomaly from M1: resolved (llama.cpp, WikiText-2, ctx 512)
+
+| Model | PPL, M1 setting (20 chunks) | PPL, all chunks | KLD vs own bf16 parent | Same top-1 |
+|---|---|---|---|---|
+| Google QAT checkpoint, bf16 (`…-qat-q4_0-unquantized`) | 61.7 | 54.0 | — | — |
+| Google QAT Q4_0 GGUF | 65.5 | 58.2 | 0.050 | 89.4% |
+| Original IT, bf16 | 213.7 | 185.4 | — | — |
+| unsloth IT Q8_0 | 213.4 | 185.4 | 0.0065 | 96.8% |
+
+**M1's "QAT 65 vs Q8_0 212" was never a quantization effect:** the QAT checkpoint is a different model whose raw-text perplexity is ~3.5× lower *before* quantization. Quantization damage measured against each model's own parent is normal (Q8_0 KLD 0.0065; QAT Q4_0 0.050). Lesson: compare quantization damage within one parent (KLD), never raw PPL across parents.
