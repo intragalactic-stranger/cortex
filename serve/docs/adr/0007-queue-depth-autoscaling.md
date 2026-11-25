@@ -48,14 +48,17 @@ takes the 15 s **mean** of the summed series. This removes the one-scrape spikes
 seconds of reaction time.
 
 ## Consequences
-+ The metric reflects what users feel. The timeline figure (`results/m5-autoscale/`) shows replicas following
-  queued demand and TTFT recovering after each scale-up.
++ The metric reflects what users feel. In the final ramp (`results/m5-autoscale/20261124T135406Z`) replicas
+  followed demand / slots exactly: 1 user → 1, 4 → 2, 6 → 3, then back to 1. TTFT did **not** return to
+  the SLO at 3 replicas on this box (shared CPU and uneven balancing; M5 report §4.1). More replicas only help
+  if they add capacity and actually receive the work.
 + It is engine-agnostic: the same pattern works with vLLM's `num_requests_waiting` + `num_requests_running`.
 − The reaction time includes the scrape interval (5 s), the 15 s window, the HPA sync period (15 s, k3s default),
   and pod start (mmap'd weights from the node page cache plus readiness). Scaling is slower than queue
   growth for short bursts; for bursty traffic a higher `minReplicas` is the fix, not a faster metric.
 - One node only: a new replica adds CPU threads until the 4 vCPUs are used, so the pool
   stops at 3. On a real cluster the same object would add nodes through the cluster autoscaler.
-− Load balancing across replicas uses the ClusterIP Service (connection-level). With long-lived
-  keep-alive connections from the gateway, new replicas fill up only as new connections are opened.
-  The per-pod series in the run directory show how even the load was.
+− Load balancing across replicas uses the ClusterIP Service, which balances connections, not requests. With
+  the gateway's keep-alive connections, measured per-pod demand in the 6-user stage was 2.84 / 1.56 / 0.94
+  (`balance_260-415s.json`), so a queue persisted at full capacity. Queue-depth scaling needs queue-aware
+  routing to pay off: `gateway.backendConnectionClose` (opt-in, unmeasured) or an L7 endpoint picker.
