@@ -48,8 +48,8 @@ export function renderMarkdown(src: string, docPath: string): { html: string; he
         seen.set(id, n + 1);
         if (n) id = `${id}-${n}`;
         headings.push({ depth, text: inner.replace(/<[^>]+>/g, ""), id });
-        // h1 in a document becomes the page title outside; demote document headings by one level.
-        const level = Math.min(depth + 1, 6);
+        // The page supplies the h1, so document headings start at h2 (keeps heading order valid).
+        const level = Math.min(Math.max(depth, 2), 6);
         return `<h${level} id="${id}"><a class="anchor" href="#${id}" aria-hidden="true" tabindex="-1">#</a>${inner}</h${level}>\n`;
       },
       link(this: { parser: { parseInline(t: Tokens.Generic[]): string } }, { href, title, tokens }: Tokens.Link) {
@@ -63,7 +63,7 @@ export function renderMarkdown(src: string, docPath: string): { html: string; he
       },
       code({ text, lang }: Tokens.Code) {
         if (lang === "mermaid") {
-          const title = `Decision flow diagram ${++diagrams}`;
+          const title = `Diagram ${++diagrams}: ${headings.at(-1)?.text ?? "flowchart"}`;
           const fc = flowchartSvg(text, title);
           if (fc) {
             return (

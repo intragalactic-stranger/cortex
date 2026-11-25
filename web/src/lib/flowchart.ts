@@ -125,10 +125,29 @@ interface Box {
   node?: FNode;
 }
 
+const WRAP = 30; // characters per drawn line
+
+/** The lines drawn for a node: each label segment word-wrapped; the first segment is bold if there are several. */
+export function drawnLines(n: FNode): { text: string; strong: boolean }[] {
+  const out: { text: string; strong: boolean }[] = [];
+  n.lines.forEach((seg, si) => {
+    let cur = "";
+    for (const word of seg.split(/\s+/)) {
+      if (cur && cur.length + 1 + word.length > WRAP) {
+        out.push({ text: cur, strong: si === 0 && n.lines.length > 1 });
+        cur = word;
+      } else cur = cur ? `${cur} ${word}` : word;
+    }
+    if (cur) out.push({ text: cur, strong: si === 0 && n.lines.length > 1 });
+  });
+  return out;
+}
+
 function size(n: FNode): [number, number] {
-  const longest = Math.max(...n.lines.map((l) => l.length));
+  const drawn = drawnLines(n);
+  const longest = Math.max(...drawn.map((l) => l.text.length));
   let w = Math.max(64, longest * CHAR_W + 2 * PAD_X);
-  let h = n.lines.length * LINE_H + 2 * PAD_Y;
+  let h = drawn.length * LINE_H + 2 * PAD_Y;
   if (n.shape === "decision") {
     w += 28;
     h += 6;
@@ -181,7 +200,9 @@ export function layout(fc: Flowchart): Layout {
   // Boxes, with dummy nodes on edges that span more than one layer.
   const boxes = new Map<string, Box>();
   for (const n of fc.nodes) {
-    const [w, h] = size(n);
+    // LR charts are laid out top-down with each box's width and height swapped, then transposed.
+    const [w0, h0] = size(n);
+    const [w, h] = fc.direction === "LR" ? [h0, w0] : [w0, h0];
     boxes.set(n.id, { id: n.id, w, h, x: 0, y: 0, layer: layer.get(n.id)!, dummy: false, node: n });
   }
   const chains: { edge: FEdge; ids: string[]; reversed: boolean }[] = [];
@@ -273,6 +294,14 @@ export function layout(fc: Flowchart): Layout {
     if (iter % 2 === 0) for (const l of layers.slice(1)) place(l, up);
     else for (const l of [...layers].reverse().slice(1)) place(l, down);
   }
+  // Pull every node toward all of its neighbours (above and below) so leaves and branch points do not drift
+  // apart; this keeps decision trees compact.
+  const both = new Map<string, string[]>(
+    [...boxes.keys()].map((id) => [id, [...(up.get(id) ?? []), ...(down.get(id) ?? [])]]),
+  );
+  for (let iter = 0; iter < 10; iter++) {
+    for (const l of iter % 2 === 0 ? layers : [...layers].reverse()) place(l, both);
+  }
   const all = [...boxes.values()];
   const minX = Math.min(...all.map((b) => b.x - b.w / 2));
   const margin = 8;
@@ -291,6 +320,11 @@ export function layout(fc: Flowchart): Layout {
     if (c.reversed) points.reverse();
     return { edge: c.edge, points };
   });
+  if (fc.direction === "LR") {
+    for (const b of all) [b.x, b.y, b.w, b.h] = [b.y, b.x, b.h, b.w];
+    for (const p of paths) p.points = p.points.map(([px, py]) => [py, px]);
+    return { width: height, height: width, boxes: all.filter((b) => !b.dummy), paths };
+  }
   return { width, height, boxes: all.filter((b) => !b.dummy), paths };
 }
 
@@ -320,13 +354,18 @@ function shapeSvg(b: Box): string {
   return `<rect class="fc-node${b.layer === 0 ? " fc-start" : ""}" x="${x0}" y="${y0}" width="${b.w}" height="${b.h}" rx="${r}"/>`;
 }
 
-function pathD(points: Array<[number, number]>): string {
+function pathD(points: Array<[number, number]>, lr: boolean): string {
   let d = `M${points[0]![0]},${points[0]![1]}`;
   for (let i = 1; i < points.length; i++) {
     const [x0, y0] = points[i - 1]!;
     const [x1, y1] = points[i]!;
-    const my = (y0 + y1) / 2;
-    d += ` C${x0},${my} ${x1},${my} ${x1},${y1}`;
+    if (lr) {
+      const mx = (x0 + x1) / 2;
+      d += ` C${mx},${y0} ${mx},${y1} ${x1},${y1}`;
+    } else {
+      const my = (y0 + y1) / 2;
+      d += ` C${x0},${my} ${x1},${my} ${x1},${y1}`;
+    }
   }
   return d;
 }
@@ -334,7 +373,7 @@ function pathD(points: Array<[number, number]>): string {
 /** Render a Mermaid flowchart to an accessible SVG string, or null if unsupported. */
 export function flowchartSvg(src: string, title: string): { svg: string; outline: string } | null {
   const fc = parseFlowchart(src);
-  if (!fc || fc.direction !== "TD") return null; // the guide's chart is top-down; LR falls back to source
+  if (!fc) return null;
   const lay = layout(fc);
   const id = `fc-${Math.abs([...src].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7)).toString(36)}`;
   const parts: string[] = [];
@@ -345,16 +384,16 @@ export function flowchartSvg(src: string, title: string): { svg: string; outline
   );
   for (const p of lay.paths) {
     parts.push(
-      `<path class="fc-edge${p.edge.dotted ? " fc-dotted" : ""}" d="${pathD(p.points)}" marker-end="url(#${id}-a)"/>`,
+      `<path class="fc-edge${p.edge.dotted ? " fc-dotted" : ""}" d="${pathD(p.points, fc.direction === "LR")}" marker-end="url(#${id}-a)"/>`,
     );
   }
   for (const b of lay.boxes) {
     parts.push(`<g>${shapeSvg(b)}`);
-    const lines = b.node!.lines;
+    const lines = drawnLines(b.node!);
     const top = b.y - ((lines.length - 1) * LINE_H) / 2;
     lines.forEach((l, i) => {
       parts.push(
-        `<text class="fc-text${i === 0 && lines.length > 1 ? " fc-strong" : ""}" x="${b.x}" y="${top + i * LINE_H}" text-anchor="middle" dominant-baseline="central">${esc(l)}</text>`,
+        `<text class="fc-text${l.strong ? " fc-strong" : ""}" x="${b.x}" y="${top + i * LINE_H}" text-anchor="middle" dominant-baseline="central">${esc(l.text)}</text>`,
       );
     });
     parts.push("</g>");
@@ -364,7 +403,7 @@ export function flowchartSvg(src: string, title: string): { svg: string; outline
     if (!p.edge.label) continue;
     const [x0, y0] = p.points[0]!;
     const [x1, y1] = p.points[1]!;
-    const t = 0.42;
+    const t = p.points.length === 2 ? 0.62 : 0.5; // direct edges: nearer the target, so fan-out labels spread
     const lx = x0 + (x1 - x0) * t;
     const ly = y0 + (y1 - y0) * t;
     const w = p.edge.label.length * CHAR_W * 0.92 + 12;

@@ -1,4 +1,5 @@
-.PHONY: setup lint fmt typecheck test test-network check demo k3d-up k3d-down k3d-status helm-check up down
+.PHONY: setup lint fmt typecheck test test-network check demo k3d-up k3d-down k3d-status helm-check up down \
+	web-setup web-dev web-test web-build web-vectors
 
 setup:            ## install all workspace packages + dev tools, enable git hooks
 	uv sync --all-packages --locked
@@ -46,3 +47,19 @@ up:               ## single-command local stack without Kubernetes (docker compo
 
 down:             ## stop the compose stack
 	docker compose -f serve/deploy/compose/compose.yaml down
+
+# --- M6: results site (web/, static Next.js export) ------------------------------------------------
+web-setup:        ## install the site's locked npm dependencies
+	cd web && npm ci
+
+web-dev:          ## local dev server on http://localhost:3000
+	cd web && npm run dev
+
+web-test:         ## type check + unit tests (memcalc parity, markdown, flowchart)
+	cd web && npm run typecheck && npm test
+
+web-build:        ## static export into web/out
+	cd web && npm run build
+
+web-vectors:      ## regenerate the memcalc parity vectors from the Python tool
+	uv run python serve/scripts/memcalc_web_vectors.py

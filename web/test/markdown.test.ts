@@ -1,7 +1,7 @@
 // The decision guide is rendered at build time; its Mermaid flowchart becomes a static SVG.
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { flowchartSvg, layout, parseFlowchart } from "../src/lib/flowchart.ts";
+import { drawnLines, flowchartSvg, layout, parseFlowchart } from "../src/lib/flowchart.ts";
 import { renderMarkdown, resolveRepoLink } from "../src/lib/markdown.ts";
 import { readText, repoPath } from "../src/lib/repo.ts";
 
@@ -44,6 +44,22 @@ describe("flowchart", () => {
       }
     }
     assert.equal(lay.paths.length, 6);
+  });
+
+  it("lays out LR charts left to right", () => {
+    const lay = layout(parseFlowchart("flowchart LR\n A[one] --> B[two] --> C[three]")!);
+    const xs = lay.boxes.map((b) => b.x);
+    assert.ok(xs[0]! < xs[1]! && xs[1]! < xs[2]!, "x increases along the chain");
+    assert.equal(new Set(lay.boxes.map((b) => b.y)).size, 1, "one row");
+    assert.ok(lay.width > lay.height);
+  });
+
+  it("wraps long labels and keeps only the first segment bold", () => {
+    const fc = parseFlowchart("flowchart TD\n A[A fairly long first segment that wraps<br/>detail] --> B[x]")!;
+    const drawn = drawnLines(fc.nodes[0]!);
+    assert.ok(drawn.length >= 3);
+    assert.ok(drawn.every((l) => l.text.length <= 30));
+    assert.deepEqual(drawn.map((l) => l.strong), [...drawn.slice(0, -1).map(() => true), false]);
   });
 
   it("returns null for unsupported input", () => {
