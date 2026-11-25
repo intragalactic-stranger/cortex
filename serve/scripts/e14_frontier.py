@@ -87,18 +87,33 @@ def collect() -> pl.DataFrame:
         if pts.is_empty():
             continue
         for (engine, artifact), g in pts.group_by(["engine", "artifact"]):
-            per_level = g.group_by("level").agg(
-                pl.col("goodput_tok_s").median(), pl.col("output_throughput_tok_s").median(),
-                pl.col("tpot_p50_s").median(), pl.col("ttft_p95_s").median(),
-            ).sort("level")  # fmt: skip
+            per_level = (
+                g.group_by("level")
+                .agg(
+                    pl.col("goodput_tok_s").median(),
+                    pl.col("output_throughput_tok_s").median(),
+                    pl.col("tpot_p50_s").median(),
+                    pl.col("ttft_p95_s").median(),
+                )
+                .sort("level")
+            )
             best = per_level.sort("goodput_tok_s", descending=True).row(0, named=True)
-            rows.append({
-                "run": run, "stamp": man_path.parent.name, "engine": engine, "artifact": artifact, "gpu": gpu,
-                "usd_per_hour": price, "workload": wl, "best_level": best["level"],
-                "goodput_tok_s": best["goodput_tok_s"], "throughput_tok_s": best["output_throughput_tok_s"],
-                "tpot_p50_ms_1user": float(per_level["tpot_p50_s"][0]) * 1000,
-                "curve": per_level.to_dicts(),
-            })  # fmt: skip
+            rows.append(
+                {
+                    "run": run,
+                    "stamp": man_path.parent.name,
+                    "engine": engine,
+                    "artifact": artifact,
+                    "gpu": gpu,
+                    "usd_per_hour": price,
+                    "workload": wl,
+                    "best_level": best["level"],
+                    "goodput_tok_s": best["goodput_tok_s"],
+                    "throughput_tok_s": best["output_throughput_tok_s"],
+                    "tpot_p50_ms_1user": float(per_level["tpot_p50_s"][0]) * 1000,
+                    "curve": per_level.to_dicts(),
+                }
+            )
     return pl.DataFrame(rows)
 
 
@@ -117,14 +132,25 @@ def main() -> None:
     qual = {a: quality(n) for a, n in QUALITY_OF.items() if (Path("serve/results/quality-gpu") / n).exists()}
     df = df.with_columns(
         (pl.col("usd_per_hour") / (pl.col("goodput_tok_s") * 3600) * 1e6).alias("usd_per_1m_slo_tokens"),
-        pl.col("artifact").map_elements(lambda a: qual.get(a, {}).get("composite"), return_dtype=pl.Float64)
+        pl.col("artifact")
+        .map_elements(lambda a: qual.get(a, {}).get("composite"), return_dtype=pl.Float64)
         .alias("quality"),
-    )  # fmt: skip
+    )
     # keep the best measured run per (engine, artifact, gpu): experiments sampled different load levels
     df = df.sort("goodput_tok_s").group_by(["engine", "artifact", "gpu"]).last()
     ok = df.filter(pl.col("goodput_tok_s") > 0)
-    table = ok.select("gpu", "engine", "artifact", "best_level", "goodput_tok_s", "usd_per_1m_slo_tokens", "quality",
-                      "tpot_p50_ms_1user", "run", "stamp").sort("usd_per_1m_slo_tokens")  # fmt: skip
+    table = ok.select(
+        "gpu",
+        "engine",
+        "artifact",
+        "best_level",
+        "goodput_tok_s",
+        "usd_per_1m_slo_tokens",
+        "quality",
+        "tpot_p50_ms_1user",
+        "run",
+        "stamp",
+    ).sort("usd_per_1m_slo_tokens")
     table.write_csv(OUT / "frontier.csv")
 
     # Pareto frontier: lower cost and higher quality (configs with a quality score)
@@ -136,10 +162,18 @@ def main() -> None:
             best_q = r["quality"]
     fig, ax = plt.subplots(figsize=(11, 6.2))
     colors = {"L4": "#2f6fd0", "H100": "#c2410c", "H200": "#7c3aed", "H100x2": "#b45309", "L40S": "#0f766e"}
-    label_these = {"qwen3-4b-fp8-official|vllm|H100", "qwen3-4b-bf16|vllm|H100", "qwen3-4b-w4a16-gptq-g128|vllm|H100",
-                   "qwen3-4b-bf16|vllm|H100x2", "qwen3-30b-a3b-bf16|vllm|H100", "qwen3-4b-w4a16-gptq-g128|vllm|L4",
-                   "qwen3-4b-bf16|vllm|L4", "qwen3.5-4b-bf16|vllm|L4", "gemma4-e4b-bf16|vllm|L4",
-                   "qwen3-4b-f16-gguf|llamacpp|L4"}  # fmt: skip
+    label_these = {
+        "qwen3-4b-fp8-official|vllm|H100",
+        "qwen3-4b-bf16|vllm|H100",
+        "qwen3-4b-w4a16-gptq-g128|vllm|H100",
+        "qwen3-4b-bf16|vllm|H100x2",
+        "qwen3-30b-a3b-bf16|vllm|H100",
+        "qwen3-4b-w4a16-gptq-g128|vllm|L4",
+        "qwen3-4b-bf16|vllm|L4",
+        "qwen3.5-4b-bf16|vllm|L4",
+        "gemma4-e4b-bf16|vllm|L4",
+        "qwen3-4b-f16-gguf|llamacpp|L4",
+    }
     short = {
         "qwen3-4b-": "4B ",
         "qwen3-30b-a3b-": "30B-A3B MoE ",
@@ -153,11 +187,22 @@ def main() -> None:
             name = r["artifact"]
             for a, b in short.items():
                 name = name.replace(a, b)
-            ax.annotate(f'{name} · {r["engine"]} · {r["gpu"]}', (r["usd_per_1m_slo_tokens"], r["quality"] * 100),
-                        fontsize=7.5, xytext=OFFSETS.get(key, (5, 4)), textcoords="offset points",
-                        arrowprops={"arrowstyle": "-", "lw": 0.5, "color": "#888"})  # fmt: skip
-    ax.plot([r["usd_per_1m_slo_tokens"] for r in frontier], [r["quality"] * 100 for r in frontier], "--", color="#16a34a",
-            label="Pareto frontier", zorder=2)  # fmt: skip
+            ax.annotate(
+                f"{name} · {r['engine']} · {r['gpu']}",
+                (r["usd_per_1m_slo_tokens"], r["quality"] * 100),
+                fontsize=7.5,
+                xytext=OFFSETS.get(key, (5, 4)),
+                textcoords="offset points",
+                arrowprops={"arrowstyle": "-", "lw": 0.5, "color": "#888"},
+            )
+    ax.plot(
+        [r["usd_per_1m_slo_tokens"] for r in frontier],
+        [r["quality"] * 100 for r in frontier],
+        "--",
+        color="#16a34a",
+        label="Pareto frontier",
+        zorder=2,
+    )
     ax.axhspan(78.7, 83.5, color="#94a3b8", alpha=0.12, zorder=0, label="±2.4-point CI band around 4B bf16")
     for g, c in colors.items():
         if g in set(scored["gpu"].to_list()):
@@ -177,11 +222,21 @@ def main() -> None:
     (WEB / "frontier.json").write_text(
         json.dumps([r["artifact"] + "|" + r["engine"] + "|" + r["gpu"] for r in frontier])
     )
-    (WEB / "curves.json").write_text(json.dumps(
-        [{k: r[k] for k in ("run", "engine", "artifact", "gpu", "workload", "curve")} for r in df.iter_rows(named=True)],
-        indent=1))  # fmt: skip
-    (WEB / "quality.json").write_text(json.dumps({n: quality(n) for n in sorted(
-        p.name for p in Path("serve/results/quality-gpu").iterdir() if p.is_dir())}, indent=1))  # fmt: skip
+    (WEB / "curves.json").write_text(
+        json.dumps(
+            [
+                {k: r[k] for k in ("run", "engine", "artifact", "gpu", "workload", "curve")}
+                for r in df.iter_rows(named=True)
+            ],
+            indent=1,
+        )
+    )
+    (WEB / "quality.json").write_text(
+        json.dumps(
+            {n: quality(n) for n in sorted(p.name for p in Path("serve/results/quality-gpu").iterdir() if p.is_dir())},
+            indent=1,
+        )
+    )
     print(table.select("gpu", "engine", "artifact", "best_level", "goodput_tok_s", "usd_per_1m_slo_tokens", "quality"))
     print("frontier:", [f"{r['artifact']}|{r['engine']}|{r['gpu']}" for r in frontier])
 

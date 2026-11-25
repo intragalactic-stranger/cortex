@@ -30,223 +30,82 @@
   ]
  },
  {
-  "run": "e2-h100-vllm-w8a8-int8",
+  "run": "e2-h100-vllm-fp8-official",
   "engine": "vllm",
-  "artifact": "qwen3-4b-w8a8-int8",
+  "artifact": "qwen3-4b-fp8-official",
   "gpu": "H100",
   "workload": "chat-balanced",
   "curve": [
    {
     "level": 1.0,
-    "goodput_tok_s": 297.1829396245546,
-    "output_throughput_tok_s": 297.1829396245546,
-    "tpot_p50_s": 0.0033034084401958584,
-    "ttft_p95_s": 0.020095720000000483
+    "goodput_tok_s": 303.7929606702206,
+    "output_throughput_tok_s": 303.7929606702206,
+    "tpot_p50_s": 0.003203780702941173,
+    "ttft_p95_s": 0.03093967749998683
    },
    {
     "level": 16.0,
-    "goodput_tok_s": 3739.6295330223165,
-    "output_throughput_tok_s": 3739.6295330223165,
-    "tpot_p50_s": 0.0038753210323529946,
-    "ttft_p95_s": 0.11708547142501402
+    "goodput_tok_s": 3781.4024321096804,
+    "output_throughput_tok_s": 3781.4024321096804,
+    "tpot_p50_s": 0.0038364171450980928,
+    "ttft_p95_s": 0.11822379945001274
    },
    {
     "level": 64.0,
-    "goodput_tok_s": 8991.277406357036,
-    "output_throughput_tok_s": 8991.277406357036,
-    "tpot_p50_s": 0.006136730303921699,
-    "ttft_p95_s": 0.3985203479500342
+    "goodput_tok_s": 9144.395792123221,
+    "output_throughput_tok_s": 9144.395792123221,
+    "tpot_p50_s": 0.0059580048852941065,
+    "ttft_p95_s": 0.4052650342749814
    },
    {
     "level": 128.0,
-    "goodput_tok_s": 7569.080765791534,
-    "output_throughput_tok_s": 11672.799253268873,
-    "tpot_p50_s": 0.009274046677450867,
-    "ttft_p95_s": 0.7188555097999142
+    "goodput_tok_s": 6526.601276082218,
+    "output_throughput_tok_s": 11796.392296372449,
+    "tpot_p50_s": 0.008992540921568594,
+    "ttft_p95_s": 0.7765730943499619
    }
   ]
  },
  {
-  "run": "e1-h100-sglang",
-  "engine": "sglang",
-  "artifact": "qwen3-4b-bf16",
-  "gpu": "H100",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 243.98633828353755,
-    "output_throughput_tok_s": 243.98633828353755,
-    "tpot_p50_s": 0.0040350801490196386,
-    "ttft_p95_s": 0.020625392749977323
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 2994.4872046180567,
-    "output_throughput_tok_s": 2994.4872046180567,
-    "tpot_p50_s": 0.004805542064705863,
-    "ttft_p95_s": 0.14662246640000517
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 6924.593227569881,
-    "output_throughput_tok_s": 7345.424860184625,
-    "tpot_p50_s": 0.007422946498039151,
-    "ttft_p95_s": 0.5139507881500123
-   },
-   {
-    "level": 128.0,
-    "goodput_tok_s": 3745.636221366253,
-    "output_throughput_tok_s": 9614.448781295287,
-    "tpot_p50_s": 0.011083560343137285,
-    "ttft_p95_s": 0.9264994168500025
-   }
-  ]
- },
- {
-  "run": "e15-l4-vllm-qwen3.5-4b-8k",
+  "run": "e2-l4-vllm-fp8-dynamic",
   "engine": "vllm",
-  "artifact": "qwen3.5-4b-bf16",
+  "artifact": "qwen3-4b-fp8-dynamic",
   "gpu": "L4",
   "workload": "chat-balanced",
   "curve": [
    {
     "level": 1.0,
-    "goodput_tok_s": 28.239135160947516,
-    "output_throughput_tok_s": 28.239135160947516,
-    "tpot_p50_s": 0.03504142607450965,
-    "ttft_p95_s": 0.13284571675010284
+    "goodput_tok_s": 47.00460134577658,
+    "output_throughput_tok_s": 47.00460134577658,
+    "tpot_p50_s": 0.021061973689215703,
+    "ttft_p95_s": 0.07383265687499119
    },
    {
-    "level": 8.0,
-    "goodput_tok_s": 93.06309714202585,
-    "output_throughput_tok_s": 186.1261942840517,
-    "tpot_p50_s": 0.04085054144509776,
-    "ttft_p95_s": 0.7585194509998701
+    "level": 4.0,
+    "goodput_tok_s": 171.46294067423096,
+    "output_throughput_tok_s": 171.46294067423096,
+    "tpot_p50_s": 0.022438092486274454,
+    "ttft_p95_s": 0.2611759788750092
    },
    {
-    "level": 32.0,
+    "level": 16.0,
+    "goodput_tok_s": 179.60490163806367,
+    "output_throughput_tok_s": 506.91878239913495,
+    "tpot_p50_s": 0.0290556431254902,
+    "ttft_p95_s": 0.9922080274750313
+   },
+   {
+    "level": 64.0,
     "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 483.915023643528,
-    "tpot_p50_s": 0.06205877072941214,
-    "ttft_p95_s": 3.1393744758496274
+    "output_throughput_tok_s": 996.0318137977773,
+    "tpot_p50_s": 0.06068113770392157,
+    "ttft_p95_s": 3.6114545356749743
    }
   ]
  },
  {
-  "run": "e2-h100-vllm-w4a16-gptq",
-  "engine": "vllm",
-  "artifact": "qwen3-4b-w4a16-gptq-g128",
-  "gpu": "H100",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 268.29373289485363,
-    "output_throughput_tok_s": 268.29373289485363,
-    "tpot_p50_s": 0.0036611892872548315,
-    "ttft_p95_s": 0.02100271149997468
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 3384.64122842477,
-    "output_throughput_tok_s": 3384.64122842477,
-    "tpot_p50_s": 0.004248164755882369,
-    "ttft_p95_s": 0.14666695650001033
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 6435.746289375765,
-    "output_throughput_tok_s": 7354.513331897251,
-    "tpot_p50_s": 0.0073802430392157815,
-    "ttft_p95_s": 0.5264295353249764
-   },
-   {
-    "level": 128.0,
-    "goodput_tok_s": 4158.38298731623,
-    "output_throughput_tok_s": 9618.84003486592,
-    "tpot_p50_s": 0.011001541858823483,
-    "ttft_p95_s": 0.9843071494000273
-   }
-  ]
- },
- {
-  "run": "e2-h100-vllm-fp8-dynamic",
-  "engine": "vllm",
-  "artifact": "qwen3-4b-fp8-dynamic",
-  "gpu": "H100",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 314.70902240266514,
-    "output_throughput_tok_s": 314.70902240266514,
-    "tpot_p50_s": 0.0031163132627450053,
-    "ttft_p95_s": 0.020182402125001886
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 3920.5252168017746,
-    "output_throughput_tok_s": 3920.5252168017746,
-    "tpot_p50_s": 0.003680352815686159,
-    "ttft_p95_s": 0.1158639586750155
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 9028.454835214921,
-    "output_throughput_tok_s": 9028.454835214921,
-    "tpot_p50_s": 0.0060610973196078225,
-    "ttft_p95_s": 0.39202457212500263
-   },
-   {
-    "level": 128.0,
-    "goodput_tok_s": 7016.853660220499,
-    "output_throughput_tok_s": 11709.895324792753,
-    "tpot_p50_s": 0.009183624930392174,
-    "ttft_p95_s": 0.732913110174988
-   }
-  ]
- },
- {
-  "run": "e1-h100-vllm",
-  "engine": "vllm",
-  "artifact": "qwen3-4b-bf16",
-  "gpu": "H200",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 285.0435907709472,
-    "output_throughput_tok_s": 285.0435907709472,
-    "tpot_p50_s": 0.003406119756862733,
-    "ttft_p95_s": 0.031105810249997035
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 3658.8456196466786,
-    "output_throughput_tok_s": 3658.8456196466786,
-    "tpot_p50_s": 0.003850293745097969,
-    "ttft_p95_s": 0.1461329141500002
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 8076.461724518047,
-    "output_throughput_tok_s": 8810.685517656051,
-    "tpot_p50_s": 0.005946038235294106,
-    "ttft_p95_s": 0.5278530957999934
-   },
-   {
-    "level": 128.0,
-    "goodput_tok_s": 4492.458977535661,
-    "output_throughput_tok_s": 11500.877493390142,
-    "tpot_p50_s": 0.008671208137254902,
-    "ttft_p95_s": 0.9730477255499992
-   }
-  ]
- },
- {
-  "run": "e13-cpu-llamacpp",
-  "engine": "llamacpp",
+  "run": "e13-cpu-ollama",
+  "engine": "ollama",
   "artifact": "qwen3-1.7b-q4_k_m",
   "gpu": "CPU",
   "workload": "chat-short",
@@ -254,39 +113,46 @@
    {
     "level": 1.0,
     "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 4.731767987684513,
-    "tpot_p50_s": 0.09956150187367929,
-    "ttft_p95_s": 7.334391288732877
+    "output_throughput_tok_s": 4.959835406851788,
+    "tpot_p50_s": 0.0964846639840361,
+    "ttft_p95_s": 6.990290600352455
    },
    {
     "level": 4.0,
     "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 5.032497550302384,
-    "tpot_p50_s": 0.36777438256346306,
-    "ttft_p95_s": 27.614814522874077
+    "output_throughput_tok_s": 5.319254749588075,
+    "tpot_p50_s": 0.34963169138109873,
+    "ttft_p95_s": 26.252688822202618
    }
   ]
  },
  {
-  "run": "e13-cpu-llamacpp",
-  "engine": "llamacpp",
-  "artifact": "gemma4-e2b-qat-q4_0",
-  "gpu": "CPU",
-  "workload": "chat-short",
+  "run": "e15-l4-vllm-gemma4-e4b-8k",
+  "engine": "vllm",
+  "artifact": "gemma4-e4b-bf16",
+  "gpu": "L4",
+  "workload": "chat-balanced",
   "curve": [
    {
     "level": 1.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 3.249127008166,
-    "tpot_p50_s": 0.14757200054055641,
-    "ttft_p95_s": 10.389480149175506
+    "goodput_tok_s": 25.564645942984754,
+    "output_throughput_tok_s": 25.564645942984754,
+    "tpot_p50_s": 0.03876633143137269,
+    "ttft_p95_s": 0.13034831509997388
    },
    {
-    "level": 4.0,
+    "level": 8.0,
+    "goodput_tok_s": 56.11641662741869,
+    "output_throughput_tok_s": 179.57253320773978,
+    "tpot_p50_s": 0.0420135877764707,
+    "ttft_p95_s": 0.8243189907500152
+   },
+   {
+    "level": 32.0,
     "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 3.6030357322300124,
-    "tpot_p50_s": 0.48488547416710637,
-    "ttft_p95_s": 40.54072554145823
+    "output_throughput_tok_s": 511.9072891907223,
+    "tpot_p50_s": 0.05744005578039208,
+    "ttft_p95_s": 3.098265489549954
    }
   ]
  },
@@ -328,39 +194,131 @@
   ]
  },
  {
-  "run": "e2-h100-vllm-bf16",
+  "run": "e13-cpu-llamacpp",
+  "engine": "llamacpp",
+  "artifact": "qwen3-1.7b-q8_0",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 3.762079537117969,
+    "tpot_p50_s": 0.1258164148727831,
+    "ttft_p95_s": 9.571390156832058
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 4.203227524464207,
+    "tpot_p50_s": 0.38312764853120795,
+    "ttft_p95_s": 37.20369529833552
+   }
+  ]
+ },
+ {
+  "run": "e2-l4-vllm-w4a16-awq",
   "engine": "vllm",
-  "artifact": "qwen3-4b-bf16",
-  "gpu": "H100",
+  "artifact": "qwen3-4b-w4a16-awq-asym",
+  "gpu": "L4",
   "workload": "chat-balanced",
   "curve": [
    {
     "level": 1.0,
-    "goodput_tok_s": 236.74078177931864,
-    "output_throughput_tok_s": 236.74078177931864,
-    "tpot_p50_s": 0.004153227548039212,
-    "ttft_p95_s": 0.02400712737500932
+    "goodput_tok_s": 79.51574906877218,
+    "output_throughput_tok_s": 79.51574906877218,
+    "tpot_p50_s": 0.012293297220588226,
+    "ttft_p95_s": 0.09111262362499772
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 271.0328871480439,
+    "output_throughput_tok_s": 271.0328871480439,
+    "tpot_p50_s": 0.013587178445098068,
+    "ttft_p95_s": 0.32205198387501355
    },
    {
     "level": 16.0,
-    "goodput_tok_s": 3033.549988197538,
-    "output_throughput_tok_s": 3033.549988197538,
-    "tpot_p50_s": 0.004768408936274487,
-    "ttft_p95_s": 0.15900696594999458
+    "goodput_tok_s": 168.00686924088032,
+    "output_throughput_tok_s": 672.0274769635213,
+    "tpot_p50_s": 0.020575231187254864,
+    "ttft_p95_s": 1.2546853048250255
    },
    {
     "level": 64.0,
-    "goodput_tok_s": 6951.73701777739,
-    "output_throughput_tok_s": 7583.713110302608,
-    "tpot_p50_s": 0.007145313208823556,
-    "ttft_p95_s": 0.5102063396250096
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 1038.4222558955566,
+    "tpot_p50_s": 0.057376071986274556,
+    "ttft_p95_s": 4.552344312925008
+   }
+  ]
+ },
+ {
+  "run": "e13-cpu-llamacpp",
+  "engine": "llamacpp",
+  "artifact": "qwen3-1.7b-q4_k_m",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 4.731767987684513,
+    "tpot_p50_s": 0.09956150187367929,
+    "ttft_p95_s": 7.334391288732877
    },
    {
-    "level": 128.0,
-    "goodput_tok_s": 5253.614623812859,
-    "output_throughput_tok_s": 10078.94446736512,
-    "tpot_p50_s": 0.010674404572549038,
-    "ttft_p95_s": 0.9335358888749952
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 5.032497550302384,
+    "tpot_p50_s": 0.36777438256346306,
+    "ttft_p95_s": 27.614814522874077
+   }
+  ]
+ },
+ {
+  "run": "e13-cpu-ollama",
+  "engine": "ollama",
+  "artifact": "qwen3-0.6b-q4_k_m",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 12.66218158643653,
+    "output_throughput_tok_s": 12.66218158643653,
+    "tpot_p50_s": 0.043460657635319325,
+    "ttft_p95_s": 2.3632734615937805
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 13.951962893899609,
+    "tpot_p50_s": 0.14862544288016147,
+    "ttft_p95_s": 8.993880282033933
+   }
+  ]
+ },
+ {
+  "run": "e13-cpu-llamacpp",
+  "engine": "llamacpp",
+  "artifact": "gemma4-e2b-ptq-q4_0",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 3.2223872268352105,
+    "tpot_p50_s": 0.15027470035674345,
+    "ttft_p95_s": 10.43350204922026
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 3.6005855101140893,
+    "tpot_p50_s": 0.47594395513454124,
+    "ttft_p95_s": 41.53504992752569
    }
   ]
  },
@@ -391,638 +349,6 @@
     "output_throughput_tok_s": 267.7707385983406,
     "tpot_p50_s": 0.055039002166666684,
     "ttft_p95_s": 2.3250822801999846
-   }
-  ]
- },
- {
-  "run": "e2-l4-llamacpp-q4_k_m",
-  "engine": "llamacpp",
-  "artifact": "qwen3-4b-q4_k_m",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 74.74198457384048,
-    "output_throughput_tok_s": 74.74198457384048,
-    "tpot_p50_s": 0.012722778930392406,
-    "ttft_p95_s": 0.178888989874892
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 203.21110252572925,
-    "tpot_p50_s": 0.017225716250000092,
-    "ttft_p95_s": 0.667907799499929
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 364.5133491982152,
-    "tpot_p50_s": 0.039543274052941266,
-    "ttft_p95_s": 2.0529825136500364
-   }
-  ]
- },
- {
-  "run": "e2-l4-llamacpp-bf16",
-  "engine": "llamacpp",
-  "artifact": "qwen3-4b-bf16",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 29.54143224404298,
-    "output_throughput_tok_s": 29.54143224404298,
-    "tpot_p50_s": 0.033182167267647084,
-    "ttft_p95_s": 0.20918485299999645
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 94.60497374393397,
-    "tpot_p50_s": 0.03962957352254899,
-    "ttft_p95_s": 0.7656337489999956
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 246.98574926742714,
-    "tpot_p50_s": 0.05987654881764712,
-    "ttft_p95_s": 2.3818009302000247
-   }
-  ]
- },
- {
-  "run": "e2-l4-vllm-fp8-official",
-  "engine": "vllm",
-  "artifact": "qwen3-4b-fp8-official",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 51.26276222568341,
-    "output_throughput_tok_s": 51.26276222568341,
-    "tpot_p50_s": 0.019148915038235147,
-    "ttft_p95_s": 0.11375727787501688
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 182.1228368496553,
-    "output_throughput_tok_s": 182.1228368496553,
-    "tpot_p50_s": 0.020485265734313828,
-    "ttft_p95_s": 0.40889252875003024
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 126.17104192267624,
-    "output_throughput_tok_s": 504.68416769070495,
-    "tpot_p50_s": 0.02768563430098037,
-    "ttft_p95_s": 1.548391611049989
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 879.5059600766473,
-    "tpot_p50_s": 0.06751811489509803,
-    "ttft_p95_s": 5.582820869625022
-   }
-  ]
- },
- {
-  "run": "e12-h100x2-vllm-tp2",
-  "engine": "vllm",
-  "artifact": "qwen3-4b-bf16",
-  "gpu": "H100x2",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 305.2629798119524,
-    "output_throughput_tok_s": 305.2629798119524,
-    "tpot_p50_s": 0.0030361759911764464,
-    "ttft_p95_s": 0.04144415929999283
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 3882.5424440491333,
-    "output_throughput_tok_s": 3882.5424440491333,
-    "tpot_p50_s": 0.0036927742225490124,
-    "ttft_p95_s": 0.1398982858999979
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 10243.974533348011,
-    "output_throughput_tok_s": 10243.974533348011,
-    "tpot_p50_s": 0.005134226875490197,
-    "ttft_p95_s": 0.38601624962500125
-   },
-   {
-    "level": 128.0,
-    "goodput_tok_s": 8024.461314011371,
-    "output_throughput_tok_s": 14432.83366084945,
-    "tpot_p50_s": 0.007049454971568602,
-    "ttft_p95_s": 0.6994241367
-   }
-  ]
- },
- {
-  "run": "e13-cpu-llamacpp",
-  "engine": "llamacpp",
-  "artifact": "qwen3-0.6b-q8_0",
-  "gpu": "CPU",
-  "workload": "chat-short",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 9.89752516497521,
-    "tpot_p50_s": 0.052055293961154624,
-    "ttft_p95_s": 3.2929301745374686
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 10.743812789893921,
-    "tpot_p50_s": 0.17919679801626545,
-    "ttft_p95_s": 13.17155354974093
-   }
-  ]
- },
- {
-  "run": "e13-cpu-ollama",
-  "engine": "ollama",
-  "artifact": "qwen3-1.7b-q4_k_m",
-  "gpu": "CPU",
-  "workload": "chat-short",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 4.959835406851788,
-    "tpot_p50_s": 0.0964846639840361,
-    "ttft_p95_s": 6.990290600352455
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 5.319254749588075,
-    "tpot_p50_s": 0.34963169138109873,
-    "ttft_p95_s": 26.252688822202618
-   }
-  ]
- },
- {
-  "run": "e13-cpu-llamacpp",
-  "engine": "llamacpp",
-  "artifact": "gemma4-e2b-ptq-q4_0",
-  "gpu": "CPU",
-  "workload": "chat-short",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 3.2223872268352105,
-    "tpot_p50_s": 0.15027470035674345,
-    "ttft_p95_s": 10.43350204922026
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 3.6005855101140893,
-    "tpot_p50_s": 0.47594395513454124,
-    "ttft_p95_s": 41.53504992752569
-   }
-  ]
- },
- {
-  "run": "e1-l4-sglang",
-  "engine": "sglang",
-  "artifact": "qwen3-4b-bf16",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 29.813801223066427,
-    "output_throughput_tok_s": 29.813801223066427,
-    "tpot_p50_s": 0.03322489515490196,
-    "ttft_p95_s": 0.11542943974995978
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 109.03718198266183,
-    "output_throughput_tok_s": 109.03718198266183,
-    "tpot_p50_s": 0.03530100743137255,
-    "ttft_p95_s": 0.39398773100003837
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 21.760914340741543,
-    "output_throughput_tok_s": 348.1746294518647,
-    "tpot_p50_s": 0.04174109029803927,
-    "ttft_p95_s": 1.441220597500046
-   },
-   {
-    "level": 32.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 532.0308386527653,
-    "tpot_p50_s": 0.053025184645098214,
-    "ttft_p95_s": 2.8058997684999554
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 748.7855890574087,
-    "tpot_p50_s": 0.0732094763823529,
-    "ttft_p95_s": 5.535148618599971
-   }
-  ]
- },
- {
-  "run": "e15-l4-sglang-qwen3.5-4b-32k",
-  "engine": "sglang",
-  "artifact": "qwen3.5-4b-bf16",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 28.708195567364303,
-    "output_throughput_tok_s": 28.708195567364303,
-    "tpot_p50_s": 0.034518717629411555,
-    "ttft_p95_s": 0.11911213135012985
-   }
-  ]
- },
- {
-  "run": "e13-cpu-llamacpp",
-  "engine": "llamacpp",
-  "artifact": "qwen3-0.6b-q4_k_m",
-  "gpu": "CPU",
-  "workload": "chat-short",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 12.624213667782222,
-    "output_throughput_tok_s": 12.624213667782222,
-    "tpot_p50_s": 0.04325376473005033,
-    "ttft_p95_s": 2.3810871904774102
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 14.063769333102414,
-    "tpot_p50_s": 0.14717653823096216,
-    "ttft_p95_s": 8.996057597873733
-   }
-  ]
- },
- {
-  "run": "e2-h100-vllm-fp8-official",
-  "engine": "vllm",
-  "artifact": "qwen3-4b-fp8-official",
-  "gpu": "H100",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 303.7929606702206,
-    "output_throughput_tok_s": 303.7929606702206,
-    "tpot_p50_s": 0.003203780702941173,
-    "ttft_p95_s": 0.03093967749998683
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 3781.4024321096804,
-    "output_throughput_tok_s": 3781.4024321096804,
-    "tpot_p50_s": 0.0038364171450980928,
-    "ttft_p95_s": 0.11822379945001274
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 9144.395792123221,
-    "output_throughput_tok_s": 9144.395792123221,
-    "tpot_p50_s": 0.0059580048852941065,
-    "ttft_p95_s": 0.4052650342749814
-   },
-   {
-    "level": 128.0,
-    "goodput_tok_s": 6526.601276082218,
-    "output_throughput_tok_s": 11796.392296372449,
-    "tpot_p50_s": 0.008992540921568594,
-    "ttft_p95_s": 0.7765730943499619
-   }
-  ]
- },
- {
-  "run": "e13-cpu-llamacpp",
-  "engine": "llamacpp",
-  "artifact": "gemma4-e2b-q4_k_m",
-  "gpu": "CPU",
-  "workload": "chat-short",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 3.5800667569532316,
-    "tpot_p50_s": 0.13849134841242744,
-    "ttft_p95_s": 9.294191760604736
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 3.939857273390421,
-    "tpot_p50_s": 0.4773837593652027,
-    "ttft_p95_s": 35.10017269831151
-   }
-  ]
- },
- {
-  "run": "e9-h100-vllm-qwen3-30b-a3b",
-  "engine": "vllm",
-  "artifact": "qwen3-30b-a3b-bf16",
-  "gpu": "H100",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 201.38292292372716,
-    "output_throughput_tok_s": 201.38292292372716,
-    "tpot_p50_s": 0.004678621416666671,
-    "ttft_p95_s": 0.0636539079249971
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 1433.0616098919736,
-    "output_throughput_tok_s": 1433.0616098919736,
-    "tpot_p50_s": 0.010359679214705837,
-    "ttft_p95_s": 0.22258049032498803
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 2859.0997910657634,
-    "output_throughput_tok_s": 3607.0022086281397,
-    "tpot_p50_s": 0.016472182870588277,
-    "ttft_p95_s": 0.680910794750001
-   },
-   {
-    "level": 128.0,
-    "goodput_tok_s": 2593.618379976525,
-    "output_throughput_tok_s": 5397.620865482717,
-    "tpot_p50_s": 0.021475244260784232,
-    "ttft_p95_s": 1.234636066449987
-   }
-  ]
- },
- {
-  "run": "e2-l4-llamacpp-q5_k_m",
-  "engine": "llamacpp",
-  "artifact": "qwen3-4b-q5_k_m",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 66.72847848021382,
-    "output_throughput_tok_s": 66.72847848021382,
-    "tpot_p50_s": 0.014317475696078623,
-    "ttft_p95_s": 0.1911969417499506
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 189.09801361793262,
-    "tpot_p50_s": 0.018633162828431228,
-    "ttft_p95_s": 0.693358682499877
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 348.80039960007355,
-    "tpot_p50_s": 0.04130372936078455,
-    "ttft_p95_s": 2.132170826974976
-   }
-  ]
- },
- {
-  "run": "e13-cpu-ollama",
-  "engine": "ollama",
-  "artifact": "qwen3-0.6b-q4_k_m",
-  "gpu": "CPU",
-  "workload": "chat-short",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 12.66218158643653,
-    "output_throughput_tok_s": 12.66218158643653,
-    "tpot_p50_s": 0.043460657635319325,
-    "ttft_p95_s": 2.3632734615937805
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 13.951962893899609,
-    "tpot_p50_s": 0.14862544288016147,
-    "ttft_p95_s": 8.993880282033933
-   }
-  ]
- },
- {
-  "run": "e2-l4-vllm-w4a16-gptq",
-  "engine": "vllm",
-  "artifact": "qwen3-4b-w4a16-gptq-g128",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 80.3274698222994,
-    "output_throughput_tok_s": 80.3274698222994,
-    "tpot_p50_s": 0.012175896849019586,
-    "ttft_p95_s": 0.08154586487500382
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 273.09977748332653,
-    "output_throughput_tok_s": 273.09977748332653,
-    "tpot_p50_s": 0.01349664842254901,
-    "ttft_p95_s": 0.31761035299997786
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 169.6687044381776,
-    "output_throughput_tok_s": 678.6748177527104,
-    "tpot_p50_s": 0.02039618118333332,
-    "ttft_p95_s": 1.2299482134750037
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 1045.0948440730222,
-    "tpot_p50_s": 0.05703837253431379,
-    "ttft_p95_s": 4.504527137424997
-   }
-  ]
- },
- {
-  "run": "e2-l4-llamacpp-q4_k_m-imat-generic",
-  "engine": "llamacpp",
-  "artifact": "qwen3-4b-q4_k_m-imat-generic",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 74.92882538006313,
-    "output_throughput_tok_s": 74.92882538006313,
-    "tpot_p50_s": 0.012703168365686345,
-    "ttft_p95_s": 0.17982519974998468
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 204.08399446464293,
-    "tpot_p50_s": 0.01715705136372553,
-    "ttft_p95_s": 0.6661838883750164
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 365.80597247824863,
-    "tpot_p50_s": 0.03942751817745101,
-    "ttft_p95_s": 2.0451905160999955
-   }
-  ]
- },
- {
-  "run": "e13-cpu-llamacpp",
-  "engine": "llamacpp",
-  "artifact": "qwen3-1.7b-q8_0",
-  "gpu": "CPU",
-  "workload": "chat-short",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 3.762079537117969,
-    "tpot_p50_s": 0.1258164148727831,
-    "ttft_p95_s": 9.571390156832058
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 4.203227524464207,
-    "tpot_p50_s": 0.38312764853120795,
-    "ttft_p95_s": 37.20369529833552
-   }
-  ]
- },
- {
-  "run": "e15-l4-sglang-gemma4-e4b-32k",
-  "engine": "sglang",
-  "artifact": "gemma4-e4b-bf16",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 25.275931411146917,
-    "output_throughput_tok_s": 25.275931411146917,
-    "tpot_p50_s": 0.03923387070392163,
-    "ttft_p95_s": 0.1258649154500091
-   }
-  ]
- },
- {
-  "run": "e13-cpu-llamacpp",
-  "engine": "llamacpp",
-  "artifact": "gemma4-e2b-q8_0",
-  "gpu": "CPU",
-  "workload": "chat-short",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 2.7696244672034385,
-    "tpot_p50_s": 0.16987845384135164,
-    "ttft_p95_s": 12.439900992106413
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 3.13171844915245,
-    "tpot_p50_s": 0.5268197889848139,
-    "ttft_p95_s": 48.58021328025497
-   }
-  ]
- },
- {
-  "run": "e15-l4-vllm-gemma4-e4b-8k",
-  "engine": "vllm",
-  "artifact": "gemma4-e4b-bf16",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 25.564645942984754,
-    "output_throughput_tok_s": 25.564645942984754,
-    "tpot_p50_s": 0.03876633143137269,
-    "ttft_p95_s": 0.13034831509997388
-   },
-   {
-    "level": 8.0,
-    "goodput_tok_s": 56.11641662741869,
-    "output_throughput_tok_s": 179.57253320773978,
-    "tpot_p50_s": 0.0420135877764707,
-    "ttft_p95_s": 0.8243189907500152
-   },
-   {
-    "level": 32.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 511.9072891907223,
-    "tpot_p50_s": 0.05744005578039208,
-    "ttft_p95_s": 3.098265489549954
-   }
-  ]
- },
- {
-  "run": "e2-l4-vllm-fp8-dynamic",
-  "engine": "vllm",
-  "artifact": "qwen3-4b-fp8-dynamic",
-  "gpu": "L4",
-  "workload": "chat-balanced",
-  "curve": [
-   {
-    "level": 1.0,
-    "goodput_tok_s": 47.00460134577658,
-    "output_throughput_tok_s": 47.00460134577658,
-    "tpot_p50_s": 0.021061973689215703,
-    "ttft_p95_s": 0.07383265687499119
-   },
-   {
-    "level": 4.0,
-    "goodput_tok_s": 171.46294067423096,
-    "output_throughput_tok_s": 171.46294067423096,
-    "tpot_p50_s": 0.022438092486274454,
-    "ttft_p95_s": 0.2611759788750092
-   },
-   {
-    "level": 16.0,
-    "goodput_tok_s": 179.60490163806367,
-    "output_throughput_tok_s": 506.91878239913495,
-    "tpot_p50_s": 0.0290556431254902,
-    "ttft_p95_s": 0.9922080274750313
-   },
-   {
-    "level": 64.0,
-    "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 996.0318137977773,
-    "tpot_p50_s": 0.06068113770392157,
-    "ttft_p95_s": 3.6114545356749743
    }
   ]
  },
@@ -1071,39 +397,713 @@
   ]
  },
  {
-  "run": "e2-l4-vllm-w4a16-awq",
+  "run": "e2-l4-vllm-fp8-official",
   "engine": "vllm",
-  "artifact": "qwen3-4b-w4a16-awq-asym",
+  "artifact": "qwen3-4b-fp8-official",
   "gpu": "L4",
   "workload": "chat-balanced",
   "curve": [
    {
     "level": 1.0,
-    "goodput_tok_s": 79.51574906877218,
-    "output_throughput_tok_s": 79.51574906877218,
-    "tpot_p50_s": 0.012293297220588226,
-    "ttft_p95_s": 0.09111262362499772
+    "goodput_tok_s": 51.26276222568341,
+    "output_throughput_tok_s": 51.26276222568341,
+    "tpot_p50_s": 0.019148915038235147,
+    "ttft_p95_s": 0.11375727787501688
    },
    {
     "level": 4.0,
-    "goodput_tok_s": 271.0328871480439,
-    "output_throughput_tok_s": 271.0328871480439,
-    "tpot_p50_s": 0.013587178445098068,
-    "ttft_p95_s": 0.32205198387501355
+    "goodput_tok_s": 182.1228368496553,
+    "output_throughput_tok_s": 182.1228368496553,
+    "tpot_p50_s": 0.020485265734313828,
+    "ttft_p95_s": 0.40889252875003024
    },
    {
     "level": 16.0,
-    "goodput_tok_s": 168.00686924088032,
-    "output_throughput_tok_s": 672.0274769635213,
-    "tpot_p50_s": 0.020575231187254864,
-    "ttft_p95_s": 1.2546853048250255
+    "goodput_tok_s": 126.17104192267624,
+    "output_throughput_tok_s": 504.68416769070495,
+    "tpot_p50_s": 0.02768563430098037,
+    "ttft_p95_s": 1.548391611049989
    },
    {
     "level": 64.0,
     "goodput_tok_s": 0.0,
-    "output_throughput_tok_s": 1038.4222558955566,
-    "tpot_p50_s": 0.057376071986274556,
-    "ttft_p95_s": 4.552344312925008
+    "output_throughput_tok_s": 879.5059600766473,
+    "tpot_p50_s": 0.06751811489509803,
+    "ttft_p95_s": 5.582820869625022
+   }
+  ]
+ },
+ {
+  "run": "e1-h100-sglang",
+  "engine": "sglang",
+  "artifact": "qwen3-4b-bf16",
+  "gpu": "H100",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 243.98633828353755,
+    "output_throughput_tok_s": 243.98633828353755,
+    "tpot_p50_s": 0.0040350801490196386,
+    "ttft_p95_s": 0.020625392749977323
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 2994.4872046180567,
+    "output_throughput_tok_s": 2994.4872046180567,
+    "tpot_p50_s": 0.004805542064705863,
+    "ttft_p95_s": 0.14662246640000517
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 6924.593227569881,
+    "output_throughput_tok_s": 7345.424860184625,
+    "tpot_p50_s": 0.007422946498039151,
+    "ttft_p95_s": 0.5139507881500123
+   },
+   {
+    "level": 128.0,
+    "goodput_tok_s": 3745.636221366253,
+    "output_throughput_tok_s": 9614.448781295287,
+    "tpot_p50_s": 0.011083560343137285,
+    "ttft_p95_s": 0.9264994168500025
+   }
+  ]
+ },
+ {
+  "run": "e9-h100-vllm-qwen3-30b-a3b",
+  "engine": "vllm",
+  "artifact": "qwen3-30b-a3b-bf16",
+  "gpu": "H100",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 201.38292292372716,
+    "output_throughput_tok_s": 201.38292292372716,
+    "tpot_p50_s": 0.004678621416666671,
+    "ttft_p95_s": 0.0636539079249971
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 1433.0616098919736,
+    "output_throughput_tok_s": 1433.0616098919736,
+    "tpot_p50_s": 0.010359679214705837,
+    "ttft_p95_s": 0.22258049032498803
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 2859.0997910657634,
+    "output_throughput_tok_s": 3607.0022086281397,
+    "tpot_p50_s": 0.016472182870588277,
+    "ttft_p95_s": 0.680910794750001
+   },
+   {
+    "level": 128.0,
+    "goodput_tok_s": 2593.618379976525,
+    "output_throughput_tok_s": 5397.620865482717,
+    "tpot_p50_s": 0.021475244260784232,
+    "ttft_p95_s": 1.234636066449987
+   }
+  ]
+ },
+ {
+  "run": "e2-h100-vllm-w8a8-int8",
+  "engine": "vllm",
+  "artifact": "qwen3-4b-w8a8-int8",
+  "gpu": "H100",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 297.1829396245546,
+    "output_throughput_tok_s": 297.1829396245546,
+    "tpot_p50_s": 0.0033034084401958584,
+    "ttft_p95_s": 0.020095720000000483
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 3739.6295330223165,
+    "output_throughput_tok_s": 3739.6295330223165,
+    "tpot_p50_s": 0.0038753210323529946,
+    "ttft_p95_s": 0.11708547142501402
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 8991.277406357036,
+    "output_throughput_tok_s": 8991.277406357036,
+    "tpot_p50_s": 0.006136730303921699,
+    "ttft_p95_s": 0.3985203479500342
+   },
+   {
+    "level": 128.0,
+    "goodput_tok_s": 7569.080765791534,
+    "output_throughput_tok_s": 11672.799253268873,
+    "tpot_p50_s": 0.009274046677450867,
+    "ttft_p95_s": 0.7188555097999142
+   }
+  ]
+ },
+ {
+  "run": "e2-l4-llamacpp-q5_k_m",
+  "engine": "llamacpp",
+  "artifact": "qwen3-4b-q5_k_m",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 66.72847848021382,
+    "output_throughput_tok_s": 66.72847848021382,
+    "tpot_p50_s": 0.014317475696078623,
+    "ttft_p95_s": 0.1911969417499506
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 189.09801361793262,
+    "tpot_p50_s": 0.018633162828431228,
+    "ttft_p95_s": 0.693358682499877
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 348.80039960007355,
+    "tpot_p50_s": 0.04130372936078455,
+    "ttft_p95_s": 2.132170826974976
+   }
+  ]
+ },
+ {
+  "run": "e15-l4-sglang-qwen3.5-4b-32k",
+  "engine": "sglang",
+  "artifact": "qwen3.5-4b-bf16",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 28.708195567364303,
+    "output_throughput_tok_s": 28.708195567364303,
+    "tpot_p50_s": 0.034518717629411555,
+    "ttft_p95_s": 0.11911213135012985
+   }
+  ]
+ },
+ {
+  "run": "e12-h100x2-vllm-tp2",
+  "engine": "vllm",
+  "artifact": "qwen3-4b-bf16",
+  "gpu": "H100x2",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 305.2629798119524,
+    "output_throughput_tok_s": 305.2629798119524,
+    "tpot_p50_s": 0.0030361759911764464,
+    "ttft_p95_s": 0.04144415929999283
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 3882.5424440491333,
+    "output_throughput_tok_s": 3882.5424440491333,
+    "tpot_p50_s": 0.0036927742225490124,
+    "ttft_p95_s": 0.1398982858999979
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 10243.974533348011,
+    "output_throughput_tok_s": 10243.974533348011,
+    "tpot_p50_s": 0.005134226875490197,
+    "ttft_p95_s": 0.38601624962500125
+   },
+   {
+    "level": 128.0,
+    "goodput_tok_s": 8024.461314011371,
+    "output_throughput_tok_s": 14432.83366084945,
+    "tpot_p50_s": 0.007049454971568602,
+    "ttft_p95_s": 0.6994241367
+   }
+  ]
+ },
+ {
+  "run": "e2-h100-vllm-bf16",
+  "engine": "vllm",
+  "artifact": "qwen3-4b-bf16",
+  "gpu": "H100",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 236.74078177931864,
+    "output_throughput_tok_s": 236.74078177931864,
+    "tpot_p50_s": 0.004153227548039212,
+    "ttft_p95_s": 0.02400712737500932
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 3033.549988197538,
+    "output_throughput_tok_s": 3033.549988197538,
+    "tpot_p50_s": 0.004768408936274487,
+    "ttft_p95_s": 0.15900696594999458
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 6951.73701777739,
+    "output_throughput_tok_s": 7583.713110302608,
+    "tpot_p50_s": 0.007145313208823556,
+    "ttft_p95_s": 0.5102063396250096
+   },
+   {
+    "level": 128.0,
+    "goodput_tok_s": 5253.614623812859,
+    "output_throughput_tok_s": 10078.94446736512,
+    "tpot_p50_s": 0.010674404572549038,
+    "ttft_p95_s": 0.9335358888749952
+   }
+  ]
+ },
+ {
+  "run": "e2-h100-vllm-w4a16-gptq",
+  "engine": "vllm",
+  "artifact": "qwen3-4b-w4a16-gptq-g128",
+  "gpu": "H100",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 268.29373289485363,
+    "output_throughput_tok_s": 268.29373289485363,
+    "tpot_p50_s": 0.0036611892872548315,
+    "ttft_p95_s": 0.02100271149997468
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 3384.64122842477,
+    "output_throughput_tok_s": 3384.64122842477,
+    "tpot_p50_s": 0.004248164755882369,
+    "ttft_p95_s": 0.14666695650001033
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 6435.746289375765,
+    "output_throughput_tok_s": 7354.513331897251,
+    "tpot_p50_s": 0.0073802430392157815,
+    "ttft_p95_s": 0.5264295353249764
+   },
+   {
+    "level": 128.0,
+    "goodput_tok_s": 4158.38298731623,
+    "output_throughput_tok_s": 9618.84003486592,
+    "tpot_p50_s": 0.011001541858823483,
+    "ttft_p95_s": 0.9843071494000273
+   }
+  ]
+ },
+ {
+  "run": "e1-h100-vllm",
+  "engine": "vllm",
+  "artifact": "qwen3-4b-bf16",
+  "gpu": "H200",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 285.0435907709472,
+    "output_throughput_tok_s": 285.0435907709472,
+    "tpot_p50_s": 0.003406119756862733,
+    "ttft_p95_s": 0.031105810249997035
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 3658.8456196466786,
+    "output_throughput_tok_s": 3658.8456196466786,
+    "tpot_p50_s": 0.003850293745097969,
+    "ttft_p95_s": 0.1461329141500002
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 8076.461724518047,
+    "output_throughput_tok_s": 8810.685517656051,
+    "tpot_p50_s": 0.005946038235294106,
+    "ttft_p95_s": 0.5278530957999934
+   },
+   {
+    "level": 128.0,
+    "goodput_tok_s": 4492.458977535661,
+    "output_throughput_tok_s": 11500.877493390142,
+    "tpot_p50_s": 0.008671208137254902,
+    "ttft_p95_s": 0.9730477255499992
+   }
+  ]
+ },
+ {
+  "run": "e2-h100-vllm-fp8-dynamic",
+  "engine": "vllm",
+  "artifact": "qwen3-4b-fp8-dynamic",
+  "gpu": "H100",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 314.70902240266514,
+    "output_throughput_tok_s": 314.70902240266514,
+    "tpot_p50_s": 0.0031163132627450053,
+    "ttft_p95_s": 0.020182402125001886
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 3920.5252168017746,
+    "output_throughput_tok_s": 3920.5252168017746,
+    "tpot_p50_s": 0.003680352815686159,
+    "ttft_p95_s": 0.1158639586750155
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 9028.454835214921,
+    "output_throughput_tok_s": 9028.454835214921,
+    "tpot_p50_s": 0.0060610973196078225,
+    "ttft_p95_s": 0.39202457212500263
+   },
+   {
+    "level": 128.0,
+    "goodput_tok_s": 7016.853660220499,
+    "output_throughput_tok_s": 11709.895324792753,
+    "tpot_p50_s": 0.009183624930392174,
+    "ttft_p95_s": 0.732913110174988
+   }
+  ]
+ },
+ {
+  "run": "e13-cpu-llamacpp",
+  "engine": "llamacpp",
+  "artifact": "gemma4-e2b-qat-q4_0",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 3.249127008166,
+    "tpot_p50_s": 0.14757200054055641,
+    "ttft_p95_s": 10.389480149175506
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 3.6030357322300124,
+    "tpot_p50_s": 0.48488547416710637,
+    "ttft_p95_s": 40.54072554145823
+   }
+  ]
+ },
+ {
+  "run": "e15-l4-vllm-qwen3.5-4b-8k",
+  "engine": "vllm",
+  "artifact": "qwen3.5-4b-bf16",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 28.239135160947516,
+    "output_throughput_tok_s": 28.239135160947516,
+    "tpot_p50_s": 0.03504142607450965,
+    "ttft_p95_s": 0.13284571675010284
+   },
+   {
+    "level": 8.0,
+    "goodput_tok_s": 93.06309714202585,
+    "output_throughput_tok_s": 186.1261942840517,
+    "tpot_p50_s": 0.04085054144509776,
+    "ttft_p95_s": 0.7585194509998701
+   },
+   {
+    "level": 32.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 483.915023643528,
+    "tpot_p50_s": 0.06205877072941214,
+    "ttft_p95_s": 3.1393744758496274
+   }
+  ]
+ },
+ {
+  "run": "e15-l4-sglang-gemma4-e4b-32k",
+  "engine": "sglang",
+  "artifact": "gemma4-e4b-bf16",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 25.275931411146917,
+    "output_throughput_tok_s": 25.275931411146917,
+    "tpot_p50_s": 0.03923387070392163,
+    "ttft_p95_s": 0.1258649154500091
+   }
+  ]
+ },
+ {
+  "run": "e1-l4-sglang",
+  "engine": "sglang",
+  "artifact": "qwen3-4b-bf16",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 29.813801223066427,
+    "output_throughput_tok_s": 29.813801223066427,
+    "tpot_p50_s": 0.03322489515490196,
+    "ttft_p95_s": 0.11542943974995978
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 109.03718198266183,
+    "output_throughput_tok_s": 109.03718198266183,
+    "tpot_p50_s": 0.03530100743137255,
+    "ttft_p95_s": 0.39398773100003837
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 21.760914340741543,
+    "output_throughput_tok_s": 348.1746294518647,
+    "tpot_p50_s": 0.04174109029803927,
+    "ttft_p95_s": 1.441220597500046
+   },
+   {
+    "level": 32.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 532.0308386527653,
+    "tpot_p50_s": 0.053025184645098214,
+    "ttft_p95_s": 2.8058997684999554
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 748.7855890574087,
+    "tpot_p50_s": 0.0732094763823529,
+    "ttft_p95_s": 5.535148618599971
+   }
+  ]
+ },
+ {
+  "run": "e13-cpu-llamacpp",
+  "engine": "llamacpp",
+  "artifact": "qwen3-0.6b-q8_0",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 9.89752516497521,
+    "tpot_p50_s": 0.052055293961154624,
+    "ttft_p95_s": 3.2929301745374686
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 10.743812789893921,
+    "tpot_p50_s": 0.17919679801626545,
+    "ttft_p95_s": 13.17155354974093
+   }
+  ]
+ },
+ {
+  "run": "e2-l4-llamacpp-bf16",
+  "engine": "llamacpp",
+  "artifact": "qwen3-4b-bf16",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 29.54143224404298,
+    "output_throughput_tok_s": 29.54143224404298,
+    "tpot_p50_s": 0.033182167267647084,
+    "ttft_p95_s": 0.20918485299999645
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 94.60497374393397,
+    "tpot_p50_s": 0.03962957352254899,
+    "ttft_p95_s": 0.7656337489999956
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 246.98574926742714,
+    "tpot_p50_s": 0.05987654881764712,
+    "ttft_p95_s": 2.3818009302000247
+   }
+  ]
+ },
+ {
+  "run": "e13-cpu-llamacpp",
+  "engine": "llamacpp",
+  "artifact": "qwen3-0.6b-q4_k_m",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 12.624213667782222,
+    "output_throughput_tok_s": 12.624213667782222,
+    "tpot_p50_s": 0.04325376473005033,
+    "ttft_p95_s": 2.3810871904774102
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 14.063769333102414,
+    "tpot_p50_s": 0.14717653823096216,
+    "ttft_p95_s": 8.996057597873733
+   }
+  ]
+ },
+ {
+  "run": "e13-cpu-llamacpp",
+  "engine": "llamacpp",
+  "artifact": "gemma4-e2b-q8_0",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 2.7696244672034385,
+    "tpot_p50_s": 0.16987845384135164,
+    "ttft_p95_s": 12.439900992106413
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 3.13171844915245,
+    "tpot_p50_s": 0.5268197889848139,
+    "ttft_p95_s": 48.58021328025497
+   }
+  ]
+ },
+ {
+  "run": "e2-l4-vllm-w4a16-gptq",
+  "engine": "vllm",
+  "artifact": "qwen3-4b-w4a16-gptq-g128",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 80.3274698222994,
+    "output_throughput_tok_s": 80.3274698222994,
+    "tpot_p50_s": 0.012175896849019586,
+    "ttft_p95_s": 0.08154586487500382
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 273.09977748332653,
+    "output_throughput_tok_s": 273.09977748332653,
+    "tpot_p50_s": 0.01349664842254901,
+    "ttft_p95_s": 0.31761035299997786
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 169.6687044381776,
+    "output_throughput_tok_s": 678.6748177527104,
+    "tpot_p50_s": 0.02039618118333332,
+    "ttft_p95_s": 1.2299482134750037
+   },
+   {
+    "level": 64.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 1045.0948440730222,
+    "tpot_p50_s": 0.05703837253431379,
+    "ttft_p95_s": 4.504527137424997
+   }
+  ]
+ },
+ {
+  "run": "e2-l4-llamacpp-q4_k_m",
+  "engine": "llamacpp",
+  "artifact": "qwen3-4b-q4_k_m",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 74.74198457384048,
+    "output_throughput_tok_s": 74.74198457384048,
+    "tpot_p50_s": 0.012722778930392406,
+    "ttft_p95_s": 0.178888989874892
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 203.21110252572925,
+    "tpot_p50_s": 0.017225716250000092,
+    "ttft_p95_s": 0.667907799499929
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 364.5133491982152,
+    "tpot_p50_s": 0.039543274052941266,
+    "ttft_p95_s": 2.0529825136500364
+   }
+  ]
+ },
+ {
+  "run": "e2-l4-llamacpp-q4_k_m-imat-generic",
+  "engine": "llamacpp",
+  "artifact": "qwen3-4b-q4_k_m-imat-generic",
+  "gpu": "L4",
+  "workload": "chat-balanced",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 74.92882538006313,
+    "output_throughput_tok_s": 74.92882538006313,
+    "tpot_p50_s": 0.012703168365686345,
+    "ttft_p95_s": 0.17982519974998468
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 204.08399446464293,
+    "tpot_p50_s": 0.01715705136372553,
+    "ttft_p95_s": 0.6661838883750164
+   },
+   {
+    "level": 16.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 365.80597247824863,
+    "tpot_p50_s": 0.03942751817745101,
+    "ttft_p95_s": 2.0451905160999955
+   }
+  ]
+ },
+ {
+  "run": "e13-cpu-llamacpp",
+  "engine": "llamacpp",
+  "artifact": "gemma4-e2b-q4_k_m",
+  "gpu": "CPU",
+  "workload": "chat-short",
+  "curve": [
+   {
+    "level": 1.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 3.5800667569532316,
+    "tpot_p50_s": 0.13849134841242744,
+    "ttft_p95_s": 9.294191760604736
+   },
+   {
+    "level": 4.0,
+    "goodput_tok_s": 0.0,
+    "output_throughput_tok_s": 3.939857273390421,
+    "tpot_p50_s": 0.4773837593652027,
+    "ttft_p95_s": 35.10017269831151
    }
   ]
  }
