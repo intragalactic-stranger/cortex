@@ -1,0 +1,92 @@
+{
+  "cortex-model-primary-6bbc46d7fb-pkjlv": {
+    "created": -1019.4,
+    "ready": -1013.4,
+    "create_to_ready_s": 6.0,
+    "delete_requested": -553.4
+  },
+  "cortex-model-primary-6bbc46d7fb-tlqll": {
+    "created": -282.4,
+    "ready": -277.4,
+    "create_to_ready_s": 5.0,
+    "delete_requested": -151.4
+  },
+  "cortex-model-primary-6bbc46d7fb-wmpjq": {
+    "created": -297.4,
+    "ready": -292.4,
+    "create_to_ready_s": 5.0,
+    "delete_requested": -147.4
+  },
+  "cortex-model-primary-6bbc46d7fb-zrxc2": {
+    "created": -6269.4,
+    "ready": -212.4,
+    "create_to_ready_s": 6057.0,
+    "delete_requested": -163.4
+  },
+  "cortex-model-primary-7d7c6ff8-965xb": {
+    "created": 177.6,
+    "ready": 183.6,
+    "create_to_ready_s": 6.0,
+    "delete_requested": null
+  },
+  "cortex-model-primary-7d7c6ff8-n4kzg": {
+    "created": 171.6,
+    "ready": 177.6,
+    "create_to_ready_s": 6.0,
+    "delete_requested": null
+  },
+  "cortex-model-primary-7d7c6ff8-sbthr": {
+    "created": 165.6,
+    "ready": 171.6,
+    "create_to_ready_s": 6.0,
+    "delete_requested": null
+  },
+  "cortex-model-primary-86b4fb9956-dt6n7": {
+    "created": 85.6,
+    "ready": 91.6,
+    "create_to_ready_s": 6.0,
+    "delete_requested": 177.6
+  },
+  "cortex-model-primary-86b4fb9956-sgqfm": {
+    "created": 98.6,
+    "ready": 104.6,
+    "create_to_ready_s": 6.0,
+    "delete_requested": 171.6
+  },
+  "cortex-model-primary-86b4fb9956-zhrk8": {
+    "created": 92.6,
+    "ready": 98.6,
+    "create_to_ready_s": 6.0,
+    "delete_requested": 183.6
+  },
+  "cortex-model-primary-9c558987b-4m8xn": {
+    "created": 17.6,
+    "ready": 23.6,
+    "create_to_ready_s": 6.0,
+    "delete_requested": 98.6
+  },
+  "cortex-model-primary-9c558987b-cgrjm": {
+    "created": -151.4,
+    "ready": null,
+    "create_to_ready_s": null,
+    "delete_requested": -147.4
+  },
+  "cortex-model-primary-9c558987b-gcwlz": {
+    "created": 77.6,
+    "ready": 83.6,
+    "create_to_ready_s": 6.0,
+    "delete_requested": 91.6
+  },
+  "cortex-model-primary-9c558987b-jqt6w": {
+    "created": -163.4,
+    "ready": -151.4,
+    "create_to_ready_s": 12.0,
+    "delete_requested": 104.6
+  },
+  "cortex-model-primary-9c558987b-lkztl": {
+    "created": -168.4,
+    "ready": -163.4,
+    "create_to_ready_s": 5.0,
+    "delete_requested": -117.4
+  }
+}

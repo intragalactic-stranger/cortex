@@ -1,0 +1,5 @@
+# derived from kube-state-metrics pod created/deletion timestamps (pods.json, 5 s resolution)
+1795527409.0 rollout 1 start
+1795527428.0 rollout 1 done
+1795527489.0 rollout 2 start
+1795527507.0 rollout 2 done

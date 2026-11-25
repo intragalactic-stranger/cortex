@@ -401,3 +401,51 @@ All on Modal with the pinned vLLM 0.32.0 / SGLang 0.5.22 images, Qwen3-4B-Instru
 - **TP=2 cuts per-token latency 1.37× and adds 43–47% capacity, for 2× the price:** goodput per dollar at 64 users falls from 6.9 to 5.1 req/s per $/h (−27%). Each layer ends in an all-reduce across the two GPUs; for a 4B model that fits on one GPU, the communication is a large share of each step.
 - **For throughput, two independent replicas (data parallel) are the cheaper way to use a second GPU** for a model this size (not measured; follows from the TP=1 numbers). TP pays off when latency is the constraint or the model does not fit on one GPU (E9's 57 GiB MoE would need TP on an 80 GB card at long contexts).
 - 2 x L4 was requested first but Modal never scheduled it (1 h 45 min in queue, not billed), so the pair is H100s.
+
+---
+
+## M5: production-style serving on local k3d (CPU), measured
+
+**Setup:** single-node k3d (k3s v1.35.10) on the M1 VM (2 cores / 4 threads, 15 GiB). Helm chart `deploy/helm/cortex-serve`.
+LiteLLM v1.108.16 gateway, KEDA 2.21.1, kube-prometheus-stack 93.0.0, llama.cpp server image from M1.
+**Primary pool:** Qwen3-0.6B Q4_K_M, **1 thread × 2 slots per replica**, 1–3 replicas, scaled by KEDA on (running + queued) / slots.
+**Canary:** Qwen3-0.6B Q8_0 (10%). **Fallback (D-021):** Qwen3-1.7B Q4_K_M, 2 threads.
+**Workload:** 64 input / 32 output tokens through the gateway (client-side timing, `gatewaybench`), every request logged.
+**Runs:** `results/m5-autoscale/{20261124T131550Z,20261124T135406Z}`, `results/m5-rollout/20261124T133518Z`,
+`results/m5-fallback/20261124T134537Z`, `results/m5-netpol/20261124T135251Z`, `results/m5-canary/20261124T140843Z`.
+Details: `docs/milestones/M5_REPORT.md`.
+
+### 1. Reliability
+
+| Run | Requests | Failed | Gateway retries | What happened during the run |
+|---|---|---|---|---|
+| Autoscaling ramp (final query) | 133 | 0 | 1 | pool 1 → 2 → 3 → 1 replicas |
+| Autoscaling ramp (first query) | 155 | 0 | 0 | pool 1 → 2 → 3 → 1 (over-scaled at 4 users) |
+| Rolling update, 4 users | 127 | 0 | 0 | two full rollouts of a 3-replica pool (`maxUnavailable 0`) |
+| Fallback demo, 2 users | 46 | 0 | 0 | primary at 0 replicas for ~150 s; 16 requests served by the fallback model |
+| Canary window, 4 users | 169 | 0 | 0 | 90/10 split; 13 requests (7.7%) went to the canary |
+| **Total** | **630** | **0** | **1** | |
+
+### 2. Autoscaling (final ramp)
+
+| Users | Replicas | TTFT p50 / p95 (s) | Pool decode tok/s |
+|---|---|---|---|
+| 1 | 1 | 3.33 / 3.45 | 5.0 |
+| 4 | 1 → 2 | 8.31 / 15.92 | 7.3 |
+| 6 | 2 → 3 | 12.19 / 28.36 | 8.9 |
+| 2 | 3 → 1 | 3.43 / 6.48 | 7.0 |
+
+**Findings**
+- **Replicas tracked demand / slots** (4 users → 2, 6 → 3). Load step → new replica Ready in ≈ 20–25 s; pod create → Ready from the weight cache ≈ 6 s. First scale-down ≈ 65 s after the load dropped (60 s stabilisation).
+- **Scaling did not restore the CPU SLO (TTFT ≤ 3 s) beyond 1 user.** Three single-thread replicas on 2 physical cores gave 1.8× the decode throughput of one, and busy replicas were CPU-throttled in ~19% of periods.
+- **Requests were not balanced across replicas.** The gateway's keep-alive connections plus per-connection ClusterIP balancing left per-pod demand at 2.84 / 1.56 / 0.94 in the 6-user stage (first ramp). Queues persisted although the slot count matched the load. Not yet measured: the opt-in per-request connection setting in the chart.
+- **Two scaling-query bugs, measured and fixed** (ADR 0007): summing separate `max_over_time` terms, and the peak of the summed series, both over-read 4 users as 5 and held 3 replicas instead of 2.
+
+### 3. Operations findings
+
+| Finding | Evidence | Fix in the chart |
+|---|---|---|
+| llama.cpp's default host prompt cache (8,192 MiB) OOM-killed a primary pod with a 1.5 GiB limit after ~100 min of load (RSS 484 → 1,507 MiB) | cAdvisor series, pod `OOMKilled` | `--cache-ram 256` |
+| A terminating pod kept serving for its whole 120 s grace period because pooled gateway connections bypassed endpoint removal | fallback demo outcome log | opt-in `gateway.backendConnectionClose` (unmeasured) |
+| NetworkPolicies + backend key: 10 / 10 access checks behave as designed | `m5-netpol/*/result.md` | n/a |
+| Canary gate returned HOLD (13 canary requests < 20); probe accuracy 12/20 for both versions | `m5-canary/*/decision.json` | longer window needed on CPU |

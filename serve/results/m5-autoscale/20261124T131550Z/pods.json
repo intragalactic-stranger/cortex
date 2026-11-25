@@ -1,0 +1,20 @@
+{
+  "cortex-model-primary-6bbc46d7fb-pkjlv": {
+    "created": 148.9,
+    "ready": 154.9,
+    "create_to_ready_s": 6.0,
+    "delete_requested": 614.9
+  },
+  "cortex-model-primary-6bbc46d7fb-zrxc2": {
+    "created": -5101.1,
+    "ready": -5094.1,
+    "create_to_ready_s": 7.0,
+    "delete_requested": null
+  },
+  "cortex-model-primary-6bbc46d7fb-zzmjs": {
+    "created": 103.9,
+    "ready": 109.9,
+    "create_to_ready_s": 6.0,
+    "delete_requested": 479.9
+  }
+}

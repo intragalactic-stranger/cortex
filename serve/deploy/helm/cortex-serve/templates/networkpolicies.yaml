@@ -1,0 +1,100 @@
+{{- if .Values.networkPolicies.enabled }}
+{{- $promNs := .Values.monitoring.prometheusNamespace -}}
+{{- $promLabels := .Values.monitoring.prometheusPodLabels -}}
+# 1. Model pods: ingress only from the gateway (inference) and Prometheus (/metrics), both on 8080.
+#    No egress at all: a model server never needs to call out (weights come from a local volume).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: models-ingress-gateway-only
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: model
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: gateway
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ $promNs }}
+          podSelector:
+            matchLabels:
+              {{- toYaml $promLabels | nindent 14 }}
+      ports:
+        - {protocol: TCP, port: 8080}
+  egress: []
+---
+# 2. Gateway DB: only the gateway may connect.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: gateway-db-ingress-gateway-only
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: gateway-db
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: gateway
+      ports:
+        - {protocol: TCP, port: 5432}
+  egress: []
+---
+# 3. Gateway: ingress on 4000 (clients via NodePort, Prometheus scrape); egress only to the model
+#    pods, its DB and cluster DNS (plus HTTPS to the internet only if the Modal slot is enabled).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: gateway
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: gateway
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - ports:
+        - {protocol: TCP, port: 4000}
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: model
+      ports:
+        - {protocol: TCP, port: 8080}
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: gateway-db
+      ports:
+        - {protocol: TCP, port: 5432}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - {protocol: UDP, port: 53}
+        - {protocol: TCP, port: 53}
+    {{- if .Values.gateway.modal.enabled }}
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except: [10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16]
+      ports:
+        - {protocol: TCP, port: 443}
+    {{- end }}
+{{- end }}

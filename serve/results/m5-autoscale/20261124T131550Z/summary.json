@@ -1,0 +1,78 @@
+{
+  "requests": 155,
+  "ok": 155,
+  "failed": 0,
+  "error_rate": 0.0,
+  "errors": {},
+  "by_deployment": {
+    "cortex-router--primary-v1": 155
+  },
+  "ok_by_deployment": {
+    "cortex-router--primary-v1": 155
+  },
+  "with_retries": 0,
+  "with_fallbacks": 0,
+  "window_s": 568.3714678287506,
+  "ttft_p50_s": 4.782590372953564,
+  "ttft_p95_s": 15.926683503435926,
+  "e2e_p50_s": 12.322655896190554,
+  "e2e_p95_s": 25.287593468884015,
+  "output_tokens_total": 4949,
+  "stages": [
+    {
+      "from_s": 0.0,
+      "to_s": 90.0,
+      "concurrency": 1,
+      "started": 17,
+      "failed": 0,
+      "ttft_p50_s": 3.305458599701524,
+      "ttft_p95_s": 3.4598916050978006,
+      "completed_rps": 0.17777777777777778,
+      "output_tok_s": 5.688888888888889
+    },
+    {
+      "from_s": 90.0,
+      "to_s": 240.0,
+      "concurrency": 4,
+      "started": 43,
+      "failed": 0,
+      "ttft_p50_s": 5.662990036886185,
+      "ttft_p95_s": 15.695812264876439,
+      "completed_rps": 0.26666666666666666,
+      "output_tok_s": 8.533333333333333
+    },
+    {
+      "from_s": 240.0,
+      "to_s": 420.0,
+      "concurrency": 6,
+      "started": 63,
+      "failed": 0,
+      "ttft_p50_s": 7.942911393009126,
+      "ttft_p95_s": 17.341191156953574,
+      "completed_rps": 0.3388888888888889,
+      "output_tok_s": 10.844444444444445
+    },
+    {
+      "from_s": 420.0,
+      "to_s": 570.0,
+      "concurrency": 2,
+      "started": 32,
+      "failed": 0,
+      "ttft_p50_s": 3.3957513463683426,
+      "ttft_p95_s": 6.659407069743611,
+      "completed_rps": 0.24,
+      "output_tok_s": 7.6066666666666665
+    },
+    {
+      "from_s": 570.0,
+      "to_s": 720.0,
+      "concurrency": 0,
+      "started": 0,
+      "failed": 0,
+      "ttft_p50_s": null,
+      "ttft_p95_s": null,
+      "completed_rps": 0.013333333333333334,
+      "output_tok_s": 0.4266666666666667
+    }
+  ]
+}

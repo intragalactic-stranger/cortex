@@ -1,0 +1,53 @@
+# Single-command local stack without Kubernetes: `make up` (serve/deploy/compose/up.sh).
+# Same pinned images as the Helm chart. No Postgres, so no virtual keys: the master key from .env
+# is the only credential. Ports are bound to loopback. CORTEX_MODELS_DIR is the M1 GGUF cache.
+name: cortex-serve
+x-llama: &llama
+  image: ghcr.io/ggml-org/llama.cpp:server@sha256:1145e8de3111dc9358c6d8daffb755c4cf8a862d93391c26ba521b9a810bbe3e
+  user: "10001:10001"
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  environment:
+    LLAMA_API_KEY: ${BACKEND_API_KEY:?run up.sh}
+  volumes:
+    - ${CORTEX_MODELS_DIR:?set CORTEX_MODELS_DIR}:/models:ro
+  tmpfs: [/tmp]
+  networks: [backend]
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD", "curl", "-sf", "http://localhost:8080/health"]
+    interval: 5s
+    retries: 60
+services:
+  primary:
+    <<: *llama
+    command: ["-m", "/models/unsloth_Qwen3-0.6B-GGUF/Qwen3-0.6B-Q4_K_M.gguf", "--alias", "qwen3-0.6b-q4km",
+              "--host", "0.0.0.0", "--port", "8080", "--metrics", "-t", "2", "-np", "2",
+              "--kv-unified-per-slot", "1024", "--cache-ram", "256", "--reasoning", "off", "--no-ui"]
+  fallback:
+    <<: *llama
+    command: ["-m", "/models/unsloth_Qwen3-1.7B-GGUF/Qwen3-1.7B-Q4_K_M.gguf", "--alias", "qwen3-1.7b-q4km",
+              "--host", "0.0.0.0", "--port", "8080", "--metrics", "-t", "2", "-np", "1",
+              "--kv-unified-per-slot", "1024", "--cache-ram", "256", "--reasoning", "off", "--no-ui"]
+  gateway:
+    image: ghcr.io/berriai/litellm-non_root:v1.108.16@sha256:9a81470454422473f10882f8de4c2c780bcd4a5719159c133110d437e1b8f7a7
+    command: ["--config", "/etc/litellm/config.yaml", "--port", "4000", "--num_workers", "1"]
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?run up.sh}
+      BACKEND_API_KEY: ${BACKEND_API_KEY:?run up.sh}
+      LITELLM_LOCAL_MODEL_COST_MAP: "True"
+      LITELLM_TELEMETRY: "False"
+    volumes:
+      - ./litellm.yaml:/etc/litellm/config.yaml:ro
+    ports:
+      - "127.0.0.1:4001:4000"
+    networks: [backend, frontend]
+    depends_on:
+      primary: {condition: service_healthy}
+      fallback: {condition: service_healthy}
+    restart: unless-stopped
+networks:
+  backend:
+    internal: true   # model servers have no route out and are reachable only from the gateway
+  frontend: {}

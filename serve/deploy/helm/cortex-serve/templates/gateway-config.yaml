@@ -1,0 +1,117 @@
+{{- /*
+LiteLLM proxy config, rendered from .Values.gateway. No secret values here: keys are read from env
+(os.environ/...), which the Deployment fills from Secrets generated at install time.
+*/}}
+{{- $root := . -}}
+{{- $g := .Values.gateway -}}
+{{- $models := dict -}}
+{{- range .Values.models }}{{- if include "cortex.modelEnabled" . }}{{- $_ := set $models .name . }}{{- end }}{{- end }}
+{{- define "cortex.litellmDeployment" -}}
+{{- $root := index . 0 -}}{{- $alias := index . 1 -}}{{- $m := index . 2 -}}{{- $weight := index . 3 -}}
+- model_name: {{ $alias }}
+  litellm_params:
+    model: openai/{{ $m.alias }}
+    api_base: http://{{ include "cortex.modelName" $m.name }}.{{ $root.Release.Namespace }}.svc.cluster.local:8080/v1
+    api_key: os.environ/BACKEND_API_KEY
+    timeout: {{ $root.Values.gateway.timeoutSeconds }}
+    stream_timeout: {{ $root.Values.gateway.streamTimeoutSeconds }}
+    rpm: {{ $root.Values.gateway.backendRpm }}
+    {{- if $root.Values.gateway.backendConnectionClose }}
+    # One TCP connection per request: kube-proxy then picks a pod per request (not per pooled
+    # connection), and a terminating pod stops receiving requests once it leaves the endpoints.
+    extra_headers: {"Connection": "close"}
+    {{- end }}
+    {{- if $weight }}
+    weight: {{ $weight }}
+    {{- end }}
+  model_info:
+    id: {{ $alias }}--{{ $m.name }}-{{ $m.version }}
+    cortex_model: {{ $m.name }}
+    cortex_version: {{ $m.version }}
+{{- end }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "cortex.gatewayName" . }}-config
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+data:
+  config.yaml: |
+    model_list:
+    {{- range $alias, $spec := $g.aliases }}
+    {{- $n := 0 }}{{- range $spec.deployments }}{{- if hasKey $models . }}{{- $n = add1 $n }}{{- end }}{{- end }}
+    {{- range $dep := $spec.deployments }}
+    {{- if hasKey $models $dep }}
+    {{- $m := index $models $dep }}
+    {{- $weight := 0 }}
+    {{- if gt $n 1 }}{{- $weight = ternary (int $g.canary.weight) (sub 100 (int $g.canary.weight)) (eq $dep "canary") }}{{- end }}
+    {{- /* canary.weight 0 = rolled back (stable only), 100 = promoted (candidate only) */}}
+    {{- if or (eq $n 1) (gt $weight 0) }}
+    {{- include "cortex.litellmDeployment" (list $root $alias $m $weight) | nindent 4 }}
+    {{- end }}
+    {{- end }}
+    {{- end }}
+    {{- end }}
+    {{- range $alias, $dep := $g.pinned }}
+    {{- if hasKey $models $dep }}
+    {{- include "cortex.litellmDeployment" (list $root $alias (index $models $dep) 0) | nindent 4 }}
+    {{- end }}
+    {{- end }}
+    {{- if $g.modal.enabled }}
+    # Modal vLLM GPU endpoint (enabled via values; see values.yaml "DISABLED SLOT").
+    - model_name: cortex-gpu
+      litellm_params:
+        model: openai/{{ required "gateway.modal.model is required" $g.modal.model }}
+        api_base: {{ required "gateway.modal.apiBase is required" $g.modal.apiBase }}
+        api_key: os.environ/MODAL_ENDPOINT_KEY
+        timeout: {{ $g.timeoutSeconds }}
+        stream_timeout: {{ $g.streamTimeoutSeconds }}
+      model_info:
+        id: cortex-gpu--modal-vllm
+    {{- else }}
+    # Modal vLLM GPU endpoint: DISABLED (gateway.modal.enabled=false). Not deployed in M5.
+    {{- end }}
+
+    router_settings:
+      # simple-shuffle honours per-deployment "weight": this is the 90/10 canary split.
+      routing_strategy: simple-shuffle
+      num_retries: {{ $g.numRetries }}
+      timeout: {{ $g.timeoutSeconds }}
+      allowed_fails: {{ $g.allowedFails }}
+      cooldown_time: {{ $g.cooldownSeconds }}
+      retry_policy:
+        TimeoutErrorRetries: 1
+        InternalServerErrorRetries: {{ $g.numRetries }}
+        RateLimitErrorRetries: {{ $g.numRetries }}
+        BadRequestErrorRetries: 0
+        AuthenticationErrorRetries: 0
+        ContentPolicyViolationErrorRetries: 0
+      fallbacks:
+      {{- range $alias, $spec := $g.aliases }}
+      {{- if $spec.fallbacks }}
+      {{- $chain := $spec.fallbacks }}
+      {{- if and $g.modal.enabled (or (eq $alias "cortex-default") (eq $alias "cortex-router")) }}
+      {{- $chain = prepend $spec.fallbacks "cortex-gpu" }}
+      {{- end }}
+        - {{ $alias }}: {{ toJson $chain }}
+      {{- end }}
+      {{- end }}
+
+    litellm_settings:
+      request_timeout: {{ $g.timeoutSeconds }}
+      drop_params: true
+      callbacks: ["prometheus"]
+      # /metrics needs a proxy-admin key when auth is on; Prometheus must not hold one. It is scraped
+      # unauthenticated instead (counts, latencies, hashed key ids only). The NodePort is loopback-only
+      # on k3d; in a shared cluster expose metrics on an internal-only port (threat model T6).
+      require_auth_for_metrics_endpoint: false
+      json_logs: true
+      telemetry: false
+
+    general_settings:
+      master_key: os.environ/LITELLM_MASTER_KEY
+      database_url: os.environ/DATABASE_URL
+      disable_spend_logs: false
+      store_model_in_db: false
+      # Virtual keys carry their own rpm/tpm limits and budgets (scripts/m5 creates them).
+      proxy_batch_write_at: 10

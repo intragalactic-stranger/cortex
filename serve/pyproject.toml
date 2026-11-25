@@ -19,6 +19,7 @@ dependencies = [
 [project.scripts]
 memcalc = "cortex_serve.memcalc.cli:app"
 servebench = "cortex_serve.servebench.cli:app"
+gatewaybench = "cortex_serve.gatewaybench.cli:app"
 
 [project.optional-dependencies]
 modal = [

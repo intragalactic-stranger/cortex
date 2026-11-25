@@ -1,0 +1,34 @@
+{
+  "requests": 127,
+  "ok": 127,
+  "failed": 0,
+  "error_rate": 0.0,
+  "errors": {},
+  "by_deployment": {
+    "cortex-router--primary-v1": 127
+  },
+  "ok_by_deployment": {
+    "cortex-router--primary-v1": 127
+  },
+  "with_retries": 0,
+  "with_fallbacks": 0,
+  "window_s": 416.80440187454224,
+  "ttft_p50_s": 4.505575808696449,
+  "ttft_p95_s": 15.924862978141755,
+  "e2e_p50_s": 13.094558452256024,
+  "e2e_p95_s": 24.507536575058474,
+  "output_tokens_total": 4064,
+  "stages": [
+    {
+      "from_s": 0.0,
+      "to_s": 420.0,
+      "concurrency": 4,
+      "started": 127,
+      "failed": 0,
+      "ttft_p50_s": 4.505575808696449,
+      "ttft_p95_s": 15.924862978141755,
+      "completed_rps": 0.29285714285714287,
+      "output_tok_s": 9.371428571428572
+    }
+  ]
+}

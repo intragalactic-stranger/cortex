@@ -1,0 +1,117 @@
+# kube-prometheus-stack, trimmed for a 4 vCPU / 15 GiB single-node k3d cluster.
+# Chart version and image digests are pinned in serve/deploy/k3d/versions.env (see docs/VERSIONS.md).
+# Kept: Prometheus Operator, Prometheus, Grafana, kube-state-metrics (replica counts for the timeline).
+# Dropped: Alertmanager (rules are evaluated and visible in Prometheus /alerts; no receivers on a laptop),
+# node-exporter, control-plane scrapes that k3s does not expose separately, default rule packs.
+fullnameOverride: kps
+
+crds:
+  enabled: true
+
+defaultRules:
+  create: false
+
+alertmanager:
+  enabled: false
+
+nodeExporter:
+  enabled: false
+
+kubeApiServer:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeProxy:
+  enabled: false
+kubeEtcd:
+  enabled: false
+coreDns:
+  enabled: false
+kubelet:
+  enabled: true
+  serviceMonitor:
+    cAdvisor: true
+    probes: false
+    resource: false
+
+kubeStateMetrics:
+  enabled: true
+kube-state-metrics:
+  image:
+    tag: v2.20.0
+    sha: sha256:42cfe3723a5f058171c627537fb57a3ea0f26e4380fa18555a95cb1a1b4cfc5b  # this subchart wants the prefix
+  resources:
+    requests: {cpu: 10m, memory: 32Mi}
+    limits: {memory: 128Mi}
+
+prometheusOperator:
+  image:
+    tag: v0.95.1
+    sha: 9c2490af910d58ec2abd77642d340e30bd5e2de5c80fd19ab4b49e28dc7bbb83
+  prometheusConfigReloader:
+    image:
+      tag: v0.95.1
+      sha: 39bdbade0c64f7c38bb6d18d6f602b14ad489bc189b709dc9266b49e6647aac1
+  resources:
+    requests: {cpu: 20m, memory: 64Mi}
+    limits: {memory: 256Mi}
+  admissionWebhooks:
+    enabled: false
+  tls:
+    enabled: false
+
+prometheus:
+  service:
+    type: NodePort
+    nodePort: 30090
+  prometheusSpec:
+    image:
+      tag: v3.16.0-distroless
+      sha: 9764044e09eb2c9e1abdb12d0f0188d4efb7384b0262d3c080f0fc59045c89ba
+    scrapeInterval: 5s
+    evaluationInterval: 15s
+    retention: 2d
+    retentionSize: 1GB
+    # Pick up ServiceMonitors / PodMonitors / PrometheusRules from every namespace, not just this release.
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    resources:
+      requests: {cpu: 100m, memory: 256Mi}
+      limits: {memory: 1Gi}
+    storageSpec: {}
+
+grafana:
+  enabled: true
+  image:
+    tag: 13.3.0-distroless
+    sha: 540b8afb775bf34aefce417e4329039daa5d44b6f2fbda6881397b1b247ca7df
+  adminUser: admin
+  # Password is generated at install time by serve/deploy/k3d/up.sh into the Secret below.
+  admin:
+    existingSecret: grafana-admin
+    userKey: admin-user
+    passwordKey: admin-password
+  service:
+    type: NodePort
+    nodePort: 30300
+  resources:
+    requests: {cpu: 50m, memory: 256Mi}
+    limits: {memory: 640Mi}   # Grafana 13 was OOM-killed at 256Mi during startup
+  persistence:
+    enabled: false
+  sidecar:
+    image:
+      tag: 2.14.3
+      sha: 52d311dcedd587421a236c4d6c621f05614c40a51386e955e0699dca97ec0880
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+      searchNamespace: ALL
+    datasources:
+      enabled: true
+  defaultDashboardsEnabled: false
+  testFramework:
+    enabled: false

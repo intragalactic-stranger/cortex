@@ -1,0 +1,31 @@
+{{- /* Read-only weight cache: a hostPath PV bound to a PVC that every model pod mounts. */}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Namespace }}-weights
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+    cortex.dev/volume: weights
+spec:
+  capacity:
+    storage: {{ .Values.weights.storage }}
+  accessModes: [ReadOnlyMany]
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: cortex-weights
+  hostPath:
+    path: {{ .Values.weights.hostPath }}
+    type: Directory
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-weights
+  labels:
+    {{- include "cortex.labels" . | nindent 4 }}
+spec:
+  accessModes: [ReadOnlyMany]
+  storageClassName: cortex-weights
+  volumeName: {{ .Release.Namespace }}-weights
+  resources:
+    requests:
+      storage: {{ .Values.weights.storage }}

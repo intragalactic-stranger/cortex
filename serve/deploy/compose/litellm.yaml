@@ -1,0 +1,26 @@
+# Compose variant of the chart's gateway config (no DB: master key only).
+model_list:
+  - model_name: cortex-default
+    litellm_params: {model: openai/qwen3-0.6b-q4km, api_base: "http://primary:8080/v1", api_key: os.environ/BACKEND_API_KEY, timeout: 120, stream_timeout: 60}
+  - model_name: cortex-router
+    litellm_params: {model: openai/qwen3-0.6b-q4km, api_base: "http://primary:8080/v1", api_key: os.environ/BACKEND_API_KEY, timeout: 120, stream_timeout: 60}
+  - model_name: cortex-judge
+    litellm_params: {model: openai/qwen3-1.7b-q4km, api_base: "http://fallback:8080/v1", api_key: os.environ/BACKEND_API_KEY, timeout: 120, stream_timeout: 60}
+  - model_name: cortex-fallback
+    litellm_params: {model: openai/qwen3-1.7b-q4km, api_base: "http://fallback:8080/v1", api_key: os.environ/BACKEND_API_KEY, timeout: 120, stream_timeout: 60}
+router_settings:
+  routing_strategy: simple-shuffle
+  num_retries: 2
+  timeout: 120
+  allowed_fails: 2
+  cooldown_time: 15
+  fallbacks:
+    - cortex-default: ["cortex-fallback"]
+    - cortex-router: ["cortex-fallback"]
+    - cortex-judge: ["cortex-default"]
+litellm_settings:
+  request_timeout: 120
+  drop_params: true
+  telemetry: false
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

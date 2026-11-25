@@ -1,0 +1,212 @@
+{{- /*
+One Deployment + Service + PodDisruptionBudget (+ KEDA ScaledObject) per entry of .Values.models.
+*/}}
+{{- $root := . -}}
+{{- $d := .Values.llamacpp.defaults -}}
+{{- $p := .Values.llamacpp.probes -}}
+{{- range $m := .Values.models }}
+{{- if include "cortex.modelEnabled" $m }}
+{{- $name := include "cortex.modelName" $m.name }}
+{{- $auto := and $m.autoscaling $m.autoscaling.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "cortex.labels" $root | nindent 4 }}
+    app.kubernetes.io/component: model
+    cortex.dev/model: {{ $m.name }}
+    cortex.dev/version: {{ $m.version }}
+spec:
+  {{- if not $auto }}
+  replicas: {{ $m.replicas }}
+  {{- end }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: model
+      cortex.dev/model: {{ $m.name }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0   # never drop below the current serving capacity during a rollout
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/part-of: cortex-serve
+        app.kubernetes.io/component: model
+        cortex.dev/model: {{ $m.name }}
+        cortex.dev/version: {{ $m.version }}
+        cortex.dev/alias: {{ $m.alias }}
+      annotations:
+        cortex.dev/weights: {{ $m.file | quote }}
+        cortex.dev/hf-revision: {{ $m.hfRevision | quote }}
+        {{- with $m.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      terminationGracePeriodSeconds: {{ $root.Values.llamacpp.drain.terminationGracePeriodSeconds }}
+      securityContext:
+        {{- toYaml $root.Values.llamacpp.securityContext | nindent 8 }}
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: llama-server
+          image: {{ $root.Values.llamacpp.image }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - -m
+            - /models/{{ $m.file }}
+            - --alias
+            - {{ $m.alias }}
+            - --host
+            - 0.0.0.0
+            - --port
+            - "8080"
+            - --metrics
+            - -t
+            - {{ include "cortex.modelArg" (list $m $d "threads") | quote }}
+            - -np
+            - {{ include "cortex.modelArg" (list $m $d "parallel") | quote }}
+            - --kv-unified-per-slot
+            - {{ include "cortex.modelArg" (list $m $d "ctxPerSlot") | quote }}
+            - --cache-ram
+            - {{ include "cortex.modelArg" (list $m $d "cacheRamMiB") | quote }}
+            {{- range (default $d.extraArgs $m.extraArgs) }}
+            - {{ . | quote }}
+            {{- end }}
+          env:
+            - name: LLAMA_API_KEY
+              valueFrom:
+                secretKeyRef: {name: {{ $root.Values.llamacpp.apiKeySecret.name }}, key: {{ $root.Values.llamacpp.apiKeySecret.key }}}
+          ports:
+            - {name: http, containerPort: 8080, protocol: TCP}
+          # /health is the only unauthenticated endpoint; it returns 503 while the model loads.
+          startupProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: {{ $p.startup.periodSeconds }}
+            failureThreshold: {{ $p.startup.failureThreshold }}
+            timeoutSeconds: {{ $p.startup.timeoutSeconds }}
+          readinessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: {{ $p.readiness.periodSeconds }}
+            failureThreshold: {{ $p.readiness.failureThreshold }}
+            timeoutSeconds: {{ $p.readiness.timeoutSeconds }}
+          livenessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: {{ $p.liveness.periodSeconds }}
+            failureThreshold: {{ $p.liveness.failureThreshold }}
+            timeoutSeconds: {{ $p.liveness.timeoutSeconds }}
+          lifecycle:
+            preStop:
+              exec:
+                # Wait for endpoint removal to propagate, then until no request is running or queued.
+                command:
+                  - sh
+                  - -c
+                  - |
+                    sleep {{ $root.Values.llamacpp.drain.endpointGraceSeconds }}
+                    while :; do
+                      m=$(curl -sf -m 2 -H "Authorization: Bearer $LLAMA_API_KEY" http://127.0.0.1:8080/metrics) || break
+                      busy=$(echo "$m" | awk '/^llamacpp:requests_(processing|deferred) /{s+=$2} END{print s+0}')
+                      [ "$busy" = "0" ] && break
+                      sleep 1
+                    done
+          resources:
+            {{- toYaml $m.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          volumeMounts:
+            - {name: weights, mountPath: /models, readOnly: true}
+            - {name: tmp, mountPath: /tmp}
+      volumes:
+        - name: weights
+          persistentVolumeClaim: {claimName: model-weights, readOnly: true}
+        - name: tmp
+          emptyDir: {sizeLimit: 64Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "cortex.labels" $root | nindent 4 }}
+    app.kubernetes.io/component: model
+    cortex.dev/model: {{ $m.name }}
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/component: model
+    cortex.dev/model: {{ $m.name }}
+  ports:
+    - {name: http, port: 8080, targetPort: http, protocol: TCP}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "cortex.labels" $root | nindent 4 }}
+spec:
+  # Voluntary evictions (drain, cluster upgrades) may never take the last serving replica.
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: model
+      cortex.dev/model: {{ $m.name }}
+{{- if $auto }}
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "cortex.labels" $root | nindent 4 }}
+spec:
+  scaleTargetRef:
+    name: {{ $name }}
+  minReplicaCount: {{ $m.autoscaling.minReplicas }}
+  maxReplicaCount: {{ $m.autoscaling.maxReplicas }}
+  pollingInterval: {{ $m.autoscaling.pollingInterval }}
+  # If Prometheus is unreachable, hold the current size instead of guessing.
+  fallback:
+    failureThreshold: 3
+    replicas: {{ $m.autoscaling.minReplicas }}
+    behavior: currentReplicasIfHigher
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleUp:
+          stabilizationWindowSeconds: 0
+          policies: [{type: Pods, value: 1, periodSeconds: 15}]
+        scaleDown:
+          stabilizationWindowSeconds: {{ $m.autoscaling.scaleDownStabilizationSeconds }}
+          policies: [{type: Pods, value: 1, periodSeconds: 30}]
+  triggers:
+    # Demand = requests running in a slot + requests queued for a slot, summed over the pool.
+    # AverageValue target = slots per replica, so desired replicas = ceil(demand / slots).
+    # See serve/docs/adr/0007-queue-depth-autoscaling.md.
+    - type: prometheus
+      name: queue-depth
+      metricType: AverageValue
+      metadata:
+        serverAddress: {{ $root.Values.monitoring.prometheusUrl }}
+        # Mean of the summed demand over 15 s (subquery). Two earlier forms over-read 4 users as 5 and
+        # held 3 replicas: (1) sum of two separate max_over_time terms double-counted a request moving
+        # from deferred to processing; (2) max_over_time of the sum still caught spikes caused by pods
+        # being scraped at slightly different instants. See ADR 0007 amendment.
+        query: >-
+          avg_over_time((
+            sum(llamacpp:requests_processing{namespace="{{ $root.Release.Namespace }}",cortex_model="{{ $m.name }}"})
+            + sum(llamacpp:requests_deferred{namespace="{{ $root.Release.Namespace }}",cortex_model="{{ $m.name }}"})
+          )[15s:5s])
+        threshold: {{ include "cortex.modelArg" (list $m $d "parallel") | quote }}
+        ignoreNullValues: "false"
+{{- end }}
+{{- end }}
+{{- end }}

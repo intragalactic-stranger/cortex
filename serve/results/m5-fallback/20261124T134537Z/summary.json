@@ -1,0 +1,23 @@
+{
+  "requests": 46,
+  "ok": 46,
+  "failed": 0,
+  "error_rate": 0.0,
+  "errors": {},
+  "by_deployment": {
+    "cortex-router--primary-v1": 30,
+    "cortex-fallback--fallback-v1": 16
+  },
+  "ok_by_deployment": {
+    "cortex-router--primary-v1": 30,
+    "cortex-fallback--fallback-v1": 16
+  },
+  "with_retries": 0,
+  "with_fallbacks": 16,
+  "window_s": 357.5380003452301,
+  "ttft_p50_s": 7.007145891198888,
+  "ttft_p95_s": 15.190859763300978,
+  "e2e_p50_s": 12.693853629520163,
+  "e2e_p95_s": 22.813385168090463,
+  "output_tokens_total": 1472
+}

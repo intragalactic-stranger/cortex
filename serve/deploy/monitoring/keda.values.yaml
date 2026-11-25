@@ -1,0 +1,18 @@
+# KEDA, pinned by digest (chart 2.21.1). Small requests for a single-node k3d cluster.
+image:
+  keda:
+    tag: "2.21.1@sha256:d09d92c0a310e3057a3c54df387b99abf2bf31352218dbe1adcb00e807886488"
+  metricsApiServer:
+    tag: "2.21.1@sha256:747e376b3e80dc4f72bf4f7043f47cc4cdb56f34b1aed9531789f474996e1c84"
+  webhooks:
+    tag: "2.21.1@sha256:5f4b0b0f7831b9f53738be85e99449a1747a5effa970305fe602455ab0f4fcd3"
+resources:
+  operator:
+    requests: {cpu: 20m, memory: 64Mi}
+    limits: {cpu: "1", memory: 512Mi}
+  metricServer:
+    requests: {cpu: 20m, memory: 64Mi}
+    limits: {cpu: "1", memory: 512Mi}
+  webhooks:
+    requests: {cpu: 10m, memory: 32Mi}
+    limits: {cpu: 500m, memory: 256Mi}
