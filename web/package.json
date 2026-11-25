@@ -1,0 +1,31 @@
+{
+  "name": "cortex-serve-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cortex Serve: static results site and browser memory calculator (M6)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx --yes serve@14.2.4 out",
+    "test": "node --test --test-reporter=spec --experimental-strip-types --no-warnings=ExperimentalWarning 'test/**/*.test.ts'",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "marked": "18.1.3",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "5.9.3"
+  }
+}
