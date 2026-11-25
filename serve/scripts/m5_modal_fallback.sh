@@ -24,15 +24,19 @@ uv run gatewaybench load --out "$OUT" --profile "420:2" --alias cortex-default \
   --input-tokens 64 --output-tokens 32 --note "GPU fallback demo: local pool to 0, Modal L4 vLLM serves" &
 LOAD=$!
 sleep 60
-mark "PRIMARY DOWN: pause KEDA at 0 replicas"
+mark "LOCAL POOL DOWN: primary (KEDA paused at 0) and canary (scaled to 0): every cortex-default deployment"
 kubectl -n "$NS" annotate scaledobject cortex-model-primary autoscaling.keda.sh/paused-replicas=0 --overwrite
+kubectl -n "$NS" scale deployment cortex-model-canary --replicas=0
 kubectl -n "$NS" wait --for=delete pod -l cortex.dev/model=primary --timeout=300s || true
-mark "primary pods gone (gateway should route to the Modal endpoint)"
+kubectl -n "$NS" wait --for=delete pod -l cortex.dev/model=canary --timeout=300s || true
+mark "local cortex-default pods gone (gateway should route to the Modal endpoint)"
 sleep 200
-mark "PRIMARY RESTORE: unpause KEDA"
+mark "LOCAL POOL RESTORE: unpause KEDA, canary back to 1"
 kubectl -n "$NS" annotate scaledobject cortex-model-primary autoscaling.keda.sh/paused-replicas-
+kubectl -n "$NS" scale deployment cortex-model-canary --replicas=1
 kubectl -n "$NS" rollout status deployment/cortex-model-primary --timeout=300s
-mark "primary ready"
+kubectl -n "$NS" rollout status deployment/cortex-model-canary --timeout=300s
+mark "local pool ready"
 wait $LOAD
 log "done: $OUT"
 python3 -c "import json;s=json.load(open('$OUT/summary.json'));print({k:s.get(k) for k in ('requests','ok','failed','by_deployment','with_fallbacks','errors')})"
