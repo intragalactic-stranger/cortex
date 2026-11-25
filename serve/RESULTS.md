@@ -292,7 +292,7 @@ llama.cpp on L4 (1 user, TPOT ms): bf16 33.2 · Q8_0 19.8 · Q5_K_M 14.3 · Q4_K
 - **Careful PTQ (GPTQ) matched both the original and Google's QAT checkpoint on every generative task** (all within CI). **Naive RTN** at the same bit width lost 13.6 points of GSM8K (flexible) and 6.8 of IFEval: *how* you quantize matters more than whether the model was trained for it, at this size and on these tasks.
 - **QAT's large advantage shows up only in raw-text perplexity** (WikiText word PPL 86 vs 252 for the original; BFSI 52 vs 127), the same "different model" effect as in §5. It did not translate into better chat-task scores.
 - **Loglikelihood benchmarks are not meaningful for Gemma 4 IT:** ARC/HellaSwag/MMLU-Pro sit at chance even for bf16 (25.2 / 37.4 / 24.8), with or without `<bos>` (`results/quality-gpu-invalid/README.md`). Gemma is compared on generative tasks only. lm-eval's `arc_challenge_chat` scores 0 for every Gemma variant (it expects a bare letter; Gemma reasons first), so reasoning-first ARC uses our own scorer (`quality/arc.py`, `cot=True`).
-- Unexplained: our GPTQ and RTN artifacts differ by 1.25 GiB with identical ignore lists. Open question for the artifact audit before publishing.
+- Size difference explained by a header audit (`deploy/modal/artifact_audit.py`): both artifacts hold identical quantized text layers (1.84 GiB int4 + scales); the GPTQ artifact additionally stores `lm_head` as a separate bf16 tensor (1.25 GiB) where RTN kept it tied to `embed_tokens`. Same weights, different storage; 10.72 GiB (11.5 GB) equals Google's QAT checkpoint size.
 
 ---
 
