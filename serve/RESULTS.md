@@ -462,3 +462,41 @@ The gateway's prepared Modal slot was enabled with our M3 FP8 Qwen3-4B served by
 - **250 of 252 requests succeeded; 214 were served by the GPU fallback** while the local pool was down. The 2 failures were streams already in progress on local pods when they were scaled to 0 ("response payload is not completed"), the same in-flight cut-off seen in the M5 CPU fallback demo.
 - The GPU p95 TTFT (5.6 s) is the first requests of the outage, which waited for the failed local attempt and the gateway cooldown before falling back.
 - **A first attempt served 0 GPU requests** (`…-gpu-unauthorized/INVALID.md`): the load-test virtual key did not list `cortex-gpu`, so LiteLLM skipped that fallback ("caller is not authorized") and went straight to the second CPU model; and the canary deployment kept serving `cortex-default`. Per-key model allow-lists apply to fallbacks too.
+
+---
+
+## M7: E14 cost frontier, measured
+
+**Method** (`scripts/e14_frontier.py`): for every serving configuration measured on the chat workload (512 in /
+256 out; CPU: 128 / 64), cost = hourly price ÷ the best goodput in output tokens/s over the measured load levels,
+expressed as $ per 1M output tokens that met the SLO. Prices: Modal L4 $0.80/h, H100 $3.95/h (the H200 run was billed
+as H100), 2 × H100 $7.90/h; CPU = AWS t3a.xlarge on-demand $0.1504/h (list price). Quality = mean of GSM8K (flexible)
+and IFEval, the two generative tasks valid for every model family. Load levels were coarse (1, 4, 16, 32, 64, 128),
+so the true optimum can lie between them. Table: `results/reports/m7-e14/frontier.csv`; plot: `frontier.png`.
+
+| Setup (best level) | $ / 1M SLO-meeting tokens | Quality % |
+|---|---|---|
+| H100 · vLLM · Qwen FP8 (64 users) | **0.120** | 81.6 |
+| H100 · vLLM · FP8-dynamic / INT8 (64) | 0.122 | 80.5 / 80.8 |
+| H200 · vLLM · bf16 (64) | 0.136 | 81.1 |
+| H100 · vLLM / SGLang · bf16 (64) | 0.158 | 81.1 |
+| H100 · vLLM · W4A16 GPTQ (64) | 0.170 | 81.0 |
+| 2 × H100 · vLLM TP=2 · bf16 (64) | 0.214 | 81.1 |
+| H100 · vLLM · Qwen3-30B-A3B bf16 (64) | 0.384 | **84.3** |
+| L4 · vLLM · W4A16 GPTQ / AWQ (4) | 0.814 / 0.820 | 81.0 / 81.6 |
+| L4 · vLLM · INT8 / FP8 (4–16) | 1.16–1.24 | 80.5–81.6 |
+| L4 · vLLM / SGLang · bf16 (4) | 2.03 / 2.04 | 81.1 |
+| L4 · vLLM · Qwen3.5-4B bf16 (8) | 2.39 | 81.6 |
+| L4 · llama.cpp · Q4_K_M (1) | 2.97 | — |
+| CPU · llama.cpp / Ollama · Qwen3-0.6B Q4_K_M (1, CPU SLO) | 3.3 | — |
+| L4 · vLLM · Gemma 4 E4B bf16 (8) | 3.96 | 80.9 |
+
+**Findings**
+- **The Pareto frontier has two points:** H100 + FP8 (cheapest) and the 30B-A3B MoE on H100 (best quality, 3.2× the
+  price per token). Every other configuration is dominated.
+- **All 4B variants (any engine, format or GPU) sit within ±2.4 points of each other**, inside the quality CIs. For a 4B
+  model the decision is cost and latency.
+- **Per SLO-meeting token the H100 is 6.8× (best vs best) to 12.8× (bf16 vs bf16) cheaper than the L4**, despite costing
+  4.9× more per hour, because the L4 serves only a handful of users inside the SLO.
+- **llama.cpp on an L4 costs 3.7× vLLM's 4-bit setup per useful token**: it never met the GPU SLO above 1 user.
+- The decision guide built on these numbers: [`docs/DECISION_GUIDE.md`](docs/DECISION_GUIDE.md).

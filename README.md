@@ -5,7 +5,7 @@ reproducible lab: every number in it comes from a committed config, a pinned ima
 
 | Package | Project | Status |
 |---|---|---|
-| [`serve/`](serve/) | **Cortex Serve**: memory math, benchmarking, quantization and production serving for LLM inference | ✅ M0–M5 done (memcalc, servebench, GPU engine baseline, quantization, feature experiments, k3d serving) · M6 web site and M7 decision guide next |
+| [`serve/`](serve/) | **Cortex Serve**: memory math, benchmarking, quantization and production serving for LLM inference | ✅ v1.0: lab (M0–M4), k3d serving (M5), web site (M6), cost frontier + [decision guide](serve/docs/DECISION_GUIDE.md) (M7) |
 | `slm/` | Cortex-SLM: a small language model from tokenizer to RL to distillation | planned |
 | `retrieval/` | Cortex Retrieval: hybrid / graph / multimodal RAG | planned |
 | `agent/` | Cortex Agent: autonomous Goal → Plan → Act → Evaluate agent | planned |
@@ -24,7 +24,7 @@ Measured on Modal (L4, H100) and a 4-vCPU box, ~60 GPU runs, with every request 
 5. **Hybrid and sliding-window architectures need 3–4× less KV memory per sequence** and serve long contexts 1.7× faster, but engines realise only 48–94% of the theoretical saving.
 6. **Production patterns, measured:** queue-depth autoscaling, zero-failure rolling updates (127/127), and gateway fallback to a GPU endpoint (214/252 requests served by the GPU while the CPU pool was down).
 
-→ Details, charts and reproduction commands: [`serve/README.md`](serve/README.md) · all tables: [`serve/RESULTS.md`](serve/RESULTS.md)
+→ **What to use when:** [`serve/docs/DECISION_GUIDE.md`](serve/docs/DECISION_GUIDE.md) · details, charts and reproduction commands: [`serve/README.md`](serve/README.md) · all tables: [`serve/RESULTS.md`](serve/RESULTS.md)
 
 ## Quickstart
 ```bash

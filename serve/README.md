@@ -5,7 +5,7 @@
 > production-style serving the rest of Cortex can call.
 
 Cortex Serve is a reproducible inference lab plus a production-style serving stack. It was built in milestones
-M0–M5; every result below is reproducible from a committed config with a manifest (git SHA, image digest, model
+M0–M7; every result below is reproducible from a committed config with a manifest (git SHA, image digest, model
 revision, real GPU from `nvidia-smi`). Full tables: [`RESULTS.md`](RESULTS.md).
 
 **Total GPU spend for M2–M5: ≈ $33 on Modal** (L4 $0.80/h, L40S $1.95/h, H100 $3.95/h).
@@ -72,7 +72,57 @@ down, 214 of 252 requests were served by the GPU (TTFT p50 0.27 s vs 5.96 s on C
 
 <img src="results/m5-autoscale/20261124T135406Z/timeline.png" alt="Offered load, queue depth, replicas and TTFT over time during a KEDA autoscaling ramp" width="820">
 
+### 5. The cost frontier (E14) and the decision guide
+
+Price of output tokens that met the SLO, at the best measured load, against quality. On an H100, FP8/INT8 weights cost
+≈ $0.12 per 1M SLO-meeting tokens; the best L4 setup (4-bit) ≈ $0.81; L4 bf16 ≈ $2.0. All 4B variants sit inside the
+quality CI band; only the 30B MoE buys more quality (≈ 3× the price per token).
+
+<img src="results/reports/m7-e14/frontier.png" alt="Cost per 1M SLO-meeting tokens vs quality; H100 FP8 cheapest, MoE highest quality" width="820">
+
+→ **[`docs/DECISION_GUIDE.md`](docs/DECISION_GUIDE.md)**: which hardware, engine, format and settings to use, with a
+decision flowchart and the evidence for each recommendation.
+
 ---
+
+## Architecture
+
+```mermaid
+flowchart LR
+    subgraph Lab["Measurement lab"]
+        MC[memcalc<br/>memory model] --> SB[servebench<br/>client-side timing, goodput]
+        SB --> MA[Modal apps<br/>bench · quantize · eval · GGUF]
+        MA --> R[(results/<br/>manifests + parquet)]
+        R --> REP[reports, RESULTS.md,<br/>E14 frontier, decision guide]
+    end
+    subgraph Prod["Production-style serving (k3d)"]
+        C[client] --> GW[LiteLLM gateway<br/>keys · limits · canary · fallback]
+        GW --> P1[llama.cpp pool<br/>KEDA on queue depth]
+        GW --> FB[second local model]
+        GW -. fallback .-> GPU[Modal vLLM GPU endpoint]
+        P1 --> PR[Prometheus + Grafana<br/>alerts]
+    end
+    REP -. chooses config for .-> Prod
+```
+
+## What went wrong (and what it taught)
+
+Each of these is documented with evidence in the milestone reports.
+
+- **A feature that never ran (M1).** llama.cpp loaded the draft model but `--spec-type` defaults to `none`, so the first
+  speculative-decoding run measured the baseline twice. servebench now fails any run whose draft model drafts nothing.
+- **The cloud swapped the GPU (M2).** Modal served an H100 request on an H200; vLLM looked 20% faster than SGLang until
+  rerun on a real H100. Every run now records and checks the GPU it got.
+- **A "38-point maths collapse" was a format change (M3).** Reading raw answers showed the domain-calibrated model had
+  stopped writing `#### N`; arithmetic dropped only 3 points. GSM8K is now reported strict and flexible.
+- **A benchmark the baseline itself fails (M3).** Gemma 4's multiple-choice scores sat at chance even for bf16, so they
+  measure nothing about quantization; Gemma is compared on generative tasks.
+- **Tens of GB returned by mistake (M3).** A KL-divergence job tried to ship its reference logits back with its results;
+  ≈ $2.40 wasted before it was caught.
+- **Self-inflicted tooling bugs:** removed engine flags, missing processor files, a deadline guard that skipped every
+  run, `pkill -f` matching its own shell. Each fixed with a test or a guard.
+- **Access control applies to fallbacks (M5).** The first GPU-fallback demo routed nothing to the GPU because the API
+  key's model allow-list didn't include it.
 
 ## What's inside
 
@@ -101,7 +151,8 @@ anything at all has been billed beyond credits; each run checks that the GPU it 
 | M3 · Quantization + quality | [`docs/milestones/M3_REPORT.md`](docs/milestones/M3_REPORT.md) |
 | M4 · Feature experiments | [`docs/milestones/M4_REPORT.md`](docs/milestones/M4_REPORT.md) |
 | M5 · Production-style serving | [`docs/milestones/M5_REPORT.md`](docs/milestones/M5_REPORT.md) |
-| M6 · Interactive web site · M7 · Decision guide | next |
+| M6 · Interactive web site | [`docs/milestones/M6_REPORT.md`](docs/milestones/M6_REPORT.md) |
+| M7 · Cost frontier, decision guide, release | [`docs/milestones/M7_REPORT.md`](docs/milestones/M7_REPORT.md) |
 
 Each report lists what was built, acceptance criteria, key numbers, deviations, decisions (marked ⚑), failures
 caught, and an explain-back checklist. Decision IDs (D-0xx) refer to the project's internal decision log.
