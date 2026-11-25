@@ -292,7 +292,7 @@
         },
         "image": "ghcr.io/berriai/litellm-non_root:v1.108.16@sha256:9a81470454422473f10882f8de4c2c780bcd4a5719159c133110d437e1b8f7a7",
         "modal": {
-          "apiBase": "https://ganeshanarumuganainar--cortex-gpu-endpoint-serve.us-east.modal.run/v1",
+          "apiBase": "https://<workspace>--cortex-gpu-endpoint-serve.<region>.modal.run/v1",
           "apiKeySecret": {
             "key": "api-key",
             "name": "modal-endpoint"

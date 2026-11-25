@@ -38,5 +38,7 @@ kubectl -n "$NS" rollout status deployment/cortex-model-primary --timeout=300s
 kubectl -n "$NS" rollout status deployment/cortex-model-canary --timeout=300s
 mark "local pool ready"
 wait $LOAD
+# the endpoint URL contains the Modal workspace name: keep it out of committed results
+grep -rlF "$CORTEX_MODAL_URL" "$OUT" | xargs -r sed -i "s#$CORTEX_MODAL_URL#https://<workspace>--cortex-gpu-endpoint-serve.<region>.modal.run#g"
 log "done: $OUT"
 python3 -c "import json;s=json.load(open('$OUT/summary.json'));print({k:s.get(k) for k in ('requests','ok','failed','by_deployment','with_fallbacks','errors')})"

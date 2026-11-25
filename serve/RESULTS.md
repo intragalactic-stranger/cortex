@@ -265,7 +265,7 @@ llama.cpp on L4 (1 user, TPOT ms): bf16 33.2 · Q8_0 19.8 · Q5_K_M 14.3 · Q4_K
 
 **Findings**
 - **The best format depends on the GPU.** On the L4 (300 GB/s) decode stays memory-bound even at 64 users, so 4-bit wins everywhere: 2.7× faster per token at 1 user, 2.5× goodput at 4 users, +32% throughput at 64. On the H100 (3.35 TB/s) a busy server becomes compute-bound: **W4A16 is faster at 1 user but slower than bf16 at 64–128 users** (weight-only int4 must dequantize to bf16 before every matmul), while **FP8/INT8 (true 8-bit compute) give +30% goodput** at 64 users.
-- **Qwen's official block-FP8 has worse TTFT on the L4** (1.55 s vs 0.99 s p95 at 16 users): sm_89 has no CUTLASS block-FP8 path (research M3 §6). On the H100 it equals our FP8.
+- **Qwen's official block-FP8 has worse TTFT on the L4** (1.55 s vs 0.99 s p95 at 16 users): sm_89 has no CUTLASS block-FP8 path (`docs/research/M3_quantization-tooling.md` §6). On the H100 it equals our FP8.
 - The engine-reported KV capacity grows as weights shrink (H100: 444K tokens bf16 → 469K FP8 → 481K W4A16).
 
 ### 5. Gemma 4 E2B perplexity anomaly from M1: resolved (llama.cpp, WikiText-2, ctx 512)
