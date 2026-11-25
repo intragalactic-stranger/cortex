@@ -1,0 +1,4 @@
+1795591697.085447714 PRIMARY DOWN: pause KEDA at 0 replicas
+1795591820.181989727 primary pods gone (gateway should route to the Modal endpoint)
+1795592020.197901585 PRIMARY RESTORE: unpause KEDA
+1795592020.611197886 primary ready

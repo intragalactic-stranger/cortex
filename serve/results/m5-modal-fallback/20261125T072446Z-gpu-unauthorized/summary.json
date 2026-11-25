@@ -1,0 +1,27 @@
+{
+  "requests": 74,
+  "ok": 73,
+  "failed": 1,
+  "error_rate": 0.013513513513513514,
+  "errors": {
+    "{'message': \"litellm.APIConnectionError: APIConnectionError: OpenAIException - Response payload is not completed: <Trans": 1
+  },
+  "by_deployment": {
+    "cortex-default--primary-v1": 35,
+    "cortex-default--canary-v2": 25,
+    "cortex-fallback--fallback-v1": 14
+  },
+  "ok_by_deployment": {
+    "cortex-default--primary-v1": 34,
+    "cortex-default--canary-v2": 25,
+    "cortex-fallback--fallback-v1": 14
+  },
+  "with_retries": 8,
+  "with_fallbacks": 14,
+  "window_s": 416.5682373046875,
+  "ttft_p50_s": 5.064746977000141,
+  "ttft_p95_s": 8.643687968599998,
+  "e2e_p50_s": 11.17495853299988,
+  "e2e_p95_s": 16.39207779900007,
+  "output_tokens_total": 2336
+}

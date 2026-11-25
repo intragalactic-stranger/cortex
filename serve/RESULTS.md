@@ -449,3 +449,16 @@ Details: `docs/milestones/M5_REPORT.md`.
 | A terminating pod kept serving for its whole 120 s grace period because pooled gateway connections bypassed endpoint removal | fallback demo outcome log | opt-in `gateway.backendConnectionClose` (unmeasured) |
 | NetworkPolicies + backend key: 10 / 10 access checks behave as designed | `m5-netpol/*/result.md` | n/a |
 | Canary gate returned HOLD (13 canary requests < 20); probe accuracy 12/20 for both versions | `m5-canary/*/decision.json` | longer window needed on CPU |
+
+### M5 addendum: GPU fallback to a Modal endpoint (2026-11-25)
+
+The gateway's prepared Modal slot was enabled with our M3 FP8 Qwen3-4B served by vLLM 0.32.0 on a Modal L4 (`deploy/modal/vllm_endpoint.py`: API key in a Modal secret, max 1 container, scale-to-zero after 2 min; unauthenticated requests get 401). Load: 2 users, 64 in / 32 out, 410 s; the whole local `cortex-default` pool (primary and canary) taken to 0 for 200 s, then restored (`scripts/m5_modal_fallback.sh`, `results/m5-modal-fallback/20261125T073502Z`).
+
+| Served by | Requests | TTFT p50 / p95 (s) | End-to-end p50 / p95 (s) |
+|---|---|---|---|
+| Modal L4 GPU (fallback) | 214 | **0.27** / 5.59 | **0.97** / 6.30 |
+| Local CPU pool (before/after the outage) | 38 | 5.96 / 6.36 | 11.2 / 11.3 |
+
+- **250 of 252 requests succeeded; 214 were served by the GPU fallback** while the local pool was down. The 2 failures were streams already in progress on local pods when they were scaled to 0 ("response payload is not completed"), the same in-flight cut-off seen in the M5 CPU fallback demo.
+- The GPU p95 TTFT (5.6 s) is the first requests of the outage, which waited for the failed local attempt and the gateway cooldown before falling back.
+- **A first attempt served 0 GPU requests** (`…-gpu-unauthorized/INVALID.md`): the load-test virtual key did not list `cortex-gpu`, so LiteLLM skipped that fallback ("caller is not authorized") and went straight to the second CPU model; and the canary deployment kept serving `cortex-default`. Per-key model allow-lists apply to fallbacks too.

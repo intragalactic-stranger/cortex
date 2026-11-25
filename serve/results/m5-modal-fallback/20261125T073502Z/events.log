@@ -1,0 +1,4 @@
+1795592312.326382808 LOCAL POOL DOWN: primary (KEDA paused at 0) and canary (scaled to 0): every cortex-default deployment
+1795592435.398250482 local cortex-default pods gone (gateway should route to the Modal endpoint)
+1795592635.413781954 LOCAL POOL RESTORE: unpause KEDA, canary back to 1
+1795592641.940935945 local pool ready

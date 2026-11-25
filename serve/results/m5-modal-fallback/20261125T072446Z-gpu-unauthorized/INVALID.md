@@ -1,0 +1,1 @@
+First attempt: the load-test virtual key did not list cortex-gpu, so LiteLLM skipped the GPU fallback ("caller is not authorized"), and the canary kept serving cortex-default. Kept as a failure capture.

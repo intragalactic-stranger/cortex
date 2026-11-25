@@ -54,6 +54,10 @@ app() {
     "salt-key=echo sk-salt-\$(openssl rand -hex 24)"
   secret "$NS" backend-api-key "api-key=openssl rand -hex 24"
   secret "$NS" gateway-db "password=openssl rand -hex 24"
+  # Optional GPU fallback (M5 Modal demo): the endpoint's API key comes from a local 0600 file, never from git.
+  if [[ -n "${CORTEX_MODAL_KEY_FILE:-}" ]]; then
+    secret "$NS" modal-endpoint "api-key=cat $CORTEX_MODAL_KEY_FILE"
+  fi
   log "installing cortex-serve chart"
   helm upgrade --install cortex "$DEPLOY_DIR/helm/cortex-serve" -n "$NS" \
     ${CORTEX_VALUES:+-f "$CORTEX_VALUES"} --wait --timeout 15m
