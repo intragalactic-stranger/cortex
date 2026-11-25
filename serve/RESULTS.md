@@ -342,6 +342,7 @@ All on Modal with the pinned vLLM 0.32.0 / SGLang 0.5.22 images, Qwen3-4B-Instru
 | FP8 KV | **151,184** | **18.5** | **101 / 104** | **21.0** | 142 |
 
 - **FP8 KV doubles capacity (1.92× tokens) and gives +46% throughput with half the TTFT tail** once long contexts are KV-bound; each stream decodes a little slower because twice as many share the GPU.
+- **Quality cost of FP8 KV: none measurable** (same suite as M3, `--kv-cache-dtype fp8`): ARC +0.4, HellaSwag −0.6, MMLU-Pro −1.8 (CI ±2.9), GSM8K +1.1, IFEval −0.6, WikiText PPL +0.1%, BFSI PPL +0.2%. These tasks use short contexts; long-context retrieval quality under FP8 KV was not measured.
 
 ### E9. MoE: Qwen3-30B-A3B-Instruct-2507 vs Qwen3-4B dense (bf16, exact H100)
 
@@ -385,6 +386,7 @@ All on Modal with the pinned vLLM 0.32.0 / SGLang 0.5.22 images, Qwen3-4B-Instru
 - **The new architectures cut memory per sequence 3.2–3.7× at 8K and 4.0–6.7× at 32K, and on long contexts that becomes 1.6–1.7× throughput and half the TTFT tail.** For short chats the dense model is still fastest (it streams the fewest bytes per token).
 - **How much of the theoretical saving vLLM realises:** Qwen3.5 84% at 8K (363 vs 305 MiB per sequence) and 94% at 32K; Gemma only ~48% at 8K and 77% at 32K. Gemma's sliding-window layers carry a fixed per-sequence overhead beyond the window (the same pattern llama.cpp showed in M1). memcalc is exact for the dense model.
 - **Gemma's per-sequence saving is partly eaten by its 14.5 GiB of weights on a 24 GB card:** its KV pool is only 4.2 GiB, so it fits fewer 8K sequences than Qwen3.5 despite smaller KV per token.
+- **Quality, Qwen3.5-4B vs Qwen3-4B (same suite, thinking off):** HellaSwag +5.8, MMLU-Pro +3.4, GSM8K +7.7 strict / +3.2 flexible, WikiText word PPL 12.2 vs 14.3; ARC −3.9, IFEval −2.3; reasoning-first ARC 93.8 vs 94.0. **The hybrid model gives equal-or-better quality with 3–4× less KV memory per sequence.** (Gemma 4 E4B is not on this scale: its loglikelihood benchmarks are unusable, §M3.6; on generative tasks it scores GSM8K 71.4/76.5, IFEval 85.2, reasoning-first ARC 93.6.)
 - **Engine support differs for the new designs:** SGLang matches vLLM on Qwen3.5 long contexts but not on 32-user chat (313 vs 484 tok/s, TTFT p95 15 s), and on Gemma long contexts it reaches only half of vLLM's throughput. Not investigated further.
 
 ### E12. Tensor parallel: TP=2 on 2 x H100 vs TP=1 on 1 x H100 (Qwen3-4B bf16, chat-balanced)

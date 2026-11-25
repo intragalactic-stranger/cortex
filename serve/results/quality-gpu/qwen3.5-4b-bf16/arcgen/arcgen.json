@@ -1,0 +1,4011 @@
+{
+ "n": 500,
+ "correct": 469,
+ "accuracy": 0.938,
+ "ci95_low": 0.9133397667805389,
+ "ci95_high": 0.9559810673863897,
+ "unparsed": 20,
+ "errors": 0,
+ "rows": [
+  {
+   "id": "Mercury_7068513",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the geologic process respon"
+  },
+  {
+   "id": "TIMSS_2003_8_pg94",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct classification "
+  },
+  {
+   "id": "Mercury_415081",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To find the average speed of the rubber "
+  },
+  {
+   "id": "LEAP_2007_8_10418",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which factor most likely af"
+  },
+  {
+   "id": "Mercury_7085225",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To form sedimentary rocks, the process g"
+  },
+  {
+   "id": "Mercury_183820",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which element is found in t"
+  },
+  {
+   "id": "Mercury_7213325",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the main disadvantage of us"
+  },
+  {
+   "id": "Mercury_SC_401666",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the composition of an unkno"
+  },
+  {
+   "id": "Mercury_7042945",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To calculate the mass of the block, we m"
+  },
+  {
+   "id": "Mercury_404894",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct fact about peng"
+  },
+  {
+   "id": "Mercury_SC_402103",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the unsafe practice, let's "
+  },
+  {
+   "id": "TIMSS_1995_8_L6",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct explanation, we"
+  },
+  {
+   "id": "MEA_2016_5_4",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct characteristic,"
+  },
+  {
+   "id": "Mercury_417117",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The scenario describes a scientific brea"
+  },
+  {
+   "id": "Mercury_SC_415534",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct temperature rea"
+  },
+  {
+   "id": "Mercury_SC_413549",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine when the student's shadow w"
+  },
+  {
+   "id": "Mercury_7034843",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct physical proper"
+  },
+  {
+   "id": "Mercury_7171570",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The digestive system relies on a complex"
+  },
+  {
+   "id": "Mercury_SC_401006",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "A balance is a scientific instrument des"
+  },
+  {
+   "id": "Mercury_400500",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which set contains only met"
+  },
+  {
+   "id": "Mercury_400880",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the change that occurs when"
+  },
+  {
+   "id": "Mercury_7267715",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which feature would cause a"
+  },
+  {
+   "id": "Mercury_SC_LBS11003",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor is not importa"
+  },
+  {
+   "id": "Mercury_7264093",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Coal is a combustible black or brown-bla"
+  },
+  {
+   "id": "Mercury_SC_406794",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To understand why the Sun appears as the"
+  },
+  {
+   "id": "Mercury_178325",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best tool for recording"
+  },
+  {
+   "id": "TAKS_2009_5_14",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "When an object like a fork falls from a "
+  },
+  {
+   "id": "Mercury_SC_408324",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "When Scott put the juice in the freezer,"
+  },
+  {
+   "id": "ACTAAP_2010_7_14",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct description of "
+  },
+  {
+   "id": "Mercury_SC_402029",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best way for students t"
+  },
+  {
+   "id": "ACTAAP_2012_7_9",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To understand why carbon, hydrogen, and "
+  },
+  {
+   "id": "AIMS_2008_8_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option represents org"
+  },
+  {
+   "id": "Mercury_7032498",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "When the body exercises, muscles generat"
+  },
+  {
+   "id": "Mercury_412681",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which action increases the "
+  },
+  {
+   "id": "Mercury_7086660",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "MCAS_1998_4_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we need"
+  },
+  {
+   "id": "Mercury_7160563",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best example of an acti"
+  },
+  {
+   "id": "Mercury_SC_405130",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "MCAS_2012_8_23640",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how heat energy from the Su"
+  },
+  {
+   "id": "Mercury_SC_414274",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, let'"
+  },
+  {
+   "id": "Mercury_SC_401792",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which of the options is a r"
+  },
+  {
+   "id": "MDSA_2013_8_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "When two substances are mixed in a seale"
+  },
+  {
+   "id": "LEAP_2007_4_10280",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "When Jake breathes out, he releases warm"
+  },
+  {
+   "id": "LEAP_2002_4_10247",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct reason, let's a"
+  },
+  {
+   "id": "Mercury_7271670",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how oceans influence seasho"
+  },
+  {
+   "id": "MEA_2016_8_12",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best example of an even"
+  },
+  {
+   "id": "Mercury_401728",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct step in the lif"
+  },
+  {
+   "id": "Mercury_SC_410837",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks about the benefit of a"
+  },
+  {
+   "id": "OHAT_2010_8_8",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the type of relationship, l"
+  },
+  {
+   "id": "Mercury_7024798",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which characteristic is lea"
+  },
+  {
+   "id": "Mercury_7161315",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we must"
+  },
+  {
+   "id": "Mercury_7082320",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct explanation for"
+  },
+  {
+   "id": "Mercury_7212328",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct unintended cons"
+  },
+  {
+   "id": "MEA_2016_8_15",
+   "pred": null,
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct list, we need t"
+  },
+  {
+   "id": "Mercury_7217298",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Scientific inquiry relies on the objecti"
+  },
+  {
+   "id": "Mercury_7111178",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best method for dealing"
+  },
+  {
+   "id": "Mercury_401912",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the probability, let's brea"
+  },
+  {
+   "id": "Mercury_416380",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "When fertilizer containing nutrients lik"
+  },
+  {
+   "id": "Mercury_7175875",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the effect of a planet rota"
+  },
+  {
+   "id": "Mercury_SC_412374",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which characteristic is lea"
+  },
+  {
+   "id": "MCAS_2004_9_5",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine what happens to the current"
+  },
+  {
+   "id": "Mercury_417460",
+   "pred": null,
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct characteristic,"
+  },
+  {
+   "id": "Mercury_7142520",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which system maintains a no"
+  },
+  {
+   "id": "Mercury_SC_400063",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Water evaporation on the surface of Eart"
+  },
+  {
+   "id": "Mercury_7114100",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement about"
+  },
+  {
+   "id": "Mercury_416683",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we must"
+  },
+  {
+   "id": "Mercury_7228725",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7271758",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most important way an a"
+  },
+  {
+   "id": "Mercury_7116183",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "When the human population increases, the"
+  },
+  {
+   "id": "MEA_2013_8_15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine what supplies the upward fo"
+  },
+  {
+   "id": "ACTAAP_2014_7_5",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which pair of instruments m"
+  },
+  {
+   "id": "Mercury_7230090",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best supply for an Eart"
+  },
+  {
+   "id": "LEAP_2011_8_10434",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which fact helps Charlie, w"
+  },
+  {
+   "id": "TAKS_2009_8_32",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which trait is most influen"
+  },
+  {
+   "id": "MCAS_2006_9_12",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why a plastic rod becomes n"
+  },
+  {
+   "id": "TIMSS_2007_8_pg60",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which group of animals has "
+  },
+  {
+   "id": "Mercury_409295",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine where the remaining energy "
+  },
+  {
+   "id": "Mercury_7200340",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor most helps ove"
+  },
+  {
+   "id": "Mercury_7270113",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which change would end Eart"
+  },
+  {
+   "id": "MCAS_2005_8_7",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "When air near the ground is warmed by su"
+  },
+  {
+   "id": "MCAS_2006_9_4",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best conclusion, let's "
+  },
+  {
+   "id": "NYSEDREGENTS_2010_8_35",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best way to make the su"
+  },
+  {
+   "id": "Mercury_7172708",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "In the scientific method, theories are w"
+  },
+  {
+   "id": "MEA_2010_8_18",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, we m"
+  },
+  {
+   "id": "Mercury_SC_400046",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct characteristic,"
+  },
+  {
+   "id": "Mercury_7106593",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct method, we need"
+  },
+  {
+   "id": "ACTAAP_2007_7_36",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we need"
+  },
+  {
+   "id": "Mercury_7084665",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine what can be seen without a "
+  },
+  {
+   "id": "NYSEDREGENTS_2012_8_19",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor limits the num"
+  },
+  {
+   "id": "Mercury_SC_405296",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which change would be harmf"
+  },
+  {
+   "id": "MCAS_2006_9_17-v1",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, let'"
+  },
+  {
+   "id": "OHAT_2009_8_36",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why fossil fuels are called"
+  },
+  {
+   "id": "Mercury_SC_405357",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which group is most likely "
+  },
+  {
+   "id": "Mercury_400084",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To balance the chemical equation, we nee"
+  },
+  {
+   "id": "MCAS_2006_9_43",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To find the momentum of the baseball, we"
+  },
+  {
+   "id": "Mercury_7057680",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "When a warm, moist air mass moves northw"
+  },
+  {
+   "id": "MCAS_2014_5_7",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The animal described is a ground squirre"
+  },
+  {
+   "id": "Mercury_SC_413542",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best step to make water"
+  },
+  {
+   "id": "Mercury_409114",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To find the average speed, we need to de"
+  },
+  {
+   "id": "Mercury_402539",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best conclusion, let's "
+  },
+  {
+   "id": "Mercury_7210473",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7013965",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most important test for"
+  },
+  {
+   "id": "Mercury_7081603",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most accurate descripti"
+  },
+  {
+   "id": "Mercury_7034808",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which action causes sugar t"
+  },
+  {
+   "id": "Mercury_7263183",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which body system performs "
+  },
+  {
+   "id": "Mercury_411071",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To find the distance Jeremy walked, we c"
+  },
+  {
+   "id": "Mercury_7252245",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which biomolecule does not "
+  },
+  {
+   "id": "Mercury_402502",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the column (group) where ar"
+  },
+  {
+   "id": "Mercury_SC_407228",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_SC_414156",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why a magnetized needle poi"
+  },
+  {
+   "id": "Mercury_SC_413299",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7131845",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely cause of th"
+  },
+  {
+   "id": "Mercury_SC_LBS10902",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine where fern plants are most "
+  },
+  {
+   "id": "Mercury_7133245",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which form of energy was wa"
+  },
+  {
+   "id": "Mercury_7189000",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The Great Rift Valley in Africa is a mas"
+  },
+  {
+   "id": "Mercury_7250058",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best feature for distin"
+  },
+  {
+   "id": "Mercury_7214008",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely negative ef"
+  },
+  {
+   "id": "Mercury_7216423",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7058415",
+   "pred": null,
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_11",
+   "pred": "4",
+   "answer": "4",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct nutrient source"
+  },
+  {
+   "id": "NAEP_2000_8_S11+11",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct relationship be"
+  },
+  {
+   "id": "Mercury_SC_402120",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how long it takes for a cup"
+  },
+  {
+   "id": "Mercury_7042648",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "MDSA_2008_8_27",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To determine how the frequency of a Ross"
+  },
+  {
+   "id": "Mercury_7106628",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor most likely in"
+  },
+  {
+   "id": "Mercury_7041650",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which activity most likely "
+  },
+  {
+   "id": "Mercury_410602",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To find the time it takes for the airpla"
+  },
+  {
+   "id": "MSA_2015_8_30",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best explanation for wh"
+  },
+  {
+   "id": "Mercury_417593",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, let'"
+  },
+  {
+   "id": "Mercury_SC_402121",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best way to prove that "
+  },
+  {
+   "id": "Mercury_7211033",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7221655",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best explanation for wh"
+  },
+  {
+   "id": "Mercury_7221078",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely effect of b"
+  },
+  {
+   "id": "Mercury_SC_416529",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To understand why most forest tree leave"
+  },
+  {
+   "id": "Mercury_SC_407400",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct first step in a"
+  },
+  {
+   "id": "Mercury_7201740",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best characteristic for"
+  },
+  {
+   "id": "Mercury_SC_406625",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "When a bird drops a seed into the soil, "
+  },
+  {
+   "id": "Mercury_7132405",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how the skin helps maintain"
+  },
+  {
+   "id": "Mercury_414352",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which piece of information "
+  },
+  {
+   "id": "Mercury_7164623",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the type of energy used by "
+  },
+  {
+   "id": "Mercury_7123393",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "MEA_2013_5_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, let'"
+  },
+  {
+   "id": "Mercury_402547",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which gas increases in conc"
+  },
+  {
+   "id": "Mercury_7016800",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "When an accidental spill occurs in a lab"
+  },
+  {
+   "id": "Mercury_7068635",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7245840",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_SC_401587",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which stage occurs in both "
+  },
+  {
+   "id": "Mercury_403907",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7234605",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, we m"
+  },
+  {
+   "id": "Mercury_7206938",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_SC_406855",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best way to model the e"
+  },
+  {
+   "id": "Mercury_SC_400162",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "AKDE&ED_2008_8_48",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which process leads to the "
+  },
+  {
+   "id": "MCAS_2006_8_12",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which map is best for analy"
+  },
+  {
+   "id": "ACTAAP_2014_7_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, let'"
+  },
+  {
+   "id": "Mercury_7132020",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which part of an atom has t"
+  },
+  {
+   "id": "MCAS_2001_5_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The physical characteristics of an organ"
+  },
+  {
+   "id": "Mercury_7143010",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "When a nonnative plant is introduced to "
+  },
+  {
+   "id": "VASoL_2009_3_22",
+   "pred": "B",
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which option describes how "
+  },
+  {
+   "id": "Mercury_7206395",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best way to communicate"
+  },
+  {
+   "id": "Mercury_7097493",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine what happens when an atom g"
+  },
+  {
+   "id": "Mercury_7168823",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The scenario described is a classic exam"
+  },
+  {
+   "id": "Mercury_SC_LBS11009",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7138390",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely result of t"
+  },
+  {
+   "id": "Mercury_SC_401783",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine what keeps the Earth in orb"
+  },
+  {
+   "id": "Mercury_SC_414339",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct change, let's a"
+  },
+  {
+   "id": "Mercury_183033",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct answer, let's b"
+  },
+  {
+   "id": "Mercury_404609",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which feature provides the "
+  },
+  {
+   "id": "Mercury_7093048",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Fertilizers typically contain high conce"
+  },
+  {
+   "id": "Mercury_7215828",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which substance produces th"
+  },
+  {
+   "id": "Mercury_7005880",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct interaction bet"
+  },
+  {
+   "id": "Mercury_7017045",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which type of wave does not"
+  },
+  {
+   "id": "Mercury_SC_405481",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most similar feature be"
+  },
+  {
+   "id": "MDSA_2009_5_39",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which activity involves usi"
+  },
+  {
+   "id": "NCEOGA_2013_8_57",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option indicates that"
+  },
+  {
+   "id": "Mercury_409645",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best course of action, "
+  },
+  {
+   "id": "NYSEDREGENTS_2008_4_28",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which statement represents "
+  },
+  {
+   "id": "WASL_2004_8_17",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7111125",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_400440",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the products of the reactio"
+  },
+  {
+   "id": "AKDE&ED_2008_4_19",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_42",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the factors on which the gr"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_1",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which property allows an ob"
+  },
+  {
+   "id": "Mercury_7102323",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the dependent variable, we "
+  },
+  {
+   "id": "Mercury_7182210",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the impact on species diver"
+  },
+  {
+   "id": "Mercury_400884",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the number of valence elect"
+  },
+  {
+   "id": "NCEOGA_2013_8_15",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "When the amount of living space availabl"
+  },
+  {
+   "id": "Mercury_LBS10302",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how long the light has been"
+  },
+  {
+   "id": "Mercury_7128923",
+   "pred": "D",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which substance retains the"
+  },
+  {
+   "id": "Mercury_7230073",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct item, we need t"
+  },
+  {
+   "id": "Mercury_411224",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To find the mass of the water that evapo"
+  },
+  {
+   "id": "NCEOGA_2013_8_42",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we need"
+  },
+  {
+   "id": "TIMSS_1995_8_J1",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best description of the"
+  },
+  {
+   "id": "Mercury_7218015",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "MCAS_2001_5_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor is least respo"
+  },
+  {
+   "id": "VASoL_2009_3_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which object is the hardest"
+  },
+  {
+   "id": "Mercury_7239383",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Genetic drift is the mechanism of evolut"
+  },
+  {
+   "id": "Mercury_SC_408748",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To understand how animals get energy fro"
+  },
+  {
+   "id": "ACTAAP_2010_5_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely explanation"
+  },
+  {
+   "id": "Mercury_408922",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To understand how the scientific process"
+  },
+  {
+   "id": "Mercury_7071523",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "When examining mold on bread, students a"
+  },
+  {
+   "id": "Mercury_407019",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine what 4.3 light-years repres"
+  },
+  {
+   "id": "Mercury_184730",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we must"
+  },
+  {
+   "id": "TAKS_2009_5_26",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which feature is common to "
+  },
+  {
+   "id": "Mercury_SC_402981",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct activity, we ne"
+  },
+  {
+   "id": "Mercury_SC_407592",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we need"
+  },
+  {
+   "id": "Mercury_7033828",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which resource improves air"
+  },
+  {
+   "id": "Mercury_180005",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best description of the"
+  },
+  {
+   "id": "VASoL_2007_5_21",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which animal is an inverteb"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_8_42",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how the acceleration of a s"
+  },
+  {
+   "id": "Mercury_SC_400012",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how the fat adaptation help"
+  },
+  {
+   "id": "Mercury_7029558",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct level in the fo"
+  },
+  {
+   "id": "Mercury_7283430",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct pair, let's ana"
+  },
+  {
+   "id": "MEA_2014_5_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why Balsam fir trees in Mai"
+  },
+  {
+   "id": "MDSA_2008_8_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, let'"
+  },
+  {
+   "id": "MEA_2011_8_13",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely outcome, we"
+  },
+  {
+   "id": "Mercury_SC_LBS10265",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how long it takes for the S"
+  },
+  {
+   "id": "Mercury_416638",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "MDSA_2009_5_25",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To prove that no mass was lost during th"
+  },
+  {
+   "id": "Mercury_7188195",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the source of the crickets'"
+  },
+  {
+   "id": "Mercury_7064575",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Coal-powered plants operate by burning c"
+  },
+  {
+   "id": "NYSEDREGENTS_2015_8_3",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct classification "
+  },
+  {
+   "id": "Mercury_7116323",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Diversity among members of a species, of"
+  },
+  {
+   "id": "Mercury_SC_406482",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "When scientists conduct an investigation"
+  },
+  {
+   "id": "Mercury_416633",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine over which component of smo"
+  },
+  {
+   "id": "Mercury_7109463",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which process takes the lon"
+  },
+  {
+   "id": "Mercury_SC_402984",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which item can be reused in"
+  },
+  {
+   "id": "Mercury_7123358",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the main cause of Earth's d"
+  },
+  {
+   "id": "Mercury_7032620",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The Periodic Table of Elements is organi"
+  },
+  {
+   "id": "MCAS_2000_4_36",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option is not a pathw"
+  },
+  {
+   "id": "Mercury_406136",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct classification "
+  },
+  {
+   "id": "Mercury_7159810",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most ethical course of "
+  },
+  {
+   "id": "Mercury_SC_407382",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how a duck and a turtle are"
+  },
+  {
+   "id": "Mercury_SC_415422",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best explanation for wh"
+  },
+  {
+   "id": "Mercury_SC_400985",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the safest method for watch"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_4",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how the toy truck's speed c"
+  },
+  {
+   "id": "TIMSS_2003_8_pg47",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option represents a c"
+  },
+  {
+   "id": "Mercury_403234",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why the object begins to mo"
+  },
+  {
+   "id": "Mercury_7203473",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's b"
+  },
+  {
+   "id": "Mercury_SC_401361",
+   "pred": "A",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct function of tin"
+  },
+  {
+   "id": "Mercury_401426",
+   "pred": "A",
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the best tool for observing"
+  },
+  {
+   "id": "Mercury_7223493",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best conclusion, let's "
+  },
+  {
+   "id": "Mercury_SC_406720",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7199028",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which property of matter ca"
+  },
+  {
+   "id": "Mercury_SC_402057",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely adaptation "
+  },
+  {
+   "id": "Mercury_402563",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the overall charge of a hyd"
+  },
+  {
+   "id": "MEA_2010_8_15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best example of a sudde"
+  },
+  {
+   "id": "Mercury_7212818",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "When scientists conduct investigations, "
+  },
+  {
+   "id": "MCAS_2000_4_26",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks about the consequence "
+  },
+  {
+   "id": "Mercury_7252753",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "The question describes a specific biolog"
+  },
+  {
+   "id": "Mercury_LBS10610",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely temperature"
+  },
+  {
+   "id": "Mercury_7180810",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which observation indicates"
+  },
+  {
+   "id": "Mercury_7130778",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which organisms are classif"
+  },
+  {
+   "id": "Mercury_400887",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To find the amount of energy ($q$) neede"
+  },
+  {
+   "id": "Mercury_175840",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The cell wall is a rigid layer located j"
+  },
+  {
+   "id": "Mercury_417150",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which water-cycle processes"
+  },
+  {
+   "id": "OHAT_2010_5_18",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we need"
+  },
+  {
+   "id": "Mercury_7011323",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which item decomposes the f"
+  },
+  {
+   "id": "MDSA_2009_8_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_SC_400590",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct term, let's ana"
+  },
+  {
+   "id": "Mercury_SC_401357",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which process returns water"
+  },
+  {
+   "id": "Mercury_404435",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option is a compound,"
+  },
+  {
+   "id": "Mercury_7141610",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which property changes at t"
+  },
+  {
+   "id": "Mercury_401926",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely reason for "
+  },
+  {
+   "id": "LEAP__4_10225",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the reason for the time dif"
+  },
+  {
+   "id": "Mercury_SC_400059",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "When running water flows over a riverbed"
+  },
+  {
+   "id": "Mercury_7032515",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option provides the m"
+  },
+  {
+   "id": "Mercury_405947",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the positive effect of usin"
+  },
+  {
+   "id": "Mercury_7030555",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct connection type"
+  },
+  {
+   "id": "Mercury_SC_400383",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best option for a stude"
+  },
+  {
+   "id": "Mercury_SC_LBS10597",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option represents a c"
+  },
+  {
+   "id": "Mercury_SC_400142",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "In a laboratory setting, safety protocol"
+  },
+  {
+   "id": "Mercury_SC_415406",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct landforms, let'"
+  },
+  {
+   "id": "MEA_2013_8_18",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the similarity between soun"
+  },
+  {
+   "id": "MCAS_2004_8_23",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the average speed and direc"
+  },
+  {
+   "id": "Mercury_LBS10151",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine where the majority of the E"
+  },
+  {
+   "id": "Mercury_SC_416167",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the largest organ in the hu"
+  },
+  {
+   "id": "Mercury_SC_405726",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which activity protects nat"
+  },
+  {
+   "id": "Mercury_SC_402282",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which renewable resource is"
+  },
+  {
+   "id": "Mercury_7192798",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor is least likel"
+  },
+  {
+   "id": "LEAP__7_10348",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which statistical measureme"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_4_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine when precipitation is most "
+  },
+  {
+   "id": "NYSEDREGENTS_2012_4_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7082845",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "When a construction worker swings a sled"
+  },
+  {
+   "id": "Mercury_417138",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine when the salt concentration"
+  },
+  {
+   "id": "Mercury_7123078",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why planets revolve around "
+  },
+  {
+   "id": "Mercury_7217368",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most appropriate unit, "
+  },
+  {
+   "id": "Mercury_SC_410963",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which statement is a scient"
+  },
+  {
+   "id": "Mercury_400877",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the mass of the atom, we ne"
+  },
+  {
+   "id": "Mercury_SC_405640",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely explanation"
+  },
+  {
+   "id": "VASoL_2009_3_8",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which element is needed in "
+  },
+  {
+   "id": "Mercury_407262",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option describes a ph"
+  },
+  {
+   "id": "Mercury_7082023",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct term, let's ana"
+  },
+  {
+   "id": "Mercury_SC_416181",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which food helps Patrick's "
+  },
+  {
+   "id": "Mercury_7027720",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best modification for t"
+  },
+  {
+   "id": "MCAS_2012_5_23625",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which characteristic a lion"
+  },
+  {
+   "id": "TIMSS_1995_8_R2",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why Peter's shirt looks blu"
+  },
+  {
+   "id": "Mercury_SC_400578",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option represents a l"
+  },
+  {
+   "id": "LEAP_2000_8_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, let'"
+  },
+  {
+   "id": "Mercury_SC_402994",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "When a glass of cold water is placed on "
+  },
+  {
+   "id": "MCAS_1999_8_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the primary cause of contin"
+  },
+  {
+   "id": "Mercury_7108990",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which object occupies the g"
+  },
+  {
+   "id": "ACTAAP_2013_7_16",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which substance is a compou"
+  },
+  {
+   "id": "Mercury_SC_400853",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Sandbars are natural landforms found in "
+  },
+  {
+   "id": "Mercury_SC_406458",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor affects how qu"
+  },
+  {
+   "id": "ACTAAP_2008_7_4",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how the acceleration change"
+  },
+  {
+   "id": "MCAS_2013_8_29416",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which tool provides the mos"
+  },
+  {
+   "id": "Mercury_7216965",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor decides if a m"
+  },
+  {
+   "id": "Mercury_7187373",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which adaptation would decr"
+  },
+  {
+   "id": "Mercury_7082758",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best description of ato"
+  },
+  {
+   "id": "Mercury_412673",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which property is a chemica"
+  },
+  {
+   "id": "Mercury_7027405",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best piece of equipment"
+  },
+  {
+   "id": "Mercury_7205800",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best statement, we must"
+  },
+  {
+   "id": "VASoL_2008_5_10",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which object is opaque, we "
+  },
+  {
+   "id": "Mercury_SC_400401",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which land feature is most "
+  },
+  {
+   "id": "Mercury_7150343",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, we m"
+  },
+  {
+   "id": "Mercury_7085278",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Geothermal energy is derived from the he"
+  },
+  {
+   "id": "Mercury_400443",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the number of protons, elec"
+  },
+  {
+   "id": "Mercury_SC_401265",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct step in the sci"
+  },
+  {
+   "id": "ACTAAP_2011_5_8",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which activity increases ce"
+  },
+  {
+   "id": "MDSA_2009_4_1",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we need"
+  },
+  {
+   "id": "Mercury_7214778",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the independent variable, w"
+  },
+  {
+   "id": "Mercury_SC_400062",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7030468",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we need"
+  },
+  {
+   "id": "Mercury_7174213",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor most affects t"
+  },
+  {
+   "id": "Mercury_SC_400402",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which natural event occurs "
+  },
+  {
+   "id": "AKDE&ED_2008_4_35",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine when and where the number o"
+  },
+  {
+   "id": "Mercury_400699",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "When vinegar (acetic acid) and baking so"
+  },
+  {
+   "id": "Mercury_SC_407613",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "In a scientific investigation, the proce"
+  },
+  {
+   "id": "Mercury_SC_401585",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine during which season the sun"
+  },
+  {
+   "id": "Mercury_7236740",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To solve this problem, we need to determ"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_34",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement regar"
+  },
+  {
+   "id": "OHAT_2007_5_15",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's v"
+  },
+  {
+   "id": "Mercury_416671",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most complete list of t"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_24",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Migration is a biological phenomenon whe"
+  },
+  {
+   "id": "AIMS_2008_8_6",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which statement is not asso"
+  },
+  {
+   "id": "Mercury_7271513",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option is evidence fo"
+  },
+  {
+   "id": "ACTAAP_2015_7_9",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which planet has the longes"
+  },
+  {
+   "id": "Mercury_SC_406835",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To ensure that a scientific investigatio"
+  },
+  {
+   "id": "Mercury_7084228",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "MCAS_2006_9_30",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The question describes a \"rare genetic c"
+  },
+  {
+   "id": "TIMSS_2003_8_pg87",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "To determine what David needs to add to "
+  },
+  {
+   "id": "Mercury_SC_406623",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Fossilized plants serve as a crucial rec"
+  },
+  {
+   "id": "Mercury_SC_400233",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which type of rock forms by"
+  },
+  {
+   "id": "Mercury_SC_401360",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct classification "
+  },
+  {
+   "id": "Mercury_7198468",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely ecological "
+  },
+  {
+   "id": "Mercury_416576",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why a paramecium does not n"
+  },
+  {
+   "id": "Mercury_7040985",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine when lunar and solar eclips"
+  },
+  {
+   "id": "ACTAAP_2007_7_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which statement indicates t"
+  },
+  {
+   "id": "Mercury_7216300",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "OHAT_2007_8_24",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "VASoL_2010_3_22",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct order of events"
+  },
+  {
+   "id": "Mercury_SC_402164",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the most likely method a st"
+  },
+  {
+   "id": "MCAS_1998_4_13",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Acid rain forms when pollutants like sul"
+  },
+  {
+   "id": "Mercury_416230",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct sequence, let's"
+  },
+  {
+   "id": "AKDE&ED_2008_8_3",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely outcome, le"
+  },
+  {
+   "id": "Mercury_7099190",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "ACTAAP_2007_7_31",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To scientifically determine the quietest"
+  },
+  {
+   "id": "MDSA_2012_8_6",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which professional did not "
+  },
+  {
+   "id": "Mercury_7270393",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the best description of Dev"
+  },
+  {
+   "id": "Mercury_SC_400697",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which action changes the me"
+  },
+  {
+   "id": "Mercury_7182245",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely outcome for"
+  },
+  {
+   "id": "MCAS_2014_8_6",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "The \"Ring of Fire\" is a major area in th"
+  },
+  {
+   "id": "Mercury_7206553",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the shared characteristic, "
+  },
+  {
+   "id": "Mercury_7212888",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best answer, let's anal"
+  },
+  {
+   "id": "Mercury_SC_401147",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the main function of a prod"
+  },
+  {
+   "id": "Mercury_7040775",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Photosynthesis is the process by which g"
+  },
+  {
+   "id": "VASoL_2007_5_22",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the manipulated variable (a"
+  },
+  {
+   "id": "MEAP_2005_8_45",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which object scatters the m"
+  },
+  {
+   "id": "MSA_2013_5_11",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct outcome, let's "
+  },
+  {
+   "id": "Mercury_7163818",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the factor that most influe"
+  },
+  {
+   "id": "AKDE&ED_2008_8_34",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we must"
+  },
+  {
+   "id": "Mercury_SC_405931",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the situation step by step"
+  },
+  {
+   "id": "Mercury_7282083",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "AKDE&ED_2012_8_20",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which physical features cla"
+  },
+  {
+   "id": "NYSEDREGENTS_2013_8_10",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which human body system wor"
+  },
+  {
+   "id": "Mercury_7142415",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely outcome, le"
+  },
+  {
+   "id": "Mercury_189053",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct property, let's"
+  },
+  {
+   "id": "Mercury_7268328",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Plant roots exhibit a specific growth be"
+  },
+  {
+   "id": "MCAS_2003_5_33",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which action demonstrates t"
+  },
+  {
+   "id": "Mercury_SC_407710",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct term, let's bre"
+  },
+  {
+   "id": "Mercury_7267523",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which natural disaster crea"
+  },
+  {
+   "id": "NCEOGA_2013_8_5",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option has the least "
+  },
+  {
+   "id": "Mercury_SC_408384",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option best describes"
+  },
+  {
+   "id": "Mercury_416593",
+   "pred": "D",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct stage of the wa"
+  },
+  {
+   "id": "MEA_2013_5_15",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine when the Sun is highest in "
+  },
+  {
+   "id": "Mercury_401763",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the chemical formula of the"
+  },
+  {
+   "id": "Mercury_175560",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "VASoL_2008_3_16",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_SC_409030",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which tool will help Tanya "
+  },
+  {
+   "id": "Mercury_7235638",
+   "pred": "B",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct cause of the su"
+  },
+  {
+   "id": "Mercury_7270165",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why oceanic crust subducts "
+  },
+  {
+   "id": "MCAS_2013_5_29411",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct stage, let's ex"
+  },
+  {
+   "id": "Mercury_400091",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the likelihood of the stude"
+  },
+  {
+   "id": "MSA_2012_5_23",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct classification "
+  },
+  {
+   "id": "TIMSS_2007_8_pg109",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best way to establish a"
+  },
+  {
+   "id": "Mercury_7206378",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most accurate way to re"
+  },
+  {
+   "id": "Mercury_7094290",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "The belief that living organisms could a"
+  },
+  {
+   "id": "Mercury_7218400",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To solve the problem of reducing electri"
+  },
+  {
+   "id": "Mercury_7215670",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best evidence that two "
+  },
+  {
+   "id": "Mercury_SC_416168",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best description of ski"
+  },
+  {
+   "id": "MCAS_2000_8_29",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct sequence for so"
+  },
+  {
+   "id": "Mercury_404132",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which chemical equation cor"
+  },
+  {
+   "id": "Mercury_SC_401185",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine why trail mix is a mixture,"
+  },
+  {
+   "id": "Mercury_415272",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we must"
+  },
+  {
+   "id": "Mercury_7130655",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best statement, let's a"
+  },
+  {
+   "id": "Mercury_188528",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the significant source of e"
+  },
+  {
+   "id": "Mercury_184975",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how closely related organis"
+  },
+  {
+   "id": "Mercury_SC_402276",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which option best describes"
+  },
+  {
+   "id": "Mercury_SC_406710",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Chameleons change their skin color prima"
+  },
+  {
+   "id": "Mercury_7159320",
+   "pred": null,
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "MCAS_2004_9_21-v1",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best hypothesis, we mus"
+  },
+  {
+   "id": "Mercury_SC_415719",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To understand why the ice cube melts, we"
+  },
+  {
+   "id": "Mercury_SC_401272",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Thomas Edison is widely recognized for h"
+  },
+  {
+   "id": "MCAS_1999_4_26",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_4_9",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct classification "
+  },
+  {
+   "id": "Mercury_402341",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct order of the Su"
+  },
+  {
+   "id": "Mercury_7131530",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the type of change that occ"
+  },
+  {
+   "id": "Mercury_SC_408706",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine when Florida will have the "
+  },
+  {
+   "id": "Mercury_183890",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct characteristic "
+  },
+  {
+   "id": "Mercury_407260",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which scenario represents a"
+  },
+  {
+   "id": "MCAS_2004_8_3",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct division, let's"
+  },
+  {
+   "id": "VASoL_2008_3_25",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best senses for measuri"
+  },
+  {
+   "id": "Mercury_411732",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which group contains the le"
+  },
+  {
+   "id": "MCAS_2009_5_6518",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which change is caused by r"
+  },
+  {
+   "id": "Mercury_7263060",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct theory, let's a"
+  },
+  {
+   "id": "Mercury_SC_401168",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which component stops curre"
+  },
+  {
+   "id": "MCAS_2009_8_17",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Photosynthesis is the biological process"
+  },
+  {
+   "id": "TIMSS_1995_8_Q15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option is NOT a chemi"
+  },
+  {
+   "id": "Mercury_7159023",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The scenario describes a shift in the cl"
+  },
+  {
+   "id": "Mercury_SC_LBS10027",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct definition of p"
+  },
+  {
+   "id": "Mercury_7227710",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct classification,"
+  },
+  {
+   "id": "MCAS_2006_9_44",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "To determine the correct description of "
+  },
+  {
+   "id": "Mercury_7228358",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "In a laboratory setting, safety protocol"
+  },
+  {
+   "id": "VASoL_2007_3_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7072380",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct factor, we must"
+  },
+  {
+   "id": "Mercury_SC_400182",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which form of energy can tr"
+  },
+  {
+   "id": "MDSA_2010_4_20",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which factor most affects t"
+  },
+  {
+   "id": "MDSA_2013_8_40",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "When a scientist conducts an investigati"
+  },
+  {
+   "id": "Mercury_7247013",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7081743",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best course of action f"
+  },
+  {
+   "id": "Mercury_7234378",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7043820",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct term, let's ana"
+  },
+  {
+   "id": "Mercury_7249708",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct function of ant"
+  },
+  {
+   "id": "VASoL_2009_3_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "When a metal rod is struck, it begins to"
+  },
+  {
+   "id": "Mercury_7210245",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "The question asks which property of wate"
+  },
+  {
+   "id": "Mercury_180828",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "When a laboratory accident occurs, such "
+  },
+  {
+   "id": "Mercury_7016258",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the proper procedure for sa"
+  },
+  {
+   "id": "MCAS_2006_8_24",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best explanation for th"
+  },
+  {
+   "id": "Mercury_SC_402985",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct piece of equipm"
+  },
+  {
+   "id": "Mercury_415086",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To find the average speed of the airplan"
+  },
+  {
+   "id": "MCAS_2014_8_20",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best way to ensure the "
+  },
+  {
+   "id": "Mercury_416646",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct structure, let'"
+  },
+  {
+   "id": "Mercury_7009993",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct difference betw"
+  },
+  {
+   "id": "Mercury_SC_408631",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best explanation for ho"
+  },
+  {
+   "id": "ACTAAP_2010_7_3",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely cause of co"
+  },
+  {
+   "id": "LEAP_2009_8_10430",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine whether water temperature a"
+  },
+  {
+   "id": "Mercury_7214340",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most likely cause of th"
+  },
+  {
+   "id": "Mercury_175385",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "When a wooden log is burned, a chemical "
+  },
+  {
+   "id": "MCAS_2002_8_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the final temperature of bo"
+  },
+  {
+   "id": "Mercury_7082443",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which statement is an opini"
+  },
+  {
+   "id": "Mercury_7107328",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Evolution, specifically the process wher"
+  },
+  {
+   "id": "Mercury_SC_415006",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best analogy, let's ana"
+  },
+  {
+   "id": "ACTAAP_2010_5_7",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the starting state of matte"
+  },
+  {
+   "id": "ACTAAP_2009_5_8",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, let's a"
+  },
+  {
+   "id": "Mercury_7138460",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the type of energy algae wi"
+  },
+  {
+   "id": "Mercury_405778",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which power plant causes th"
+  },
+  {
+   "id": "Mercury_SC_408763",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which feature would best he"
+  },
+  {
+   "id": "Mercury_7212993",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most abundant greenhous"
+  },
+  {
+   "id": "Mercury_7004743",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which particle an atom lose"
+  },
+  {
+   "id": "Mercury_SC_401295",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Deserts are characterized by extremely h"
+  },
+  {
+   "id": "Mercury_7093153",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which question can best be "
+  },
+  {
+   "id": "Mercury_7017710",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct similarity betw"
+  },
+  {
+   "id": "Mercury_7173583",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which example represents a "
+  },
+  {
+   "id": "Mercury_7222793",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best way to reduce unco"
+  },
+  {
+   "id": "MDSA_2011_5_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which presentation best dem"
+  },
+  {
+   "id": "Mercury_7283833",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which aspect of modern life"
+  },
+  {
+   "id": "Mercury_SC_401788",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct first step in a"
+  },
+  {
+   "id": "Mercury_405136",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement, let'"
+  },
+  {
+   "id": "Mercury_7005005",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Winds that blow from the ocean toward th"
+  },
+  {
+   "id": "MCAS_2003_5_14",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To understand why early morning fog is r"
+  },
+  {
+   "id": "Mercury_7086608",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the charge of the atom, we "
+  },
+  {
+   "id": "MDSA_2009_4_34",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best explanation, let's"
+  },
+  {
+   "id": "NAEP_2000_8_S11+10",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To separate a mixture of sand and salt, "
+  },
+  {
+   "id": "Mercury_SC_400404",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which investigation require"
+  },
+  {
+   "id": "Mercury_7116235",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct answer, we must"
+  },
+  {
+   "id": "Mercury_7218365",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the most appropriate SI uni"
+  },
+  {
+   "id": "Mercury_400407",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct statement about"
+  },
+  {
+   "id": "Mercury_7081480",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To understand why sound travels faster i"
+  },
+  {
+   "id": "Mercury_402348",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct pH range for ac"
+  },
+  {
+   "id": "Mercury_7106698",
+   "pred": "D",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which device most likely pr"
+  },
+  {
+   "id": "FCAT_2008_5_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the best analogy for the ro"
+  },
+  {
+   "id": "Mercury_SC_410971",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Cities set limits on pollution from cars"
+  },
+  {
+   "id": "Mercury_7136063",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct processes, we m"
+  },
+  {
+   "id": "OHAT_2007_8_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how coal is formed, let's a"
+  },
+  {
+   "id": "Mercury_SC_400708",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Petroleum, from which natural gas and oi"
+  },
+  {
+   "id": "Mercury_SC_413439",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which investigation best te"
+  },
+  {
+   "id": "Mercury_402216",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct chemical equati"
+  },
+  {
+   "id": "Mercury_406550",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the outcome of this relatio"
+  },
+  {
+   "id": "AKDE&ED_2008_8_7",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which method best answers t"
+  }
+ ]
+}
