@@ -173,7 +173,7 @@ it did not promote on thin evidence. Caveats, all visible in `decision.json`:
    - Candidate fix, in the chart and opt-in: `gateway.backendConnectionClose` sends `Connection: close`, so each request is balanced and a terminating pod stops receiving traffic.
    - Proper fix: queue-aware L7 routing (e.g. the Kubernetes Gateway API Inference Extension endpoint picker).
    **Not measured yet** (next item).
-8. **Node disk pressure evicted the stack after the runs.** At 03:00 UTC on 11-25, after all evidence runs had finished, the shared VM's root filesystem crossed the kubelet eviction threshold. The node was tainted `disk-pressure` and every pod was evicted. This blocked the planned re-measurement with `backendConnectionClose=true`. On a shared, 85–94%-full disk the k3d stack (≈ 8.2 GB) is fragile. `make k3d-down` / `make k3d-up` rebuilds it.
+8. **Node disk pressure evicted the stack after the runs.** At 03:00 UTC on 11-25, after all evidence runs had finished, the shared VM's root filesystem crossed the kubelet eviction threshold. The node was tainted `disk-pressure` and every pod was evicted. This blocked the planned re-measurement with `backendConnectionClose=true`. On a shared, 85–94%-full disk the k3d stack (≈ 8.2 GB) is fragile. The evicted cluster was deleted afterwards (`make k3d-down`, plus the k3s / k3d-tools images) to give the disk back. `make k3d-up` rebuilds everything from the pinned versions in ~10 min.
 
 ## 8. Explain-back
 
