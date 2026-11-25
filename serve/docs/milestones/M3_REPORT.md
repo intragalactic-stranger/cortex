@@ -1,7 +1,7 @@
 # M3 · Quantization artifacts + quality (E2, E3, QAT vs PTQ): Report
 
 > **Status:** `DONE` except HF publishing (needs your yes and an HF token, D-022/D-027) · **Date:** 2026-11-24 · **Branch:** `serve/m3-quant` · **Modal spend:** ≈ $17 (credits; card $0.00)
-> **Results:** [`../../RESULTS.md`](../../RESULTS.md) §M3 · **Research:** `00_Implementation_Plan/research/M3_tooling-research.md`
+> **Results:** [`../../RESULTS.md`](../../RESULTS.md) §M3 · **Research:** [`../research/M3_quantization-tooling.md`](../research/M3_quantization-tooling.md)
 
 ## 1. Summary of what was done
 
