@@ -67,8 +67,10 @@ tok = AutoTokenizer.from_pretrained(MODEL, revision=REV)
 N, L = 512, 2048
 ds = load_dataset("HuggingFaceH4/ultrachat_200k", split=f"train_sft[:{N}]").shuffle(seed=42)
 ds = ds.map(lambda ex: {"text": tok.apply_chat_template(ex["messages"], tokenize=False)})
-ds = ds.map(lambda s: tok(s["text"], max_length=L, truncation=True, add_special_tokens=False),
-            remove_columns=ds.column_names)
+ds = ds.map(
+    lambda s: tok(s["text"], max_length=L, truncation=True, add_special_tokens=False), remove_columns=ds.column_names
+)
+
 
 def save(d):
     model.save_pretrained(d, save_compressed=True)
@@ -78,6 +80,7 @@ def save(d):
 **(a) FP8 dynamic.** Data-free (no calibration set needed); takes minutes.
 ```python
 from llmcompressor.modifiers.quantization import QuantizationModifier
+
 oneshot(model=model, recipe=QuantizationModifier(targets="Linear", scheme="FP8_DYNAMIC", ignore=["lm_head"]))
 save("Qwen3-4B-Instruct-2507-FP8-Dynamic")
 ```
@@ -86,8 +89,11 @@ save("Qwen3-4B-Instruct-2507-FP8-Dynamic")
 ```python
 from llmcompressor.modifiers.gptq import GPTQModifier
 from llmcompressor.modifiers.transform.smoothquant import SmoothQuantModifier
-recipe = [SmoothQuantModifier(smoothing_strength=0.8),
-          GPTQModifier(targets="Linear", scheme="W8A8", ignore=["lm_head"])]
+
+recipe = [
+    SmoothQuantModifier(smoothing_strength=0.8),
+    GPTQModifier(targets="Linear", scheme="W8A8", ignore=["lm_head"]),
+]
 oneshot(model=model, dataset=ds, recipe=recipe, max_seq_length=L, num_calibration_samples=N)
 save("Qwen3-4B-Instruct-2507-W8A8-INT8")
 ```
@@ -95,8 +101,14 @@ save("Qwen3-4B-Instruct-2507-W8A8-INT8")
 **(c) W4A16 GPTQ, group 128**
 ```python
 from llmcompressor.modifiers.gptq import GPTQModifier
-oneshot(model=model, dataset=ds, recipe=GPTQModifier(targets="Linear", scheme="W4A16", ignore=["lm_head"]),
-        max_seq_length=L, num_calibration_samples=N)
+
+oneshot(
+    model=model,
+    dataset=ds,
+    recipe=GPTQModifier(targets="Linear", scheme="W4A16", ignore=["lm_head"]),
+    max_seq_length=L,
+    num_calibration_samples=N,
+)
 save("Qwen3-4B-Instruct-2507-W4A16-G128")
 ```
 
@@ -104,8 +116,11 @@ save("Qwen3-4B-Instruct-2507-W4A16-G128")
 ```python
 from llmcompressor.modifiers.quantization import QuantizationModifier
 from llmcompressor.modifiers.transform.awq import AWQModifier
-recipe = [AWQModifier(duo_scaling="both"),
-          QuantizationModifier(targets=["Linear"], scheme="W4A16_ASYM", ignore=["lm_head"])]
+
+recipe = [
+    AWQModifier(duo_scaling="both"),
+    QuantizationModifier(targets=["Linear"], scheme="W4A16_ASYM", ignore=["lm_head"]),
+]
 oneshot(model=model, dataset=ds, recipe=recipe, max_seq_length=L, num_calibration_samples=N)
 save("Qwen3-4B-Instruct-2507-AWQ-W4A16-ASYM")
 ```
@@ -120,12 +135,18 @@ save("Qwen3-4B-Instruct-2507-AWQ-W4A16-ASYM")
 from transformers import AutoProcessor, Gemma4ForConditionalGeneration
 from llmcompressor.utils import load_context
 from compressed_tensors.quantization import QuantizationArgs, QuantizationScheme
+
 with load_context(Gemma4ForConditionalGeneration):
-    model = Gemma4ForConditionalGeneration.from_pretrained("google/gemma-4-E4B-it", revision="4ecc2ba63bcac23ba4a767fc87025b1450f84c9c")
-scheme = QuantizationScheme(targets=["Linear"], weights=QuantizationArgs(
-    num_bits=4, type="int", strategy="group", group_size=32, symmetric=True, dynamic=False))
-recipe = GPTQModifier(config_groups={"group_0": scheme},
-                      ignore=["lm_head", "re:.*vision.*", "re:.*audio.*"])  # same as Google's ignore list
+    model = Gemma4ForConditionalGeneration.from_pretrained(
+        "google/gemma-4-E4B-it", revision="4ecc2ba63bcac23ba4a767fc87025b1450f84c9c"
+    )
+scheme = QuantizationScheme(
+    targets=["Linear"],
+    weights=QuantizationArgs(num_bits=4, type="int", strategy="group", group_size=32, symmetric=True, dynamic=False),
+)
+recipe = GPTQModifier(
+    config_groups={"group_0": scheme}, ignore=["lm_head", "re:.*vision.*", "re:.*audio.*"]
+)  # same as Google's ignore list
 ```
 - Google's ignore list is 250 entries: 249 vision/audio modules plus `lm_head`. Every text `Linear` is quantized, including the per-layer-input projections.
 - The `QuantizationScheme`/`config_groups` constructor form follows the compressed-tensors API, but this exact snippet was not run (**UNVERIFIED**).
@@ -142,8 +163,14 @@ recipe = GPTQModifier(config_groups={"group_0": scheme},
 - **Use a dedicated quantization image.** Suggested pins, all at least about 2 weeks old:
   ```python
   modal.Image.debian_slim(python_version="3.12").uv_pip_install(
-      "llmcompressor==0.15.0", "compressed-tensors==0.20.1", "torch==2.14.1",
-      "transformers==5.21.0", "datasets==5.1.0", "accelerate==1.15.0", "auto-round==0.16.1")
+      "llmcompressor==0.15.0",
+      "compressed-tensors==0.20.1",
+      "torch==2.14.1",
+      "transformers==5.21.0",
+      "datasets==5.1.0",
+      "accelerate==1.15.0",
+      "auto-round==0.16.1",
+  )
   ```
   Write the output to the `cortex-hf-cache` volume, or push it to a private HF repo, then load it from the vLLM image.
 - **Format compatibility (checked by reading the schemas):** `QuantizationArgs` in ct 0.17.0 already has `scale_dtype`/`zp_dtype`, and the config models use pydantic's default (extra fields ignored). Checkpoints written by ct 0.20.1 should therefore load in vLLM 0.32.0. This is **UNVERIFIED at runtime**, so smoke-load each artifact once.
