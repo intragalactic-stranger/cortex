@@ -12,8 +12,8 @@ import httpx
 import polars as pl
 
 from cortex_serve.servebench.client import RequestResult, send
-from cortex_serve.servebench.collect import CgroupSampler, NvidiaSmiSampler, scrape_prometheus
-from cortex_serve.servebench.config import ArtifactSpec, RunConfig
+from cortex_serve.servebench.collect import CgroupSampler, NvidiaSmiSampler, json_valid, prom_delta, scrape_prometheus
+from cortex_serve.servebench.config import ArtifactSpec, RunConfig, WorkloadSpec
 from cortex_serve.servebench.engines import Engine, make_engine
 from cortex_serve.servebench.engines.base import artifact_path
 from cortex_serve.servebench.engines.llamacpp import LlamaCppEngine
@@ -43,12 +43,22 @@ def probe_llamacpp_memory(engine: LlamaCppEngine, artifact: ArtifactSpec) -> dic
         probe.stop()
 
 
+def request_extra(engine_kind: str, wl: WorkloadSpec) -> dict[str, Any] | None:
+    """Per-request OpenAI-body additions for a workload."""
+    extra: dict[str, Any] = {}
+    # vLLM and SGLang take ignore_eos per request (llama.cpp uses the server flag --ignore-eos)
+    if engine_kind in ("vllm", "sglang") and wl.ignore_eos:
+        extra["ignore_eos"] = True
+    if wl.json_schema is not None:
+        extra["response_format"] = {"type": "json_schema", "json_schema": {"name": wl.name, "schema": wl.json_schema}}
+    return extra or None
+
+
 async def _run_level(
-    engine: Engine, cfg: RunConfig, warmup: list[Request], measured: list[Request], level: float
+    engine: Engine, cfg: RunConfig, warmup: list[Request], measured: list[Request], level: float, wl: WorkloadSpec
 ) -> LevelRun:
     limits = httpx.Limits(max_connections=int(max(level, 1)) + 8)
-    # vLLM and SGLang take ignore_eos per request (llama.cpp uses the server flag --ignore-eos)
-    extra = {"ignore_eos": True} if cfg.engine.kind in ("vllm", "sglang") else None
+    extra = request_extra(cfg.engine.kind, wl)
     async with httpx.AsyncClient(timeout=cfg.load.timeout_s, limits=limits) as client:
 
         async def do(req: Request) -> RequestResult:
@@ -80,6 +90,29 @@ def _artifact_record(a: ArtifactSpec, models_dir: Path) -> dict[str, Any]:
     if a.repo.startswith("/") and qm.exists():  # M3 local checkpoint: carry its quantization manifest
         rec["quantize_manifest"] = json.loads(qm.read_text())
     return rec  # HF-repo artifacts (vLLM/SGLang) are identified by repo + pinned revision
+
+
+def _engine_counters(
+    before: dict[str, float], after: dict[str, float], wl: WorkloadSpec, results: list[RequestResult]
+) -> dict[str, float | None]:
+    """vLLM speculative-decoding and prefix-cache counters over one load point; JSON validity if constrained."""
+    acc = prom_delta(before, after, "vllm:spec_decode_num_accepted_tokens_total")
+    drafted = prom_delta(before, after, "vllm:spec_decode_num_draft_tokens_total")
+    hits = prom_delta(before, after, "vllm:prefix_cache_hits_total")
+    queries = prom_delta(before, after, "vllm:prefix_cache_queries_total")
+    ok = [r for r in results if r.ok]
+    return {
+        "spec_accepted_tokens": acc,
+        "spec_draft_tokens": drafted,
+        "spec_acceptance": acc / drafted if acc is not None and drafted else None,
+        "prefix_cache_hit_rate": hits / queries if hits is not None and queries else None,
+        "json_valid_rate": (
+            sum(json_valid(r.text, schema) for r in ok) / len(ok)
+            if (schema := wl.json_schema or wl.check_schema) and ok
+            else None
+        ),
+        "truncated_rate": sum(r.finish_reason == "length" for r in ok) / len(ok) if ok else None,
+    }
 
 
 def draft_stats(results: list[RequestResult]) -> dict[str, float | None]:
@@ -150,7 +183,7 @@ def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: 
                             else CgroupSampler(engine.container or "").start()
                         )
                         before = scrape_prometheus(engine.base_url)
-                        lr = asyncio.run(_run_level(engine, cfg, warmup, measured, level))
+                        lr = asyncio.run(_run_level(engine, cfg, warmup, measured, level, wl))
                         resources = sampler.stop()
                         after = scrape_prometheus(engine.base_url)
                         for r in lr.results:
@@ -181,6 +214,7 @@ def run(cfg: RunConfig, out_root: Path, models_dir: Path, repo_dir: Path, only: 
                             **{f"mem_{k}": v for k, v in memory.items()},
                             **_server_medians(lr.results),
                             **drafts,
+                            **_engine_counters(before, after, wl, lr.results),
                             "metrics_scraped": bool(before and after),
                         }
                         point_rows.append(row)

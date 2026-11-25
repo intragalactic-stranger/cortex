@@ -1,6 +1,6 @@
 # M2 · GPU engine baseline on Modal (E1, E8, memcalc validation): Report
 
-> **Status:** `DONE` (repo-public step pending your yes) · **Date:** 2026-11-24 · **Branch:** `serve/m2-modal-prep` · **Modal spend:** ≈ $3.80 (credits; $0.00 billed to card)
+> **Status:** `DONE` (repo made public 2026-11-24) · **Date:** 2026-11-24 · **Branch:** `serve/m2-modal-prep` · **Modal spend:** ≈ $3.80 (credits; $0.00 billed to card)
 > **Results:** [`../../RESULTS.md`](../../RESULTS.md) §M2 · **Spec:** [`M2_SPEC.md`](M2_SPEC.md) · **Research:** [`../research/M2_gpu-engines-and-modal.md`](../research/M2_gpu-engines-and-modal.md)
 
 ## 1. Summary of what was done
@@ -27,7 +27,7 @@
 | memcalc vs vLLM KV table, ±20% on max concurrency | ✅ | −7% to +13% on KV; weights −2% |
 | Cross-check within ~5–10% | ✅ | 1–7% |
 | Spend logged per run | ✅ | `03_COMPUTE_AND_BUDGET.md` |
-| Repo flipped to public | ⏳ | Waiting for your yes (D-022) |
+| Repo flipped to public | ✅ | 2026-11-24, after your yes (D-037) |
 
 ## 3. Key numbers
 

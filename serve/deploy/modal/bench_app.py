@@ -20,6 +20,7 @@ import json
 import os
 import subprocess
 import tarfile
+import time
 from pathlib import Path
 
 import modal
@@ -72,13 +73,23 @@ def _fetch_gguf(cfg: object) -> None:
         if art.file is None:
             continue
         dest = Path("/hf/gguf") / artifact_path(art)
+        if art.repo == "local/gguf-m3":  # our own M3 GGUFs (gguf_app.py writes them to /hf/gguf-m3)
+            src = Path("/hf/gguf-m3") / art.file
+            if not src.exists():
+                raise FileNotFoundError(f"{src} missing: run gguf_app.py --job qwen first")
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            if not dest.exists():
+                dest.symlink_to(src)
+            continue
         if not dest.exists():
             print(f"[fetch] {art.repo}@{art.revision[:8]}/{art.file}")
             hf_hub_download(art.repo, art.file, revision=art.revision, local_dir=dest.parent)
             hf_cache.commit()
 
 
-def _bench(config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
+def _bench(
+    config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool, deadline_s: float = 0.0
+) -> bytes:
     """Runs inside the GPU container: run each config in turn (one cold start), return all run dirs as tar.gz.
 
     A failing config is logged and skipped so the others still return their data.
@@ -90,8 +101,16 @@ def _bench(config_yamls: list[str], only: list[str] | None, git_sha: str, git_di
 
     out = Path("/tmp/results")
     run_dirs: list[Path] = []
-    for text in config_yamls:
+    from cortex_serve.spend import skip_config
+
+    t0 = time.monotonic()
+    for i, text in enumerate(config_yamls):
         cfg = RunConfig.model_validate(yaml.safe_load(text))
+        # Modal kills the whole call at its timeout and nothing is returned: skip a config that cannot finish
+        need = (cfg.budget.max_minutes * 60) if cfg.budget else 0.0
+        if skip_config(i, time.monotonic() - t0, need, deadline_s):
+            print(f"[fail] {cfg.name}: skipped, would not finish before the container timeout")
+            continue
         try:
             _fetch_gguf(cfg)
             run_dirs.append(run(cfg, out, models_dir=Path("/hf/gguf"), repo_dir=Path("/"), only=only))
@@ -108,18 +127,24 @@ def _bench(config_yamls: list[str], only: list[str] | None, git_sha: str, git_di
 
 # One function per engine image; GPU type and timeout are set per call with .with_options().
 @app.function(image=_image("vllm"), gpu="L4", volumes=VOLUMES, timeout=600)
-def bench_vllm(config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
-    return _bench(config_yamls, only, git_sha, git_dirty)
+def bench_vllm(
+    config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool, deadline_s: float = 0.0
+) -> bytes:
+    return _bench(config_yamls, only, git_sha, git_dirty, deadline_s)
 
 
 @app.function(image=_image("sglang"), gpu="L4", volumes=VOLUMES, timeout=600)
-def bench_sglang(config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
-    return _bench(config_yamls, only, git_sha, git_dirty)
+def bench_sglang(
+    config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool, deadline_s: float = 0.0
+) -> bytes:
+    return _bench(config_yamls, only, git_sha, git_dirty, deadline_s)
 
 
 @app.function(image=_image("llamacpp"), gpu="L4", volumes=VOLUMES, timeout=600)
-def bench_llamacpp(config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool) -> bytes:
-    return _bench(config_yamls, only, git_sha, git_dirty)
+def bench_llamacpp(
+    config_yamls: list[str], only: list[str] | None, git_sha: str, git_dirty: bool, deadline_s: float = 0.0
+) -> bytes:
+    return _bench(config_yamls, only, git_sha, git_dirty, deadline_s)
 
 
 FUNCTIONS = {"vllm": bench_vllm, "sglang": bench_sglang, "llamacpp": bench_llamacpp}
@@ -156,7 +181,7 @@ def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 
     )
     fn = FUNCTIONS[cfgs[0].engine.kind].with_options(gpu=gpu, timeout=int(minutes * 60))
     with guarded(names, worst, approved_gate, yes):
-        data = fn.remote(texts, only.split(",") if only else None, sha, dirty)
+        data = fn.remote(texts, only.split(",") if only else None, sha, dirty, minutes * 60)
     dest = Path("serve/results")
     with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
         tar.extractall(dest, filter="data")
@@ -169,7 +194,7 @@ def main(config: str, yes: bool = False, only: str = "", approved_gate: float = 
 
 def _check_gpu(dest: Path, run_names: list[str], requested: str) -> None:
     """Modal may serve a request on a different (upgraded) GPU; flag any run whose real device differs."""
-    want = requested.rstrip("!").replace("-", " ").split()[0].upper()  # "H100!" -> "H100", "A100-80GB" -> "A100"
+    want = requested.split(":")[0].rstrip("!").replace("-", " ").split()[0].upper()  # "H100!:2" -> "H100"
     for name in run_names:
         for man in (dest / name).glob("*/manifest.json"):
             real = str(json.loads(man.read_text()).get("host", {}).get("gpu", ""))

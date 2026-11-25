@@ -1,0 +1,46 @@
+name: e12-h100x2-vllm-tp2
+experiment: E12
+description: Tensor parallel TP=2 on 2 x H100 (exact); compare with E2 H100 bf16 TP=1. 2 x L4 never became available on Modal (1 h 45 min queue).
+engine:
+  kind: vllm
+  launch: process
+  image: vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34
+  args:
+    max_model_len: 4096
+    gpu_memory_utilization: 0.9
+    tensor_parallel_size: 2
+artifacts:
+- name: qwen3-4b-bf16
+  repo: Qwen/Qwen3-4B-Instruct-2507
+  revision: cdbee75f17c01a7cc42f958dc650907174af0554
+  family: Qwen/Qwen3-4B-Instruct-2507
+  quant: bf16
+tokenizers:
+  Qwen/Qwen3-4B-Instruct-2507:
+    repo: Qwen/Qwen3-4B-Instruct-2507
+    revision: cdbee75f17c01a7cc42f958dc650907174af0554
+workloads:
+- name: chat-balanced
+  input_tokens: 512
+  output_tokens: 256
+load:
+  mode: concurrency
+  levels:
+  - 1
+  - 16
+  - 64
+  - 128
+  requests_per_level: 8
+  requests_per_slot: 3
+  warmup_requests: 4
+slo:
+  ttft_s: 0.5
+  tpot_s: 0.05
+repeats: 2
+hardware:
+  device: modal-h100x2
+  gpu: H100 x2
+budget:
+  gpu: H100!:2
+  usd_per_hour: 7.9
+  max_minutes: 20

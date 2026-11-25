@@ -144,3 +144,34 @@ def scrape_prometheus(base_url: str, timeout_s: float = 5.0) -> dict[str, float]
     except httpx.HTTPError:
         return {}
     return parse_prometheus(resp.text)
+
+
+def prom_delta(before: dict[str, float], after: dict[str, float], prefix: str) -> float | None:
+    """Sum of counter increases over every label set of a metric name (None if the metric is absent)."""
+    keys = [k for k in after if k.split("{", 1)[0] == prefix]
+    if not keys:
+        return None
+    return sum(after[k] - before.get(k, 0.0) for k in keys)
+
+
+def json_valid(text: str, schema: dict[str, Any]) -> bool:
+    """Parses as JSON and has the schema's required top-level keys with matching basic types."""
+    import json
+
+    try:
+        obj = json.loads(text)
+    except (ValueError, TypeError):
+        return False
+    if schema.get("type") == "object" and not isinstance(obj, dict):
+        return False
+    types: dict[str, type | tuple[type, ...]] = {
+        "string": str, "integer": int, "number": (int, float), "boolean": bool, "array": list, "object": dict,
+    }  # fmt: skip
+    props: dict[str, Any] = schema.get("properties", {})
+    for key in schema.get("required", []):
+        if not isinstance(obj, dict) or key not in obj:
+            return False
+        want = types.get(str(props.get(key, {}).get("type", "")))
+        if want is not None and not isinstance(obj[key], want):
+            return False
+    return True

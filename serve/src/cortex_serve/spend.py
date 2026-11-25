@@ -72,3 +72,9 @@ def guarded(name: str, worst_usd: float, approved_gate: float, yes: bool) -> Ite
         yield
     finally:
         rec.unlink(missing_ok=True)
+
+
+def skip_config(index: int, elapsed_s: float, need_s: float, deadline_s: float) -> bool:
+    """In a multi-config GPU session (deadline = sum of the configs' caps), skip a later config whose own cap no
+    longer fits because earlier configs overran theirs. The first config always runs."""
+    return bool(deadline_s) and index > 0 and elapsed_s + need_s > deadline_s

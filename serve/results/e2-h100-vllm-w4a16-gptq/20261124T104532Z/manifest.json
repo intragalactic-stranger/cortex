@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "created_utc": "2026-11-24T10:45:37+00:00",
+  "servebench_version": "0.1.0",
+  "host": {
+    "hostname_hash": "c5803a6e4daa",
+    "cpu": "unknown",
+    "logical_cpus": 17,
+    "memory_gib": 1024.0,
+    "kernel": "4.19.0-gvisor",
+    "python": "3.12.3",
+    "docker": null,
+    "gpu": "NVIDIA H100 80GB HBM3, 620.70.06, 81559 MiB"
+  },
+  "run": {
+    "name": "e2-h100-vllm-w4a16-gptq",
+    "experiment": "E2",
+    "stamp": "20261124T104532Z"
+  },
+  "config": {
+    "name": "e2-h100-vllm-w4a16-gptq",
+    "description": "Quantization speed (E2): w4a16-gptq on H100, vLLM 0.32.0. Same workload and server args as E1.",
+    "experiment": "E2",
+    "engine": {
+      "kind": "vllm",
+      "image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+      "launch": "process",
+      "args": {
+        "max_model_len": 4096,
+        "gpu_memory_utilization": 0.9
+      }
+    },
+    "artifacts": [
+      {
+        "name": "qwen3-4b-w4a16-gptq-g128",
+        "repo": "/hf/artifacts/qwen3-4b-w4a16-gptq-g128-generic",
+        "revision": "local",
+        "file": null,
+        "family": "Qwen/Qwen3-4B-Instruct-2507",
+        "quant": "w4a16-gptq-g128"
+      }
+    ],
+    "tokenizers": {
+      "Qwen/Qwen3-4B-Instruct-2507": {
+        "repo": "Qwen/Qwen3-4B-Instruct-2507",
+        "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+      }
+    },
+    "workloads": [
+      {
+        "name": "chat-balanced",
+        "input_tokens": 512,
+        "output_tokens": 256,
+        "input_jitter": 0.0,
+        "shared_prefix_tokens": 0,
+        "instruction": "Continue the notes above in the same style. Keep writing without stopping."
+      }
+    ],
+    "load": {
+      "mode": "concurrency",
+      "levels": [
+        1.0,
+        16.0,
+        64.0,
+        128.0
+      ],
+      "requests_per_level": 16,
+      "requests_per_slot": 3,
+      "warmup_requests": 4,
+      "timeout_s": 600.0
+    },
+    "slo": {
+      "ttft_s": 0.5,
+      "tpot_s": 0.05
+    },
+    "repeats": 2,
+    "seed": 1234,
+    "disable_thinking": true,
+    "hardware": {
+      "device": "modal-h100",
+      "gpu": "H100"
+    },
+    "budget": {
+      "gpu": "H100!",
+      "usd_per_hour": 3.95,
+      "max_minutes": 8.0
+    }
+  },
+  "engine": {
+    "kind": "vllm",
+    "image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+    "digest": null,
+    "version": "0.32.0"
+  },
+  "git": {
+    "sha": "838091fea98b643ede696d559fce0dfaa949b117",
+    "dirty": false
+  },
+  "artifacts": [
+    {
+      "name": "qwen3-4b-w4a16-gptq-g128",
+      "repo": "/hf/artifacts/qwen3-4b-w4a16-gptq-g128-generic",
+      "revision": "local",
+      "file": null,
+      "family": "Qwen/Qwen3-4B-Instruct-2507",
+      "quant": "w4a16-gptq-g128",
+      "quantize_manifest": {
+        "artifact": "qwen3-4b-w4a16-gptq-g128-generic",
+        "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "base_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "recipe": "w4a16-gptq-g128",
+        "recipe_description": "GPTQ int4 weights, group 128, symmetric, static actorder",
+        "calib": "generic",
+        "calib_repo": "HuggingFaceH4/ultrachat_200k",
+        "calib_revision": "8049631c405ae6576f93f445c6b8166f76f5505a",
+        "n": "512",
+        "ids": "66bc04b0f6e4882a",
+        "max_seq_length": 2048,
+        "versions": {
+          "llmcompressor": "0.15.0",
+          "compressed-tensors": "0.20.1",
+          "torch": "2.14.1",
+          "transformers": "5.21.0"
+        },
+        "git_sha": "9b0cc3fe97efa0905b0b10d04e7f0745067ccd6f",
+        "git_dirty": false,
+        "gpu": "L4",
+        "wall_s": 986.1,
+        "size_bytes": 2663267739
+      }
+    }
+  ],
+  "budget": {
+    "gpu": "H100!",
+    "usd_per_hour": 3.95,
+    "max_minutes": 8.0
+  }
+}

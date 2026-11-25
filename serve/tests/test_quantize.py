@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from cortex_serve.quantize.calib import ids_digest, split_bfsi
 from cortex_serve.quantize.recipes import RECIPES, build
-from cortex_serve.spend import inflight_usd
+from cortex_serve.spend import inflight_usd, skip_config
 
 
 def _row(title: str, part: str, sec: int, text: str = "x" * 300) -> dict[str, str]:
@@ -49,3 +49,10 @@ def test_inflight_counts_live_reservations_only(tmp_path: Path) -> None:
     (tmp_path / "dead.json").write_text(json.dumps({"pid": 2**22 + 12345, "worst_usd": 9.0}))
     assert inflight_usd(tmp_path) == 1.5
     assert not (tmp_path / "dead.json").exists()
+
+
+def test_skip_config_never_skips_first_and_only_skips_overruns() -> None:
+    assert not skip_config(0, 0.5, 1500, 1500)  # single config: always runs
+    assert not skip_config(1, 600, 900, 1500)  # first finished early: the second fits
+    assert skip_config(1, 700, 900, 1500)  # first overran its 600 s cap
+    assert not skip_config(3, 10_000, 1, 0)  # no deadline given

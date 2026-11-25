@@ -41,6 +41,8 @@ QUANTS = ["Q8_0", "Q5_K_M", "Q4_K_M"]
 L4_USD_PER_HOUR = 0.80
 MAX_MINUTES = 120
 OUT = Path("/hf/gguf-m3")
+KLD_DIR = Path("/tmp/kld")  # reference logits: ~2 B x vocab per scored token (GBs); never returned or committed
+KLD_CHUNKS = 100  # 100 x 512-token chunks (half of each scored) keeps the base file at ~8-14 GB
 
 app = modal.App("cortex-gguf")
 hf_cache = modal.Volume.from_name("cortex-hf-cache", create_if_missing=True)
@@ -99,7 +101,7 @@ def _ppl(model: Path, data: Path, logs: Path, tag: str, chunks: int | None = Non
     if chunks:
         cmd += ["--chunks", str(chunks)]
     if kld == "base":
-        cmd += ["--kl-divergence-base", str(logs / "base.kld")]
+        cmd += ["--kl-divergence-base", str(KLD_DIR / "base.kld")]
     elif kld:
         cmd = ["/app/llama-perplexity", "-m", str(model), "--kl-divergence-base", kld, "--kl-divergence", "-ngl", "99"]
     text = _sh(cmd, logs / f"ppl-{tag}.log")
@@ -160,9 +162,12 @@ def _qwen(work: Path, logs: Path) -> dict[str, object]:
     hf_cache.commit()
     res: dict[str, object] = {}
     for name, path in variants.items():
-        wiki = _ppl(path, t["wiki"], logs, f"wiki-{name}", kld="base" if name == "bf16" else "")
-        if name != "bf16":
-            wiki.update(_ppl(path, t["wiki"], logs, f"kld-{name}", kld=str(logs / "base.kld")))
+        wiki = _ppl(path, t["wiki"], logs, f"wiki-{name}")
+        if name == "bf16":
+            _ppl(path, t["wiki"], logs, "kldbase-bf16", chunks=KLD_CHUNKS, kld="base")
+        else:
+            k = _ppl(path, t["wiki"], logs, f"kld-{name}", kld=str(KLD_DIR / "base.kld"))
+            wiki.update({key: v for key, v in k.items() if key.startswith(("kld", "same"))})
         res[name] = {"bytes": path.stat().st_size, "wikitext2": wiki,
                      "bfsi_heldout": _ppl(path, t["bfsi_heldout"], logs, f"bfsi-{name}")}  # fmt: skip
     return res
@@ -181,15 +186,17 @@ def _gemma(work: Path, logs: Path) -> dict[str, object]:
             paths[tag] = Path(hf_hub_download(repo, file, revision=rev))
     res: dict[str, object] = {}
     for parent, child in (("qat-bf16", "qat-q4_0"), ("it-bf16", "it-q8_0")):
-        kbase = logs / f"{parent}.kld"
+        kbase = KLD_DIR / f"{parent}.kld"
         for tag in (parent, child):
             r = {"m1_setting_20_chunks": _ppl(paths[tag], wiki, logs, f"wiki20-{tag}", chunks=20)}
             if tag == parent:
                 _sh(["/app/llama-perplexity", "-m", str(paths[tag]), "-f", str(wiki), "-c", "512", "-ngl", "99",
-                     "--kl-divergence-base", str(kbase)], logs / f"kldbase-{tag}.log")  # fmt: skip
-                r["all_chunks"] = _ppl(paths[tag], wiki, logs, f"wiki-{tag}")
-            else:
-                r["all_chunks"] = _ppl(paths[tag], wiki, logs, f"kld-{tag}", kld=str(kbase))
+                     "--chunks", str(KLD_CHUNKS), "--kl-divergence-base", str(kbase)],
+                    logs / f"kldbase-{tag}.log")  # fmt: skip
+            r["all_chunks"] = _ppl(paths[tag], wiki, logs, f"wiki-{tag}")
+            if tag == child:
+                k = _ppl(paths[tag], wiki, logs, f"kld-{tag}", kld=str(kbase))
+                r["kld_vs_parent"] = {key: v for key, v in k.items() if key.startswith(("kld", "same"))}
             res[tag] = r
     return res
 
@@ -200,6 +207,7 @@ def run_job(job: str, git: dict[str, object]) -> bytes:
     work.mkdir(parents=True, exist_ok=True)
     logs.mkdir(parents=True, exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
+    KLD_DIR.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     try:
         results = _qwen(work, logs) if job == "qwen" else _gemma(work, logs)
@@ -212,7 +220,7 @@ def run_job(job: str, git: dict[str, object]) -> bytes:
     hf_cache.commit()
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w:gz") as tar:
-        tar.add(logs, arcname=f"gguf-{job}")
+        tar.add(logs, arcname=f"gguf-{job}", filter=lambda m: None if m.name.endswith(".kld") else m)
     return buf.getvalue()
 
 

@@ -1,0 +1,63 @@
+{
+  "job": "gemma",
+  "status": "ok",
+  "image": "ghcr.io/ggml-org/llama.cpp:full-cuda-b12110@sha256:87803fec70c8046e04e051e49199894ad77e61cf74fd1dceb9ad5ee2f75de228",
+  "gpu": "L4",
+  "wall_s": 492,
+  "git": {
+    "sha": "7e0614167455a160602d4e986d794b7b8bf40257",
+    "dirty": false
+  },
+  "results": {
+    "qat-bf16": {
+      "m1_setting_20_chunks": {
+        "ppl": 61.6781,
+        "ppl_err": 3.5969
+      },
+      "all_chunks": {
+        "ppl": 54.0231,
+        "ppl_err": 0.58573
+      }
+    },
+    "qat-q4_0": {
+      "m1_setting_20_chunks": {
+        "ppl": 65.503,
+        "ppl_err": 3.8552
+      },
+      "all_chunks": {
+        "ppl": 58.1778,
+        "ppl_err": 0.6381
+      },
+      "kld_vs_parent": {
+        "kld": 0.049582,
+        "kld_err": 0.00051,
+        "same_top1_pct": 89.408
+      }
+    },
+    "it-bf16": {
+      "m1_setting_20_chunks": {
+        "ppl": 213.744,
+        "ppl_err": 16.29099
+      },
+      "all_chunks": {
+        "ppl": 185.4218,
+        "ppl_err": 2.63223
+      }
+    },
+    "it-q8_0": {
+      "m1_setting_20_chunks": {
+        "ppl": 213.4099,
+        "ppl_err": 16.24721
+      },
+      "all_chunks": {
+        "ppl": 185.3994,
+        "ppl_err": 2.63048
+      },
+      "kld_vs_parent": {
+        "kld": 0.006516,
+        "kld_err": 0.000305,
+        "same_top1_pct": 96.839
+      }
+    }
+  }
+}
