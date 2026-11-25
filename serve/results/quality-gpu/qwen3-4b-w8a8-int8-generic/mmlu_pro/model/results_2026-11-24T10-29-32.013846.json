@@ -1,0 +1,132 @@
+{
+  "results": {
+    "leaderboard_mmlu_pro": {
+      "name": "leaderboard_mmlu_pro",
+      "alias": "leaderboard_mmlu_pro",
+      "sample_len": 1000,
+      "acc,none": 0.345,
+      "acc_stderr,none": 0.015039986742055365
+    }
+  },
+  "group_subtasks": {},
+  "configs": {
+    "leaderboard_mmlu_pro": {
+      "task": "leaderboard_mmlu_pro",
+      "dataset_path": "TIGER-Lab/MMLU-Pro",
+      "test_split": "test",
+      "fewshot_split": "validation",
+      "doc_to_text": "def doc_to_text(doc):\n    doc_to_text = f\"{doc['question']}\\n\"\n\n    for i in range(len(doc[\"options\"])):\n        doc_to_text += f\"{string.ascii_uppercase[i]}. {doc['options'][i]}\\n\"\n\n    doc_to_text += \"Answer:\"\n    return doc_to_text\n",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": "def doc_to_choice(doc):\n    return [string.ascii_uppercase[i] for i in range(len(doc[\"options\"]))]\n",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "validation",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "<function doc_to_text at 0x2ade92a098a0>",
+        "doc_to_choice": "<function doc_to_choice at 0x2adf79321300>",
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 0.1,
+        "model": "model",
+        "tokenizer": "/hf/artifacts/qwen3-4b-w8a8-int8-generic",
+        "num_concurrent": 32,
+        "max_retries": 3,
+        "timeout": 600,
+        "base_url": "http://127.0.0.1:8000/v1/completions",
+        "config_source": "/usr/local/lib/python3.12/dist-packages/lm_eval/tasks/leaderboard/mmlu_pro/mmlu_pro.yaml"
+      }
+    }
+  },
+  "versions": {
+    "leaderboard_mmlu_pro": 0.1
+  },
+  "n-shot": {
+    "leaderboard_mmlu_pro": 5
+  },
+  "higher_is_better": {
+    "leaderboard_mmlu_pro": {
+      "acc": true
+    }
+  },
+  "n-samples": {
+    "leaderboard_mmlu_pro": {
+      "original": 12032,
+      "effective": 1000
+    }
+  },
+  "config": {
+    "model": "local-completions",
+    "model_args": {
+      "model": "model",
+      "tokenizer": "/hf/artifacts/qwen3-4b-w8a8-int8-generic",
+      "num_concurrent": 32,
+      "max_retries": 3,
+      "timeout": 600,
+      "base_url": "http://127.0.0.1:8000/v1/completions"
+    },
+    "batch_size": 1,
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "use_cache": null,
+    "limit": 1000.0,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": {},
+    "random_seed": 1234,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": null,
+  "date": 1795514864.883016,
+  "pretty_env_info": "PyTorch version: 2.13.0+cu130\nIs debug build: False\nCUDA used to build PyTorch: 13.0\nROCM used to build PyTorch: N/A\n\nOS: Ubuntu 24.04.3 LTS (x86_64)\nGCC version: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nClang version: Could not collect\nCMake version: Could not collect\nLibc version: glibc-2.39\n\nPython version: 3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0] (64-bit runtime)\nPython platform: Linux-4.19.0-gvisor-x86_64-with-glibc2.39\nIs CUDA available: True\nCUDA runtime version: 13.0.88\nCUDA_MODULE_LOADING set to: \nGPU models and configuration: GPU 0: NVIDIA L4\nNvidia driver version: Could not collect\ncuDNN version: Could not collect\nIs XPU available: False\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: False\nCaching allocator config: N/A\n\nCPU:\nArchitecture:        x86_64\nCPU op-mode(s):      32-bit, 64-bit\nAddress sizes:       46 bits physical, 48 bits virtual\nByte Order:          Little Endian\nCPU(s):              17\nOn-line CPU(s) list: 0-16\nVendor ID:           GenuineIntel\nModel name:          unknown\nCPU family:          6\nModel:               85\nThread(s) per core:  1\nCore(s) per socket:  17\nSocket(s):           1\nStepping:            unknown\nBogoMIPS:            2200.17\nFlags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx512_vnni md_clear arch_capabilities\nHypervisor vendor:   KVM\nVirtualization type: full\nNUMA node(s):        1\nNUMA node0 CPU(s):   0-16\n\nVersions of relevant libraries:\n[pip3] nccl-extensions==0.1.0\n[pip3] nccl4py==0.6.0\n[pip3] numpy==2.2.6\n[pip3] nvidia-cublas==13.1.1.3\n[pip3] nvidia-cuda-cupti==13.0.85\n[pip3] nvidia-cuda-nvrtc==13.0.88\n[pip3] nvidia-cuda-runtime==13.0.96\n[pip3] nvidia-cudnn-cu13==9.20.0.48\n[pip3] nvidia-cudnn-frontend==1.31.0\n[pip3] nvidia-cufft==12.0.0.61\n[pip3] nvidia-curand==10.4.0.35\n[pip3] nvidia-cusolver==12.0.4.66\n[pip3] nvidia-cusparse==12.6.3.3\n[pip3] nvidia-cusparselt-cu13==0.8.1\n[pip3] nvidia-nccl-cu13==2.30.7\n[pip3] nvidia-nvjitlink==13.4.92\n[pip3] nvidia-nvtx==13.0.85\n[pip3] nvtx==0.2.15\n[pip3] tokenspeed-triton==3.9.10.post20261008\n[pip3] torch==2.13.0+cu130\n[pip3] torch_c_dlpack_ext==0.1.5\n[pip3] torchaudio==2.11.0+cu130\n[pip3] torchcodec==0.17.0+cu130\n[pip3] torchvision==0.28.0+cu130\n[pip3] triton==3.7.1\n[conda] Could not collect",
+  "transformers_version": "5.19.0",
+  "lm_eval_version": "0.4.13",
+  "upper_git_hash": null,
+  "tokenizer_pad_token": [
+    "<|endoftext|>",
+    "151643"
+  ],
+  "tokenizer_eos_token": [
+    "<|im_end|>",
+    "151645"
+  ],
+  "tokenizer_bos_token": [
+    null,
+    "None"
+  ],
+  "eot_token_id": 151645,
+  "max_length": 2047,
+  "task_hashes": {
+    "leaderboard_mmlu_pro": "818d41f3fe1207a44ba0fd1aff833deea828a51d9ccec5ac00ee50734b3dd508"
+  },
+  "model_source": "local-completions",
+  "model_name": "model",
+  "model_name_sanitized": "model",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": null,
+  "chat_template": null,
+  "chat_template_sha": null,
+  "total_evaluation_time_seconds": "1327.052019273"
+}

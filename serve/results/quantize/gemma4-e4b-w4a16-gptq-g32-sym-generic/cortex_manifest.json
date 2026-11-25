@@ -1,0 +1,25 @@
+{
+  "artifact": "gemma4-e4b-w4a16-gptq-g32-sym-generic",
+  "base_model": "google/gemma-4-E4B-it",
+  "base_revision": "4ecc2ba63bcac23ba4a767fc87025b1450f84c9c",
+  "recipe": "w4a16-gptq-g32-sym",
+  "recipe_description": "GPTQ int4 group 32 symmetric (matches Google's Gemma 4 QAT scheme)",
+  "calib": "generic",
+  "calib_repo": "HuggingFaceH4/ultrachat_200k",
+  "calib_revision": "8049631c405ae6576f93f445c6b8166f76f5505a",
+  "n": "512",
+  "ids": "66bc04b0f6e4882a",
+  "max_seq_length": 2048,
+  "versions": {
+    "llmcompressor": "0.15.0",
+    "compressed-tensors": "0.20.1",
+    "torch": "2.14.1",
+    "transformers": "5.21.0"
+  },
+  "git_sha": "4a009dc8f02d6b92e929e3d13202cb9ee72b5da1",
+  "git_dirty": false,
+  "gpu": "L40S",
+  "pipeline": "basic",
+  "wall_s": 320.0,
+  "size_bytes": 11546064771
+}

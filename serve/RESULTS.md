@@ -198,3 +198,206 @@ Weights: memcalc 7.49 GiB vs vLLM "Model loading took 7.64 GiB" (−2%). KV byte
 | 16 | 1,301 / 1,323 | 41.9 / 42.0 | 353 / 359 |
 
 **The harness agrees with the vendor's benchmark within 1–7%** (`results/m2-crosscheck/20261124T091327Z`). Differences are within run-to-run noise (vllm bench uses random token IDs on `/v1/completions`; servebench uses tokenizer-verified text on chat completions).
+
+---
+
+## M3: Quantization artifacts, quality (E3) and speed (E2), measured
+
+**Base model:** Qwen3-4B-Instruct-2507 @ `cdbee75f`. **Quantizer:** llm-compressor 0.15.0 / compressed-tensors 0.20.1 in its own Modal image (it pins compressed-tensors 0.20.1; vLLM 0.32.0 pins 0.17.0). **GGUF:** llama.cpp `full-cuda-b12110`. Calibration: 512 samples × 2,048 tokens, generic = UltraChat 200k (`8049631c`), BFSI = eCFR Titles 12 + 17 (`Azzindani/US_Regulation_ECFR_20260101` @ `04148fee`), split by CFR part so the BFSI held-out set never overlaps calibration (D-026).
+**Quality (vLLM 0.32.0 + lm-eval 0.4.13, same container):** ARC-Challenge (1,172, acc_norm), HellaSwag (first 2,000, acc_norm), MMLU-Pro leaderboard variant (first 1,000, logprob MC), GSM8K (1,319, 5-shot, strict + flexible extract), IFEval (541, prompt-level strict), WikiText word perplexity, BFSI held-out perplexity (200 sections). Every variant sees the same items; ± = 95% CI from lm-eval's standard error.
+**Runs:** `results/quantize/*/cortex_manifest.json`, `results/quality-gpu/<variant>/`, `results/quality-gguf-gpu/`, `results/e2-{l4,h100}-*`.
+
+### 1. Artifacts
+
+| Variant | Method | Size | Time (GPU) |
+|---|---|---|---|
+| bf16 | original | 7.49 GiB | — |
+| FP8-dynamic | FP8 E4M3 W per-channel, A per-token dynamic (data-free) | 4.12 GiB | 18 s (L4) |
+| W8A8-INT8 | SmoothQuant 0.8 + GPTQ int8 | 4.12 GiB | 22 min (L4) |
+| W4A16 GPTQ g128 | GPTQ int4, group 128, generic calib | 2.48 GiB | 16 min (L4) |
+| W4A16 GPTQ g128 BFSI | same, BFSI calibration | 2.48 GiB | 12 min (L4) |
+| W4A16 AWQ | AWQ scales + RTN int4 asym g128 | 2.49 GiB | 19 min (L40S; OOM on L4) |
+| Qwen official FP8 | block-128 FP8 (Qwen) | 5.19 GB | — |
+| GGUF Q8_0 / Q5_K_M / Q4_K_M (± imatrix generic / BFSI) | llama.cpp | 3.99 / 2.69 / 2.33 GiB | minutes (CPU) |
+
+### 2. Quality vs bf16 (vLLM formats)
+
+| Variant | ARC | HellaSwag | MMLU-Pro | GSM8K strict / flex | IFEval | WikiText PPL | BFSI PPL |
+|---|---|---|---|---|---|---|---|
+| bf16 | 58.3 ±2.8 | 58.5 ±2.2 | 34.5 ±2.9 | 72.8 / 78.8 | 83.4 ±3.1 | 14.27 | 5.97 |
+| FP8-dynamic (ours) | +0.4 | −0.3 | −0.4 | +1.3 / +0.8 | −2.0 | +1.3% | +0.2% |
+| FP8 official (Qwen) | +0.8 | −0.1 | −0.8 | −0.7 / +0.8 | +0.4 | +0.1% | +0.2% |
+| W8A8-INT8 | +0.7 | +0.2 | 0.0 | −1.7 / +0.5 | −0.9 | +0.5% | +0.2% |
+| W4A16 AWQ | −1.6 | −0.4 | −1.9 | +3.2 / +1.7 | −0.7 | +4.7% | +5.6% |
+| W4A16 GPTQ (generic) | +0.1 | −1.6 | −2.3 | +0.7 / +0.8 | −0.9 | +5.5% | +7.3% |
+| W4A16 GPTQ (BFSI calib) | +0.4 | −0.9 | −2.8 | **−38.4** / −3.2 | −3.9 | +8.3% | **+3.0%** |
+
+**Findings**
+- **8-bit (FP8 or INT8) is quality-neutral:** every task within its CI, perplexity +0.1–1.3%. Our 18-second data-free FP8 matches Qwen's official FP8.
+- **4-bit costs a measurable but small amount:** perplexity +4.7–5.5%, MMLU-Pro −1.9 to −2.3 (inside the CI), reasoning and instruction tasks unchanged within noise. AWQ ≥ GPTQ on most metrics, all inside the CIs.
+- **Domain-only calibration is a trade-off, not a free win.** BFSI calibration halves the in-domain perplexity damage (+3.0% vs +7.3%) but the model stops following the few-shot answer format: only 45% of GSM8K answers end in `#### N` (80% with generic calibration), so strict GSM8K drops 38 points while arithmetic itself (flexible extract) drops 3.2. IFEval −3.9 agrees. Recommendation: calibrate on a domain + general-chat mix.
+
+### 3. GGUF quality (llama.cpp; KL divergence vs the bf16 GGUF on 100 WikiText-2 chunks, PPL on all chunks)
+
+| Variant | Size | Mean KLD | Same top-1 | WikiText PPL | BFSI PPL |
+|---|---|---|---|---|---|
+| bf16 | 7.50 GiB | — | — | 10.338 | 5.444 |
+| Q8_0 | 3.99 GiB | 0.0012 | 98.2% | +0.1% | +0.2% |
+| Q5_K_M | 2.69 GiB | 0.0115 | 94.8% | +1.1% | +0.7% |
+| Q4_K_M | 2.33 GiB | 0.0366 | 91.7% | +2.0% | +2.9% |
+| Q4_K_M + imatrix (generic) | 2.33 GiB | 0.0250 | 92.4% | +2.9% | +2.4% |
+| Q4_K_M + imatrix (BFSI) | 2.33 GiB | 0.0255 | 92.5% | +1.8% | +2.0% |
+
+- **Each step down in bits roughly triples KL divergence** (8 → 5 → 4 bit); **an importance matrix cuts 4-bit KLD by ~31%** at the same size. Generic and BFSI imatrices are equivalent on KLD; BFSI is slightly better on BFSI text. PPL and KLD disagree on the generic imatrix (PPL slightly worse): KLD against the parent is the more reliable damage measure.
+
+### 4. E2 speed: what the bytes buy (vLLM, chat-balanced 512/256)
+
+| Format | L4 TPOT @1 (ms) | L4 goodput @4 (req/s) | L4 tok/s @64 | H100 TPOT @1 (ms) | H100 goodput @64 (req/s) | H100 tok/s @128 |
+|---|---|---|---|---|---|---|
+| bf16 | 33.3 | 0.43 | 792 | 4.15 | 27.2 | 10,079 |
+| FP8-dynamic | 21.1 | 0.67 | 996 | 3.12 | 35.3 | 11,710 |
+| FP8 official | 19.1 | 0.71 | 880 | 3.20 | 35.7 | 11,796 |
+| W8A8-INT8 | 20.8 | 0.68 | 994 | 3.30 | 35.1 | 11,673 |
+| W4A16 GPTQ | **12.2** | **1.07** | **1,045** | 3.66 | 25.1 | 9,619 |
+| W4A16 AWQ | 12.3 | 1.06 | 1,038 | — | — | — |
+
+llama.cpp on L4 (1 user, TPOT ms): bf16 33.2 · Q8_0 19.8 · Q5_K_M 14.3 · Q4_K_M 12.7 (imatrix: identical speed). At 16 users: 247 / 312 / 349 / 365 tok/s.
+
+**Findings**
+- **The best format depends on the GPU.** On the L4 (300 GB/s) decode stays memory-bound even at 64 users, so 4-bit wins everywhere: 2.7× faster per token at 1 user, 2.5× goodput at 4 users, +32% throughput at 64. On the H100 (3.35 TB/s) a busy server becomes compute-bound: **W4A16 is faster at 1 user but slower than bf16 at 64–128 users** (weight-only int4 must dequantize to bf16 before every matmul), while **FP8/INT8 (true 8-bit compute) give +30% goodput** at 64 users.
+- **Qwen's official block-FP8 has worse TTFT on the L4** (1.55 s vs 0.99 s p95 at 16 users): sm_89 has no CUTLASS block-FP8 path (research M3 §6). On the H100 it equals our FP8.
+- The engine-reported KV capacity grows as weights shrink (H100: 444K tokens bf16 → 469K FP8 → 481K W4A16).
+
+### 5. Gemma 4 E2B perplexity anomaly from M1: resolved (llama.cpp, WikiText-2, ctx 512)
+
+| Model | PPL, M1 setting (20 chunks) | PPL, all chunks | KLD vs own bf16 parent | Same top-1 |
+|---|---|---|---|---|
+| Google QAT checkpoint, bf16 (`…-qat-q4_0-unquantized`) | 61.7 | 54.0 | — | — |
+| Google QAT Q4_0 GGUF | 65.5 | 58.2 | 0.050 | 89.4% |
+| Original IT, bf16 | 213.7 | 185.4 | — | — |
+| unsloth IT Q8_0 | 213.4 | 185.4 | 0.0065 | 96.8% |
+
+**M1's "QAT 65 vs Q8_0 212" was never a quantization effect:** the QAT checkpoint is a different model whose raw-text perplexity is ~3.5× lower *before* quantization. Quantization damage measured against each model's own parent is normal (Q8_0 KLD 0.0065; QAT Q4_0 0.050). Lesson: compare quantization damage within one parent (KLD), never raw PPL across parents.
+
+### 6. QAT vs PTQ: Gemma 4 E4B at the same W4A16 g32 symmetric scheme (vLLM, L40S)
+
+| Variant | GSM8K strict / flex | IFEval | ARC, reasoning-first (n = 500, Wilson 95%) | Size |
+|---|---|---|---|---|
+| bf16 (original IT) | 71.4 / 76.5 | 85.2 ±3.0 | 93.6 (91.1–95.4) | — |
+| Google QAT (`…-qat-w4a16-ct`) | −1.7 / −1.2 | −3.0 | 93.2 (90.6–95.1) | 11.5 GB |
+| Our GPTQ PTQ (generic calib, basic pipeline) | +0.1 / −0.2 | −2.0 | 92.6 (90.0–94.6) | 10.75 GiB |
+| Our RTN (data-free) | **−40.4 / −13.6** | **−6.8** | 90.6 (87.7–92.9) | 9.50 GiB |
+
+**Findings**
+- **Careful PTQ (GPTQ) matched both the original and Google's QAT checkpoint on every generative task** (all within CI). **Naive RTN** at the same bit width lost 13.6 points of GSM8K (flexible) and 6.8 of IFEval: *how* you quantize matters more than whether the model was trained for it, at this size and on these tasks.
+- **QAT's large advantage shows up only in raw-text perplexity** (WikiText word PPL 86 vs 252 for the original; BFSI 52 vs 127), the same "different model" effect as in §5. It did not translate into better chat-task scores.
+- **Loglikelihood benchmarks are not meaningful for Gemma 4 IT:** ARC/HellaSwag/MMLU-Pro sit at chance even for bf16 (25.2 / 37.4 / 24.8), with or without `<bos>` (`results/quality-gpu-invalid/README.md`). Gemma is compared on generative tasks only. lm-eval's `arc_challenge_chat` scores 0 for every Gemma variant (it expects a bare letter; Gemma reasons first), so reasoning-first ARC uses our own scorer (`quality/arc.py`, `cot=True`).
+- Size difference explained by a header audit (`deploy/modal/artifact_audit.py`): both artifacts hold identical quantized text layers (1.84 GiB int4 + scales); the GPTQ artifact additionally stores `lm_head` as a separate bf16 tensor (1.25 GiB) where RTN kept it tied to `embed_tokens`. Same weights, different storage; 10.72 GiB (11.5 GB) equals Google's QAT checkpoint size.
+
+---
+
+## M4: Feature experiments (E4–E7, E9, E10, E12, E15), measured
+
+All on Modal with the pinned vLLM 0.32.0 / SGLang 0.5.22 images, Qwen3-4B-Instruct-2507 bf16 unless stated, L4 unless stated, closed-loop concurrency, medians of 1–2 repeats (stated per config in `configs/gpu/e*.yaml`). Runs: `results/e{4,5,6,7,9,10,12,15}-*`.
+
+### E4. Prefix caching (2,048-token prompts, 128 out)
+
+| Workload | Users | TTFT p50 (s): vLLM APC off / on · SGLang radix off / on | Out tok/s: vLLM off / on · SGLang off / on |
+|---|---|---|---|
+| shared-prefix (1,536 of 2,048 tokens shared) | 1 | 0.37 / **0.12** · 0.36 / **0.12** | 27 / 29 · 27 / 29 |
+| shared-prefix | 16 | 1.63 / **1.03** · 3.34 / **1.15** | 165 / **285** · 168 / **296** |
+| rag-long-prefill (unique prompts) | 16 | 1.43 / 1.43 · 3.47 / 3.51 | 166 / 165 · 165 / 164 |
+
+- **With 75% of the prompt shared, caching cuts TTFT 3× at 1 user and raises throughput 73–76% at 16 users** (TTFT p95 5.3 s → 1.5 s). vLLM's measured cache hit rate was 72–75%, matching the 75% shared share.
+- **No cost on unique prompts** (within 1%). vLLM APC and SGLang RadixAttention are equivalent on this workload.
+
+### E5. Chunked prefill (vLLM)
+
+| Workload | Users | ITL p99 (ms): chunked off / on | TPOT p50 (ms) | Out tok/s |
+|---|---|---|---|---|
+| rag-long-prefill (2,048 in) | 4 | **365 / 47** | 42.8 / 41.0 | 80 / 81 |
+| rag-long-prefill | 16 | 397 / 370 | 90 / 86 | 159 / 163 |
+| chat-balanced (512 in) | 16 | 44 / 49 | 42 / 42 | 347 / 349 |
+
+- **Chunked prefill cuts the inter-token tail 8× when long prompts arrive while others decode** (4 users): without it each new 2,048-token prefill stalls every running stream for one long step.
+- At 16 long-prompt users both settings stall (~370–400 ms): prefill work fills every step, so the next knob is the chunk size (`max_num_batched_tokens`). vLLM warns that disabling chunked prefill is not officially supported for this model.
+
+### E6. Speculative decoding (real UltraChat prompts, natural stop, ≤256 out)
+
+| Config | TPOT p50 @1 (ms) | Out tok/s @1 / @4 / @16 | Acceptance | TTFT p95 @1 (s) |
+|---|---|---|---|---|
+| Baseline | 33 | 30 / 101 / **397** | — | 0.11 |
+| Draft model Qwen3-0.6B, k = 4 | **26** | **38 / 119** / 374 | 30–33% | 0.22 |
+| n-gram prompt lookup, k = 4 | 34 | 30 / 96 / 327 | 2% | 0.10 |
+
+- **A small draft model speeds up a single user 1.27× on the GPU** (the opposite of M1's CPU result, where verifying k tokens was not cheap) **and the gain is gone by 16 users** (−6% throughput): with a busy batch, verification is no longer free.
+- **n-gram lookup is useless on open-ended chat** (2% acceptance; answers rarely copy the prompt) and costs 18% throughput at 16 users. It is a tool for edit/extract/RAG-quote workloads, not chat.
+- The draft model doubles TTFT at 1 user (it prefills too).
+
+### E7. FP8 KV cache (long-context: 7,680 in / 256 out, max_model_len 8,192)
+
+| | KV tokens | Max seqs @8K | Out tok/s @16 / @32 | TTFT p95 @16 (s) | TPOT p50 @16 (ms) |
+|---|---|---|---|---|---|
+| bf16 KV | 78,864 | 9.6 | 69 / 71 | 41.2 | 120 |
+| FP8 KV | **151,184** | **18.5** | **101 / 104** | **21.0** | 142 |
+
+- **FP8 KV doubles capacity (1.92× tokens) and gives +46% throughput with half the TTFT tail** once long contexts are KV-bound; each stream decodes a little slower because twice as many share the GPU.
+- **Quality cost of FP8 KV: none measurable** (same suite as M3, `--kv-cache-dtype fp8`): ARC +0.4, HellaSwag −0.6, MMLU-Pro −1.8 (CI ±2.9), GSM8K +1.1, IFEval −0.6, WikiText PPL +0.1%, BFSI PPL +0.2%. These tasks use short contexts; long-context retrieval quality under FP8 KV was not measured.
+
+### E9. MoE: Qwen3-30B-A3B-Instruct-2507 vs Qwen3-4B dense (bf16, exact H100)
+
+| | 4B dense | 30B-A3B MoE (3.3B active) |
+|---|---|---|
+| Weights | 7.6 GiB | 56.9 GiB |
+| KV tokens | 444,592 | 124,128 |
+| TPOT p50 @1 / @16 / @64 (ms) | 4.15 / 4.77 / 7.15 | **4.68** / 10.36 / 16.47 |
+| Out tok/s @64 / @128 | 7,584 / 10,079 | 3,607 / 5,398 |
+| ARC / HellaSwag / MMLU-Pro | 58.3 / 58.5 / 34.5 | **62.5 / 67.8 / 46.9** |
+| GSM8K strict / flex · IFEval | 72.8 / 78.8 · 83.4 | **83.9 / 86.1** · 82.6 |
+| WikiText word PPL | 14.27 | 9.54 |
+
+- **At 1 user the MoE decodes almost as fast as the 4B dense model** (4.7 vs 4.2 ms): each token reads only the active experts.
+- **Under batching the advantage disappears:** different requests route to different experts, so the batch reads most of the 30B weights; TPOT doubles by 16 users and throughput is half the dense model's at 64–128.
+- **Quality is much higher** (MMLU-Pro +12.4, GSM8K +11, HellaSwag +9.3) for 7.5× the weight memory. MoE buys a bigger model's quality at a small model's single-stream latency, not at its batch throughput or memory.
+
+### E10. Structured output (JSON schema, ≤400 out)
+
+| | JSON valid | Truncated | TPOT p50 @1 / @16 (ms) | TTFT p95 @16 (s) |
+|---|---|---|---|---|
+| Instruction only | 100% | 0% | 33.5 / 44.6 | 1.36 |
+| `response_format: json_schema` | 100% | 0% | 33.5 / 44.8 | 1.37 |
+
+- **Constrained decoding costs nothing measurable here** (≤0.5% TPOT), and **this model already produced valid JSON 100% of the time when asked** for a simple 4-key schema. The constraint is free insurance. A first run with a 200-token cap (superseded) showed the real failure mode: 12.5% of answers cut off by `max_tokens`, invalid in both modes.
+
+### E15. Architecture study: Qwen3-4B (dense) vs Qwen3.5-4B (hybrid Gated DeltaNet) vs Gemma 4 E4B (SWA + KV sharing + PLE), L4
+
+| | Qwen3-4B | Qwen3.5-4B | Gemma 4 E4B |
+|---|---|---|---|
+| Weights on GPU (vLLM) | 7.64 GiB | 7.94 GiB | 14.5 GiB (PLE + vision/audio towers) |
+| KV pool (vLLM, util 0.9) | 10.81 GiB | 9.86 GiB | 4.16 GiB |
+| Memory per 8K sequence: memcalc / vLLM | 1,152 / 1,152 MiB | 305 / 363 MiB | 148 / 309 MiB |
+| Memory per 32K sequence: memcalc / vLLM | 4,608 / 4,612 MiB | 1,073 / 1,140 MiB | 532 / 692 MiB |
+| Max concurrent seqs @8K / @32K (vLLM) | 9.6 / 2.4 | **27.8 / 8.9** | 13.8 / 6.2 |
+| TPOT p50 @1, chat (ms) | **33.5** | 35.0 | 38.8 |
+| Out tok/s, chat @32 (vLLM / SGLang) | **528 / 538** | 484 / 313 | 512 / 502 |
+| Out tok/s, long-context @32 (vLLM / SGLang) | 68 / 69 | **109 / 111** | **116** / 57 |
+| TTFT p95, long-context @32 (vLLM) | 100 s | **50 s** | 56 s |
+
+- **The new architectures cut memory per sequence 3.2–3.7× at 8K and 4.0–6.7× at 32K, and on long contexts that becomes 1.6–1.7× throughput and half the TTFT tail.** For short chats the dense model is still fastest (it streams the fewest bytes per token).
+- **How much of the theoretical saving vLLM realises:** Qwen3.5 84% at 8K (363 vs 305 MiB per sequence) and 94% at 32K; Gemma only ~48% at 8K and 77% at 32K. Gemma's sliding-window layers carry a fixed per-sequence overhead beyond the window (the same pattern llama.cpp showed in M1). memcalc is exact for the dense model.
+- **Gemma's per-sequence saving is partly eaten by its 14.5 GiB of weights on a 24 GB card:** its KV pool is only 4.2 GiB, so it fits fewer 8K sequences than Qwen3.5 despite smaller KV per token.
+- **Quality, Qwen3.5-4B vs Qwen3-4B (same suite, thinking off):** HellaSwag +5.8, MMLU-Pro +3.4, GSM8K +7.7 strict / +3.2 flexible, WikiText word PPL 12.2 vs 14.3; ARC −3.9, IFEval −2.3; reasoning-first ARC 93.8 vs 94.0. **The hybrid model gives equal-or-better quality with 3–4× less KV memory per sequence.** (Gemma 4 E4B is not on this scale: its loglikelihood benchmarks are unusable, §M3.6; on generative tasks it scores GSM8K 71.4/76.5, IFEval 85.2, reasoning-first ARC 93.6.)
+- **Engine support differs for the new designs:** SGLang matches vLLM on Qwen3.5 long contexts but not on 32-user chat (313 vs 484 tok/s, TTFT p95 15 s), and on Gemma long contexts it reaches only half of vLLM's throughput. Not investigated further.
+
+### E12. Tensor parallel: TP=2 on 2 x H100 vs TP=1 on 1 x H100 (Qwen3-4B bf16, chat-balanced)
+
+| Users | TPOT p50 (ms) TP1 / TP2 | Out tok/s TP1 / TP2 | Goodput req/s TP1 / TP2 |
+|---|---|---|---|
+| 1 | 4.15 / **3.04** | 237 / 305 | 0.92 / 1.19 |
+| 16 | 4.77 / 3.69 | 3,034 / 3,883 | 11.9 / 15.2 |
+| 64 | 7.15 / 5.13 | 7,584 / 10,244 | 27.2 / 40.0 |
+| 128 | 10.67 / 7.05 | 10,079 / 14,433 | 20.5 / 31.4 |
+
+- **TP=2 cuts per-token latency 1.37× and adds 43–47% capacity, for 2× the price:** goodput per dollar at 64 users falls from 6.9 to 5.1 req/s per $/h (−27%). Each layer ends in an all-reduce across the two GPUs; for a 4B model that fits on one GPU, the communication is a large share of each step.
+- **For throughput, two independent replicas (data parallel) are the cheaper way to use a second GPU** for a model this size (not measured; follows from the TP=1 numbers). TP pays off when latency is the constraint or the model does not fit on one GPU (E9's 57 GiB MoE would need TP on an 80 GB card at long contexts).
+- 2 x L4 was requested first but Modal never scheduled it (1 h 45 min in queue, not billed), so the pair is H100s.

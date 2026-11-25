@@ -1,0 +1,4011 @@
+{
+ "n": 500,
+ "correct": 470,
+ "accuracy": 0.94,
+ "ci95_low": 0.9156384216937552,
+ "ci95_high": 0.9576519139990498,
+ "unparsed": 13,
+ "errors": 0,
+ "rows": [
+  {
+   "id": "Mercury_7068513",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Mount St. Helens is a stratovolc"
+  },
+  {
+   "id": "TIMSS_2003_8_pg94",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The Sun is"
+  },
+  {
+   "id": "Mercury_415081",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "We are given that the rubber duck travel"
+  },
+  {
+   "id": "LEAP_2007_8_10418",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe students "
+  },
+  {
+   "id": "Mercury_7085225",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When a lay"
+  },
+  {
+   "id": "Mercury_183820",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. In living "
+  },
+  {
+   "id": "Mercury_7213325",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nSolar energy "
+  },
+  {
+   "id": "Mercury_SC_401666",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "Mercury_7042945",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "We are given that a student measures the"
+  },
+  {
+   "id": "Mercury_404894",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's evaluate each option step by step:"
+  },
+  {
+   "id": "Mercury_SC_402103",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "TIMSS_1995_8_L6",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "MEA_2016_5_4",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "Mercury_417117",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The scenar"
+  },
+  {
+   "id": "Mercury_SC_415534",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the scenario \u2014 a ther"
+  },
+  {
+   "id": "Mercury_SC_413549",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe length of"
+  },
+  {
+   "id": "Mercury_7034843",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The Period"
+  },
+  {
+   "id": "Mercury_7171570",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The digest"
+  },
+  {
+   "id": "Mercury_SC_401006",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA balance is "
+  },
+  {
+   "id": "Mercury_400500",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. We are "
+  },
+  {
+   "id": "Mercury_400880",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the change step by step:\n\n"
+  },
+  {
+   "id": "Mercury_7267715",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "Mercury_SC_LBS11003",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go through the options step by ste"
+  },
+  {
+   "id": "Mercury_7264093",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the composition of co"
+  },
+  {
+   "id": "Mercury_SC_406794",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The Sun ap"
+  },
+  {
+   "id": "Mercury_178325",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the data being record"
+  },
+  {
+   "id": "TAKS_2009_5_14",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The fork f"
+  },
+  {
+   "id": "Mercury_SC_408324",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Scott fill"
+  },
+  {
+   "id": "ACTAAP_2010_7_14",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Fish breat"
+  },
+  {
+   "id": "Mercury_SC_402029",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider what \"showing respect f"
+  },
+  {
+   "id": "ACTAAP_2012_7_9",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "AIMS_2008_8_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7032498",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. During and"
+  },
+  {
+   "id": "Mercury_412681",
+   "pred": null,
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "We are given a question about how change"
+  },
+  {
+   "id": "Mercury_7086660",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what petrified palm t"
+  },
+  {
+   "id": "MCAS_1998_4_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nSoil is a nat"
+  },
+  {
+   "id": "Mercury_7160563",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_SC_405130",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The first "
+  },
+  {
+   "id": "MCAS_2012_8_23640",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Heat energ"
+  },
+  {
+   "id": "Mercury_SC_414274",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "Mercury_SC_401792",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n- Renewable r"
+  },
+  {
+   "id": "MDSA_2013_8_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The teache"
+  },
+  {
+   "id": "LEAP_2007_4_10280",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWhen Jake bre"
+  },
+  {
+   "id": "LEAP_2002_4_10247",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7271670",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Oceans have a high heat capacity"
+  },
+  {
+   "id": "MEA_2016_8_12",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_401728",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go through the life cycle of an ap"
+  },
+  {
+   "id": "Mercury_SC_410837",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the trait in question"
+  },
+  {
+   "id": "OHAT_2010_8_8",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7024798",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step i"
+  },
+  {
+   "id": "Mercury_7161315",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step."
+  },
+  {
+   "id": "Mercury_7082320",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe student o"
+  },
+  {
+   "id": "Mercury_7212328",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "MEA_2016_8_15",
+   "pred": null,
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Let's go step by step to determine which"
+  },
+  {
+   "id": "Mercury_7217298",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nScientific in"
+  },
+  {
+   "id": "Mercury_7111178",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the problem. The Mico"
+  },
+  {
+   "id": "Mercury_401912",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- One parent has brown ey"
+  },
+  {
+   "id": "Mercury_416380",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the scenario. Fertili"
+  },
+  {
+   "id": "Mercury_7175875",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_SC_412374",
+   "pred": "A",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Let's analyze each option in the context"
+  },
+  {
+   "id": "MCAS_2004_9_5",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "We are given that the voltage is held co"
+  },
+  {
+   "id": "Mercury_417460",
+   "pred": null,
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "Mercury_7142520",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_SC_400063",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Water evap"
+  },
+  {
+   "id": "Mercury_7114100",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "Mercury_416683",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nUpwelling occ"
+  },
+  {
+   "id": "Mercury_7228725",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what a taxonomic clas"
+  },
+  {
+   "id": "Mercury_7271758",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Artificial reefs, such as sunken"
+  },
+  {
+   "id": "Mercury_7116183",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The human "
+  },
+  {
+   "id": "MEA_2013_8_15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When the b"
+  },
+  {
+   "id": "ACTAAP_2014_7_5",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To measure wind chill, we need to determ"
+  },
+  {
+   "id": "Mercury_7230090",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The field "
+  },
+  {
+   "id": "LEAP_2011_8_10434",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nDennis believ"
+  },
+  {
+   "id": "TAKS_2009_8_32",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "MCAS_2006_9_12",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When two m"
+  },
+  {
+   "id": "TIMSS_2007_8_pg60",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. To determi"
+  },
+  {
+   "id": "Mercury_409295",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what refrigerator eff"
+  },
+  {
+   "id": "Mercury_7200340",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7270113",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Tectonic activity on Earth is primarily "
+  },
+  {
+   "id": "MCAS_2005_8_7",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWhen air near"
+  },
+  {
+   "id": "MCAS_2006_9_4",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go step by step.\n\nWe are given the"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_8_35",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe goal is t"
+  },
+  {
+   "id": "Mercury_7172708",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Scientific"
+  },
+  {
+   "id": "MEA_2010_8_18",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "Mercury_SC_400046",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7106593",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "We are given that a particular peach tre"
+  },
+  {
+   "id": "ACTAAP_2007_7_36",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. First, def"
+  },
+  {
+   "id": "Mercury_7084665",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_8_19",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The number"
+  },
+  {
+   "id": "Mercury_SC_405296",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA squirrel's "
+  },
+  {
+   "id": "MCAS_2006_9_17-v1",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the situation step by step"
+  },
+  {
+   "id": "OHAT_2009_8_36",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nFossil fuels "
+  },
+  {
+   "id": "Mercury_SC_405357",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_400084",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "We are given an unbalanced chemical equa"
+  },
+  {
+   "id": "MCAS_2006_9_43",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- Mass of the baseball, m"
+  },
+  {
+   "id": "Mercury_7057680",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the scenario \u2014 a warm"
+  },
+  {
+   "id": "MCAS_2014_5_7",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The mammal"
+  },
+  {
+   "id": "Mercury_SC_413542",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "Mercury_409114",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "We are given that John drove for two hou"
+  },
+  {
+   "id": "Mercury_402539",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the situation.  \nThe "
+  },
+  {
+   "id": "Mercury_7210473",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe descripti"
+  },
+  {
+   "id": "Mercury_7013965",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks which test is "
+  },
+  {
+   "id": "Mercury_7081603",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The student observes that a plan"
+  },
+  {
+   "id": "Mercury_7034808",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nTo determine "
+  },
+  {
+   "id": "Mercury_7263183",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_411071",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- Jeremy's average speed "
+  },
+  {
+   "id": "Mercury_7252245",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each biomolecule in terms "
+  },
+  {
+   "id": "Mercury_402502",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Recall the structure of the peri"
+  },
+  {
+   "id": "Mercury_SC_407228",
+   "pred": "B",
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "Mercury_SC_414156",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A compass "
+  },
+  {
+   "id": "Mercury_SC_413299",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "Mercury_7131845",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The Miami "
+  },
+  {
+   "id": "Mercury_SC_LBS10902",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Fern plants are typically found in moist"
+  },
+  {
+   "id": "Mercury_7133245",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Tonya plug"
+  },
+  {
+   "id": "Mercury_7189000",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what the Great Rift V"
+  },
+  {
+   "id": "Mercury_7250058",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Prokaryoti"
+  },
+  {
+   "id": "Mercury_7214008",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7216423",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "Mercury_7058415",
+   "pred": "B",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_11",
+   "pred": "4",
+   "answer": "4",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Fungi are heterotrophs, meaning "
+  },
+  {
+   "id": "NAEP_2000_8_S11+11",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The Moon i"
+  },
+  {
+   "id": "Mercury_SC_402120",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "Mercury_7042648",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nMuscle fibers"
+  },
+  {
+   "id": "MDSA_2008_8_27",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\nRossby waves "
+  },
+  {
+   "id": "Mercury_7106628",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7041650",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The ozone "
+  },
+  {
+   "id": "Mercury_410602",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- Speed of the airplane ="
+  },
+  {
+   "id": "MSA_2015_8_30",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Farmers us"
+  },
+  {
+   "id": "Mercury_417593",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The fish h"
+  },
+  {
+   "id": "Mercury_SC_402121",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The student has made a hypothesi"
+  },
+  {
+   "id": "Mercury_7211033",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Photosynth"
+  },
+  {
+   "id": "Mercury_7221655",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step."
+  },
+  {
+   "id": "Mercury_7221078",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Blood parasites, such as avian m"
+  },
+  {
+   "id": "Mercury_SC_416529",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Forest tre"
+  },
+  {
+   "id": "Mercury_SC_407400",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine the correct first step in a"
+  },
+  {
+   "id": "Mercury_7201740",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the context \u2014 Giselle"
+  },
+  {
+   "id": "Mercury_SC_406625",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the scenario \u2014 a bird"
+  },
+  {
+   "id": "Mercury_7132405",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nHomeostasis r"
+  },
+  {
+   "id": "Mercury_414352",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are given:"
+  },
+  {
+   "id": "Mercury_7164623",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The friend"
+  },
+  {
+   "id": "Mercury_7123393",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "MEA_2013_5_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When a stu"
+  },
+  {
+   "id": "Mercury_402547",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The contai"
+  },
+  {
+   "id": "Mercury_7016800",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: When there is an accidental spil"
+  },
+  {
+   "id": "Mercury_7068635",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Understand the question. We are "
+  },
+  {
+   "id": "Mercury_7245840",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_SC_401587",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the life cycles of a tree "
+  },
+  {
+   "id": "Mercury_403907",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Fossilized coral reefs are typic"
+  },
+  {
+   "id": "Mercury_7234605",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The studen"
+  },
+  {
+   "id": "Mercury_7206938",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "Mercury_SC_406855",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "Mercury_SC_400162",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "AKDE&ED_2008_8_48",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which process will most lik"
+  },
+  {
+   "id": "MCAS_2006_8_12",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which map is best for analy"
+  },
+  {
+   "id": "ACTAAP_2014_7_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7132020",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. An atom is"
+  },
+  {
+   "id": "MCAS_2001_5_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Color, sha"
+  },
+  {
+   "id": "Mercury_7143010",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The boat brought a nonnative pla"
+  },
+  {
+   "id": "VASoL_2009_3_22",
+   "pred": "B",
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Let's go through the options step by ste"
+  },
+  {
+   "id": "Mercury_7206395",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what the student is o"
+  },
+  {
+   "id": "Mercury_7097493",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. An atom is"
+  },
+  {
+   "id": "Mercury_7168823",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the process described"
+  },
+  {
+   "id": "Mercury_SC_LBS11009",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go step by step:\n\n1. A food nutrit"
+  },
+  {
+   "id": "Mercury_7138390",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. In June, t"
+  },
+  {
+   "id": "Mercury_SC_401783",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The Earth "
+  },
+  {
+   "id": "Mercury_SC_414339",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWhen heat ene"
+  },
+  {
+   "id": "Mercury_183033",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's solve this step by step:\n\n1) The q"
+  },
+  {
+   "id": "Mercury_404609",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what the question is "
+  },
+  {
+   "id": "Mercury_7093048",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "Mercury_7215828",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "Mercury_7005880",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The circul"
+  },
+  {
+   "id": "Mercury_7017045",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_SC_405481",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The stem o"
+  },
+  {
+   "id": "MDSA_2009_5_39",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step."
+  },
+  {
+   "id": "NCEOGA_2013_8_57",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine which option indicates that"
+  },
+  {
+   "id": "Mercury_409645",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The student is trying to determi"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_4_28",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "WASL_2004_8_17",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nMichael claim"
+  },
+  {
+   "id": "Mercury_7111125",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_400440",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Identify the type of reaction.\n\n"
+  },
+  {
+   "id": "AKDE&ED_2008_4_19",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_42",
+   "pred": "3",
+   "answer": "3",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Recall Newton's Law of Universal"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_1",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked:"
+  },
+  {
+   "id": "Mercury_7102323",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. In an expe"
+  },
+  {
+   "id": "Mercury_7182210",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the role of sea stars"
+  },
+  {
+   "id": "Mercury_400884",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Phosphorus has an atomic number "
+  },
+  {
+   "id": "NCEOGA_2013_8_15",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When livin"
+  },
+  {
+   "id": "Mercury_LBS10302",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "A light-year is the distance that light "
+  },
+  {
+   "id": "Mercury_7128923",
+   "pred": "D",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "To determine which substance will retain"
+  },
+  {
+   "id": "Mercury_7230073",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks about protecti"
+  },
+  {
+   "id": "Mercury_411224",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Determine the volume of water th"
+  },
+  {
+   "id": "NCEOGA_2013_8_42",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "TIMSS_1995_8_J1",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The Earth'"
+  },
+  {
+   "id": "Mercury_7218015",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "MCAS_2001_5_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option in terms of it"
+  },
+  {
+   "id": "VASoL_2009_3_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "Mercury_7239383",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Genetic dr"
+  },
+  {
+   "id": "Mercury_SC_408748",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nPat is learni"
+  },
+  {
+   "id": "ACTAAP_2010_5_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Fossils ar"
+  },
+  {
+   "id": "Mercury_408922",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks how the scient"
+  },
+  {
+   "id": "Mercury_7071523",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the context. Students"
+  },
+  {
+   "id": "Mercury_407019",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go step by step:\n\n1. A \"light-year"
+  },
+  {
+   "id": "Mercury_184730",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "TAKS_2009_5_26",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "Mercury_SC_402981",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "Mercury_SC_407592",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "Mercury_7033828",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_180005",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The tropos"
+  },
+  {
+   "id": "VASoL_2007_5_21",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. First, def"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_8_42",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Recall Newton's Second Law of Mo"
+  },
+  {
+   "id": "Mercury_SC_400012",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question.  \nThe q"
+  },
+  {
+   "id": "Mercury_7029558",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what aphids are and w"
+  },
+  {
+   "id": "Mercury_7283430",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "MEA_2014_5_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Balsam fir"
+  },
+  {
+   "id": "MDSA_2008_8_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The problem states that the surf"
+  },
+  {
+   "id": "MEA_2011_8_13",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. We are giv"
+  },
+  {
+   "id": "Mercury_SC_LBS10265",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "We are given that:\n\n- 1 astronomical uni"
+  },
+  {
+   "id": "Mercury_416638",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the reproduction methods o"
+  },
+  {
+   "id": "MDSA_2009_5_25",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the reaction.  \nBakin"
+  },
+  {
+   "id": "Mercury_7188195",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Crickets a"
+  },
+  {
+   "id": "Mercury_7064575",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what coal-powered pla"
+  },
+  {
+   "id": "NYSEDREGENTS_2015_8_3",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: All dogs and cats are animals, s"
+  },
+  {
+   "id": "Mercury_7116323",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nDiversity amo"
+  },
+  {
+   "id": "Mercury_SC_406482",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question is about ensuring t"
+  },
+  {
+   "id": "Mercury_416633",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the components of smog and"
+  },
+  {
+   "id": "Mercury_7109463",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step i"
+  },
+  {
+   "id": "Mercury_SC_402984",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7123358",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Earth's orbit around the Sun is "
+  },
+  {
+   "id": "Mercury_7032620",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the structure of the "
+  },
+  {
+   "id": "MCAS_2000_4_36",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_406136",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's break this down step by step:\n\n1. "
+  },
+  {
+   "id": "Mercury_7159810",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider the ethical principles "
+  },
+  {
+   "id": "Mercury_SC_407382",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the options step by step:\n"
+  },
+  {
+   "id": "Mercury_SC_415422",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "Mercury_SC_400985",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_4",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A toy truc"
+  },
+  {
+   "id": "TIMSS_2003_8_pg47",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_403234",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The object"
+  },
+  {
+   "id": "Mercury_7203473",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Codons are"
+  },
+  {
+   "id": "Mercury_SC_401361",
+   "pred": "A",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Understand what UV rays are. Ult"
+  },
+  {
+   "id": "Mercury_401426",
+   "pred": "A",
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Understand the goal of the inves"
+  },
+  {
+   "id": "Mercury_7223493",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the observation step by st"
+  },
+  {
+   "id": "Mercury_SC_406720",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider the question \u2014 it's ask"
+  },
+  {
+   "id": "Mercury_7199028",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "Mercury_SC_402057",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider the question \u2014 the weat"
+  },
+  {
+   "id": "Mercury_402563",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A neutral "
+  },
+  {
+   "id": "MEA_2010_8_15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7212818",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider the purpose of scientif"
+  },
+  {
+   "id": "MCAS_2000_4_26",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "Mercury_7252753",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_LBS10610",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "We are given that the morning temperatur"
+  },
+  {
+   "id": "Mercury_7180810",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "Mercury_7130778",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "Mercury_400887",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- Mass of lead, m = 5.0 g"
+  },
+  {
+   "id": "Mercury_175840",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The cell w"
+  },
+  {
+   "id": "Mercury_417150",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "OHAT_2010_5_18",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The experiment is designed to te"
+  },
+  {
+   "id": "Mercury_7011323",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Decomposit"
+  },
+  {
+   "id": "MDSA_2009_8_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_SC_400590",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The studen"
+  },
+  {
+   "id": "Mercury_SC_401357",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe water cyc"
+  },
+  {
+   "id": "Mercury_404435",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA compound is"
+  },
+  {
+   "id": "Mercury_7141610",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Gravity de"
+  },
+  {
+   "id": "Mercury_401926",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the context. Giant sl"
+  },
+  {
+   "id": "LEAP__4_10225",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_SC_400059",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the process of erosio"
+  },
+  {
+   "id": "Mercury_7032515",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nIn an ecosyst"
+  },
+  {
+   "id": "Mercury_405947",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7030555",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "We are given a scenario where four house"
+  },
+  {
+   "id": "Mercury_SC_400383",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe student w"
+  },
+  {
+   "id": "Mercury_SC_LBS10597",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_SC_400142",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: When a spill occurs in a laborat"
+  },
+  {
+   "id": "Mercury_SC_415406",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the process described"
+  },
+  {
+   "id": "MEA_2013_8_18",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the options step by step:\n"
+  },
+  {
+   "id": "MCAS_2004_8_23",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- Distance from Boston to"
+  },
+  {
+   "id": "Mercury_LBS10151",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: We know that approximately 71% o"
+  },
+  {
+   "id": "Mercury_SC_416167",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_SC_405726",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n- Natural hab"
+  },
+  {
+   "id": "Mercury_SC_402282",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7192798",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step i"
+  },
+  {
+   "id": "LEAP__7_10348",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "NYSEDREGENTS_2008_4_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nPrecipitation"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_4_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The state "
+  },
+  {
+   "id": "Mercury_7082845",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When the c"
+  },
+  {
+   "id": "Mercury_417138",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nEstuaries are"
+  },
+  {
+   "id": "Mercury_7123078",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "Mercury_7217368",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider the scale of the distan"
+  },
+  {
+   "id": "Mercury_SC_410963",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_400877",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's solve this step by step:\n\n1. The q"
+  },
+  {
+   "id": "Mercury_SC_405640",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. All six pu"
+  },
+  {
+   "id": "VASoL_2009_3_8",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The butter"
+  },
+  {
+   "id": "Mercury_407262",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7082023",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Light wave"
+  },
+  {
+   "id": "Mercury_SC_416181",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Patrick needs vitamin D to help "
+  },
+  {
+   "id": "Mercury_7027720",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what an ocean plate i"
+  },
+  {
+   "id": "MCAS_2012_5_23625",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Lions, lik"
+  },
+  {
+   "id": "TIMSS_1995_8_R2",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. White ligh"
+  },
+  {
+   "id": "Mercury_SC_400578",
+   "pred": "B",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "LEAP_2000_8_2",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the situation step by step"
+  },
+  {
+   "id": "Mercury_SC_402994",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The scenar"
+  },
+  {
+   "id": "MCAS_1999_8_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Continenta"
+  },
+  {
+   "id": "Mercury_7108990",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "ACTAAP_2013_7_16",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA compound is"
+  },
+  {
+   "id": "Mercury_SC_400853",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nSandbars form"
+  },
+  {
+   "id": "Mercury_SC_406458",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. We know th"
+  },
+  {
+   "id": "ACTAAP_2008_7_4",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Newton's second law of motion states tha"
+  },
+  {
+   "id": "MCAS_2013_8_29416",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "Mercury_7216965",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A mutation"
+  },
+  {
+   "id": "Mercury_7187373",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "Mercury_7082758",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "Mercury_412673",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7027405",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what the student is t"
+  },
+  {
+   "id": "Mercury_7205800",
+   "pred": "D",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Understand the standard classifi"
+  },
+  {
+   "id": "VASoL_2008_5_10",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_SC_400401",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider what glaciers do to the"
+  },
+  {
+   "id": "Mercury_7150343",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Energy ent"
+  },
+  {
+   "id": "Mercury_7085278",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Geothermal energy comes from the"
+  },
+  {
+   "id": "Mercury_400443",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the given information"
+  },
+  {
+   "id": "Mercury_SC_401265",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. In the sci"
+  },
+  {
+   "id": "ACTAAP_2011_5_8",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nCellular resp"
+  },
+  {
+   "id": "MDSA_2009_4_1",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: A seashell is a fossilized remai"
+  },
+  {
+   "id": "Mercury_7214778",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what an independent v"
+  },
+  {
+   "id": "Mercury_SC_400062",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA plateau is "
+  },
+  {
+   "id": "Mercury_7030468",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step."
+  },
+  {
+   "id": "Mercury_7174213",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nSound waves a"
+  },
+  {
+   "id": "Mercury_SC_400402",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "AKDE&ED_2008_4_35",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Daylight h"
+  },
+  {
+   "id": "Mercury_400699",
+   "pred": "C",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Understand the reaction involved"
+  },
+  {
+   "id": "Mercury_SC_407613",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nIn a scientif"
+  },
+  {
+   "id": "Mercury_SC_401585",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The time o"
+  },
+  {
+   "id": "Mercury_7236740",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "We are told that two tectonic plates are"
+  },
+  {
+   "id": "NYSEDREGENTS_2008_8_34",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When a chi"
+  },
+  {
+   "id": "OHAT_2007_5_15",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the Earth's rotation."
+  },
+  {
+   "id": "Mercury_416671",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "NYSEDREGENTS_2010_4_24",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nAnimals migra"
+  },
+  {
+   "id": "AIMS_2008_8_6",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step i"
+  },
+  {
+   "id": "Mercury_7271513",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe theory of"
+  },
+  {
+   "id": "ACTAAP_2015_7_9",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A \"year\" o"
+  },
+  {
+   "id": "Mercury_SC_406835",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks what the stude"
+  },
+  {
+   "id": "Mercury_7084228",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "MCAS_2006_9_30",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "TIMSS_2003_8_pg87",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- David originally dissol"
+  },
+  {
+   "id": "Mercury_SC_406623",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Fossilized plants can provide informatio"
+  },
+  {
+   "id": "Mercury_SC_400233",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Rocks are "
+  },
+  {
+   "id": "Mercury_SC_401360",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what a physical prope"
+  },
+  {
+   "id": "Mercury_7198468",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Wolves are"
+  },
+  {
+   "id": "Mercury_416576",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7040985",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A lunar ec"
+  },
+  {
+   "id": "ACTAAP_2007_7_3",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nEvaporation i"
+  },
+  {
+   "id": "Mercury_7216300",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "OHAT_2007_8_24",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nVolcanoes are"
+  },
+  {
+   "id": "VASoL_2010_3_22",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nIn spring, pl"
+  },
+  {
+   "id": "Mercury_SC_402164",
+   "pred": "D",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: The student is conducting an exp"
+  },
+  {
+   "id": "MCAS_1998_4_13",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Acid rain forms when pollutants "
+  },
+  {
+   "id": "Mercury_416230",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nFirst, we nee"
+  },
+  {
+   "id": "AKDE&ED_2008_8_3",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When winte"
+  },
+  {
+   "id": "Mercury_7099190",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the role of plant mat"
+  },
+  {
+   "id": "ACTAAP_2007_7_31",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To scientifically determine the quietest"
+  },
+  {
+   "id": "MDSA_2012_8_6",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_7270393",
+   "pred": "D",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Let's break this down step by step:\n\n1. "
+  },
+  {
+   "id": "Mercury_SC_400697",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe melting p"
+  },
+  {
+   "id": "Mercury_7182245",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Initially, mountain lions and wo"
+  },
+  {
+   "id": "MCAS_2014_8_6",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what the \"Ring of Fir"
+  },
+  {
+   "id": "Mercury_7206553",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the options step by step:\n"
+  },
+  {
+   "id": "Mercury_7212888",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the scenario.  \nResea"
+  },
+  {
+   "id": "Mercury_SC_401147",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. In an ecos"
+  },
+  {
+   "id": "Mercury_7040775",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Photosynthesis is the process by"
+  },
+  {
+   "id": "VASoL_2007_5_22",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nIn a scientif"
+  },
+  {
+   "id": "MEAP_2005_8_45",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "MSA_2013_5_11",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The water "
+  },
+  {
+   "id": "Mercury_7163818",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWhen a meteor"
+  },
+  {
+   "id": "AKDE&ED_2008_8_34",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Understand the question \u2014 we are"
+  },
+  {
+   "id": "Mercury_SC_405931",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the scenario. Farmers"
+  },
+  {
+   "id": "Mercury_7282083",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Offspring "
+  },
+  {
+   "id": "AKDE&ED_2012_8_20",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Reptiles are a class of vertebra"
+  },
+  {
+   "id": "NYSEDREGENTS_2013_8_10",
+   "pred": "2",
+   "answer": "2",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA dialysis ma"
+  },
+  {
+   "id": "Mercury_7142415",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the current situation"
+  },
+  {
+   "id": "Mercury_189053",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nOrganisms in "
+  },
+  {
+   "id": "Mercury_7268328",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nPlants exhibi"
+  },
+  {
+   "id": "MCAS_2003_5_33",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "Mercury_SC_407710",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what the question is "
+  },
+  {
+   "id": "Mercury_7267523",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "NCEOGA_2013_8_5",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nGlobal climat"
+  },
+  {
+   "id": "Mercury_SC_408384",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the options step by step i"
+  },
+  {
+   "id": "Mercury_416593",
+   "pred": "D",
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "MEA_2013_5_15",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The Sun re"
+  },
+  {
+   "id": "Mercury_401763",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the charges of the io"
+  },
+  {
+   "id": "Mercury_175560",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWaves are dis"
+  },
+  {
+   "id": "VASoL_2008_3_16",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "Mercury_SC_409030",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Tanya is investigating which hou"
+  },
+  {
+   "id": "Mercury_7235638",
+   "pred": "B",
+   "answer": "C",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: The question asks about surface-"
+  },
+  {
+   "id": "Mercury_7270165",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWhen two tect"
+  },
+  {
+   "id": "MCAS_2013_5_29411",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A butterfl"
+  },
+  {
+   "id": "Mercury_400091",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the genetics of earlo"
+  },
+  {
+   "id": "MSA_2012_5_23",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what renewable and no"
+  },
+  {
+   "id": "TIMSS_2007_8_pg109",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA. Compare th"
+  },
+  {
+   "id": "Mercury_7206378",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question is about recording "
+  },
+  {
+   "id": "Mercury_7094290",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "Mercury_7218400",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The students want to reduce the "
+  },
+  {
+   "id": "Mercury_7215670",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks for the best e"
+  },
+  {
+   "id": "Mercury_SC_416168",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nSkin is the o"
+  },
+  {
+   "id": "MCAS_2000_8_29",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "To solve a technological problem systema"
+  },
+  {
+   "id": "Mercury_404132",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_SC_401185",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA mixture is "
+  },
+  {
+   "id": "Mercury_415272",
+   "pred": null,
+   "answer": "B",
+   "correct": false,
+   "error": null,
+   "raw": "Step 1: Understand the question. We are "
+  },
+  {
+   "id": "Mercury_7130655",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Previously"
+  },
+  {
+   "id": "Mercury_188528",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "Mercury_184975",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "To determine how closely related organis"
+  },
+  {
+   "id": "Mercury_SC_402276",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_SC_406710",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA chameleon's"
+  },
+  {
+   "id": "Mercury_7159320",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nPrimary succe"
+  },
+  {
+   "id": "MCAS_2004_9_21-v1",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go step by step to determine the b"
+  },
+  {
+   "id": "Mercury_SC_415719",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Melting is"
+  },
+  {
+   "id": "Mercury_SC_401272",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThomas Edison"
+  },
+  {
+   "id": "MCAS_1999_4_26",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "NYSEDREGENTS_2012_4_9",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Gravity an"
+  },
+  {
+   "id": "Mercury_402341",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA total lunar"
+  },
+  {
+   "id": "Mercury_7131530",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the situation step by step"
+  },
+  {
+   "id": "Mercury_SC_408706",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Earth orbi"
+  },
+  {
+   "id": "Mercury_183890",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Reptiles a"
+  },
+  {
+   "id": "Mercury_407260",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "MCAS_2004_8_3",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "VASoL_2008_3_25",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_411732",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Reactivity"
+  },
+  {
+   "id": "MCAS_2009_5_6518",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked:"
+  },
+  {
+   "id": "Mercury_7263060",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go step by step:\n\nWe are asked to "
+  },
+  {
+   "id": "Mercury_SC_401168",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Current mo"
+  },
+  {
+   "id": "MCAS_2009_8_17",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nPhotosynthesi"
+  },
+  {
+   "id": "TIMSS_1995_8_Q15",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7159023",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Pluto was "
+  },
+  {
+   "id": "Mercury_SC_LBS10027",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nPotential ene"
+  },
+  {
+   "id": "Mercury_7227710",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what membrane-bound s"
+  },
+  {
+   "id": "MCAS_2006_9_44",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Let's solve this step by step.\n\nWe are t"
+  },
+  {
+   "id": "Mercury_7228358",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Safety is the top priority in an"
+  },
+  {
+   "id": "VASoL_2007_3_1",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Baby cardi"
+  },
+  {
+   "id": "Mercury_7072380",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Gravitational attraction between"
+  },
+  {
+   "id": "Mercury_SC_400182",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. We are ask"
+  },
+  {
+   "id": "MDSA_2010_4_20",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When decid"
+  },
+  {
+   "id": "MDSA_2013_8_40",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA scientist r"
+  },
+  {
+   "id": "Mercury_7247013",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "Mercury_7081743",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks how the resear"
+  },
+  {
+   "id": "Mercury_7234378",
+   "pred": null,
+   "answer": "D",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\nMountain buil"
+  },
+  {
+   "id": "Mercury_7043820",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. In a chemi"
+  },
+  {
+   "id": "Mercury_7249708",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the options step by step:\n"
+  },
+  {
+   "id": "VASoL_2009_3_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A metal ro"
+  },
+  {
+   "id": "Mercury_7210245",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "Mercury_180828",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: When a lab accident occurs, such"
+  },
+  {
+   "id": "Mercury_7016258",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider the safety implications"
+  },
+  {
+   "id": "MCAS_2006_8_24",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the situation step by step"
+  },
+  {
+   "id": "Mercury_SC_402985",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_415086",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- Distance between two ci"
+  },
+  {
+   "id": "MCAS_2014_8_20",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks how the studen"
+  },
+  {
+   "id": "Mercury_416646",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "Mercury_7009993",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Main seque"
+  },
+  {
+   "id": "Mercury_SC_408631",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The que"
+  },
+  {
+   "id": "ACTAAP_2010_7_3",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "LEAP_2009_8_10430",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "To determine whether water temperature a"
+  },
+  {
+   "id": "Mercury_7214340",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are told t"
+  },
+  {
+   "id": "Mercury_175385",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. When a woo"
+  },
+  {
+   "id": "MCAS_2002_8_11",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "We are given:\n\n- One glass of water at 1"
+  },
+  {
+   "id": "Mercury_7082443",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7107328",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Evolution is the process by whic"
+  },
+  {
+   "id": "Mercury_SC_415006",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are asked "
+  },
+  {
+   "id": "ACTAAP_2010_5_7",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Heat was a"
+  },
+  {
+   "id": "ACTAAP_2009_5_8",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. First, con"
+  },
+  {
+   "id": "Mercury_7138460",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Reef-building corals host photos"
+  },
+  {
+   "id": "Mercury_405778",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The questi"
+  },
+  {
+   "id": "Mercury_SC_408763",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the problem. The plan"
+  },
+  {
+   "id": "Mercury_7212993",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Greenhouse"
+  },
+  {
+   "id": "Mercury_7004743",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. The mass o"
+  },
+  {
+   "id": "Mercury_SC_401295",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Consider the main challenge in a"
+  },
+  {
+   "id": "Mercury_7093153",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nA. \"Are tulip"
+  },
+  {
+   "id": "Mercury_7017710",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "Mercury_7173583",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7222793",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the question. The stu"
+  },
+  {
+   "id": "MDSA_2011_5_23",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe question "
+  },
+  {
+   "id": "Mercury_7283833",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nAn epidemic i"
+  },
+  {
+   "id": "Mercury_SC_401788",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "In a scientific investigation, the proce"
+  },
+  {
+   "id": "Mercury_405136",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "Mercury_7005005",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the source of moistur"
+  },
+  {
+   "id": "MCAS_2003_5_14",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what causes early mor"
+  },
+  {
+   "id": "Mercury_7086608",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the basic structure o"
+  },
+  {
+   "id": "MDSA_2009_4_34",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go step by step:\n\n1. The scientist"
+  },
+  {
+   "id": "NAEP_2000_8_S11+10",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's go step by step:\n\nWe are trying to"
+  },
+  {
+   "id": "Mercury_SC_400404",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step t"
+  },
+  {
+   "id": "Mercury_7116235",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Species ev"
+  },
+  {
+   "id": "Mercury_7218365",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks for the most a"
+  },
+  {
+   "id": "Mercury_400407",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze each option step by step:\n"
+  },
+  {
+   "id": "Mercury_7081480",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Sound travels as a mechanical wa"
+  },
+  {
+   "id": "Mercury_402348",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand what acid rain is.  \n"
+  },
+  {
+   "id": "Mercury_7106698",
+   "pred": "D",
+   "answer": "A",
+   "correct": false,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. A hearing "
+  },
+  {
+   "id": "FCAT_2008_5_2",
+   "pred": "D",
+   "answer": "D",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nThe stem of a"
+  },
+  {
+   "id": "Mercury_SC_410971",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question states that cities "
+  },
+  {
+   "id": "Mercury_7136063",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Understand the rock cycle. The r"
+  },
+  {
+   "id": "OHAT_2007_8_12",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Coal is a fossil fuel, and it is"
+  },
+  {
+   "id": "Mercury_SC_400708",
+   "pred": "C",
+   "answer": "C",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: Petroleum, which includes gas an"
+  },
+  {
+   "id": "Mercury_SC_413439",
+   "pred": "A",
+   "answer": "A",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\nWe are lookin"
+  },
+  {
+   "id": "Mercury_402216",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's analyze the question step by step:"
+  },
+  {
+   "id": "Mercury_406550",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Let's think step by step:\n\n1. Tapeworms "
+  },
+  {
+   "id": "AKDE&ED_2008_8_7",
+   "pred": "B",
+   "answer": "B",
+   "correct": true,
+   "error": null,
+   "raw": "Step 1: The question asks for the method"
+  }
+ ]
+}

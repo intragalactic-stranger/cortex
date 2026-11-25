@@ -1,0 +1,94 @@
+{
+  "job": "qwen",
+  "status": "ok",
+  "image": "ghcr.io/ggml-org/llama.cpp:full-cuda-b12110@sha256:87803fec70c8046e04e051e49199894ad77e61cf74fd1dceb9ad5ee2f75de228",
+  "gpu": "L4",
+  "wall_s": 788,
+  "git": {
+    "sha": "7e0614167455a160602d4e986d794b7b8bf40257",
+    "dirty": false
+  },
+  "results": {
+    "bf16": {
+      "bytes": 8051283648,
+      "wikitext2": {
+        "ppl": 10.3382,
+        "ppl_err": 0.08269
+      },
+      "bfsi_heldout": {
+        "ppl": 5.4441,
+        "ppl_err": 0.06372
+      }
+    },
+    "q8_0": {
+      "bytes": 4280403648,
+      "wikitext2": {
+        "ppl": 10.3452,
+        "ppl_err": 0.08275,
+        "kld": 0.001228,
+        "kld_err": 1.5e-05,
+        "same_top1_pct": 98.161
+      },
+      "bfsi_heldout": {
+        "ppl": 5.4557,
+        "ppl_err": 0.06397
+      }
+    },
+    "q5_k_m": {
+      "bytes": 2889512128,
+      "wikitext2": {
+        "ppl": 10.4489,
+        "ppl_err": 0.08375,
+        "kld": 0.011507,
+        "kld_err": 0.000334,
+        "same_top1_pct": 94.784
+      },
+      "bfsi_heldout": {
+        "ppl": 5.4845,
+        "ppl_err": 0.06429
+      }
+    },
+    "q4_k_m": {
+      "bytes": 2497279168,
+      "wikitext2": {
+        "ppl": 10.5467,
+        "ppl_err": 0.08412,
+        "kld": 0.036559,
+        "kld_err": 0.001015,
+        "same_top1_pct": 91.659
+      },
+      "bfsi_heldout": {
+        "ppl": 5.6024,
+        "ppl_err": 0.06611
+      }
+    },
+    "q4_k_m-imat-generic": {
+      "bytes": 2497279392,
+      "wikitext2": {
+        "ppl": 10.6362,
+        "ppl_err": 0.08565,
+        "kld": 0.025048,
+        "kld_err": 0.000372,
+        "same_top1_pct": 92.392
+      },
+      "bfsi_heldout": {
+        "ppl": 5.5774,
+        "ppl_err": 0.06598
+      }
+    },
+    "q4_k_m-imat-bfsi": {
+      "bytes": 2497279392,
+      "wikitext2": {
+        "ppl": 10.5229,
+        "ppl_err": 0.0841,
+        "kld": 0.025466,
+        "kld_err": 0.000411,
+        "same_top1_pct": 92.541
+      },
+      "bfsi_heldout": {
+        "ppl": 5.5531,
+        "ppl_err": 0.06553
+      }
+    }
+  }
+}

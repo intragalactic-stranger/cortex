@@ -1,0 +1,27 @@
+{
+  "name": "qwen3-4b-bf16-kv-fp8",
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "max_model_len": 4096,
+  "extra": [
+    "--kv-cache-dtype",
+    "fp8"
+  ],
+  "engine_image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+  "lm_eval": "lm_eval[api,ifeval]==0.4.13",
+  "gpu": "NVIDIA L4, 23034 MiB",
+  "wall_s": 2916,
+  "git": {
+    "sha": "464a14449347fbcba047e5b1693e71eac9a9bc5c",
+    "dirty": true
+  },
+  "domain": {
+    "bfsi_heldout_ppl": 5.975656676103367,
+    "bfsi_heldout_tokens": 81532.0,
+    "bfsi_heldout_sections": 200.0
+  },
+  "quick_limit": 0,
+  "add_bos": false,
+  "parts": "all",
+  "quantize_manifest": null
+}

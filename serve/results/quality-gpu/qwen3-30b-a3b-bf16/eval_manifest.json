@@ -1,0 +1,24 @@
+{
+  "name": "qwen3-30b-a3b-bf16",
+  "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+  "revision": "0d7cf23991f47feeb3a57ecb4c9cee8ea4a17bfe",
+  "max_model_len": 4096,
+  "extra": [],
+  "engine_image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+  "lm_eval": "lm_eval[api,ifeval]==0.4.13",
+  "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+  "wall_s": 1018,
+  "git": {
+    "sha": "76e3952fba00bf2fe8ff50541a0f6cd706a0bf79",
+    "dirty": true
+  },
+  "domain": {
+    "bfsi_heldout_ppl": 4.495040479376036,
+    "bfsi_heldout_tokens": 81532.0,
+    "bfsi_heldout_sections": 200.0
+  },
+  "quick_limit": 0,
+  "add_bos": false,
+  "parts": "all",
+  "quantize_manifest": null
+}

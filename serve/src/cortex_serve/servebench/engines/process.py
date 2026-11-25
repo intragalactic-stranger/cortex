@@ -33,7 +33,13 @@ def _flags(args: dict[str, Any], bool_flags: set[str]) -> list[str]:
     return out
 
 
-VLLM_BOOL = {"enable_prefix_caching", "no_enable_prefix_caching", "enable_chunked_prefill", "enforce_eager"}
+VLLM_BOOL = {
+    "enable_prefix_caching",
+    "no_enable_prefix_caching",
+    "enable_chunked_prefill",
+    "no_enable_chunked_prefill",
+    "enforce_eager",
+}
 SGLANG_BOOL = {"disable_radix_cache", "enable_mixed_chunk", "disable_cuda_graph"}
 
 

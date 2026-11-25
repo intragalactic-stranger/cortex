@@ -1,0 +1,13 @@
+0.13 minutes
+[1]25.3520,[2]42.8855,[3]43.2926,[4]52.5907,[5]51.2798,[6]55.4520,[7]58.2189,[8]61.9515,[9]67.6214,[10]69.6944,[11]70.2910,[12]72.6775,[13]76.9632,[14]72.7003,[15]70.0974,[16]66.9022,[17]64.7680,[18]68.3140,[19]67.2508,[20]65.5030,
+
+0.04.002.321 W load: control-looking token:    212 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.04.002.545 W load: control-looking token:     50 '<|tool_response>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.04.017.464 W load: '</s>' is a normal token here, removing it from EOG list
+0.04.988.517 I cmn          init: llama threadpool init, n_threads = 17
+0.05.103.228 I 
+0.05.103.389 I system_info: n_threads = 17 (n_threads_batch = 17) / 17 | CUDA : ARCHS = 500,610,700,750,800,860,890,900,1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VNNI = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.05.103.421 I perplexity: tokenizing the input ..
+0.06.535.500 I perplexity: tokenization took 1432.06 ms
+0.06.536.370 I perplexity: calculating perplexity over 20 chunks, n_ctx=512, batch_size=2048, n_seq=4
+0.08.151.545 I perplexity: 1.62 seconds per pass - ETA 0.10.659.566 I Final estimate: PPL = 65.5030 +/- 3.85520

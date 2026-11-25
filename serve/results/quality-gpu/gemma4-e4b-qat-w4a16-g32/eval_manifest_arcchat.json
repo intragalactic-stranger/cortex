@@ -1,0 +1,25 @@
+{
+  "name": "gemma4-e4b-qat-w4a16-g32",
+  "model": "google/gemma-4-E4B-it-qat-w4a16-ct",
+  "revision": "6cd26aaa2357fb2bad8c51699a7558a4d1a965bb",
+  "max_model_len": 4096,
+  "extra": [
+    "--limit-mm-per-prompt",
+    "{\"image\":0,\"audio\":0}",
+    "--default-chat-template-kwargs",
+    "{\"enable_thinking\":false}"
+  ],
+  "engine_image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+  "lm_eval": "lm_eval[api,ifeval]==0.4.13",
+  "gpu": "NVIDIA L40S, 46068 MiB",
+  "wall_s": 318,
+  "git": {
+    "sha": "b9b2e78f1a56cbb41935208b904197bc27fbd3de",
+    "dirty": false
+  },
+  "domain": null,
+  "quick_limit": 0,
+  "add_bos": true,
+  "parts": "arcchat",
+  "quantize_manifest": null
+}

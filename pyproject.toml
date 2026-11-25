@@ -18,6 +18,11 @@ target-version = "py312"
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "N", "PTH", "TID"]
 
+[tool.ruff.lint.per-file-ignores]
+# published model-card prose: typographic × and − are intentional; long caveat sentences are content
+"serve/scripts/hf_cards.py" = ["RUF001", "E501"]
+"serve/src/cortex_serve/quantize/card.py" = ["RUF001"]
+
 [tool.mypy]
 python_version = "3.12"
 strict = true

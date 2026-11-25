@@ -1,0 +1,50 @@
+name: e2-l4-llamacpp-q4_k_m-imat-generic
+experiment: E2
+description: 'Quantization speed (E2), llama.cpp CUDA on L4: q4_k_m-imat-generic.'
+engine:
+  kind: llamacpp
+  launch: process
+  image: ghcr.io/ggml-org/llama.cpp:server-cuda-b12110@sha256:a2963b4817f03eea7e0d6065ea576252322792441ef97aaae178b924520547d6
+  args:
+    parallel: 16
+    ctx_size: 65536
+    flash_attn: 'on'
+    ignore_eos: true
+    extra:
+    - -ngl
+    - '99'
+artifacts:
+- name: qwen3-4b-q4_k_m-imat-generic
+  repo: local/gguf-m3
+  revision: local
+  file: qwen3-4b-Q4_K_M-imat-generic.gguf
+  family: Qwen/Qwen3-4B-Instruct-2507
+  quant: q4_k_m-imat-generic
+tokenizers:
+  Qwen/Qwen3-4B-Instruct-2507:
+    repo: Qwen/Qwen3-4B-Instruct-2507
+    revision: cdbee75f17c01a7cc42f958dc650907174af0554
+workloads:
+- name: chat-balanced
+  input_tokens: 512
+  output_tokens: 256
+load:
+  mode: concurrency
+  levels:
+  - 1
+  - 4
+  - 16
+  requests_per_level: 16
+  requests_per_slot: 3
+  warmup_requests: 4
+slo:
+  ttft_s: 0.5
+  tpot_s: 0.05
+repeats: 2
+hardware:
+  device: modal-l4
+  gpu: L4
+budget:
+  gpu: L4
+  usd_per_hour: 0.8
+  max_minutes: 10

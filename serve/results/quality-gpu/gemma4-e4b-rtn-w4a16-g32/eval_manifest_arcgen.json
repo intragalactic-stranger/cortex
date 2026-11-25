@@ -1,0 +1,45 @@
+{
+  "name": "gemma4-e4b-rtn-w4a16-g32",
+  "model": "/hf/artifacts/gemma4-e4b-w4a16-rtn-g32-sym",
+  "revision": "local",
+  "max_model_len": 4096,
+  "extra": [
+    "--limit-mm-per-prompt",
+    "{\"image\":0,\"audio\":0}",
+    "--default-chat-template-kwargs",
+    "{\"enable_thinking\":false}"
+  ],
+  "engine_image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+  "lm_eval": "lm_eval[api,ifeval]==0.4.13",
+  "gpu": "NVIDIA L40S, 46068 MiB",
+  "wall_s": 303,
+  "git": {
+    "sha": "4060696a66d8ee350fe11dbe05bb2ee9ecb95852",
+    "dirty": false
+  },
+  "domain": null,
+  "quick_limit": 0,
+  "add_bos": false,
+  "parts": "arcgen",
+  "quantize_manifest": {
+    "artifact": "gemma4-e4b-w4a16-rtn-g32-sym",
+    "base_model": "google/gemma-4-E4B-it",
+    "base_revision": "4ecc2ba63bcac23ba4a767fc87025b1450f84c9c",
+    "recipe": "w4a16-rtn-g32-sym",
+    "recipe_description": "Round-to-nearest int4 group 32 symmetric (data-free PTQ baseline)",
+    "calib": "none",
+    "max_seq_length": 2048,
+    "versions": {
+      "llmcompressor": "0.15.0",
+      "compressed-tensors": "0.20.1",
+      "torch": "2.14.1",
+      "transformers": "5.21.0"
+    },
+    "git_sha": "1c9d94192d6382aba979e7390b10f786c1f2425d",
+    "git_dirty": false,
+    "gpu": "L4",
+    "pipeline": "default",
+    "wall_s": 42.5,
+    "size_bytes": 10203884169
+  }
+}

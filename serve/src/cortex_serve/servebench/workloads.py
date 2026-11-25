@@ -164,6 +164,13 @@ _WORDS = [
 ]
 
 
+ULTRACHAT = (
+    "HuggingFaceH4/ultrachat_200k",
+    "8049631c405ae6576f93f445c6b8166f76f5505a",
+    "data/test_sft-00000-of-00001-f7dfac4afe5b93f4.parquet",
+)
+
+
 @dataclass(frozen=True)
 class Request:
     id: int
@@ -198,7 +205,31 @@ def exact_tokens(tok: Tokenizer, rng: random.Random, n_tokens: int) -> str:
     return text
 
 
+def real_prompts(rows: list[str], spec: WorkloadSpec, tok: Tokenizer, n: int, seed: int) -> list[Request]:
+    """First-turn user prompts, shuffled with the seed; prompts longer than ``input_tokens`` are skipped."""
+    order = list(range(len(rows)))
+    random.Random(f"{seed}:{spec.name}").shuffle(order)
+    out: list[Request] = []
+    for i in order:
+        n_in = len(tok.encode(rows[i]))
+        if 0 < n_in <= spec.input_tokens:
+            out.append(Request(id=len(out), workload=spec.name, prompt=rows[i], input_tokens=n_in,
+                               max_tokens=spec.output_tokens))  # fmt: skip
+            if len(out) == n:
+                return out
+    raise ValueError(f"only {len(out)} prompts <= {spec.input_tokens} tokens, need {n}")
+
+
+def ultrachat_rows() -> list[str]:
+    from cortex_serve.servebench.quality.datasets import fetch_parquet
+
+    df = fetch_parquet(*ULTRACHAT)
+    return [str(p) for p in df["prompt"].to_list()]
+
+
 def generate(spec: WorkloadSpec, tok: Tokenizer, n: int, seed: int) -> list[Request]:
+    if spec.source == "ultrachat":
+        return real_prompts(ultrachat_rows(), spec, tok, n, seed)
     rng = random.Random(f"{seed}:{spec.name}")
     prefix = exact_tokens(tok, random.Random(f"{seed}:{spec.name}:prefix"), spec.shared_prefix_tokens)
     instr_tokens = len(tok.encode(spec.instruction))

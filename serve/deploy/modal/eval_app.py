@@ -28,6 +28,7 @@ VLLM_IMAGE = "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d
 LM_EVAL = "lm_eval[api,ifeval]==0.4.13"
 MMLU_PRO_LIMIT = 1000  # leaderboard_mmlu_pro is one task of 12,032 items: first 1,000
 BFSI_HELDOUT_N = 200
+ARC_GEN_N = 500
 RATES = {"L4": 0.80, "L40S": 1.95, "H100": 3.95}  # `modal billing rates`, 2026-11-24
 MAX_MINUTES = 120
 
@@ -37,7 +38,7 @@ image = (
     modal.Image.from_registry(VLLM_IMAGE)
     .entrypoint([])
     .run_commands('command -v python || ln -s "$(command -v python3)" /usr/local/bin/python')
-    .uv_pip_install(LM_EVAL, "pydantic>=2.10", "pyyaml>=6", "httpx>=0.28", "pandas>=2.2", "datasets>=4")
+    .uv_pip_install(LM_EVAL, "pydantic>=2.10", "pyyaml>=6", "httpx>=0.28", "pandas>=2.2", "datasets>=4", "polars>=1.20")
     # lm-eval must not move vLLM's torch/transformers (research M3 risk 6): fail the build if it did
     .run_commands('python3 -c "import torch, transformers, vllm; print(torch.__version__, transformers.__version__)"')
     .env({"HF_HOME": "/hf", "HF_HUB_ENABLE_HF_TRANSFER": "0", "HF_ALLOW_CODE_EVAL": "1"})
@@ -82,7 +83,7 @@ def _domain_ppl(base_url: str, n: int) -> dict[str, float]:
 
 @app.function(image=image, gpu="L4", volumes={"/hf": hf_cache}, timeout=MAX_MINUTES * 60)
 def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int, extra: list[str],
-             git: dict[str, object], quick: int = 0) -> bytes:  # fmt: skip
+             git: dict[str, object], quick: int = 0, add_bos: bool = False, parts: str = "all") -> bytes:  # fmt: skip
     from cortex_serve.servebench.config import ArtifactSpec
     from cortex_serve.servebench.engines.process import ProcessEngine
 
@@ -100,24 +101,41 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
         # local checkpoints carry their own tokenizer files; hub models use the base repo's tokenizer
         tok = f"tokenizer={model if model.startswith('/') else tokenizer}"
         common = f"model=model,{tok},num_concurrent=32,max_retries=3,timeout=600"
-        _lm_eval("local-completions", f"{common},base_url={base}/v1/completions",
-                 out / "loglik", "arc_challenge,wikitext", None, quick)  # fmt: skip
-        _lm_eval("local-completions", f"{common},base_url={base}/v1/completions",
-                 out / "hellaswag", "hellaswag", 2000, quick)  # fmt: skip
-        _lm_eval("local-completions", f"{common},base_url={base}/v1/completions",
-                 out / "mmlu_pro", "leaderboard_mmlu_pro", MMLU_PRO_LIMIT, quick)  # fmt: skip
-        _lm_eval("local-chat-completions", f"{common},base_url={base}/v1/chat/completions", out / "gen",
-                 "gsm8k,ifeval", None, quick)  # fmt: skip
-        domain = _domain_ppl(base, quick or BFSI_HELDOUT_N)
+        # Gemma needs <bos>; lm-eval's API models tokenize loglikelihood requests without special tokens by default
+        ll = f"{common},base_url={base}/v1/completions" + (",add_bos_token=True" if add_bos else "")
+        want = set(parts.split(",")) if parts != "all" else {"loglik", "gen", "domain"}
+        if "loglik" in want:
+            _lm_eval("local-completions", ll, out / "loglik", "arc_challenge,wikitext", None, quick)
+            _lm_eval("local-completions", ll, out / "hellaswag", "hellaswag", 2000, quick)
+            _lm_eval("local-completions", ll, out / "mmlu_pro", "leaderboard_mmlu_pro", MMLU_PRO_LIMIT, quick)
+        if "gen" in want:
+            _lm_eval("local-chat-completions", f"{common},base_url={base}/v1/chat/completions", out / "gen",
+                     "gsm8k,ifeval", None, quick)  # fmt: skip
+        if "arcchat" in want:  # generative ARC (chat template): for models whose raw-text likelihoods are degenerate
+            _lm_eval("local-chat-completions", f"{common},base_url={base}/v1/chat/completions", out / "arcchat",
+                     "arc_challenge_chat", None, quick)  # fmt: skip
+        if "arcgen" in want:  # reasoning-first ARC with our own scorer (Wilson CI), same rules for every model
+            import asyncio
+
+            from cortex_serve.servebench.quality.arc import evaluate as arc_eval
+
+            res = asyncio.run(arc_eval(base, "openai", "model", quick or ARC_GEN_N, seed=1234, concurrency=32,
+                                       cot=True, max_tokens=768))  # fmt: skip
+            (out / "arcgen").mkdir(exist_ok=True)
+            (out / "arcgen" / "arcgen.json").write_text(json.dumps(res, indent=1))
+        domain = _domain_ppl(base, quick or BFSI_HELDOUT_N) if "domain" in want else None
         (out / "engine.log").write_text(eng.logs())
     finally:
         eng.stop()
+    gpu_name = subprocess.run(["nvidia-smi", "--query-gpu=name,memory.total", "--format=csv,noheader"],
+                              capture_output=True, text=True, check=False).stdout.strip()  # fmt: skip
     qm = Path(model) / "cortex_manifest.json"
     meta = {"name": name, "model": model, "revision": revision, "max_model_len": max_len, "extra": extra,
-            "engine_image": VLLM_IMAGE, "lm_eval": LM_EVAL, "gpu": "L4", "wall_s": round(time.time() - t0),
-            "git": git, "domain": domain, "quick_limit": quick,
+            "engine_image": VLLM_IMAGE, "lm_eval": LM_EVAL, "gpu": gpu_name, "wall_s": round(time.time() - t0),
+            "git": git, "domain": domain, "quick_limit": quick, "add_bos": add_bos, "parts": parts,
             "quantize_manifest": json.loads(qm.read_text()) if qm.exists() else None}  # fmt: skip
-    (out / "eval_manifest.json").write_text(json.dumps(meta, indent=2))
+    mname = "eval_manifest.json" if parts == "all" else f"eval_manifest_{parts.replace(',', '+')}.json"
+    (out / mname).write_text(json.dumps(meta, indent=2))
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w:gz") as tar:
         tar.add(out, arcname=name)
@@ -127,18 +145,20 @@ def evaluate(name: str, model: str, revision: str, tokenizer: str, max_len: int,
 @app.local_entrypoint()
 def main(name: str, model: str, revision: str = "local", tokenizer: str = "Qwen/Qwen3-4B-Instruct-2507",
          max_len: int = 4096, extra: str = "",
-         gpu: str = "L4", quick: int = 0, yes: bool = False, approved_gate: float = 60.0) -> None:  # fmt: skip
+         gpu: str = "L4", quick: int = 0, add_bos: bool = False, parts: str = "all", max_minutes: int = MAX_MINUTES,
+         yes: bool = False,
+         approved_gate: float = 60.0) -> None:  # fmt: skip
     from cortex_serve.spend import guarded
 
-    worst = RATES[gpu] * MAX_MINUTES / 60
-    print(f"[cost] eval {name}: {gpu}, hard cap {MAX_MINUTES} min -> worst case ${worst:.2f}", flush=True)
+    worst = RATES[gpu.rstrip("!")] * max_minutes / 60
+    print(f"[cost] eval {name}: {gpu}, hard cap {max_minutes} min -> worst case ${worst:.2f}", flush=True)
     sha = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=False).stdout.strip()
     dirty = bool(subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"], capture_output=True,
                                 text=True, check=False).stdout.strip())  # fmt: skip
-    fn = evaluate.with_options(gpu=gpu)
+    fn = evaluate.with_options(gpu=gpu, timeout=max_minutes * 60)
     with guarded(f"eval {name}", worst, approved_gate, yes):
         data = fn.remote(name, model, revision, tokenizer, max_len, extra.split() if extra else [],
-                         {"sha": sha, "dirty": dirty}, quick)  # fmt: skip
+                         {"sha": sha, "dirty": dirty}, quick, add_bos, parts)  # fmt: skip
     dest = Path("serve/results/quality-gpu" + ("-quick" if quick else ""))
     dest.mkdir(parents=True, exist_ok=True)
     with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:

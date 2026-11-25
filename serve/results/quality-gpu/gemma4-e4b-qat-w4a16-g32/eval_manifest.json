@@ -1,0 +1,27 @@
+{
+  "name": "gemma4-e4b-qat-w4a16-g32",
+  "model": "google/gemma-4-E4B-it-qat-w4a16-ct",
+  "revision": "6cd26aaa2357fb2bad8c51699a7558a4d1a965bb",
+  "max_model_len": 4096,
+  "extra": [
+    "--limit-mm-per-prompt",
+    "{\"image\":0,\"audio\":0}",
+    "--default-chat-template-kwargs",
+    "{\"enable_thinking\":false}"
+  ],
+  "engine_image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+  "lm_eval": "lm_eval[api,ifeval]==0.4.13",
+  "gpu": "NVIDIA L40S, 49140 MiB",
+  "wall_s": 1246,
+  "git": {
+    "sha": "2efbbf17549f42ff27be1f75a0b0bf82d3aa766f",
+    "dirty": false
+  },
+  "domain": {
+    "bfsi_heldout_ppl": 51.562659701100216,
+    "bfsi_heldout_tokens": 83460.0,
+    "bfsi_heldout_sections": 200.0
+  },
+  "quick_limit": 0,
+  "quantize_manifest": null
+}

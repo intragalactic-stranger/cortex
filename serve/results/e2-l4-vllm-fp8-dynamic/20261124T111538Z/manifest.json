@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "created_utc": "2026-11-24T11:15:45+00:00",
+  "servebench_version": "0.1.0",
+  "host": {
+    "hostname_hash": "c5803a6e4daa",
+    "cpu": "unknown",
+    "logical_cpus": 17,
+    "memory_gib": 654.89,
+    "kernel": "4.19.0-gvisor",
+    "python": "3.12.3",
+    "docker": null,
+    "gpu": "NVIDIA L4, 620.70.06, 23034 MiB"
+  },
+  "run": {
+    "name": "e2-l4-vllm-fp8-dynamic",
+    "experiment": "E2",
+    "stamp": "20261124T111538Z"
+  },
+  "config": {
+    "name": "e2-l4-vllm-fp8-dynamic",
+    "description": "Quantization speed (E2): fp8-dynamic on L4, vLLM 0.32.0. Same workload and server args as E1.",
+    "experiment": "E2",
+    "engine": {
+      "kind": "vllm",
+      "image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+      "launch": "process",
+      "args": {
+        "max_model_len": 4096,
+        "gpu_memory_utilization": 0.9
+      }
+    },
+    "artifacts": [
+      {
+        "name": "qwen3-4b-fp8-dynamic",
+        "repo": "/hf/artifacts/qwen3-4b-fp8-dynamic",
+        "revision": "local",
+        "file": null,
+        "family": "Qwen/Qwen3-4B-Instruct-2507",
+        "quant": "fp8-dynamic"
+      }
+    ],
+    "tokenizers": {
+      "Qwen/Qwen3-4B-Instruct-2507": {
+        "repo": "Qwen/Qwen3-4B-Instruct-2507",
+        "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+      }
+    },
+    "workloads": [
+      {
+        "name": "chat-balanced",
+        "input_tokens": 512,
+        "output_tokens": 256,
+        "input_jitter": 0.0,
+        "shared_prefix_tokens": 0,
+        "instruction": "Continue the notes above in the same style. Keep writing without stopping."
+      }
+    ],
+    "load": {
+      "mode": "concurrency",
+      "levels": [
+        1.0,
+        4.0,
+        16.0,
+        64.0
+      ],
+      "requests_per_level": 16,
+      "requests_per_slot": 3,
+      "warmup_requests": 4,
+      "timeout_s": 600.0
+    },
+    "slo": {
+      "ttft_s": 0.5,
+      "tpot_s": 0.05
+    },
+    "repeats": 2,
+    "seed": 1234,
+    "disable_thinking": true,
+    "hardware": {
+      "device": "modal-l4",
+      "gpu": "L4"
+    },
+    "budget": {
+      "gpu": "L4",
+      "usd_per_hour": 0.8,
+      "max_minutes": 25.0
+    }
+  },
+  "engine": {
+    "kind": "vllm",
+    "image": "vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34",
+    "digest": null,
+    "version": "0.32.0"
+  },
+  "git": {
+    "sha": "2db1b7fc66afc9cae9c767146d887cd50edab55a",
+    "dirty": false
+  },
+  "artifacts": [
+    {
+      "name": "qwen3-4b-fp8-dynamic",
+      "repo": "/hf/artifacts/qwen3-4b-fp8-dynamic",
+      "revision": "local",
+      "file": null,
+      "family": "Qwen/Qwen3-4B-Instruct-2507",
+      "quant": "fp8-dynamic",
+      "quantize_manifest": {
+        "artifact": "qwen3-4b-fp8-dynamic",
+        "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "base_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "recipe": "fp8-dynamic",
+        "recipe_description": "FP8 E4M3 weights per-channel + dynamic per-token activations (data-free)",
+        "calib": "none",
+        "max_seq_length": 2048,
+        "versions": {
+          "llmcompressor": "0.15.0",
+          "compressed-tensors": "0.20.1",
+          "torch": "2.14.1",
+          "transformers": "5.21.0"
+        },
+        "git_sha": "1c526987b4ada4368b490e8a30eb130d13fef352",
+        "git_dirty": false,
+        "gpu": "L4",
+        "wall_s": 17.8,
+        "size_bytes": 4425336196
+      }
+    }
+  ],
+  "budget": {
+    "gpu": "L4",
+    "usd_per_hour": 0.8,
+    "max_minutes": 25.0
+  }
+}

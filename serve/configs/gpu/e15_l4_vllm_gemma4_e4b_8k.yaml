@@ -1,0 +1,50 @@
+name: e15-l4-vllm-gemma4-e4b-8k
+experiment: E15
+description: 'Architecture study: gemma4-e4b on L4, vllm, 8K context. KV capacity + chat and long-context curves.'
+engine:
+  kind: vllm
+  launch: process
+  image: vllm/vllm-openai:v0.32.0@sha256:befccf0e7e4089aa23926bb6f887a85c0d46c2a99e6de5c5ffdf5cb7957c5b34
+  args:
+    max_model_len: 8192
+    gpu_memory_utilization: 0.9
+    extra:
+    - --limit-mm-per-prompt
+    - '{"image":0,"audio":0}'
+artifacts:
+- name: gemma4-e4b-bf16
+  repo: google/gemma-4-E4B-it
+  revision: 4ecc2ba63bcac23ba4a767fc87025b1450f84c9c
+  family: google/gemma-4-E4B-it
+  quant: bf16
+tokenizers:
+  google/gemma-4-E4B-it:
+    repo: google/gemma-4-E4B-it
+    revision: 4ecc2ba63bcac23ba4a767fc87025b1450f84c9c
+workloads:
+- name: chat-balanced
+  input_tokens: 512
+  output_tokens: 256
+- name: long-context
+  input_tokens: 7680
+  output_tokens: 256
+load:
+  mode: concurrency
+  levels:
+  - 1
+  - 8
+  - 32
+  requests_per_level: 8
+  requests_per_slot: 2
+  warmup_requests: 4
+slo:
+  ttft_s: 0.5
+  tpot_s: 0.05
+repeats: 1
+hardware:
+  device: modal-l4
+  gpu: L4
+budget:
+  gpu: L4
+  usd_per_hour: 0.8
+  max_minutes: 30
