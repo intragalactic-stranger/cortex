@@ -130,3 +130,10 @@ def test_modal_slot_enters_fallback_chain_when_enabled() -> None:
     assert fallbacks["cortex-default"] == ["cortex-gpu", "cortex-fallback"]
     [gpu] = [m for m in cfg["model_list"] if m["model_name"] == "cortex-gpu"]
     assert gpu["litellm_params"]["api_key"] == "os.environ/MODAL_ENDPOINT_KEY"
+
+
+def test_backend_connection_close_is_opt_in() -> None:
+    off = gateway_config(render())
+    assert all("extra_headers" not in m["litellm_params"] for m in off["model_list"])
+    on = gateway_config(render("gateway.backendConnectionClose=true"))
+    assert all(m["litellm_params"]["extra_headers"] == {"Connection": "close"} for m in on["model_list"])

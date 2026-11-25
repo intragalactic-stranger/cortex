@@ -98,6 +98,11 @@ gateway:
   cooldownSeconds: 15
   # Requests-per-minute ceiling per backend deployment (LiteLLM rpm); keys get their own limits.
   backendRpm: 600
+  # Candidate fix, NOT yet measured (default off = the configuration every M5 run used): send
+  # "Connection: close" to the backends so kube-proxy picks a pod per request. M5 found that pooled
+  # keep-alive connections pin traffic to older pods (uneven queues at 3 replicas) and keep a draining
+  # pod busy until its grace period ends (M5_REPORT section 7). Validate with m5_autoscale.sh before enabling.
+  backendConnectionClose: false
   canary:
     weight: 10                         # percent of cortex-default traffic sent to the canary (90/10)
   # Model aliases exposed to clients. "deployments" name entries of .Values.models.

@@ -16,6 +16,11 @@ LiteLLM proxy config, rendered from .Values.gateway. No secret values here: keys
     timeout: {{ $root.Values.gateway.timeoutSeconds }}
     stream_timeout: {{ $root.Values.gateway.streamTimeoutSeconds }}
     rpm: {{ $root.Values.gateway.backendRpm }}
+    {{- if $root.Values.gateway.backendConnectionClose }}
+    # One TCP connection per request: kube-proxy then picks a pod per request (not per pooled
+    # connection), and a terminating pod stops receiving requests once it leaves the endpoints.
+    extra_headers: {"Connection": "close"}
+    {{- end }}
     {{- if $weight }}
     weight: {{ $weight }}
     {{- end }}

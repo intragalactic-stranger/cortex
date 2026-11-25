@@ -1,0 +1,23 @@
+{
+  "requests": 169,
+  "ok": 169,
+  "failed": 0,
+  "error_rate": 0.0,
+  "errors": {},
+  "by_deployment": {
+    "cortex-default--primary-v1": 156,
+    "cortex-default--canary-v2": 13
+  },
+  "ok_by_deployment": {
+    "cortex-default--primary-v1": 156,
+    "cortex-default--canary-v2": 13
+  },
+  "with_retries": 0,
+  "with_fallbacks": 0,
+  "window_s": 596.9156758785248,
+  "ttft_p50_s": 6.467935993336141,
+  "ttft_p95_s": 15.401907217130065,
+  "e2e_p50_s": 12.414419949054718,
+  "e2e_p95_s": 24.0250134550035,
+  "output_tokens_total": 5397
+}
