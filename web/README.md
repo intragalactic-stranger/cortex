@@ -5,6 +5,8 @@ curves for every configuration, a memory calculator that runs in the browser, th
 architecture. Every number is read from files committed in this repository at build time; nothing is fetched
 at runtime.
 
+**Live:** https://intragalactic-stranger.github.io/cortex/
+
 ![Home page](screenshots/home.png)
 
 | Page | What it shows | Data source |
@@ -67,6 +69,6 @@ make web-test web-build
 The build is plain files in `web/out`, so any static host works.
 
 - **Vercel:** set the project root to `web/`; the default Next.js settings build the static export.
-- **GitHub Pages or a sub-path:** `BASE_PATH=/cortex npm run build`, then publish `web/out`.
+- **GitHub Pages (how this repo is published):** `.github/workflows/pages.yml` builds with `BASE_PATH=/cortex` on every push to `main` that touches the site or its data.
 
 Lighthouse scores and how they were measured: [`LIGHTHOUSE.md`](LIGHTHOUSE.md).

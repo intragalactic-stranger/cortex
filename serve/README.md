@@ -8,6 +8,8 @@ Cortex Serve is a reproducible inference lab plus a production-style serving sta
 M0–M7; every result below is reproducible from a committed config with a manifest (git SHA, image digest, model
 revision, real GPU from `nvidia-smi`). Full tables: [`RESULTS.md`](RESULTS.md).
 
+**Explore the results online:** https://intragalactic-stranger.github.io/cortex/ (cost frontier, curves, browser memory calculator, decision guide).
+
 **Total GPU spend for M2–M5: ≈ $33 on Modal** (L4 $0.80/h, L40S $1.95/h, H100 $3.95/h).
 
 ---
