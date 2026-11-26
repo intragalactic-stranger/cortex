@@ -88,7 +88,7 @@ export function loadGuideMarkdown(): string | null {
   return readText(repoPath(GUIDE_PATH));
 }
 
-/** Names of the Hugging Face model repos prepared from the model cards (repos are private: no links). */
+/** Hugging Face model repos published from the model cards (public since 2026-11-26). */
 export function loadHfModelNames(): string[] {
   const dir = repoPath("serve", "results", "hf_cards");
   if (!existsSync(dir)) return [];
