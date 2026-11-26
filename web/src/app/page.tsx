@@ -102,7 +102,14 @@ export default function Home() {
         </div>
         {hf.length > 0 && (
           <p className="small">
-            Quantized releases prepared for Hugging Face (private for now): {hf.join(", ")}.
+            Quantized models on Hugging Face:{" "}
+            {hf.map((name, i) => (
+              <span key={name}>
+                {i > 0 && ", "}
+                <a href={`https://huggingface.co/${name}`}>{name.split("/")[1]}</a>
+              </span>
+            ))}
+            .
           </p>
         )}
       </section>

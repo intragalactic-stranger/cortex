@@ -184,9 +184,16 @@ make k3d-up && serve/scripts/m5_autoscale.sh && make k3d-down
 
 ## Models
 
-Five Qwen3-4B-Instruct-2507 quantizations produced here (FP8-Dynamic, W8A8-INT8, W4A16-GPTQ, W4A16-AWQ, and a
-BFSI-calibrated GPTQ research artifact) are prepared for Hugging Face under `intragalactic-stranger/` with model
-cards built only from these results.
+Five Qwen3-4B-Instruct-2507 quantizations produced here are public on Hugging Face, each with a model card built
+only from these results (load them with vLLM or SGLang):
+
+| Model | Format | Use it when |
+|---|---|---|
+| [Qwen3-4B-Instruct-2507-FP8-Dynamic](https://huggingface.co/intragalactic-stranger/Qwen3-4B-Instruct-2507-FP8-Dynamic) | FP8 weights + activations | GPUs with FP8 (H100, L4): quality equal to bf16 within error |
+| [Qwen3-4B-Instruct-2507-W8A8-INT8](https://huggingface.co/intragalactic-stranger/Qwen3-4B-Instruct-2507-W8A8-INT8) | INT8 weights + activations (SmoothQuant + GPTQ) | GPUs without FP8 support (A100, A10G; not measured here) |
+| [Qwen3-4B-Instruct-2507-W4A16-GPTQ](https://huggingface.co/intragalactic-stranger/Qwen3-4B-Instruct-2507-W4A16-GPTQ) | 4-bit weights, group 128 | Bandwidth-poor GPUs (L4): 2.7× faster per token than bf16 |
+| [Qwen3-4B-Instruct-2507-W4A16-AWQ](https://huggingface.co/intragalactic-stranger/Qwen3-4B-Instruct-2507-W4A16-AWQ) | 4-bit weights, group 128 | Same use as GPTQ; quality equal within error |
+| [Qwen3-4B-Instruct-2507-W4A16-GPTQ-BFSI](https://huggingface.co/intragalactic-stranger/Qwen3-4B-Instruct-2507-W4A16-GPTQ-BFSI) | 4-bit, finance-calibrated | Research artifact: domain-only calibration hurt format-following (see M3 report) |
 
 ## Docs
 - [`docs/learn/`](docs/learn/): 8 short learning docs on inference from first principles (model anatomy, memory math, roofline, serving techniques, quantization, formats, engines, lifecycle)
