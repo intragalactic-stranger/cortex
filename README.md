@@ -5,7 +5,7 @@ reproducible lab: every number in it comes from a committed config, a pinned ima
 
 | Package | Project | Status |
 |---|---|---|
-| [`serve/`](serve/) | **Cortex Serve**: memory math, benchmarking, quantization and production serving for LLM inference | ✅ v1.0: lab (M0–M4), k3d serving (M5), web site (M6), cost frontier + [decision guide](serve/docs/DECISION_GUIDE.md) (M7) |
+| [`serve/`](serve/) | **Cortex Serve**: memory math, benchmarking, quantization and production serving for LLM inference | ✅ v1.0: lab (M0–M4), k3d serving (M5), [web site](https://intragalactic-stranger.github.io/cortex/) (M6), cost frontier + [decision guide](serve/docs/DECISION_GUIDE.md) (M7) |
 | `slm/` | Cortex-SLM: a small language model from tokenizer to RL to distillation | planned |
 | `retrieval/` | Cortex Retrieval: hybrid / graph / multimodal RAG | planned |
 | `agent/` | Cortex Agent: autonomous Goal → Plan → Act → Evaluate agent | planned |
